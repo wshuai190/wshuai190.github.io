@@ -11,21 +11,21 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.S. in University of Western Australia, WA, 2019
+* M.S. in University of Queensland, QLD, 2021
+* Ph.D in University of Queensland, 2025 (expected)
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* July-Sep 2021: Research Assistant
+  * University of Queensland
+  * Duties included: TREC Competition, Neural IR
+  * Supervisor: A.Professor Guido Zuccon
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* From Feb 2022: Teaching Assistant
+  * University of Queensland
+  * Duties included: TA for course INFS7205, INFS7410, DATA7901&7902/7903
+  * Course Coordinator: Professor Helen Huang, A.Professor Guido Zuccon, Dr Miao Xu
   
 Skills
 ======
