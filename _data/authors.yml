@@ -9,7 +9,24 @@ shengyao-zhuang:
   twitter     : "https://twitter.com/ShengyaoZhuang"
   google_plus :
 
-Name2 Name2:
+hang-li:
+  name        : "Name2 Name2"
+  email       : "name2@name2.com"
+  bio         : "I ordered what?"
+  avatar      : "bio-photo.jpg"
+  twitter     : "name2"
+  google_plus : "Name"
+
+
+guido-zuccon:
+  name        : "Name2 Name2"
+  email       : "name2@name2.com"
+  bio         : "I ordered what?"
+  avatar      : "bio-photo.jpg"
+  twitter     : "name2"
+  google_plus : "Name"
+
+bevan-koopman:
   name        : "Name2 Name2"
   email       : "name2@name2.com"
   bio         : "I ordered what?"
