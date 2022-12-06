@@ -1,11 +1,6 @@
 ---
-title: "Best Student Paper Award"
-collection: talks
-type: "Talk"
-permalink: /awards/2021-best-paper
-venue: "Australasian Document Computing Symposium"
+title: "Portfolio item number 1"
+excerpt: "Best student paper award on ADCS 2021 for paper "MeSH Term Suggestion for Systematic Review Literature Search""
+collection: awards
 date: 2021-12-31
-location:
 ---
-
-Best student paper award on ADCS 2021 for paper "MeSH Term Suggestion for Systematic Review Literature Search"
