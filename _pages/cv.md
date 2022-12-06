@@ -26,15 +26,6 @@ Work experience
   * University of Queensland
   * Duties included: TA for course INFS7205, INFS7410, DATA7901&7902/7903
   * Course Coordinator: Professor Helen Huang, A.Professor Guido Zuccon, Dr Miao Xu
-  
-Skills
-======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
 
 Publications
 ======
@@ -53,7 +44,10 @@ Teaching
   <ul>{% for post in site.teaching %}
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
-  
-Service and leadership
+
+Awards
 ======
-* Currently signed in to 43 different slack teams
+  <ul>{% for post in site.awards %}
+    {% include archive-single-cv.html %}
+  {% endfor %}</ul>
+
