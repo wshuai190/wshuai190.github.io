@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_awards/2018-12-31-UWA-travel.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2018-12-31-UWA-travel.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_awards/2021-07-31-dean-exellence.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2021-07-31-dean-exellence.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_awards/2021-08-31-PhD-scholarship.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2021-08-31-PhD-scholarship.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_awards/2021-10-31-DIGIX-challenge.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2021-10-31-DIGIX-challenge.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_awards/2021-12-31-best-paper.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2021-12-31-best-paper.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_awards/2022-05-31-SIGIR-travel.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2022-05-31-SIGIR-travel.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="15826000" />
+      <workItem from="1670299435928" duration="15906000" />
     </task>
     <servers />
   </component>
