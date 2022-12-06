@@ -4,8 +4,9 @@ authors: [hang-li, shuai-wang, shengyao-zhuang, ahmed-mourad, xueguang-ma, jimmy
 title: "To Interpolate or not to Interpolate: PRF, Dense and Sparse Retrievers"
 collection: publications
 permalink:/publication/li-sigir-2022-inter
-venue: Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR' 22)
-year: 2022
+date: 2022-07-01
+venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR' 22)'
+paperurl: 'http://ielab.io/files/li-sigir-2022-inter.pdf'
 links:
  - url: http://ielab.io/files/li-sigir-2022-inter.pdf
    name: Paper PDF

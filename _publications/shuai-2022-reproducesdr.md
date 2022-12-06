@@ -4,9 +4,9 @@ authors: [shuai-wang, harry-scells, ahmed-mourad, guido-zuccon]
 title: 'SDR for Systematic Reviews: A Reproducibility Study'
 collection: publications
 permalink:/publication/shuai-2022-reproducesdr
-venue: Proceedings of the 44th European Conference on Information Retrieval (ECIR 2022) 
-year: 2022
-pdf: /publications/pdfs/shuai2022reproducesdr.pdf
+date: 2022-02-28
+venue: 'Proceedings of the 44th European Conference on Information Retrieval (ECIR 2022)'
+paperurl: 'https://ielab.io/publications/pdfs/shuai2022reproducesdr.pdf'
 projects: [systematic-reviews] 
 links:
  - url: https://github.com/ielab/sdr

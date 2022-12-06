@@ -1,13 +1,13 @@
 # Authors
 
-Name Name:
-  name        : "Name Name"
-  uri         : "http://name.com"
-  email       : "name@name.com"
-  bio         : "This is the first name."
-  avatar      : "bio-photo-2.jpg"
-  twitter     : "name"
-  google_plus : "Name"
+shengyao-zhuang:
+  name        : "Shengyao Zhuang"
+  uri         : "https://arvinzhuang.github.io/"
+  email       : "s.zhuang@uq.edu.au"
+  bio         : "Shengyao Zhuang is a Ph.D. student in the ielab, School of Information Technology and Electrical Engineering, The University of Queensland, supervised by A/Prof. Guido Zuccon."
+  avatar      : "https://arvinzhuang.github.io/images/Shengyao_zhuang.jpg"
+  twitter     : "https://twitter.com/ShengyaoZhuang"
+  google_plus :
 
 Name2 Name2:
   name        : "Name2 Name2"

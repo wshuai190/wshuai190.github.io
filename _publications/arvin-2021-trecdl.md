@@ -3,9 +3,9 @@ authors: [shengyao-zhuang, hang-li, shuai-wang, guido-zuccon]
 title: IELAB at TREC Deep Learning Track 2021
 collection: publications
 permalink:/publication/arvin-20210trecdl
-venue: TREC 2021 Deep Learning Track
-year: 2021
-pdf: /publications/pdfs/arvin2021trecdl.pdf
+date: 2021-09-01
+venue: 'TREC 2021 Deep Learning Track'
+paperurl: 'https://ielab.io/publications/pdfs/arvin2021trecdl.pdf'
 ---
 ## Abstract
 

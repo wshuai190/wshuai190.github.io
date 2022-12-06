@@ -3,10 +3,10 @@ redirect_from: /shuai2021meshsuggest
 authors: [shuai-wang, hang-li, harry-scells, daniel-locke, guido-zuccon]
 title: 'MeSH Term Suggestion for Systematic Review Literature Search'
 collection: publications
+date: 2021-12-29
 permalink:/publication/shuai-2021-meshsuggest
-venue: Australasian Document Computing Symposium (ADCS 2021)
-year: 2021
-pdf: /publications/pdfs/shuai2021meshsuggest.pdf
+venue: 'Australasian Document Computing Symposium (ADCS 2021)'
+paperurl: 'https://ielab.io/publications/pdfs/shuai2021meshsuggest.pdf'
 projects: [systematic-reviews] 
 ---
 ---
