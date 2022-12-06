@@ -1,7 +1,7 @@
 ---
-title: 'SDR for Systematic Reviews: A Reproducibility Study'
+title: "SDR for Systematic Reviews: A Reproducibility Study"
 collection: publications
-permalink:/publication/2022-02-28-shuai-reproducesdr
+permalink: /publication/2022-02-28-shuai-reproducesdr
 excerpt: 
 date: 2022-02-28
 venue: 'Proceedings of the 44th European Conference on Information Retrieval (ECIR 2022)'

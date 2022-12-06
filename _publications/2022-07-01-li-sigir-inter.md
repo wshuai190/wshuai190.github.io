@@ -1,7 +1,7 @@
 ---
 title: "To Interpolate or not to Interpolate: PRF, Dense and Sparse Retrievers"
 collection: publications
-permalink:/publication/2022-07-01-li-sigir-inter
+permalink: /publication/2022-07-01-li-sigir-inter
 excerpt: 
 date: 2022-07-01
 venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR' 22)'

@@ -1,7 +1,7 @@
 ---
-title: 'MeSH Term Suggestion for Systematic Review Literature Search'
+title: "MeSH Term Suggestion for Systematic Review Literature Search"
 collection: publications
-permalink:/publication/2021-12-29-shuai-meshsuggest
+permalink: /publication/2021-12-29-shuai-meshsuggest
 excerpt: 
 date: 2021-12-29
 venue: 'Australasian Document Computing Symposium (ADCS 2021)'

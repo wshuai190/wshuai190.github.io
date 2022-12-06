@@ -1,7 +1,7 @@
 ---
 title: "Neural Rankers for Effective Screening Prioritization in Medical Systematic Review Literature Search"
 collection: publications
-permalink:/publication/2022-12-14-shuai-neuralsr
+permalink: /publication/2022-12-14-shuai-neuralsr
 excerpt: 
 date: 2022-12-14
 venue: "Australasian Document Computing Symposium (ADCS 2022, to appear)"

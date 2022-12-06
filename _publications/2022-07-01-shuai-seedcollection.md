@@ -1,7 +1,7 @@
 ---
-title: 'From Little Things Big Things Grow: A Collection with Seed Studies for Medical Systematic Review Literature Search'
+title: "From Little Things Big Things Grow: A Collection with Seed Studies for Medical Systematic Review Literature Search"
 collection: publications
-permalink:/publication/2022-07-01-shuai-seedcollection
+permalink: /publication/2022-07-01-shuai-seedcollection
 excerpt: 
 date: 2022-07-01
 venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022)'
