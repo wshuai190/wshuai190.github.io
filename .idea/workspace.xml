@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/paper1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/paper2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/paper3.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +16,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -33,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/shuaiwang/workspace/wshuai190.github.io/_publications",
+    "last_opened_file_path": "/Users/shuaiwang/workspace/wshuai190.github.io/_awards",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm"
@@ -41,6 +45,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_awards" />
       <recent name="$PROJECT_DIR$/_publications" />
     </key>
   </component>
@@ -86,7 +91,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="10033000" />
+      <workItem from="1670299435928" duration="11580000" />
     </task>
     <servers />
   </component>
