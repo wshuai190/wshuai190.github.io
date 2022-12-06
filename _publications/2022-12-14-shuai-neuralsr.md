@@ -2,7 +2,7 @@
 authors: [shuai-wang, harry-scells, bevan-koopman, guido-zuccon]
 title: "Neural Rankers for Effective Screening Prioritization in Medical Systematic Review Literature Search"
 collection: publications
-permalink:/publication/shuai-2022-neuralsr
+permalink:/publication/2022-12-14-shuai-neuralsr.md
 date: 2022-12-14
 venue: "Australasian Document Computing Symposium (ADCS 2022, to appear)"
 redirect_from: /shuai2022neuralsr

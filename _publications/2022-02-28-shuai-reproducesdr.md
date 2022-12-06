@@ -3,7 +3,7 @@ redirect_from: /shuaireproducesdr
 authors: [shuai-wang, harry-scells, ahmed-mourad, guido-zuccon]
 title: 'SDR for Systematic Reviews: A Reproducibility Study'
 collection: publications
-permalink:/publication/shuai-2022-reproducesdr
+permalink:/publication/2022-02-28-shuai-reproducesdr.md
 date: 2022-02-28
 venue: 'Proceedings of the 44th European Conference on Information Retrieval (ECIR 2022)'
 paperurl: 'https://ielab.io/publications/pdfs/shuai2022reproducesdr.pdf'

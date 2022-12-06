@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/authors.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/authors.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/talkmap.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/talkmap.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/arvin-2021-trecdl.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/li-sigir-2022-inter.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/shuai-2021-meshsuggest.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-meshjournal.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-neuralsr.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-reproducesdr.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-seedcollection.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +93,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="4562000" />
+      <workItem from="1670299435928" duration="5155000" />
     </task>
     <servers />
   </component>
