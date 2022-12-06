@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/_awards/2021-best-paper.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2021-best-paper.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/awards.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/awards.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +88,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="11748000" />
+      <workItem from="1670299435928" duration="12114000" />
     </task>
     <servers />
   </component>
