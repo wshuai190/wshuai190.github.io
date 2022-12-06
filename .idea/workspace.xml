@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_awards/2021-best-paper.md" beforeDir="false" afterPath="$PROJECT_DIR$/_awards/2021-best-paper.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +89,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="14020000" />
+      <workItem from="1670299435928" duration="14617000" />
     </task>
     <servers />
   </component>
