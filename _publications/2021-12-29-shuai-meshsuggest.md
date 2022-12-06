@@ -1,14 +1,11 @@
 ---
-redirect_from: /shuai2021meshsuggest
-authors: [shuai-wang, hang-li, harry-scells, daniel-locke, guido-zuccon]
 title: 'MeSH Term Suggestion for Systematic Review Literature Search'
 collection: publications
 date: 2021-12-29
 permalink:/publication/2021-12-29-shuai-meshsuggest.md
 venue: 'Australasian Document Computing Symposium (ADCS 2021)'
 paperurl: 'https://ielab.io/publications/pdfs/shuai2021meshsuggest.pdf'
-projects: [systematic-reviews] 
----
+citation: 'Shuai Wang and Hang Li and Harry Scells and Daniel Locke and Guido Zuccon. 2021. MeSH Term Suggestion for Systematic Review Literature Search. In Australasian Document Computing Symposium (ADCS 2021).'
 ---
 ## Abstract
 High-quality medical systematic reviews require comprehensive literature searches to ensure the recommendations and outcomes are sufficiently reliable. Indeed, searching for relevant medical literature is a key phase in constructing systematic reviews and often involves domain (medical researchers) and search (information specialists) experts in developing the search queries. Queries in this context are highly complex, based on Boolean logic, include free-text terms and index terms from standardised terminologies (e.g., MeSH), and are difficult and time-consuming to build. The use of MeSH terms, in particular, has been shown to improve the quality of the search results. However, identifying the correct MeSH terms to include in a query is difficult: information experts are often unfamiliar with the MeSH database and unsure about the appropriateness of MeSH terms for a query. Naturally, the full value of the MeSH terminology is often not fully exploited.

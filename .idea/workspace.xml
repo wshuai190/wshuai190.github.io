@@ -3,13 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/arvin-2021-trecdl.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/li-sigir-2022-inter.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/shuai-2021-meshsuggest.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-meshjournal.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-neuralsr.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-reproducesdr.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/shuai-2022-seedcollection.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2021-09-01-arvin-trecdl.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-09-01-arvin-trecdl.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-07-01-li-sigir-inter.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-07-01-li-sigir-inter.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-07-01-shuai-seedcollection.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-07-01-shuai-seedcollection.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-09-01-shuai-meshjournal.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-09-01-shuai-meshjournal.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="5155000" />
+      <workItem from="1670299435928" duration="6104000" />
     </task>
     <servers />
   </component>
