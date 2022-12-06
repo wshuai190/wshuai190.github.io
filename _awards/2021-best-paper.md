@@ -1,7 +1,7 @@
 ---
 title: "Best Student Paper Award"
-collection: awards
-type: "awards"
+collection: talks
+type: "Talk"
 permalink: /awards/2021-best-paper
 venue: "Australasian Document Computing Symposium"
 date: 2021-12-31
