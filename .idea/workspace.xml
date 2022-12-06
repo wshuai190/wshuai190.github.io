@@ -3,14 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_pages/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/about.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-09-01-arvin-trecdl.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-09-01-arvin-trecdl.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-07-01-li-sigir-inter.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-07-01-li-sigir-inter.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-07-01-shuai-seedcollection.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-07-01-shuai-seedcollection.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-09-01-shuai-meshjournal.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-09-01-shuai-meshjournal.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-07-01-li-sigir-inter.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/a.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/markdown_generator/PubsFromBib.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/markdown_generator/PubsFromBib.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/markdown_generator/publications.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/markdown_generator/publications.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/markdown_generator/talks.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/markdown_generator/talks.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +91,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="7016000" />
+      <workItem from="1670299435928" duration="7589000" />
     </task>
     <servers />
   </component>
