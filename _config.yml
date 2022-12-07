@@ -82,12 +82,12 @@ analytics:
 author:
   name             : "Shuai Wang (Dylan)"
   avatar           : "ws.jpg"
-  bio              : "PhD student at Ielab, UQ; Institution Link: https://ielab.io/people/shuai-wang"
+  bio              : "PhD student at Ielab, UQ"
   location         : "Brisbane, Australia"
-  employer         :
+  employer         : "https://ielab.io/people/shuai-wang.html"
   pubmed           :
   googlescholar    : "https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en"
-  email            :
+  email            : "shuai.wang2@uq.edu.au"
   researchgate     : "https://www.researchgate.net/profile/Shuai-Wang-202"
   uri              :
   bitbucket        :
@@ -102,7 +102,7 @@ author:
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         :
+  linkedin         : "https://www.linkedin.com/in/shuai-wang-33125b196/"
   orcid            : "https://orcid.org/0000-0002-0726-5250"
   pinterest        :
   soundcloud       :
