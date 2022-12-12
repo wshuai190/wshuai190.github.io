@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2023-02-27-shuai-meshdemo.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2023-02-27-shuai-meshdemo.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +90,7 @@
       <updated>1661672571082</updated>
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
-      <workItem from="1670299435928" duration="21453000" />
+      <workItem from="1670299435928" duration="23139000" />
     </task>
     <servers />
   </component>
