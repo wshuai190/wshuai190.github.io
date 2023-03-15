@@ -1,21 +1,26 @@
 ---
 permalink: /
-title: "About me"
-excerpt: "About me"
+title: "About Me"
+excerpt: "About Me"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-Shuai Wang is currently a PhD student under the supervision of Dr Guido Zuccon and Dr Bevan Koopman. Shuai Wang obtained his B.S degree from the University of Western Australia in Dec 2019 and completed his MEngSc degree from the University of Queensland in July 2021. Shuai Wang is interested in various research areas, including information retrieval, NLP, machine learning and security. [Institution link](https://ielab.io/people/shuai-wang)
+## Shuai Wang
 
-currently, I'm looking for internship for 2023, winter or summer, please contact me by email if you are interested! Thank you very much!
+Shuai Wang is a dedicated PhD student working under the supervision of Dr. Guido Zuccon and Dr. Bevan Koopman. He earned his Bachelor of Science degree from the University of Western Australia in December 2019 and completed his Master of Engineering Science degree at the University of Queensland in July 2021. Shuai is passionate about exploring various research areas, including information retrieval, natural language processing (NLP), machine learning, and security. You can learn more about his academic background and research projects at [Institution link](https://ielab.io/people/shuai-wang).
+
+### Internship Opportunities
+
+Shuai is actively seeking internship opportunities for 2023, during the winter or summer seasons. If you have an opening that aligns with his research interests and expertise, please don't hesitate to reach out by email. Thank you for your consideration!
 
 {% include base_path %}
 
-Publications
-======
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+## Publications
+
+<ul>{% for post in site.publications %}
+  {% include archive-single-cv.html %}
+{% endfor %}</ul>
+
