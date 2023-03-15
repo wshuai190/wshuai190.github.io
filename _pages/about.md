@@ -7,7 +7,6 @@ header:
 excerpt: "Shuai Wang - PhD student, Information Retrieval, NLP, Machine Learning, and Security"
 permalink: /
 title: "About Me"
-excerpt: "About Me"
 author_profile: true
 redirect_from: 
   - /about/
