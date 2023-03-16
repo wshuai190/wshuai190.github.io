@@ -12,11 +12,11 @@ redirect_from:
   - /about.html
 ---
 
-Shuai Wang is a dedicated PhD student working under the supervision of Dr. Guido Zuccon and Dr. Bevan Koopman. He earned his Bachelor of Science degree from the University of Western Australia in December 2019 and completed his Master of Engineering Science degree at the University of Queensland in July 2021. Shuai is passionate about exploring various research areas, including information retrieval, natural language processing (NLP), machine learning, and security. You can learn more about his academic background and research projects at [Institution link](https://ielab.io/people/shuai-wang).
+Shuai Wang is a dedicated PhD student working under the supervision of [Dr. Guido Zuccon](https://ielab.io/people/guido-zuccon.html), [Dr. Bevan Koopman](https://bevankoopman.github.io/) and unofficial supervisor [Dr. Harrisen Scells](https://scells.me/). He earned his Bachelor of Science degree from the University of Western Australia in December 2019 and completed his Master of Engineering Science degree at the University of Queensland in July 2021. Shuai is passionate about exploring various research areas, including information retrieval, natural language processing (NLP), machine learning, and security. You can learn more about his academic background and research projects at [here](https://ielab.io/people/shuai-wang).
 
 ### Internship Opportunities
 
-Shuai is actively seeking internship opportunities for 2023, during the winter or summer seasons. If you have an opening that aligns with his research interests and expertise, please don't hesitate to reach out by email. Thank you for your consideration!
+Shuai is actively seeking internship opportunities for 2023, starting from November or December. If you have an opening that aligns with his research interests and expertise, please don't hesitate to reach out by email. Thank you for your consideration!
 
 {% include base_path %}
 
