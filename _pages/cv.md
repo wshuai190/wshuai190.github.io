@@ -1,6 +1,6 @@
 ---
 layout: archive
-title: "CV"
+title: "Curriculum Vitae"
 permalink: /cv/
 author_profile: true
 redirect_from:
@@ -9,45 +9,41 @@ redirect_from:
 
 {% include base_path %}
 
-Education
-======
-* B.S. in University of Western Australia, WA, 2019
-* M.S. in University of Queensland, QLD, 2021
-* Ph.D in University of Queensland, 2025 (expected)
+## Education
 
-Work experience
-======
-* July-Sep 2021: Research Assistant
-  * University of Queensland
-  * Duties included: TREC Competition, Neural IR
-  * Supervisor: A.Professor Guido Zuccon
+* **Ph.D. in University of Queensland, QLD** (Expected: 2025)
+* **M.S. in University of Queensland, QLD** (2021)
+* **B.S. in University of Western Australia, WA** (2019)
 
-* From Feb 2022: Teaching Assistant
-  * University of Queensland
-  * Duties included: TA for course INFS7205, INFS7410, DATA7901&7902/7903
-  * Course Coordinator: Professor Helen Huang, A.Professor Guido Zuccon, Dr Miao Xu
+## Work Experience
 
-Publications
-======
-  <ul>{% for post in site.publications %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Talks
-======
-  <ul>{% for post in site.talks %}
-    {% include archive-single-talk-cv.html %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+### Research Assistant
+* **University of Queensland** (July - September 2021)
+  * Participated in the TREC Competition and worked on Neural Information Retrieval projects
+  * Supervisor: A. Professor Guido Zuccon
 
-Awards
-======
-  <ul>{% for post in site.awards %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
+### Teaching Assistant
+* **University of Queensland** (From February 2022)
+  * Courses: INFS7205, INFS7410, DATA7901 & 7902/7903
+  * Course Coordinators: Professor Helen Huang, A. Professor Guido Zuccon, Dr. Miao Xu
+
+## Publications
+<ul>{% for post in site.publications %}
+  {% include archive-single-cv.html %}
+{% endfor %}</ul>
+
+## Talks
+<ul>{% for post in site.talks %}
+  {% include archive-single-talk-cv.html %}
+{% endfor %}</ul>
+
+## Teaching
+<ul>{% for post in site.teaching %}
+  {% include archive-single-cv.html %}
+{% endfor %}</ul>
+
+## Awards
+<ul>{% for post in site.awards %}
+  {% include archive-single-cv.html %}
+{% endfor %}</ul>
 
