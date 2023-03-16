@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_includes/archive-single.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/archive-single.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-07-01-shuai-InterpolateDR.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-07-01-shuai-InterpolateDR.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-09-01-arvin-trecdl.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-09-01-arvin-trecdl.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-07-01-shuai-seedcollection.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-07-01-shuai-seedcollection.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-07-02-hang-sigirprfi.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-07-02-hang-sigirprfi.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_buttons.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +100,7 @@
       <workItem from="1670299435928" duration="23139000" />
       <workItem from="1678979644100" duration="1584000" />
       <workItem from="1678981563800" duration="1288000" />
-      <workItem from="1678991932716" duration="5715000" />
+      <workItem from="1678991932716" duration="5815000" />
     </task>
     <servers />
   </component>
