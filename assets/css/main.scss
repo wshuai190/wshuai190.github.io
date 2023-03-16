@@ -68,15 +68,6 @@ ul li {
   margin-bottom: 1.5rem;
 }
 
-.news-item {
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.news-date {
-  display: block;
-  font-size: 0.9
-}
 
 .news-status {
   position: absolute;
@@ -91,6 +82,46 @@ ul li {
 
 .fa-home:before {
   content: "\f015";
+}
+
+.news-item {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.news-status {
+  position: absolute;
+  top: 0;
+  left: -1.5rem;
+  font-size: 1.2rem;
+}
+
+.news-date {
+  margin-right: 1.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.news-title {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.news-description {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.news-link {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Reduce margin between news items */
+.news-item + .news-item {
+  margin-top: 1rem;
 }
 
 
