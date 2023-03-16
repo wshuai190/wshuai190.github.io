@@ -3,8 +3,7 @@ layout: single
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
-  overlay_image: /assets/images/banner.jpg
-excerpt: "Shuai Wang - PhD student, Information Retrieval, NLP, Machine Learning, and Security"
+excerpt: "Shuai Wang - PhD student, Professional search, Information Retrieval, NLP, Machine Learning"
 permalink: /
 title: "About Me"
 author_profile: true
