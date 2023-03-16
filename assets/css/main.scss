@@ -39,3 +39,31 @@
 @import "vendor/font-awesome/brands";
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
+
+/* News section */
+
+.post-meta {
+  font-size: 1rem;
+  color: #999;
+}
+
+.post-meta:before {
+  content: "\f017";
+  font-family: FontAwesome;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+  color: #999;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+ul {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+ul li {
+  margin-bottom: 1.5rem;
+}
