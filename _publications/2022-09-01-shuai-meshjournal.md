@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2022-09-01-shuai-meshjournal
 excerpt: 
 date: 2022-09-01
+page_type: "Journal"
 venue: "Intelligent Systems with Applications (ISWA) Technology-Assisted Review Systems Special Issue"
 paperurl: 'https://ielab.io/publications/pdfs/shuai2022meshjournal.pdf'
 citation: 'Shuai Wang and Harry Scells and Bevan Koopman and Guido Zuccon. 2022. Automated MeSH Term Suggestion for Effective Query Formulation in Systematic Reviews Literature Search. In Intelligent Systems with Applications (ISWA) Technology-Assisted Review Systems Special Issue.'

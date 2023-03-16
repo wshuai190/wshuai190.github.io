@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2022-07-02-hang-sigirprfi
 excerpt: 
 date: 2022-07-02
+page_type: "Short"
 venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022)'
 paperurl: 'https://ielab.io/files/li-sigir-2022-inter.pdf'
 citation: 'Hang Li and Shuai Wang and Shengyao Zhuang and Ahmed Mourad and xueguang-ma and jimmy-lin and Guido Zuccon. 2022. To Interpolate or not to Interpolate: PRF, Dense and Sparse Retrievers. In Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022).'

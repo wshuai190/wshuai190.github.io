@@ -151,3 +151,32 @@
     font-size: $type-size-7;
   }
 }
+
+.page-type-btn {
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  margin-right: 8px;
+  border-radius: 3px;
+}
+
+.page-type-btn.long {
+  background-color: #007bff;
+}
+
+.page-type-btn.short {
+  background-color: #28a745;
+}
+
+.page-type-btn.reproduce {
+  background-color: #ffc107;
+}
+
+.page-type-btn.notebook {
+  background-color: #dc3545;
+}
+
+.page-type-btn.journal {
+  background-color: lightgrey;
+}

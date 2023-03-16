@@ -4,6 +4,7 @@ collection: publications
 permalink: /publication/2022-02-28-shuai-reproducesdr
 excerpt: 
 date: 2022-02-28
+page_type: "Reproduce"
 venue: 'Proceedings of the 44th European Conference on Information Retrieval (ECIR 2022)'
 paperurl: 'https://ielab.io/publications/pdfs/shuai2022reproducesdr.pdf'
 citation: 'Shuai Wang and Harry Scells and Ahmed Mourad and Guido Zuccon. 2022. SDR for Systematic Reviews: A Reproducibility Study. In Proceedings of the 44th European Conference on Information Retrieval (ECIR 2022).'
