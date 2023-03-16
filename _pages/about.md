@@ -5,7 +5,7 @@ header:
   overlay_filter: "0.5"
 excerpt: "Shuai Wang - PhD student, Professional search, Information Retrieval, NLP, Machine Learning"
 permalink: /
-title: "About Me"
+title: "Shuai Wang (Dylan) UQ"
 author_profile: true
 redirect_from: 
   - /about/
