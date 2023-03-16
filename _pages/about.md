@@ -22,12 +22,15 @@ Shuai is actively seeking internship opportunities for 2023, during the winter o
 
 ## News
 
-<ul>{% for news in site.data.news %}
-  <li>
-    <span class="post-meta">{{ news.date | date: "%B %d, %Y" }}</span>
-    <h3><a href="{{ news.url | default: '#' }}">{{ news.title }}</a></h3>
-  </li>
-{% endfor %}</ul>
+{% for news in site.data.news %}
+<div class="news-item">
+  <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
+  <h3 class="news-title">{{ news.title }}</h3>
+  {% if news.description %}
+  <p class="news-description">{{ news.description }}</p>
+  {% endif %}
+</div>
+{% endfor %}
 
 
 ## Publications
