@@ -70,11 +70,27 @@ ul li {
 
 .news-item {
   margin-bottom: 1.5rem;
+  position: relative;
 }
 
 .news-date {
   display: block;
   font-size: 0.9
+}
+
+.news-status {
+  position: absolute;
+  top: 0;
+  left: -1.5rem;
+  font-size: 1.2rem;
+}
+
+.fa-plane:before {
+  content: "\f072";
+}
+
+.fa-home:before {
+  content: "\f015";
 }
 
 

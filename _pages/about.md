@@ -24,6 +24,11 @@ Shuai is actively seeking internship opportunities for 2023, during the winter o
 
 {% for news in site.data.news reversed %}
 <div class="news-item">
+  {% if news.status == "travel" %}
+  <span class="news-status"><i class="fas fa-plane"></i></span>
+  {% else %}
+  <span class="news-status"><i class="fas fa-home"></i></span>
+  {% endif %}
   <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
   <h3 class="news-title">{{ news.title }}</h3>
   {% if news.description %}
