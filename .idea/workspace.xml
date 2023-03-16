@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/_includes/google-analytics.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/analytics-providers/custom.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/analytics-providers/google-universal.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/analytics-providers/google.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/analytics.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/google-analytics.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/_layouts/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/default.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +52,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/_awards" />
       <recent name="$PROJECT_DIR$/_publications" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_includes/analytics-providers" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.index.html">
@@ -103,7 +102,7 @@
       <workItem from="1670299435928" duration="23139000" />
       <workItem from="1678979644100" duration="1584000" />
       <workItem from="1678981563800" duration="1288000" />
-      <workItem from="1678991932716" duration="2417000" />
+      <workItem from="1678991932716" duration="2835000" />
     </task>
     <servers />
   </component>
