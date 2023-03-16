@@ -1,30 +1,38 @@
 - title: "Present Paper at ICTIR 2021, Online"
   date: 2021-07-11
-  url: https://ictir2021.org/
+  description: "Presented a paper online interpolation of DR and BM25 at the ICTIR 2021 conference."
 
 - title: "Started PhD program at The University of Queensland"
   date: 2021-10-01
-  
+  description: "Began a PhD program in information retrieval and natural language processing at The University of Queensland."
+
 - title: "Present Paper at ADCS 2021, Online, Received Best Student Paper Award"
   date: 2021-12-09
   url: http://adcs-conference.org/2021/
- 
+  description: "Presented a paper on MeSH Term suggestion and received the Best Student Paper Award."
+
 - title: "Present Paper at ECIR 2022, Online"
   date: 2022-04-10
   url: https://ecir2022.org/
+  description: "Presented a paper on reproducibility of Seed-driven document ranking in systematic review at the ECIR 2022 conference."
 
 - title: "Poster Presentations at SIGIR 2022, Madrid, Spain"
   date: 2022-07-11
   url: https://sigir.org/sigir2022/
+  description: "Presented two posters at the SIGIR 2022 conference in Madrid, Spain."
 
 - title: "Presentations at ADCS 2022, Adelaide, Australia"
   date: 2022-12-15
   url: http://adcs-conference.org/2022/
+  description: "Presented a paper on using neural ranker in systematic review screening at the ADCS 2022 conference in Adelaide, Australia."
 
 - title: "Poster Presentations at WSDM 2023, Singapore"
   date: 2023-02-27
   url: https://www.wsdm-conference.org/2023/
+  description: "Presented a demo poster on MeSH Term suggestion at the WSDM 2023 conference in Singapore."
 
 - title: "Two Month Research Visit at Leipzig University"
   date: 2023-03-04
   url: https://temir.org/people.html
+  description: "Visited Leipzig University for two months to collaborate on research projects related to systematic review automation and complex medicine-based question-answering."
+

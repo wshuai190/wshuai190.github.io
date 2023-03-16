@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-12-14-shuai-neuralsr.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2023-02-27-shuai-meshdemo.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2023-02-27-shuai-meshdemo.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_data/news.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/news.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/about.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,10 +37,13 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/shuaiwang/workspace/wshuai190.github.io/_awards",
+    "last_opened_file_path": "/Users/shuaiwang/workspace/wshuai190.github.io",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm"
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -91,6 +95,7 @@
       <workItem from="1661672572332" duration="4518000" />
       <workItem from="1661690906636" duration="1605000" />
       <workItem from="1670299435928" duration="23139000" />
+      <workItem from="1678979644100" duration="386000" />
     </task>
     <servers />
   </component>

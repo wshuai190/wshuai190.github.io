@@ -29,6 +29,9 @@ Shuai is actively seeking internship opportunities for 2023, during the winter o
   {% if news.description %}
   <p class="news-description">{{ news.description }}</p>
   {% endif %}
+  {% if news.url %}
+  <a href="{{ news.url }}" class="news-link">Read more</a>
+  {% endif %}
 </div>
 {% endfor %}
 
