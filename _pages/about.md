@@ -22,7 +22,7 @@ Shuai is actively seeking internship opportunities for 2023, during the winter o
 
 ## News
 
-{% for news in site.data.news %}
+{% for news in site.data.news reversed %}
 <div class="news-item">
   <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
   <h3 class="news-title">{{ news.title }}</h3>
@@ -31,6 +31,7 @@ Shuai is actively seeking internship opportunities for 2023, during the winter o
   {% endif %}
 </div>
 {% endfor %}
+
 
 
 ## Publications
