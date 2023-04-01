@@ -30,7 +30,7 @@ Shuai is actively seeking internship opportunities for 2023, starting from Novem
   {% if news.status == "home" %}
   <span class="news-status"><i class="fas fa-home"></i></span>
   {% else %}
-  <span class="news-status"><i class="fa-solid fa-party-horn"></i></span>
+  <span class="news-status"><i class="fas fa-glass-cheers"></i></span>
   {% endif %}
   {% endif %}
   <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
