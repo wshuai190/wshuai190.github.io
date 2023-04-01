@@ -43,3 +43,8 @@
   url: https://temir.org/people.html
   description: "Visiting Leipzig University for two months to collaborate on research projects related to systematic review automation and complex medicine-based question-answering."
   status: travel
+
+- title: "Our Paper titled: Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study has been accepted to SIGIR 2023"
+  date: 2023-04-01
+  status: Celebrate
+
