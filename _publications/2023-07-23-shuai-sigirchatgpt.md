@@ -5,7 +5,7 @@ permalink: /publication/2023-07-23-sigirchatgpt
 excerpt: 
 date: 2022-07-02
 page_type: "Long"
-venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022)'
+venue: 'Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023)'
 paperurl: 'https://ielab.io/files/li-sigir-2022-inter.pdf'
 citation: 'Shuai Wang, Harrisen Scells, Bevan Koopman and Guido Zuccon. 2023. Can ChatGPT Write a GoodBoolean QueryforSystematic Review Literature Search? In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023).'
 ---
