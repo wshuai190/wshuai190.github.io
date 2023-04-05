@@ -44,13 +44,8 @@
   description: "Visiting Leipzig University for two months to collaborate on research projects related to systematic review automation and complex medicine-based question-answering."
   status: travel
 
-- title: "One Paper Accepted at SIGIR 2023 Reproducibility Track"
-  date: 2023-04-01
-  description: "Paper titled: Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study has been accepted to SIGIR 2023. Preprints will be available soon."
-  status: Celebrate
-
-- title: "One Paper Accepted at SIGIR 2023 Full-Paper Track"
+- title: "Two Papers Accepted at SIGIR 2023"
   date: 2023-04-01
   url: https://arxiv.org/abs/2302.03495
-  description: "Paper titled: Can ChatGPT Write a GoodBoolean QueryforSystematic Review Literature Search? has been accepted to SIGIR 2023"
-  status: Celebrate
+  description: "[Full Paper]: Can ChatGPT Write a Good Boolean Query for Systematic Review Literature Search?; and [Reproducibility Paper]: Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study have been accepted to SIGIR 2023."
+  status: celebrate

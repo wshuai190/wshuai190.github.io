@@ -30,7 +30,7 @@ Shuai is actively seeking internship opportunities for 2023, starting from Novem
   {% if news.status == "home" %}
   <span class="news-status"><i class="fas fa-home"></i></span>
   {% else %}
-  <span class="news-status"><i class="fas fa-glass-cheers"></i></span>
+  <span class="news-status"><i class="fas fa-wine-glass"></i></span>
   {% endif %}
   {% endif %}
   <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
@@ -48,7 +48,10 @@ Shuai is actively seeking internship opportunities for 2023, starting from Novem
 
 ## Publications
 
-<ul>{% for post in site.publications %}
+<ul>
+{% assign sorted_publications = site.publications | sort: 'date' | reverse %}
+{% for post in sorted_publications %}
   {% include archive-single-cv.html %}
-{% endfor %}</ul>
+{% endfor %}
+</ul>
 
