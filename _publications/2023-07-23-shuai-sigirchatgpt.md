@@ -3,10 +3,10 @@ title: "Can ChatGPT Write a GoodBoolean QueryforSystematic Review Literature Sea
 collection: publications
 permalink: /publication/2023-07-23-sigirchatgpt
 excerpt: 
-date: 2023-07-02
+date: 2023-07-24
 page_type: "Long"
 venue: 'Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023)'
-paperurl: 'https://ielab.io/files/li-sigir-2022-inter.pdf'
+paperurl: 'https://arxiv.org/abs/2302.03495'
 citation: 'Shuai Wang, Harrisen Scells, Bevan Koopman and Guido Zuccon. 2023. Can ChatGPT Write a GoodBoolean QueryforSystematic Review Literature Search? In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023).'
 ---
 ## Abstract
