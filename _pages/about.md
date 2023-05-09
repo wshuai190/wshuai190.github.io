@@ -55,3 +55,11 @@ Shuai is actively seeking internship opportunities for 2023, starting from Novem
 {% endfor %}
 </ul>
 
+
+## Services
+
+He has served as a reviewer for the following journal/conference:
+
+- TOIS: ACM Transactions on Information Systems
+- ACM ICTIR 2023: ACM International Conference on the Theory of Information Retrieval
+
