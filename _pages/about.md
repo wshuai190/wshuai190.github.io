@@ -12,12 +12,22 @@ redirect_from:
   - /about.html
 ---
 
-Shuai Wang is a dedicated PhD student working under the supervision of [Dr. Guido Zuccon](https://ielab.io/people/guido-zuccon.html), [Dr. Bevan Koopman](https://bevankoopman.github.io/) and unofficial supervisor [Dr. Harrisen Scells](https://scells.me/). He earned his Bachelor of Science degree from the University of Western Australia in December 2019 and completed his Master of Engineering Science degree at the University of Queensland in July 2021. Shuai is passionate about exploring various research areas, including information retrieval, natural language processing (NLP), machine learning, and security. You can learn more about his academic background and research projects at [here](https://ielab.io/people/shuai-wang).
+Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://ielab.io/people/guido-zuccon.html) and [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), my official supervisors. But wait, there's more! I've also got an unofficial supervisor, [Dr. Harrisen Scells](https://scells.me/), who's in Germany but still manages to keep tabs on me thanks to the wonders of Wi-Fi (Something that's been invented by Aussie researchers).
+
+I snagged my Bachelor of Science degree from the University of Western Australia in 2019, then rolled the dice (not really, but it sounds cooler) and leveled up with a Master of Engineering Science degree from the University of Queensland in 2021.
+
+Now, I'm a second-year PhD student at UQ, exploring the wilds of information retrieval, natural language processing (NLP), and machine learning like a data-loving Indiana Jones. I'm also eyeing security and CV, but I'm still figuring out if I'm ready to dive into that pool.
+
+I'm currently working on a super-niche thesis on automation for medical systematic reviews with my buddy [Xinyu Mao](https://ielab.io/people/xinyu-mao). It's so niche, I don't have to worry about other brainiacs stealing my thunder.
+
+I also moonlight as a tutor at UQ, teaching courses like INFS7410. I'm not in it for the cash, but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together (and yes, you'll get first author credit if we hit the jackpot).
+
 
 ### Internship Opportunities
 
 Shuai is actively seeking internship opportunities for 2023, starting from November or December. If you have an opening that aligns with his research interests and expertise, please don't hesitate to reach out by email. Thank you for your consideration!
 
+I'm also looking for an internship. Got a spot that matches my skills? Shoot me an email! I'm as keen as a caffeinated kangaroo. Thanks for thinking of me!
 {% include base_path %}
 
 ## News
