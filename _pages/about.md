@@ -67,7 +67,7 @@ I'm also looking for an internship. Got a spot that matches my skills? Shoot me 
 
 ## Services
 
-He has served as a reviewer for the following journal/conference:
+I serve as a reviewer/PC member for the following journal/conference:
 
 - TOIS: ACM Transactions on Information Systems
 - ACM ICTIR 2023: ACM International Conference on the Theory of Information Retrieval
