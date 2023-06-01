@@ -25,9 +25,8 @@ I also moonlight as a tutor at UQ, teaching courses like INFS7410. I'm not in it
 
 ### Internship Opportunities
 
-Shuai is actively seeking internship opportunities for 2023, starting from November or December. If you have an opening that aligns with his research interests and expertise, please don't hesitate to reach out by email. Thank you for your consideration!
-
 I'm also looking for an internship. Got a spot that matches my skills? Shoot me an email! I'm as keen as a caffeinated kangaroo. Thanks for thinking of me!
+
 {% include base_path %}
 
 ## News
