@@ -18,7 +18,7 @@ I snagged my Bachelor of Science degree from the University of Western Australia
 
 Now, I'm a second-year PhD student at UQ, exploring the wilds of information retrieval, natural language processing (NLP), and machine learning like a data-loving Indiana Jones. I'm also eyeing security and CV, but I'm still figuring out if I'm ready to dive into that pool.
 
-I'm currently working on a super-niche thesis on automation for medical systematic reviews with my buddy [Xinyu Mao](https://ielab.io/people/xinyu-mao). It's so niche, I don't have to worry about other brainiacs stealing my thunder.
+I'm currently working on automation for medical systematic reviews, where I have been currently focused on the development of Automatic Mesh Term Suggestion, Screening Prioritisation, Seed-drievn methods and Boolean query formulation.
 
 I also moonlight as a tutor at UQ, teaching courses like INFS7410. I'm not in it for the cash, but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together (and yes, you'll get first author credit if we hit the jackpot).
 
