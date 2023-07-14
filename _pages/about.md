@@ -70,5 +70,6 @@ I'm also looking for an internship. Got a spot that matches my skills? Shoot me 
 I serve as a reviewer/PC member for the following journal/conference:
 
 - TOIS: ACM Transactions on Information Systems
+- Journal of Data and Information Quality
 - ACM ICTIR 2023: ACM International Conference on the Theory of Information Retrieval
 
