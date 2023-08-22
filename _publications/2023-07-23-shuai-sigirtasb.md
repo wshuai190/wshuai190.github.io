@@ -6,7 +6,7 @@ excerpt:
 date: 2023-07-23
 page_type: "Reproduce"
 venue: 'Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023)'
-paperurl: 'https://ielab.io/publications/pdfs/shuai2023balancetrain.pdf'
+paperurl: 'https://dl.acm.org/doi/abs/10.1145/3539618.3591915'
 citation: 'Shuai Wang, and Guido Zuccon. 2023. Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study. In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023).'
 ---
 ## Abstract

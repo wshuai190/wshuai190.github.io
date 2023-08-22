@@ -6,7 +6,7 @@ excerpt:
 date: 2023-07-24
 page_type: "Long"
 venue: 'Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023)'
-paperurl: 'https://arxiv.org/abs/2302.03495'
+paperurl: 'https://dl.acm.org/doi/10.1145/3539618.3591703#:~:text=In%20this%20paper%2C%20we%20investigate,to%20generate%20effective%20Boolean%20queries.'
 citation: 'Shuai Wang, Harrisen Scells, Bevan Koopman and Guido Zuccon. 2023. Can ChatGPT Write a Good Boolean Query for Systematic Review Literature Search? In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023).'
 ---
 ## Abstract

@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2023-07-23-shuai-sigirchatgpt.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2023-07-23-shuai-sigirchatgpt.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2023-07-23-shuai-sigirtasb.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2023-07-23-shuai-sigirtasb.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +121,8 @@
       <workItem from="1690028252467" duration="1474000" />
       <workItem from="1690249186397" duration="2504000" />
       <workItem from="1690601404123" duration="1039000" />
-      <workItem from="1691925351199" duration="69000" />
+      <workItem from="1691925351199" duration="904000" />
+      <workItem from="1692742171991" duration="79000" />
     </task>
     <servers />
   </component>
