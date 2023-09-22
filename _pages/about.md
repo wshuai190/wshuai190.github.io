@@ -3,7 +3,7 @@ layout: single
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
-excerpt: "Shuai Wang - PhD student, Professional search, Information Retrieval, NLP, Machine Learning"
+excerpt: "Shuai Wang - PhD student, Domain-specific search, Information Retrieval, NLP, Machine Learning"
 permalink: /
 title: "Shuai Wang (Dylan) UQ"
 author_profile: true
@@ -12,7 +12,7 @@ redirect_from:
   - /about.html
 ---
 
-Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://ielab.io/people/guido-zuccon.html) and [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), my official supervisors. But wait, there's more! I've also got an unofficial supervisor, [Dr. Harrisen Scells](https://scells.me/), who's in Germany but still manages to keep tabs on me thanks to the wonders of Wi-Fi (Something that's been invented by Aussie researchers).
+Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857) and [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), my official supervisors. But wait, there's more! I've also got an unofficial supervisor, [Dr. Harrisen Scells](https://scells.me/), who's in Germany but still manages to keep tabs on me thanks to the wonders of Wi-Fi (Something that's been invented by Aussie researchers).
 
 I snagged my Bachelor of Science degree from the University of Western Australia in 2019, then rolled the dice (not really, but it sounds cooler) and leveled up with a Master of Engineering Science degree from the University of Queensland in 2021.
 
@@ -20,7 +20,7 @@ Now, I'm a second-year PhD student at UQ, exploring the wilds of information ret
 
 I'm currently working on automation for medical systematic reviews, where I have been currently focused on the development of Automatic Mesh Term Suggestion, Screening Prioritisation, Seed-drievn methods and Boolean query formulation.
 
-I also moonlight as a tutor at UQ, teaching courses like INFS7410. I'm not in it for the cash, but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together (and yes, you'll get first author credit if we hit the jackpot).
+I also moonlight as a tutor at UQ, teaching courses like INFS7410 (information retrieval and web search). I'm not in it for the cash, but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together (and yes, you'll get first author credit if we hit the jackpot).
 
 
 ### Internship Opportunities
