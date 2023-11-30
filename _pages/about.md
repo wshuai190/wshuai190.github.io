@@ -16,7 +16,7 @@ Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of acad
 
 I snagged my Bachelor of Science degree from the University of Western Australia in 2019, then rolled the dice (not really, but it sounds cooler) and leveled up with a Master of Engineering Science degree from the University of Queensland in 2021.
 
-Now, I'm a second-year PhD student at UQ, exploring the wilds of information retrieval, natural language processing (NLP), and machine learning like a data-loving Indiana Jones. I'm also eyeing security and CV, but I'm still figuring out if I'm ready to dive into that pool.
+Now, I just started the third-year in my PhD, exploring the wilds of information retrieval, natural language processing (NLP), and machine learning like a data-loving Indiana Jones. I'm also eyeing security and CV, but I'm still figuring out if I'm ready to dive into that pool.
 
 I'm currently working on automation for medical systematic reviews, where I have been currently focused on the development of Automatic Mesh Term Suggestion, Screening Prioritisation, Seed-drievn methods and Boolean query formulation.
 
