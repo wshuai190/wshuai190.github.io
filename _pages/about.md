@@ -12,7 +12,7 @@ redirect_from:
   - /about.html
 ---
 
-Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857) and [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), my official supervisors. But wait, there's more! I've also got an unofficial supervisor, [Dr. Harrisen Scells](https://scells.me/), who's in Germany but still manages to keep tabs on me thanks to the wonders of Wi-Fi (Something that's been invented by Aussie researchers).
+Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857) and [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/) (who's in Germany but still manages to keep tabs on me.
 
 I snagged my Bachelor of Science degree from the University of Western Australia in 2019, then rolled the dice (not really, but it sounds cooler) and leveled up with a Master of Engineering Science degree from the University of Queensland in 2021.
 
