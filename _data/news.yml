@@ -65,4 +65,8 @@
   description: "Presented a paper LLM-driven Boolean-based screening prioritisation at SIGIR-AP 2023."
   status: travel
 
+- title: "One Full Paper (Findings) Accepted in ECIR2024"
+  date: 2023-12-19
+  description: "[Full Paper]: Zero-shot Generative Large Language Models for Systematic Review Screening Automation has been accepted to ECIR 2024."
+  status: celebrate
 
