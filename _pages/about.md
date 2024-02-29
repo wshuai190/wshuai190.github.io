@@ -23,9 +23,9 @@ I'm currently working on automation for medical systematic reviews, where I have
 I also moonlight as a tutor at UQ, teaching courses like INFS7410 (information retrieval and web search). I'm not in it for the cash, but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together (and yes, you'll get first author credit if we hit the jackpot).
 
 
-### Internship Opportunities
+### Internship
 
-I'm also looking for an internship. Got a spot that matches my skills? Shoot me an email! I'm as keen as a caffeinated kangaroo. Thanks for thinking of me!
+I'm currently conducting my internship at [Naver Lab Europe](https://europe.naverlabs.com/), with research focus on Large Language Models.
 
 {% include base_path %}
 
