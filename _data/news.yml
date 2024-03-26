@@ -75,3 +75,13 @@
   description: "From 29th of Feb, 2024, I will start my internship at Naver Labs Europe in Grenoble for 4 months, investigating on Large Language Models"
   status: travel
 
+- title: "Paper Presentation at ECIR, Glasgow"
+  date: 2024-03-25
+  description: "Presented a paper Zero-shot  Zero-shot Generative Large Language Models for Systematic Review Screening Automation."
+  status: travel
+
+- title: "Three papers Accepted in SIGIR2024"
+  date: 2023-03-26
+  description: "[Resource Paper]: FeB4RAG;  [Short Paper]: LLM for stemming; [Perspective Paper]: Evaluating ad-hoc generative IR;"
+  status: celebrate
+
