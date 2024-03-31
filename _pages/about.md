@@ -29,10 +29,12 @@ I'm currently conducting my internship at [Naver Lab Europe](https://europe.nave
 
 {% include base_path %}
 
+
 ## News
+<ul>
 {% include news.html %}
 <a href="/news/" class="read-more-link">Read all news</a>
-
+</ul>
 
 
 
