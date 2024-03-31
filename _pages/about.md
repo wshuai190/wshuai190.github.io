@@ -31,27 +31,36 @@ I'm currently conducting my internship at [Naver Lab Europe](https://europe.nave
 
 ## News
 
+{% assign max_news = 5 %} <!-- Set maximum number of news items to display -->
+{% assign news_count = 0 %}
+
 {% for news in site.data.news reversed %}
-<div class="news-item">
-  {% if news.status == "travel" %}
-  <span class="news-status"><i class="fas fa-plane"></i></span>
-  {% else %}
-  {% if news.status == "home" %}
-  <span class="news-status"><i class="fas fa-home"></i></span>
-  {% else %}
-  <span class="news-status"><i class="fas fa-wine-glass"></i></span>
+  {% if news_count < max_news %}
+    <div class="news-item">
+      {% if news.status == "travel" %}
+        <span class="news-status"><i class="fas fa-plane"></i></span>
+      {% elsif news.status == "home" %}
+        <span class="news-status"><i class="fas fa-home"></i></span>
+      {% else %}
+        <span class="news-status"><i class="fas fa-wine-glass"></i></span>
+      {% endif %}
+      <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
+      <h3 class="news-title">{{ news.title }}</h3>
+      {% if news.description %}
+        <p class="news-description">{{ news.description }}</p>
+      {% endif %}
+      {% if news.url %}
+        <a href="{{ news.url }}" class="news-link">Read more</a>
+      {% endif %}
+    </div>
+    {% assign news_count = news_count | plus: 1 %}
   {% endif %}
-  {% endif %}
-  <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
-  <h3 class="news-title">{{ news.title }}</h3>
-  {% if news.description %}
-  <p class="news-description">{{ news.description }}</p>
-  {% endif %}
-  {% if news.url %}
-  <a href="{{ news.url }}" class="news-link">Read more</a>
-  {% endif %}
-</div>
 {% endfor %}
+
+{% if site.data.news.size > max_news %}
+  <a href="url-to-full-news-page" class="read-more-link">Read all news</a> <!-- Add link to the full news page -->
+{% endif %}
+
 
 ## Services
 
