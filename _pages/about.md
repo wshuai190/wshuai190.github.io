@@ -31,37 +31,47 @@ I'm currently conducting my internship at [Naver Lab Europe](https://europe.nave
 
 ## News
 
-{% assign max_news = 5 %} <!-- Set maximum number of news items to display -->
+{% assign max_news = 3 %} <!-- Set maximum number of news items to display -->
 {% assign news_count = 0 %}
 
 {% for news in site.data.news reversed %}
   {% if news_count < max_news %}
     <div class="news-item">
-      {% if news.status == "travel" %}
-      <span class="news-status"><i class="fas fa-plane"></i></span>
-      {% else %}
-      {% if news.status == "home" %}
-      <span class="news-status"><i class="fas fa-home"></i></span>
-      {% else %}
-      <span class="news-status"><i class="fas fa-wine-glass"></i></span>
-      {% endif %}
-      {% endif %}
+      <!-- Display different icons based on news status -->
+      {% case news.status %}
+        {% when "travel" %}
+          <span class="news-status"><i class="fas fa-plane"></i></span>
+        {% when "home" %}
+          <span class="news-status"><i class="fas fa-home"></i></span>
+        {% else %}
+          <span class="news-status"><i class="fas fa-wine-glass"></i></span>
+      {% endcase %}
+
+      <!-- Display news date -->
       <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
+
+      <!-- Display news title -->
       <h3 class="news-title">{{ news.title }}</h3>
+
+      <!-- Optional news description -->
       {% if news.description %}
-      <p class="news-description">{{ news.description }}</p>
+        <p class="news-description">{{ news.description }}</p>
       {% endif %}
+
+      <!-- Optional news link -->
       {% if news.url %}
-      <a href="{{ news.url }}" class="news-link">Read more</a>
+        <a href="{{ news.url }}" class="news-link">Read more</a>
       {% endif %}
     </div>
     {% assign news_count = news_count | plus: 1 %}
   {% endif %}
 {% endfor %}
 
+<!-- Link to view all news if there are more than the maximum number displayed -->
 {% if site.data.news.size > max_news %}
-  <a href="/news/" class="read-more-link">Read all news</a> <!-- Add link to the full news page -->
+  <a href="/news/" class="read-more-link">Read all news</a>
 {% endif %}
+
 
 
 ## Services
