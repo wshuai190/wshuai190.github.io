@@ -12,20 +12,19 @@ redirect_from:
   - /about.html
 ---
 
-Howdy! I'm Shuai Wang, a PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/) (in Germany but still manages to keep tabs on me).
+Howdy! I'm Shuai Wang, a third-year PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/).
 
-I snagged my Bachelor of Science degree from the University of Western Australia in 2019, then rolled the dice (not really, but it sounds cooler) and leveled up with a Master of Engineering Science degree from the University of Queensland in 2021.
+I received my Bachelor of Science degree from the University of Western Australia in 2019, then obtained a Master of Engineering Science degree from the University of Queensland in 2021.
 
-Now, I am in the final-year(3rd-year) of my PhD, exploring the wilds of information retrieval, natural language processing (NLP), and machine learning like a data-loving Indiana Jones. I'm also eyeing security and CV, but I'm still figuring out if I'm ready to dive into that pool.
+My research is strongly related to information retrieval and natural language processing (NLP). My PhD topic focuses on domain-specific applications (automation for medical systematic reviews), where I have been currently focused on the development of Automatic Mesh Term Suggestion, Screening Prioritisation, Seed-driven methods and Boolean query formulation. I also do some side projects on general IR and NLP tasks, such as Federated RAG, Fusion of Rankers etc.
 
-I'm currently working on automation for medical systematic reviews, where I have been currently focused on the development of Automatic Mesh Term Suggestion, Screening Prioritisation, Seed-drievn methods and Boolean query formulation.
+I'm also a tutor at UQ, teaching courses like INFS7410 (information retrieval and web search). I'm not in it for the cash but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together!
 
-I also moonlight as a tutor at UQ, teaching courses like INFS7410 (information retrieval and web search). I'm not in it for the cash, but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together (and yes, you'll get first author credit if we hit the jackpot).
+Currently, I'm doing my internship at [Naver Lab Europe](https://europe.naverlabs.com/), with a research focus on Retrieval-augmented generation (RAG) and Large Language Models.
 
+### Job Opportunities
 
-### Internship
-
-I'm currently conducting my internship at [Naver Lab Europe](https://europe.naverlabs.com/), with research focus on Large Language Models.
+I'm expected to graduate at the end of 2024, and I'm looking for job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
 
 {% include base_path %}
 
