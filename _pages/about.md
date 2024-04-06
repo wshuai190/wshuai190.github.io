@@ -24,7 +24,7 @@ Currently, I'm doing my internship at [Naver Lab Europe](https://europe.naverlab
 
 ### Job Opportunities
 
-I'm expected to graduate at the end of 2024, and I'm looking for job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
+I'm expected to graduate at the end of 2024, and I'm casually looking for job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
 
 {% include base_path %}
 
