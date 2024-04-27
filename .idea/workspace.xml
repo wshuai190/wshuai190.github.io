@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_includes/analytics-providers/custom.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/analytics-providers/custom.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +38,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/shuaiwang/workspace/wshuai190.github.io/_includes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/shuaiwang/workspace/wshuai190.github.io&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -142,6 +143,8 @@
       <workItem from="1711892149923" duration="4529000" />
       <workItem from="1712423976509" duration="3120000" />
       <workItem from="1712730028166" duration="9650000" />
+      <workItem from="1713633937652" duration="158000" />
+      <workItem from="1714204769191" duration="37000" />
     </task>
     <servers />
   </component>
