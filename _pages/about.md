@@ -20,11 +20,11 @@ My research is strongly related to information retrieval and natural language pr
 
 I'm also a tutor at UQ, teaching courses like INFS7410 (information retrieval and web search). I'm not in it for the cash but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together!
 
-Currently, I'm doing my internship at [Naver Lab Europe](https://europe.naverlabs.com/), with a research focus on Retrieval-augmented generation (RAG) and Large Language Models.
+I conducted my internship at [Naver Lab Europe](https://europe.naverlabs.com/) Feb-July 2024, with a research focus on Context Compression on Retrieval-augmented generation (RAG).
 
 ### Job Opportunities
 
-I'm expected to graduate at the end of 2024, and I'm casually looking for job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
+I'm expected to graduate at the end of 2024, and I'm currently looking for job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
 
 {% include base_path %}
 
