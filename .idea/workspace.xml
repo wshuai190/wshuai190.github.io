@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_buttons.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_publications/2024-07-16-COCOM.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2024-07-16-COCOM.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +44,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -147,7 +148,8 @@
       <workItem from="1714204769191" duration="4168000" />
       <workItem from="1720630657487" duration="702000" />
       <workItem from="1721156524042" duration="816000" />
-      <workItem from="1727091980516" duration="576000" />
+      <workItem from="1727091980516" duration="1917000" />
+      <workItem from="1729402087486" duration="229000" />
     </task>
     <servers />
   </component>
