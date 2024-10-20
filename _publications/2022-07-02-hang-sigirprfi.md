@@ -7,7 +7,7 @@ date: 2022-07-02
 page_type: "Short"
 venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022)'
 paperurl: 'https://ielab.io/files/li-sigir-2022-inter.pdf'
-citation: 'Hang Li and Shuai Wang and Shengyao Zhuang and Ahmed Mourad and xueguang-ma and jimmy-lin and Guido Zuccon. 2022. To Interpolate or not to Interpolate: PRF, Dense and Sparse Retrievers. In Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022).'
+citation: 'Hang Li* and Shuai Wang* and Shengyao Zhuang and Ahmed Mourad and xueguang-ma and jimmy-lin and Guido Zuccon. 2022. To Interpolate or not to Interpolate: PRF, Dense and Sparse Retrievers. In Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022).'
 ---
 ## Abstract
 Current pre-trained language model approaches to information retrieval can be broadly divided into two categories: sparse retrievers (to which belong also non-neural approaches such as bag-of-words methods, e.g., BM25) and dense retrievers. Each of these categories appears to capture different characteristics of relevance. Previous work has investigated how relevance signals from sparse retrievers could be combined with those from dense retrievers via interpolation. Such interpolation would generally lead to higher retrieval effectiveness.
