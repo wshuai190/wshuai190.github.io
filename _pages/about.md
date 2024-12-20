@@ -44,6 +44,7 @@ I serve as a reviewer/PC member for the following journal/conference:
 - TOIS: ACM Transactions on Information Systems
 - Journal of Data and Information Quality
 - ACM ICTIR 2023, SIGIR2024
+- ECIR2024
 
 
 ## Publications

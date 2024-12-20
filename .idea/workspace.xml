@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_data/news.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_data/news.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-07-01-shuai-InterpolateDR.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-07-01-shuai-InterpolateDR.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2021-12-29-shuai-meshsuggest.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2022-02-28-shuai-reproducesdr.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_publications/2023-12-19-shuai-llm-screening.md" beforeDir="false" afterPath="$PROJECT_DIR$/_publications/2023-12-19-shuai-llm-screening.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_pages/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/about.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +152,7 @@
       <workItem from="1729402087486" duration="6741000" />
       <workItem from="1729729291140" duration="200000" />
       <workItem from="1729760248775" duration="818000" />
-      <workItem from="1734654646056" duration="464000" />
+      <workItem from="1734654646056" duration="758000" />
     </task>
     <servers />
   </component>
