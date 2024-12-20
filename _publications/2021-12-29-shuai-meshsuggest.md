@@ -6,7 +6,7 @@ excerpt:
 date: 2021-12-29
 page_type: "Long"
 venue: 'Australasian Document Computing Symposium (ADCS 2021)'
-paperurl: 'https://ielab.io/publications/pdfs/shuai2021meshsuggest.pdf'
+paperurl: 'https://dl.acm.org/doi/abs/10.1145/3503516.3503530'
 citation: 'Shuai Wang and Hang Li and Harry Scells and Daniel Locke and Guido Zuccon. 2021. MeSH Term Suggestion for Systematic Review Literature Search. In Australasian Document Computing Symposium (ADCS 2021).'
 ---
 ## Abstract

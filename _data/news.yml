@@ -85,8 +85,12 @@
   description: "[Resource Paper]: FeB4RAG;  [Short Paper]: LLM for stemming; [Perspective Paper]: Evaluating ad-hoc generative IR;"
   status: celebrate
 
-- title: "Paper Accepted in WSDM"
+- title: "Paper Accepted in WSDM 2025"
   date: 2024-10-24
   description: "[Full Paper]: Context Embeddings for Efficient Answer Generation in RAG"
   status: celebrate
 
+- title: "Two Papers Accepted in ECIR 2025"
+  date: 2024-12-18
+  description: "[Full Paper]: Corpus Subsampling; [Full Paper]: Prompt Variations on Zero-shot LLM-based Rankers"
+  status: celebrate

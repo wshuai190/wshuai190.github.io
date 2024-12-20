@@ -6,7 +6,7 @@ excerpt:
 date: 2023-12-19
 page_type: "Long"
 venue: 'ECIR-2024'
-paperurl: ''
+paperurl: 'https://link.springer.com/chapter/10.1007/978-3-031-56027-9_25'
 citation: 'Shuai Wang, Harrisen Scells, Shengyao Zhuang, Martin Potthast, Bevan Koopman and Guido Zuccon. 2023. Zero-shot Generative Large Language Models for Systematic Review Screening Automation. In Proceedings of the 46th European Conference on Information Retrieval (ECIR 2024).'
 ---
 ## Abstract
