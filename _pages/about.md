@@ -3,7 +3,7 @@ layout: single
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
-excerpt: "Shuai Wang - PhD student, Domain-specific search, Information Retrieval, NLP, Machine Learning"
+excerpt: "Shuai Wang - Postdoc and Finishing PhD Student, Domain-specific search, Information Retrieval, NLP, Machine Learning"
 permalink: /
 title: "Shuai Wang (Dylan) UQ"
 author_profile: true
