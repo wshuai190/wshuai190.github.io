@@ -12,7 +12,7 @@ redirect_from:
   - /about.html
 ---
 
-Howdy! I'm Shuai Wang, a third-year PhD student who's been swimming in the deep end of academia for what feels like forever. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/).
+Howdy! I'm Shuai Wang, a Postdoc and a finishing PhD student at IeLab, UQ. I'm under the eagle eyes of [Professor. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [A.Professor. Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/).
 
 I received my Bachelor of Science degree from the University of Western Australia in 2019, then obtained a Master of Engineering Science degree from the University of Queensland in 2021.
 
@@ -24,7 +24,7 @@ I conducted my internship at [Naver Lab Europe](https://europe.naverlabs.com/) F
 
 ### Job Opportunities
 
-I'm expected to graduate at the end of 2024, and I'm currently looking for job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
+I'm currently working as a Postdoc at UQ, starting from Feb, 2025; I'm also looking for continued job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
 
 {% include base_path %}
 
