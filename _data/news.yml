@@ -85,6 +85,11 @@
   description: "[Resource Paper]: FeB4RAG;  [Short Paper]: LLM for stemming; [Perspective Paper]: Evaluating ad-hoc generative IR;"
   status: celebrate
 
+- title: "Paper Presentation at SIGIR, Washington DC"
+  date: 2024-07-25
+  description: "Presented papers accepted at SIGIR 2024 in Washington DC."
+  status: travel
+
 - title: "Paper Accepted in WSDM 2025"
   date: 2024-10-24
   description: "[Full Paper]: Context Embeddings for Efficient Answer Generation in RAG"
