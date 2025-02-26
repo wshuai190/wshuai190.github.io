@@ -100,6 +100,11 @@
   description: "[Full Paper]: Corpus Subsampling; [Full Paper]: Prompt Variations on Zero-shot LLM-based Rankers"
   status: celebrate
 
+- title: "Present Encore-paper at SIGIR-AP, Melbourne Satelite"
+  date: 2024-12-20
+  description: "Encore Presentation: Training Adaptive BERT-based Dense Retrievers at Smaller Scales: Matryoshka, 2D Matryoshka, and Starbucks Approaches"
+  status: travel
+
 - title: "Paper Accepted in WWW 2025"
   date: 2025-01-20
   description: "[Short Paper]: ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search"
