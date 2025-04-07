@@ -114,3 +114,8 @@
   date: 2025-02-01
   description: "Started a postdoc position in information retrieval and natural language processing at The University of Queensland."
   status: celebrate
+
+- title: "Three Papers Accepted in SIGIR 2025"
+  date: 2025-04-05
+  description: "[Reproducibility Paper]: 2D Matryoshka Training for Information Retrieval; Reassessing Large Language Model Boolean Query Generation for Systematic Reviews; Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition."
+  status: celebrate
