@@ -42,9 +42,11 @@ I'm currently working as a Postdoc at UQ, starting from Feb, 2025; I'm also look
 I serve as a reviewer/PC member for the following journal/conference:
 
 - TOIS: ACM Transactions on Information Systems
-- Journal of Data and Information Quality
-- ACM ICTIR 2023, SIGIR2024
+- ACM ICTIR 2023, SIGIR2024, SIGIR2025
 - ECIR2024
+- Campbell Systematic Reviews
+- Journal of Data and Information Quality
+
 
 
 ## Publications
