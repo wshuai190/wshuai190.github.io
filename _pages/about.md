@@ -18,13 +18,13 @@ I received my Bachelor of Science degree from the University of Western Australi
 
 My research is strongly related to information retrieval and natural language processing (NLP). My PhD topic focuses on domain-specific applications (automation for medical systematic reviews), where I have been currently focused on the development of Automatic Mesh Term Suggestion, Screening Prioritisation, Seed-driven methods and Boolean query formulation. I also do some side projects on general IR and NLP tasks, such as Federated RAG, Fusion of Rankers etc.
 
-I'm also a tutor at UQ, teaching courses like INFS7410 (information retrieval and web search). I'm not in it for the cash but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together!
+I'm currently teaching INFS7410 (information retrieval and web search) in UQ as a course coordinator. Previously, I taught INFS7410, INFS7205, DATA7901/7902/7903 as a tutor in 2021-2024. I'm not in it for the cash but for the chance to scout for other brainiacs to collaborate with. So, if you're interested, let's chat and see if we can cook up some research magic together!
 
 I conducted my internship at [Naver Lab Europe](https://europe.naverlabs.com/) Feb-July 2024, with a research focus on Context Compression on Retrieval-augmented generation (RAG).
 
 ### Job Opportunities
 
-I'm currently working as a Postdoc at UQ, starting from Feb, 2025; I'm also looking for continued job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
+Started from Feb, 2025, I work as a Postdoc at UQ; I'm also looking for continued job opportunities in academia and industry. If you think I'm a good fit for your team, please feel free to contact me.
 
 {% include base_path %}
 
