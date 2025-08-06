@@ -170,6 +170,29 @@ ul li {
   word-wrap: break-word;
   overflow-wrap: break-word;
   margin-right: 0.5rem;
+  /* Force content to never overflow */
+  overflow: hidden;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Force all sidebar content to never overflow */
+.sidebar * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
+}
+
+.sidebar .author__urls,
+.sidebar .author__name,
+.sidebar .author__bio,
+.sidebar .author__urls a {
+  font-size: clamp(0.7rem, 2vw, 0.9rem) !important;
+  line-height: 1.3 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 /* Enhanced author profile styling */
@@ -561,6 +584,10 @@ ul li {
   position: relative;
   display: block;
   clear: both;
+  box-sizing: border-box;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .archive__item:hover {
@@ -572,35 +599,78 @@ ul li {
 
 .archive__item-title {
   width: 100% !important;
-  max-width: none !important;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
   line-height: 1.4;
   font-weight: 500;
   color: #1f2937;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 .archive__item-excerpt {
   width: 100% !important;
-  max-width: none !important;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  max-width: 100% !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: auto !important;
   color: #6b7280;
   font-size: 0.9rem;
   line-height: 1.5;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
-/* Force archive list to be full width */
+/* Force archive list to be full width but contained within main area */
 .archive .list__item {
   width: 100% !important;
-  max-width: none !important;
+  max-width: 100% !important;
   display: block !important;
   float: none !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
 }
 
 .archive {
   width: 100% !important;
-  max-width: none !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Specific fixes for publications archive page */
+.layout--archive #main,
+.layout--archive .page {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.layout--archive .page__content {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+/* Force all content within archive pages to stay within bounds */
+.layout--archive .page__content *,
+.layout--archive .archive *,
+.layout--archive .archive__item * {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Prevent any floating elements from causing overflow */
+.layout--archive .page__content::after,
+.layout--archive .archive::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 /* Visitor map widget styling */
@@ -800,8 +870,141 @@ h3.archive__item-title,
   padding: 0 !important;
 }
 
-/* Responsive improvements for Grid Layout */
+/* Mobile navigation - working hamburger menu */
 @media (max-width: 768px) {
+  /* Show hamburger button on mobile - VERY VISIBLE */
+  .greedy-nav button,
+  .greedy-nav .navicon-button {
+    display: block !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 2px solid white !important;
+    color: white !important;
+    font-size: 1.5rem !important;
+    padding: 0.5rem !important;
+    cursor: pointer !important;
+    position: relative !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 8px !important;
+    margin: 0.5rem !important;
+    float: right !important;
+  }
+  
+  .greedy-nav button:hover,
+  .greedy-nav .navicon-button:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-color: #ffffff !important;
+  }
+  
+  /* Simple text hamburger */
+  .greedy-nav button::after,
+  .greedy-nav .navicon-button::after {
+    content: "☰" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    color: white !important;
+    font-size: 1.8rem !important;
+    line-height: 1 !important;
+    font-weight: bold !important;
+  }
+  
+  /* Force visibility */
+  .greedy-nav button {
+    z-index: 1001 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Hide visible links by default on mobile */
+  .greedy-nav .visible-links {
+    display: none !important;
+  }
+  
+  /* Force dropdown to appear BELOW navigation bar */
+  .greedy-nav .hidden-links {
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    left: 0 !important;
+    background: #000000 !important;
+    border: 1px solid #333 !important;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3) !important;
+    z-index: 1002 !important;
+    display: block !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    transition: all 0.3s ease !important;
+    margin-top: 0 !important;
+    transform: none !important;
+  }
+  
+  /* Show dropdown when not hidden */
+  .greedy-nav .hidden-links:not(.hidden) {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Force masthead and nav positioning */
+  .masthead {
+    position: static !important;
+    overflow: visible !important;
+  }
+  
+  .masthead__inner-wrap {
+    position: relative !important;
+    overflow: visible !important;
+  }
+  
+  .greedy-nav {
+    position: relative !important;
+    overflow: visible !important;
+  }
+  
+  .greedy-nav .hidden-links ul {
+    display: flex !important;
+    flex-direction: column !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .greedy-nav .hidden-links li {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-bottom: 1px solid #333 !important;
+  }
+  
+  .greedy-nav .hidden-links li:last-child {
+    border-bottom: none !important;
+  }
+  
+  .greedy-nav .hidden-links a {
+    display: block !important;
+    padding: 1rem !important;
+    color: white !important;
+    text-decoration: none !important;
+    width: 100% !important;
+    text-align: center !important;
+    transition: background 0.2s ease !important;
+  }
+  
+  .greedy-nav .hidden-links a:hover {
+    background: #333 !important;
+  }
+  
+  /* Ensure proper positioning */
+  .greedy-nav {
+    position: relative !important;
+  }
+  
+  .masthead {
+    position: relative !important;
+  }
+
+  /* Grid layout for mobile */
   #main {
     display: block !important;
     grid-template-columns: none !important;
@@ -839,16 +1042,119 @@ h3.archive__item-title,
   }
 }
 
-@media (min-width: 769px) and (max-width: 1023px) {
+/* NUCLEAR OPTION - Force sidebar to fit at all problematic sizes */
+@media (min-width: 600px) and (max-width: 1200px) {
+  .sidebar {
+    max-width: min(25vw, 200px) !important;
+    width: min(25vw, 200px) !important;
+    padding: clamp(0.5rem, 1.5vw, 1.25rem) !important;
+    font-size: clamp(0.7rem, 1.8vw, 0.9rem) !important;
+  }
+  
+  .author__avatar img {
+    width: clamp(60px, 12vw, 100px) !important;
+    height: clamp(60px, 12vw, 100px) !important;
+  }
+  
+  .author__urls {
+    padding: clamp(0.5rem, 1.2vw, 1rem) !important;
+    font-size: clamp(0.65rem, 1.5vw, 0.85rem) !important;
+  }
+  
+  .author__urls-wrapper .btn {
+    padding: clamp(0.3rem, 1vw, 0.75rem) clamp(0.5rem, 1.2vw, 1rem) !important;
+    font-size: clamp(0.65rem, 1.4vw, 0.8rem) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
+
+/* Extra breakpoint for problematic medium sizes */
+@media (min-width: 769px) and (max-width: 900px) {
   #main {
-    grid-template-columns: 180px 1fr;
-    gap: 1.5rem;
-    max-width: 100%;
-    padding: 1.5rem;
+    grid-template-columns: 140px 1fr;
+    gap: 0.75rem;
+    padding: 0.75rem;
   }
   
   .sidebar {
-    max-width: 180px !important;
+    max-width: 140px !important;
+    padding: 0.75rem !important;
+  }
+  
+  .author__avatar img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .author__urls {
+    padding: 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+  
+  .author__name {
+    font-size: 0.9rem !important;
+  }
+  
+  .author__bio {
+    font-size: 0.8rem !important;
+  }
+  
+  .author__urls-wrapper .btn {
+    padding: 0.4rem 0.6rem !important;
+    font-size: 0.75rem !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1023px) {
+  #main {
+    grid-template-columns: 160px 1fr;
+    gap: 1rem;
+    max-width: 100%;
+    padding: 1rem;
+  }
+  
+  .sidebar {
+    max-width: 160px !important;
+    padding: 1rem !important;
+  }
+  
+  .author__avatar img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .author__urls {
+    padding: 0.75rem !important;
+    font-size: 0.8rem !important;
+  }
+  
+  .author__name {
+    font-size: 1rem !important;
+  }
+  
+  .author__bio {
+    font-size: 0.85rem !important;
+  }
+  
+  /* Fix Follow button positioning */
+  .author__urls-wrapper {
+    position: relative !important;
+  }
+  
+  .author__urls-wrapper .btn {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Ensure proper text wrapping in sidebar */
+  .sidebar * {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 }
 
