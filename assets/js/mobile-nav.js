@@ -13,12 +13,13 @@
         
         // Create navigation items with actual links
         const navItems = [
+            { title: '🏠 Home', url: '/' },
             { title: '📝 Publications', url: '/publications/' },
             { title: '🏆 Awards', url: '/awards/' },
             { title: '💬 Talks', url: '/talks/' },
             { title: '📚 Teaching', url: '/teaching/' },
             { title: '📄 CV', url: '/cv/' },
-            { title: '🇨🇳 中文', url: '/about-zh/' }
+            { title: '🇨🇳 中文', url: '/zh/' }
         ];
         
         // Create list items with links
@@ -52,7 +53,7 @@
             hiddenLinks.appendChild(li);
         });
         
-        // Enhanced button click handler
+        // Simple button click handler
         let isOpen = false;
         
         function toggleMenu() {
@@ -65,8 +66,7 @@
             }
         }
         
-        // Remove existing event listeners and add new one
-        button.removeEventListener('click', toggleMenu);
+        // Simple event listener
         button.addEventListener('click', toggleMenu);
         
         // Close menu when clicking outside

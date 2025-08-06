@@ -1,8 +1,8 @@
 ---
 layout: single
 header:
-  overlay_color: "#3b82f6"
-  overlay_filter: "0.3"
+  overlay_color: "#000000"
+  overlay_filter: "0.5"
 excerpt: "🎓 博士后研究员 & 在读博士生 • 🔍 信息检索 • 🤖 自然语言处理 • 📊 机器学习"
 permalink: /zh/
 title: "王率 (Dylan)"
