@@ -40,6 +40,38 @@
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
 
+/* Import Google Fonts for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Ensure Font Awesome and Academicons load */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+@import url('https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css');
+
+/* Global enhancements */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  color: #1f2937;
+  font-weight: 700;
+}
+
 /* News section */
 
 .post-meta {
@@ -122,6 +154,769 @@ ul li {
 /* Reduce margin between news items */
 .news-item + .news-item {
   margin-top: 1rem;
+}
+
+/* Enhanced sidebar */
+.sidebar {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  position: sticky;
+  top: 2rem;
+  max-width: 200px;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  margin-right: 0.5rem;
+}
+
+/* Enhanced author profile styling */
+.author__avatar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.author__avatar img {
+  border-radius: 50%;
+  border: 3px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.author__avatar img:hover {
+  transform: scale(1.05);
+  border-color: #000000;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.author__name {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 1.2rem !important;
+}
+
+.author__bio {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+/* Enhanced social links */
+.author__urls {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  font-size: 0.85rem;
+}
+
+/* Fix missing social icons */
+.author__urls i {
+  width: 16px;
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-style: normal;
+}
+
+/* Fallback for missing Font Awesome icons */
+.author__urls i:before {
+  font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands", "Academicons", FontAwesome;
+  font-weight: 900;
+}
+
+/* Specific icon fallbacks */
+.fa-linkedin:before { content: "💼"; }
+.fa-github:before { content: "🔗"; }  
+.fa-twitter:before { content: "🐦"; }
+.fa-envelope:before { content: "✉️"; }
+.fa-graduation-cap:before { content: "🎓"; }
+.ai-orcid:before { content: "🆔"; }
+.fa-researchgate:before { content: "🔬"; }
+
+/* Ensure icons are visible */
+.author__urls .fas,
+.author__urls .fab,
+.author__urls .ai {
+  display: inline-block !important;
+  width: 16px;
+  text-align: center;
+}
+
+.author__urls li {
+  margin-bottom: 0.75rem;
+}
+
+.author__urls a {
+  color: #4b5563;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.25rem 0;
+  border-radius: 4px;
+}
+
+.author__urls a:hover {
+  color: #000000;
+  transform: translateX(4px);
+}
+
+/* Enhanced buttons */
+.btn {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn--inverse {
+  background: #000000;
+  color: white;
+  border: none;
+}
+
+.btn--inverse:hover {
+  background: #333333;
+}
+
+/* Enhanced news section */
+.news-section {
+  margin: 2rem 0;
+}
+
+.news-item {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.news-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #000000;
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+}
+
+.btn--primary {
+  background: #000000;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.btn--primary:hover {
+  background: #333333;
+  color: white;
+  text-decoration: none;
+}
+
+.btn--large {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+}
+
+/* Enhanced page content */
+.page__content {
+  padding: 2rem 0;
+  margin-bottom: 4rem;
+}
+
+.page__content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+/* Reduced footer height */
+.page__footer {
+  margin-top: 3rem !important;
+  border-top: 1px solid #e5e7eb;
+  padding: 1.5rem 0 1rem 0 !important;
+  clear: both !important;
+}
+
+/* Compact footer content */
+.page__footer footer {
+  padding: 1rem !important;
+  line-height: 1.4 !important;
+}
+
+.page__footer .social-icons {
+  margin: 0.75rem 0 !important;
+  padding: 0 !important;
+}
+
+.page__footer .social-icons li {
+  display: inline-block !important;
+  margin: 0 0.5rem 0.5rem 0 !important;
+  padding: 0.25rem !important;
+}
+
+.page__footer .social-icons a {
+  padding: 0.25rem !important;
+  display: inline-block !important;
+  text-decoration: none !important;
+}
+
+/* Compact footer text */
+.page__footer p {
+  margin: 0.5rem 0 !important;
+  line-height: 1.4 !important;
+  font-size: 0.9rem !important;
+}
+
+.page__footer a {
+  margin: 0 0.25rem !important;
+  padding: 0.125rem !important;
+}
+
+/* Ensure main content container has bottom space */
+.layout--single #main {
+  margin-bottom: 4rem !important;
+  padding-bottom: 4rem !important;
+}
+
+/* Enhanced masthead - Force black background */
+.masthead, .masthead * {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+.masthead {
+  border-bottom: 1px solid #333333 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+.masthead__inner-wrap {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+.masthead a, 
+.masthead__menu-item a, 
+.greedy-nav a,
+.visible-links a,
+.visible-links li a,
+.masthead * a {
+  color: #ffffff !important;
+  text-decoration: none !important;
+  background: transparent !important;
+}
+
+.masthead a:hover, 
+.masthead__menu-item a:hover, 
+.greedy-nav a:hover,
+.visible-links a:hover,
+.visible-links li a:hover {
+  color: #cccccc !important;
+  background: transparent !important;
+}
+
+.masthead__menu-item--lg a {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  background: transparent !important;
+}
+
+/* Force all masthead elements to have black background */
+.masthead .masthead__menu,
+.masthead nav,
+.masthead ul,
+.masthead li {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
+
+/* FORCE TOP navigation to be horizontal - nuclear option */
+.greedy-nav button,
+.greedy-nav .navicon {
+  display: none !important;
+}
+
+/* Override greedy-nav completely */
+.greedy-nav {
+  display: block !important;
+}
+
+.greedy-nav ul {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.greedy-nav ul li,
+.visible-links li,
+.hidden-links li,
+.masthead__menu-item {
+  display: inline-block !important;
+  float: left !important;
+  margin: 0 1rem 0 0 !important;
+  list-style: none !important;
+}
+
+.visible-links,
+.hidden-links {
+  position: static !important;
+  display: inline !important;
+  visibility: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Force all navigation lists to be horizontal */
+.masthead ul,
+.masthead__menu ul {
+  display: flex !important;
+  flex-direction: row !important;
+  list-style: none !important;
+}
+
+/* Stylish hero section */
+.page__hero {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2d3748 25%, #4a5568 50%, #2d3748 75%, #1a202c 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+  color: white;
+  text-align: center;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.page__hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.page__hero-caption {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Enhanced title in hero */
+.page__title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+/* Enhanced archive items - Full width like news items */
+.archive__item {
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  width: 100% !important;
+  max-width: none !important;
+  position: relative;
+  display: block;
+  clear: both;
+}
+
+.archive__item:hover {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-color: #000000;
+}
+
+.archive__item-title {
+  width: 100% !important;
+  max-width: none !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.archive__item-excerpt {
+  width: 100% !important;
+  max-width: none !important;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Force archive list to be full width */
+.archive .list__item {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  float: none !important;
+}
+
+.archive {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Visitor map widget styling */
+.visitor-map {
+  margin: 3rem 0 2rem 0;
+  text-align: center;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
+
+.visitor-map img,
+.visitor-map iframe {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+/* ClustrMaps specific styling */
+#clustrmaps {
+  display: block;
+  margin: 0 auto;
+}
+
+/* FORCE publications section to be full width on homepage */
+.page__content ul,
+ul {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  box-sizing: border-box !important;
+}
+
+.page__content ul li,
+ul li {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  margin-bottom: 0 !important;
+  list-style: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Target the specific publications section */
+.page__content h2:contains("Publications") + ul,
+.page__content h2:contains("📝 Publications") + ul {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Publications items styled exactly like news items - AGGRESSIVE OVERRIDE */
+.page__content .list__item,
+.list__item,
+div.list__item {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  float: none !important;
+  position: static !important;
+}
+
+.page__content .list__item .archive__item,
+.list__item .archive__item,
+div.list__item .archive__item,
+.archive__item {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  clear: both !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  float: none !important;
+}
+
+.page__content .list__item .archive__item:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  border-color: #000000 !important;
+  background: linear-gradient(135deg, #ffffff, #f1f5f9) !important;
+}
+
+/* Fix nested li structure in CV format */
+.page__content .list__item .archive__item li {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+/* CV-specific archive items */
+.archive__item.archive__item--cv,
+.list__item .archive__item {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  clear: both !important;
+}
+
+/* NUCLEAR OPTION - Override all possible constraints */
+article.archive__item,
+.archive__item article,
+.page__content article,
+.page__content .archive__item-title,
+.archive__item-title,
+h3.archive__item-title,
+.archive__item-excerpt,
+.page__content .archive__item-excerpt {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+  box-sizing: border-box !important;
+}
+
+/* Force publications section specifically */
+.page__content h2 + ul li,
+.page__content h2 + ul li > *,
+.page__content h2 + ul li .list__item,
+.page__content h2 + ul li .archive__item {
+  width: 100% !important;
+  max-width: none !important;
+  display: block !important;
+}
+
+/* Override any grid or float constraints - but not masthead */
+.page__content .archive__item,
+.page__content .list__item,
+.page__content ul,
+.page__content li {
+  float: none !important;
+}
+
+/* Enhanced publication list */
+.archive__item-title {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.archive__item-excerpt {
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Modern Grid Layout Override */
+#main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem auto;
+  padding: 2rem 2rem 4rem 2rem;
+  min-height: calc(100vh - 200px);
+}
+
+.sidebar {
+  grid-column: 1;
+  position: sticky !important;
+  top: 2rem !important;
+  float: none !important;
+  width: 100% !important;
+  max-width: 200px !important;
+  margin: 0 !important;
+  height: fit-content !important;
+  align-self: start !important;
+}
+
+.page {
+  grid-column: 2;
+  width: 100% !important;
+  max-width: none !important;
+  float: none !important;
+  position: static !important;
+}
+
+.page__inner-wrap {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.page__content {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+/* Responsive improvements for Grid Layout */
+@media (max-width: 768px) {
+  #main {
+    display: block !important;
+    grid-template-columns: none !important;
+    padding: 1rem;
+  }
+  
+  .sidebar {
+    width: 100% !important;
+    max-width: none !important;
+    margin-bottom: 2rem !important;
+    position: static !important;
+  }
+  
+  .page {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  
+  .author__avatar img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .author__urls {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .news-item, .archive__item {
+    padding: 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  #main {
+    grid-template-columns: 180px 1fr;
+    gap: 1.5rem;
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+  
+  .sidebar {
+    max-width: 180px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #main {
+    grid-template-columns: 220px 1fr;
+    gap: 2.5rem;
+    max-width: 1400px;
+    padding: 2.5rem;
+  }
+  
+  .sidebar {
+    max-width: 220px !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  #main {
+    grid-template-columns: 240px 1fr;
+    gap: 3rem;
+    max-width: 1600px;
+  }
+  
+  .sidebar {
+    max-width: 240px !important;
+  }
+}
+
+/* Language switching styles */
+.lang-switch {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lang-switch:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Chinese font support */
+html[lang="zh"], html[lang="zh"] * {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 

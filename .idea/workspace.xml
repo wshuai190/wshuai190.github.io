@@ -50,9 +50,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/_teaching" />
       <recent name="$PROJECT_DIR$/_publications" />
       <recent name="$PROJECT_DIR$/_includes" />
-      <recent name="$PROJECT_DIR$/_teaching" />
       <recent name="$PROJECT_DIR$/_awards" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -160,7 +160,7 @@
       <workItem from="1744008681734" duration="1517000" />
       <workItem from="1745659868313" duration="1000" />
       <workItem from="1747625015315" duration="3816000" />
-      <workItem from="1753689071930" duration="303000" />
+      <workItem from="1753689071930" duration="1937000" />
     </task>
     <servers />
   </component>

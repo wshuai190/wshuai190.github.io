@@ -11,6 +11,10 @@ title                    : "Shuai Wang (Dylan)"
 title_separator          : "-"
 name                     : &name "Shuai Wang"
 description              : &description "Shuai Wang is currently a Postdoc/finishing PhD student under the supervision of Dr Guido Zuccon and Dr Bevan Koopman. Shuai Wang obtained his B.S degree from the University of Western Australia in Dec 2019 and completed his MEngSc degree from the University of Queensland in July 2021. Shuai Wang is interested in various research areas, including information retrieval, NLP, machine learning and security. More info: https://ielab.io/people/shuai-wang"
+
+# Language settings
+languages: ["en", "zh"]
+default_lang: "en"
 url                      : https://wshuai190.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "wshuai190/wshuai190.github.io"
@@ -103,6 +107,46 @@ author:
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
+  lastfm           :
+  linkedin         : "shuai-wang-33125b196"
+  orcid            : "https://orcid.org/0000-0002-0726-5250"
+  pinterest        :
+  soundcloud       :
+  stackoverflow    :
+  steam            :
+  tumblr           :
+  twitter          : "dylan_wangs"
+  vine             :
+  weibo            :
+  xing             :
+  youtube          :
+  wikipedia        :
+
+# Chinese Author Profile
+author_zh:
+  name             : "王率 (Dylan)"
+  avatar           : "ws.jpg"
+  bio: "博士后研究员 (即将毕业博士生)@昆士兰大学;
+    实习生@Naver实验室欧洲;
+    莱比锡大学访问学者"
+  location         : "澳大利亚布里斯班"
+  employer         :
+  pubmed           :
+  googlescholar    : "https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en"
+  email            : "shuai.wang2@uq.edu.au"
+  researchgate     : "https://www.researchgate.net/profile/Shuai-Wang-202"
+  uri              :
+  bitbucket        :
+  codepen          :
+  dribbble         :
+  flickr           :
+  facebook         :
+  foursquare       :
+  github           : "wshuai190"
+  google_plus      :
+  keybase          :
+  instagram        :
+  impactstory      :
   lastfm           :
   linkedin         : "shuai-wang-33125b196"
   orcid            : "https://orcid.org/0000-0002-0726-5250"

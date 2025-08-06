@@ -1,4 +1,4 @@
-# main links links
+# main links
 main:
   - title: "Publications"
     url: /publications/
@@ -14,4 +14,27 @@ main:
     
   - title: "CV"
     url: /cv/
+    
+  - title: "中文"
+    url: /zh/
+    
+# Chinese navigation - redirect to English pages
+main_zh:
+  - title: "学术论文"
+    url: /publications/
+    
+  - title: "获奖情况"
+    url: /awards/
+
+  - title: "学术报告"
+    url: /talks/    
+
+  - title: "教学经历"
+    url: /teaching/
+    
+  - title: "简历"
+    url: /cv/
+    
+  - title: "English"
+    url: /
 
