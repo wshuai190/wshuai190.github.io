@@ -65,7 +65,7 @@ I contribute to the academic community by serving as a **reviewer/PC member** fo
 
 ### 🏛️ Conferences  
 - **ACM ICTIR** 2023, **SIGIR** 2024, **SIGIR** 2025
-- **ECIR** 2024
+- **ECIR** 2024, 2025
 
 ## 📝 Publications
 
