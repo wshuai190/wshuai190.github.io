@@ -18,20 +18,20 @@ Howdy! I'm **Shuai Wang**, a Postdoc and finishing PhD student at [IeLab, UQ](ht
 
 ## 🎓 Academic Background
 
-- **PhD** (finishing) - University of Queensland (2021-2025)
+- **PhD** (finishing and thesis submitted) - University of Queensland (2021-2025)
 - **Master of Engineering Science** - University of Queensland (2021)
 - **Bachelor of Science** - University of Western Australia (2019)
 
 ## 🔬 Research Focus
 
-My research centers on **information retrieval** and **natural language processing (NLP)**, with a particular focus on domain-specific applications. My PhD work concentrates on automation for medical systematic reviews, including:
+My research centers on **information retrieval** and **natural language processing (NLP)**. My PhD work concentrates on automation for medical systematic reviews, including:
 
 - **Automatic Mesh Term Suggestion**
 - **Screening Prioritisation** 
 - **Seed-driven Methods**
 - **Boolean Query Formulation**
 
-I also explore general IR and NLP challenges, including **Federated RAG** and **Fusion of Rankers**.
+I also explore general IR and NLP challenges, including **Federated RAG**, **Search and RAG model Efficiency** and **Effective Ranking Models**.
 
 ## 👨‍🏫 Teaching & Mentoring
 
@@ -66,6 +66,7 @@ I contribute to the academic community by serving as a **reviewer/PC member** fo
 ### 🏛️ Conferences  
 - **ACM ICTIR** 2023, **SIGIR** 2024, **SIGIR** 2025
 - **ECIR** 2024, 2025
+- **WSDM** 2026
 
 ## 📝 Publications
 
