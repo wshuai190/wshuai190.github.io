@@ -3,9 +3,9 @@ layout: single
 header:
   overlay_color: "#000000"
   overlay_filter: "0.5"
-excerpt: "🎓 博士后研究员 & 在读博士生 • 🔍 信息检索 • 🤖 自然语言处理 • 📊 机器学习"
+excerpt: "🎓 博士后研究员 • 🔍 信息检索 • 🤖 自然语言处理 • 📊 机器学习"
 permalink: /zh/
-title: "王率 (Dylan)"
+title: "王率博士 (Dylan)"
 author_profile: true
 lang: zh
 navigation: main_zh
@@ -16,11 +16,11 @@ redirect_from:
 
 ## 👋 欢迎！
 
-您好！我是**王率**，昆士兰大学IeLab的博士后研究员和即将毕业的博士生。我在[Guido Zuccon教授](https://researchers.uq.edu.au/researcher/22857)、[Bevan Koopman副教授](https://bevankoopman.github.io/)和[Harrisen Scells博士](https://scells.me/)的指导下进行研究。
+您好！我是**王率**，昆士兰大学IeLab的博士后研究员。我已完成博士学位，曾在[Guido Zuccon教授](https://researchers.uq.edu.au/researcher/22857)、[Bevan Koopman副教授](https://bevankoopman.github.io/)和[Harrisen Scells博士](https://scells.me/)的指导下进行研究。
 
 ## 🎓 学术背景
 
-- **博士学位** (即将毕业) - 昆士兰大学 (2021-2025)
+- **博士学位** - 昆士兰大学 (2025) [阅读我的论文](/files/thesis.pdf)
 - **工程科学硕士** - 昆士兰大学 (2021)
 - **理学学士** - 西澳大利亚大学 (2019)
 

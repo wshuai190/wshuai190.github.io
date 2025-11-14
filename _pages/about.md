@@ -3,9 +3,9 @@ layout: single
 header:
   overlay_color: "#000000"
   overlay_filter: "0.5"
-excerpt: "🎓 Postdoc & PhD Student • 🔍 IR • 🤖 NLP • 📊 ML"
+excerpt: "🎓 Postdoc • 🔍 IR • 🤖 NLP • 📊 ML"
 permalink: /
-title: "Shuai Wang (Dylan)"
+title: "Dr. Shuai Wang (Dylan)"
 author_profile: true
 redirect_from: 
   - /about/
@@ -14,13 +14,14 @@ redirect_from:
 
 ## 👋 Welcome!
 
-Howdy! I'm **Shuai Wang**, a Postdoc and finishing PhD student at [IeLab, UQ](https://ielab.io/). I'm under the guidance of [Professor Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [A.Professor Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/).
+Howdy! I'm **Shuai Wang**, a Postdoc at [IeLab, UQ](https://ielab.io/). I completed my PhD under the guidance of [Professor Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [A.Professor Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/).
 
 ## 🎓 Academic Background
 
-- **PhD** (finishing and thesis submitted) - University of Queensland (2021-2025)
+- **Doctor of Philosophy** - University of Queensland (2025) [Read My Thesis](/files/thesis.pdf)
 - **Master of Engineering Science** - University of Queensland (2021)
 - **Bachelor of Science** - University of Western Australia (2019)
+
 
 ## 🔬 Research Focus
 
@@ -45,7 +46,7 @@ Currently serving as **Course Coordinator** for INFS7410 (Information Retrieval 
 
 ## 💼 Job Opportunities
 
-Starting February 2025, I work as a Postdoc at UQ. I'm actively seeking **exciting opportunities** in both academia and industry. If you think I'm a great fit for your team, please feel free to reach out!
+Since February 2025, I have been working as a Postdoc at UQ. I'm actively seeking **exciting opportunities** in both academia and industry. If you think I'm a great fit for your team, please feel free to reach out!
 
 {% include base_path %}
 

@@ -7,10 +7,10 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Shuai Wang (Dylan)"
+title                    : "Dr. Shuai Wang (Dylan)"
 title_separator          : "-"
-name                     : &name "Shuai Wang"
-description              : &description "Shuai Wang is currently a Postdoc/finishing PhD student under the supervision of Dr Guido Zuccon and Dr Bevan Koopman. Shuai Wang obtained his B.S degree from the University of Western Australia in Dec 2019 and completed his MEngSc degree from the University of Queensland in July 2021. Shuai Wang is interested in various research areas, including information retrieval, NLP, machine learning and security. More info: https://ielab.io/people/shuai-wang"
+name                     : &name "Dr. Shuai Wang"
+description              : &description "Dr. Shuai Wang is currently a Postdoc at the University of Queensland. He completed his PhD under the supervision of Dr Guido Zuccon and Dr Bevan Koopman in 2025. Dr. Shuai Wang obtained his B.S degree from the University of Western Australia in Dec 2019 and completed his MEngSc degree from the University of Queensland in July 2021. Dr. Shuai Wang is interested in various research areas, including information retrieval, NLP, machine learning and security. More info: https://ielab.io/people/shuai-wang"
 
 # Language settings
 languages: ["en", "zh"]
@@ -84,11 +84,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "Shuai Wang (Dylan)"
+  name             : "Dr. Shuai Wang (Dylan)"
   avatar           : "ws.jpg"
-  bio: "Postdoc (Finishing PhD student)@UQ;
-    Intern@NLE;
-    Visiting scholar at Leipzig University"
+  bio: "Postdoc, University of Queensland;
+    PhD (2025);
+    Previously: Naver Labs Europe, Leipzig University"
   location         : "Brisbane, Australia"
   employer         :
   pubmed           :
@@ -124,11 +124,11 @@ author:
 
 # Chinese Author Profile
 author_zh:
-  name             : "王率 (Dylan)"
+  name             : "王率博士 (Dylan)"
   avatar           : "ws.jpg"
-  bio: "博士后研究员 (即将毕业博士生)@昆士兰大学;
-    实习生@Naver实验室欧洲;
-    莱比锡大学访问学者"
+  bio: "博士后研究员, 昆士兰大学;
+    博士 (2025);
+    曾任职: Naver实验室欧洲, 莱比锡大学"
   location         : "澳大利亚布里斯班"
   employer         :
   pubmed           :

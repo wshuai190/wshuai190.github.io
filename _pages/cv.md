@@ -11,9 +11,9 @@ redirect_from:
 
 ## Education
 
-* **Ph.D. in University of Queensland, QLD** (Expected: 2025)
-* **M.S. in University of Queensland, QLD** (2021)
-* **B.S. in University of Western Australia, WA** (2019)
+* **Doctor of Philosophy** - University of Queensland, QLD (2025) [Read My Thesis](/files/thesis.pdf)
+* **M.S.** - University of Queensland, QLD (2021)
+* **B.S.** - University of Western Australia, WA (2019)
 
 ## Work Experience
 
