@@ -140,3 +140,14 @@
   date: 2025-12-08
   description: "I have received a SeCAT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search that I coordinated and lectured in semester 2, 2025; based on 43 student responses out of 122."
   status: celebrate
+
+- title: "Two Papers accepted in ECIR2026"
+  date: 2025-12-18
+  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper] Evaluator - Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels "
+  status: celebrate
+
+- title: "Paper accepted in EACL2026 Main Conference"
+  date: 2026-01-04
+  description: "[Full Paper]: AutoBool: Reinforcement-Learned LLM for Effective Automatic Systematic Reviews Boolean Query Generation. "
+  status: celebrate
+  
