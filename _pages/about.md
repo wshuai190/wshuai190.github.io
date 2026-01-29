@@ -58,14 +58,14 @@ Since February 2025, I have been working as a Postdoc at UQ. I'm actively seekin
 
 ## 🤝 Professional Services
 
-I contribute to the academic community by serving as a **reviewer/PC member** for:
+I contribute to the academic community by serving as a **PC/SPC (reviewer) member** for:
 
 ### 📚 Journals
 - **TOIS**: ACM Transactions on Information Systems
 - **Journal of Data and Information Quality**
 
 ### 🏛️ Conferences  
-- **ACM ICTIR** 2023, **SIGIR** 2024, **SIGIR** 2025
+- **ACM ICTIR** 2023, **SIGIR** 2024, **SIGIR** 2025,  **SIGIR** 2026
 - **ECIR** 2024, 2025
 - **WSDM** 2026
 
