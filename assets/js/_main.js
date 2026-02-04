@@ -60,6 +60,45 @@ $(document).ready(function(){
   // init smooth scroll
   $("a").smoothScroll({offset: -20});
 
+  // Scroll-triggered animations
+  var animateOnScroll = function() {
+    var elements = document.querySelectorAll('.archive__item, .news-item, h2, .page__content > p');
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    elements.forEach(function(el, index) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      el.style.transitionDelay = (index * 0.05) + 's';
+      observer.observe(el);
+    });
+  };
+
+  // Initialize scroll animations
+  if ('IntersectionObserver' in window) {
+    animateOnScroll();
+  }
+
+  // Lazy load images
+  var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  lazyImages.forEach(function(img) {
+    img.addEventListener('load', function() {
+      this.classList.add('loaded');
+    });
+  });
+
   // add lightbox class to all image links
   $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
 

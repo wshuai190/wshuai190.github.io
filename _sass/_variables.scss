@@ -56,18 +56,25 @@ $light-gray                 : #9ca3af;
 $lighter-gray               : #f3f4f6;
 
 $body-color                 : #ffffff;
-$background-color           : #ffffff;
+$background-color           : #fafbfc;
 $code-background-color      : #f8fafc;
 $code-background-color-dark : #e2e8f0;
 $text-color                 : #1f2937;
-$border-color               : #e5e7eb;
+$border-color               : #e2e8f0;
 
-/* Clean black primary color */
-$primary-color              : #000000;
-$success-color              : #62c462;
-$warning-color              : #f89406;
-$danger-color               : #ee5f5b;
-$info-color                 : #52adc8;
+/* Vibrant accent colors */
+$primary-color              : #2563eb;
+$primary-dark               : #1d4ed8;
+$primary-light              : #3b82f6;
+$accent-color               : #7c3aed;
+$accent-light               : #8b5cf6;
+$teal-accent                : #14b8a6;
+$coral-accent               : #f43f5e;
+
+$success-color              : #10b981;
+$warning-color              : #f59e0b;
+$danger-color               : #ef4444;
+$info-color                 : #06b6d4;
 
 /* brands */
 $behance-color              : #1769FF;
@@ -92,12 +99,12 @@ $youtube-color              : #bb0000;
 $xing-color                 : #006567;
 
 
-/* Clean link colors */
+/* Modern link colors */
 $link-color                 : $primary-color;
-$link-color-hover           : #333333;
-$link-color-visited         : #666666;
+$link-color-hover           : $primary-dark;
+$link-color-visited         : $accent-color;
 $masthead-link-color        : #ffffff;
-$masthead-link-color-hover  : #cccccc;
+$masthead-link-color-hover  : rgba(255, 255, 255, 0.8);
 
 
 /*
