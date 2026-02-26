@@ -1,0 +1,92 @@
+{% if site.data.scholar_metrics %}
+{% assign m = site.data.scholar_metrics %}
+<div class="scholar-stats">
+  <style>
+    .scholar-stats {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+      padding: 1em 1.2em;
+      margin: 1em 0;
+    }
+    .scholar-stats__header {
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 0.8em;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .scholar-stats__header a {
+      color: #4183c4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .scholar-stats__header a:hover { text-decoration: underline; }
+    .scholar-stats__updated {
+      margin-left: auto;
+      font-size: 0.85em;
+      color: #999;
+    }
+    .scholar-stats__grid {
+      display: flex;
+      gap: 1.5em;
+      flex-wrap: wrap;
+    }
+    .scholar-stats__item {
+      text-align: center;
+      min-width: 70px;
+    }
+    .scholar-stats__value {
+      display: block;
+      font-size: 1.6em;
+      font-weight: 700;
+      color: #333;
+      line-height: 1;
+    }
+    .scholar-stats__label {
+      display: block;
+      font-size: 0.75em;
+      color: #888;
+      margin-top: 0.2em;
+    }
+    .scholar-stats__divider {
+      width: 1px;
+      background: #dee2e6;
+      align-self: stretch;
+    }
+  </style>
+
+  <div class="scholar-stats__header">
+    <i class="fas fa-graduation-cap"></i>
+    <a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener">Google Scholar</a>
+    {% if m.last_updated and m.last_updated != "pending" %}
+      <span class="scholar-stats__updated">Updated {{ m.last_updated }}</span>
+    {% endif %}
+  </div>
+
+  <div class="scholar-stats__grid">
+    <div class="scholar-stats__item">
+      <span class="scholar-stats__value">{{ m.citations }}</span>
+      <span class="scholar-stats__label">Citations</span>
+    </div>
+    <div class="scholar-stats__divider"></div>
+    <div class="scholar-stats__item">
+      <span class="scholar-stats__value">{{ m.h_index }}</span>
+      <span class="scholar-stats__label">h-index</span>
+    </div>
+    <div class="scholar-stats__divider"></div>
+    <div class="scholar-stats__item">
+      <span class="scholar-stats__value">{{ m.i10_index }}</span>
+      <span class="scholar-stats__label">i10-index</span>
+    </div>
+    {% if m.citations_5y and m.citations_5y != 0 %}
+    <div class="scholar-stats__divider"></div>
+    <div class="scholar-stats__item">
+      <span class="scholar-stats__value">{{ m.citations_5y }}</span>
+      <span class="scholar-stats__label">Cit. (5y)</span>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

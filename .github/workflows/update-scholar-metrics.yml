@@ -1,0 +1,35 @@
+name: Update Google Scholar Metrics
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # Every day at 06:00 UTC
+  workflow_dispatch:        # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install scholarly free-proxy
+
+      - name: Fetch Google Scholar metrics
+        run: python scripts/fetch_scholar_metrics.py
+
+      - name: Commit and push if data changed
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add _data/scholar_metrics.json
+          git diff --staged --quiet || git commit -m "chore: update Google Scholar metrics $(date -u +%Y-%m-%d)"
+          git push
