@@ -155,32 +155,47 @@
 .page-type-btn {
   display: inline-block;
   color: white;
-  font-size: 12px;
-  padding: 2px 6px;
-  margin-right: 8px;
-  border-radius: 3px;
+  font-size: 0.72em;
+  font-weight: 600;
+  padding: 3px 9px;
+  margin-right: 5px;
+  border-radius: 20px;
+  vertical-align: middle;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.85;
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .page-type-btn.long {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
 }
 
 .page-type-btn.short {
-  background-color: #28a745;
+  background: linear-gradient(135deg, #10b981, #047857);
 }
 
 .page-type-btn.reproduce {
-  background-color: #ffc107;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fff;
 }
 
 .page-type-btn.resource {
-  background-color: #000;
+  background: linear-gradient(135deg, #6b7280, #374151);
 }
 
 .page-type-btn.notebook {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, #f97316, #c2410c);
 }
 
 .page-type-btn.journal {
-  background-color: lightgrey;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+}
+
+.page-type-btn.demo {
+  background: linear-gradient(135deg, #ec4899, #9333ea);
 }

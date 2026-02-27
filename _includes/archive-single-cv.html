@@ -35,6 +35,9 @@
       {% if post.page_type %}
       <span class="page-type-btn {{ post.page_type | slugify }}">{{ post.page_type }}</span>
       {% endif %}
+      {% if post.demo %}
+      <a href="{{ base_path }}{{ post.url }}" class="page-type-btn demo"><i class="fas fa-play-circle"></i> Live Demo</a>
+      {% endif %}
     </h3>
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>

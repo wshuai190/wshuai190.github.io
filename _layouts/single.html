@@ -57,6 +57,21 @@ layout: default
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
 
+      {% if page.demo %}
+      <section class="page__content">
+        <h2><i class="fas fa-play-circle"></i> Live Demo</h2>
+        <iframe
+          src="{{ page.demo | remove: 'https://huggingface.co/spaces/' | replace: '/', '-' | prepend: 'https://' | append: '.hf.space' }}"
+          frameborder="0"
+          style="width:100%; height:500px; border-radius:6px; border:1px solid #ddd;"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope"
+        ></iframe>
+        <p style="font-size:0.85em; color:#888; margin-top:0.4em;">
+          <a href="{{ page.demo }}" target="_blank" rel="noopener">Open in HuggingFace ↗</a>
+        </p>
+      </section>
+      {% endif %}
+
       <footer class="page__meta">
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>

@@ -63,5 +63,9 @@
       <p>Download <a href=" {{ post.paperurl }} "><u>here</u></a></p>
     {% endif %}
 
+    {% if post.demo %}
+      <p><a href="{{ post.demo }}" target="_blank" rel="noopener" class="btn btn--info btn--small"><i class="fas fa-play-circle"></i> Live Demo</a></p>
+    {% endif %}
+
   </article>
 </div>
