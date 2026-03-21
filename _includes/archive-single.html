@@ -12,6 +12,68 @@
   {% assign title = post.title %}
 {% endif %}
 
+{% if post.collection == 'publications' %}
+
+<div class="list__item">
+  <article class="publication-card" itemscope itemtype="http://schema.org/CreativeWork">
+
+    <div class="publication-card__header">
+      <div class="publication-card__badges">
+        {% if post.page_type %}
+        <span class="badge badge--type badge--{{ post.page_type | downcase }}">{{ post.page_type }}</span>
+        {% endif %}
+        {% if post.venue %}
+        <span class="badge badge--venue">{{ post.venue }}</span>
+        {% endif %}
+      </div>
+      {% if post.demo %}
+      <a href="{{ post.demo }}" class="demo-pill" target="_blank" rel="noopener">
+        <span>🤗 Live Demo</span>
+      </a>
+      {% endif %}
+    </div>
+
+    <h2 class="publication-card__title" itemprop="headline">
+      {% if post.paperurl %}
+        <a href="{{ post.paperurl }}" target="_blank" rel="noopener">{{ title }}</a>
+      {% else %}
+        <a href="{{ base_path }}{{ post.url }}" rel="permalink">{{ title }}</a>
+      {% endif %}
+    </h2>
+
+    {% if post.citation %}
+    <p class="publication-card__authors">{{ post.citation | split: '. ' | first }}.</p>
+    {% endif %}
+
+    {% if post.excerpt %}
+    <div class="publication-card__excerpt" itemprop="description">
+      {{ post.excerpt | markdownify | strip_html | truncate: 220 }}
+    </div>
+    {% endif %}
+
+    <div class="publication-card__actions">
+      {% if post.paperurl %}
+      <a href="{{ post.paperurl }}" class="btn btn--primary btn--small" target="_blank" rel="noopener">
+        <i class="fas fa-file-pdf"></i> Paper
+      </a>
+      {% endif %}
+      {% if post.demo %}
+      <a href="{{ post.demo }}" class="btn btn--accent btn--small" target="_blank" rel="noopener">
+        <i class="fas fa-play-circle"></i> Demo
+      </a>
+      {% endif %}
+      {% if post.paperurl == blank and post.url %}
+      <a href="{{ base_path }}{{ post.url }}" class="btn btn--inverse btn--small" rel="permalink">
+        <i class="fas fa-info-circle"></i> Details
+      </a>
+      {% endif %}
+    </div>
+
+  </article>
+</div>
+
+{% else %}
+
 <div class="{{ include.type | default: "list" }}__item">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     {% if include.type == "grid" and teaser %}
@@ -36,25 +98,23 @@
       <span class="page-type-btn {{ post.page_type | slugify }}">{{ post.page_type }}</span>
       {% endif %}
     </h2>
-    
+
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
 
-        {% if post.collection == 'teaching' %}
-          <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif post.collection == 'publications' %}
-          <p>Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
-        {% elsif post.date %}
-         <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
-        {% endif %}
+    {% if post.collection == 'teaching' %}
+      <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+    {% elsif post.date %}
+      <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
+    {% endif %}
 
     {% if post.excerpt and site.read_more != 'enabled' %}
     <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify }}</p>
     {% elsif post.excerpt and site.read_more == 'enabled' %}
     <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
     {% endif %}
-    
+
     {% if post.citation and post.paperurl %}
       <p>Recommended citation: {{ post.citation }} <a href="{{ post.paperurl }}"><u>{{ post.paperurl }}</u></a></p>
     {% elsif post.citation %}
@@ -69,3 +129,5 @@
 
   </article>
 </div>
+
+{% endif %}

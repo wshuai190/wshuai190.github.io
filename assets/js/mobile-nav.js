@@ -1,101 +1,69 @@
-// Mobile Navigation Fix - Create clickable dropdown menu
-(function() {
-    'use strict';
-    
-    function createMobileNav() {
-        const hiddenLinks = document.querySelector('.greedy-nav .hidden-links');
-        const button = document.querySelector('.greedy-nav button');
-        
-        if (!hiddenLinks || !button) return;
-        
-        // Clear any existing content
-        hiddenLinks.innerHTML = '';
-        
-        // Create navigation items with actual links
-        const navItems = [
-            { title: '🏠 Home', url: '/' },
-            { title: '📝 Publications', url: '/publications/' },
-            { title: '🏆 Awards', url: '/awards/' },
-            { title: '💬 Talks', url: '/talks/' },
-            { title: '📚 Teaching', url: '/teaching/' },
-            { title: '📄 CV', url: '/cv/' },
-            { title: '🇨🇳 中文', url: '/zh/' }
-        ];
-        
-        // Create list items with links
-        navItems.forEach(function(item) {
-            const li = document.createElement('li');
-            li.className = 'masthead__menu-item';
-            
-            const a = document.createElement('a');
-            a.href = item.url;
-            a.textContent = item.title;
-            a.style.cssText = `
-                display: block !important;
-                padding: 1rem !important;
-                color: white !important;
-                text-decoration: none !important;
-                border-bottom: 1px solid #333 !important;
-                transition: background 0.2s ease !important;
-                text-align: center !important;
-                font-size: 1.1rem !important;
-            `;
-            
-            // Add hover effect
-            a.addEventListener('mouseenter', function() {
-                this.style.background = '#333 !important';
-            });
-            a.addEventListener('mouseleave', function() {
-                this.style.background = 'transparent !important';
-            });
-            
-            li.appendChild(a);
-            hiddenLinks.appendChild(li);
-        });
-        
-        // Simple button click handler
-        let isOpen = false;
-        
-        function toggleMenu() {
-            if (isOpen) {
-                hiddenLinks.classList.add('hidden');
-                isOpen = false;
-            } else {
-                hiddenLinks.classList.remove('hidden');
-                isOpen = true;
-            }
-        }
-        
-        // Simple event listener
-        button.addEventListener('click', toggleMenu);
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!button.contains(e.target) && !hiddenLinks.contains(e.target)) {
-                hiddenLinks.classList.add('hidden');
-                isOpen = false;
-            }
-        });
-        
-        // Close menu when clicking on a link
-        hiddenLinks.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A') {
-                hiddenLinks.classList.add('hidden');
-                isOpen = false;
-            }
-        });
-        
-        console.log('Mobile navigation initialized with clickable links');
+// Mobile Navigation — works with the redesigned greedy-nav markup
+(function () {
+  'use strict';
+
+  function initMobileNav() {
+    var nav        = document.querySelector('.greedy-nav');
+    var toggleBtn  = nav && nav.querySelector('.greedy-nav__toggle');
+    var hiddenLinks = nav && nav.querySelector('.hidden-links');
+
+    if (!nav || !toggleBtn || !hiddenLinks) return;
+
+    // Populate hidden-links from the visible-links so the server-rendered
+    // list is the single source of truth (no hardcoded duplicates).
+    var visibleItems = nav.querySelectorAll('.visible-links .masthead__menu-item');
+    if (hiddenLinks.children.length === 0 && visibleItems.length > 0) {
+      visibleItems.forEach(function (item) {
+        var clone = item.cloneNode(true);
+        hiddenLinks.appendChild(clone);
+      });
     }
-    
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', createMobileNav);
-    } else {
-        createMobileNav();
+
+    var isOpen = false;
+
+    function openMenu() {
+      hiddenLinks.classList.remove('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      isOpen = true;
     }
-    
-    // Also initialize after a short delay to ensure all elements are loaded
-    setTimeout(createMobileNav, 1000);
-    
+
+    function closeMenu() {
+      hiddenLinks.classList.add('hidden');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      isOpen = false;
+    }
+
+    toggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    // Close when clicking outside the nav
+    document.addEventListener('click', function (e) {
+      if (isOpen && !nav.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close when a link inside the dropdown is followed
+    hiddenLinks.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') {
+        closeMenu();
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', function (e) {
+      if (isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
+        closeMenu();
+        toggleBtn.focus();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileNav);
+  } else {
+    initMobileNav();
+  }
 })();

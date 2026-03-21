@@ -2,32 +2,26 @@
    SIDEBAR
    ========================================================================== */
 
-/*
-   Default
-   ========================================================================== */
-
 .sidebar {
-  -webkit-transform: translate3d(0, 0 , 0);
-          transform: translate3d(0, 0 , 0);
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 
   @include clearfix();
   margin-bottom: 1em;
 
   @include breakpoint($large) {
-    @include span(2.5 of 12);
+    // Cancel Susy float — #main is now flexbox/grid
+    flex: 0 0 300px;
+    width: 300px;
+    float: none;
     opacity: 1;
     -webkit-transition: opacity 0.2s ease-in-out;
             transition: opacity 0.2s ease-in-out;
-    float: left;
-    clear: left;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 
-
   @include breakpoint($x-large) {
+    flex: 0 0 320px;
+    width: 320px;
     padding-right: 0;
   }
 
@@ -37,12 +31,12 @@
   }
 
   h3, h4 {
-    font-size: $type-size-5;
+    font-size: $type-size-6;
   }
 
   p, li {
     font-family: $sans-serif;
-    font-size: $type-size-6;
+    font-size: $type-size-7;
     line-height: 1.5;
   }
 
@@ -75,8 +69,6 @@
   display: table-cell;
   vertical-align: top;
   width: 36px;
-  // set width only, for non-square avatars
-  // height: 36px;
 
   @include breakpoint($large) {
     display: block;
@@ -118,6 +110,7 @@
     margin-bottom: 10px;
   }
 }
+
 .sidebar .author__name {
   font-family: $sans-serif;
   font-size: $type-size-5;
@@ -138,13 +131,10 @@
   vertical-align: middle;
   font-family: $sans-serif;
   z-index: 10;
-  position: relative;
   cursor: pointer;
 
-  li:last-child {
-    a {
-      margin-bottom: 0;
-    }
+  li:last-child a {
+    margin-bottom: 0;
   }
 
   @include breakpoint($large) {
@@ -184,40 +174,6 @@
     box-shadow: none;
   }
 
-  &:before {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -11px;
-    left: calc(50% - 10px);
-    width: 0;
-    border-style: solid;
-    border-width: 0 10px 10px;
-    border-color: $border-color transparent;
-    z-index: 0;
-
-    @include breakpoint($large) {
-      display: none;
-    }
-  }
-
-  &:after {
-    display: block;
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: calc(50% - 10px);
-    width: 0;
-    border-style: solid;
-    border-width: 0 10px 10px;
-    border-color: #fff transparent;
-    z-index: 1;
-
-    @include breakpoint($large) {
-      display: none;
-    }
-  }
-
   li {
     white-space: nowrap;
   }
@@ -229,7 +185,7 @@
     padding-top: 2px;
     padding-bottom: 2px;
     color: inherit;
-    font-size: $type-size-5;
+    font-size: $type-size-7;
     text-decoration: none;
 
     &:hover {

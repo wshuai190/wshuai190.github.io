@@ -1,39 +1,57 @@
 {% include base_path %}
 
-<div id="news-section">
-    {% assign max_news = 3 %} <!-- Set maximum number of news items to display -->
-    {% assign news_count = 0 %}
+<div class="news-feed" id="news-section">
+  {% assign max_news = 3 %}
+  {% assign news_count = 0 %}
 
-    {% for news in site.data.news reversed %}
-      {% if news_count < max_news %}
-        <div class="news-item">
-          <!-- Display different icons based on news status -->
-          {% case news.status %}
-            {% when "travel" %}
-              <span class="news-status"><i class="fas fa-plane"></i></span>
-            {% when "home" %}
-              <span class="news-status"><i class="fas fa-home"></i></span>
+  {% for news in site.data.news reversed %}
+    {% if news_count < max_news %}
+
+      {% assign status_class = "news-item--celebrate" %}
+      {% assign status_icon  = "fas fa-star" %}
+      {% if news.status == "travel" %}
+        {% assign status_class = "news-item--travel" %}
+        {% assign status_icon  = "fas fa-plane" %}
+      {% elsif news.status == "home" %}
+        {% assign status_class = "news-item--home" %}
+        {% assign status_icon  = "fas fa-home" %}
+      {% endif %}
+
+      <div class="news-item {{ status_class }}">
+        <div class="news-item__accent" aria-hidden="true"></div>
+
+        <div class="news-item__body">
+          <div class="news-item__meta">
+            <span class="news-item__badge">
+              <i class="{{ status_icon }}" aria-hidden="true"></i>
+              {{ news.status | default: "update" | capitalize }}
+            </span>
+            <time class="news-item__date" datetime="{{ news.date | date: '%Y-%m-%d' }}">
+              {{ news.date | date: "%b %d, %Y" }}
+            </time>
+          </div>
+
+          <h3 class="news-item__title">
+            {% if news.url %}
+              <a href="{{ news.url }}" target="_blank" rel="noopener noreferrer">{{ news.title }}</a>
             {% else %}
-              <span class="news-status"><i class="fas fa-wine-glass"></i></span>
-          {% endcase %}
+              {{ news.title }}
+            {% endif %}
+          </h3>
 
-          <!-- Display news date -->
-          <span class="news-date">{{ news.date | date: "%B %d, %Y" }}</span>
-
-          <!-- Display news title -->
-          <h3 class="news-title">{{ news.title }}</h3>
-
-          <!-- Optional news description -->
           {% if news.description %}
-            <p class="news-description">{{ news.description }}</p>
+            <p class="news-item__description">{{ news.description }}</p>
           {% endif %}
 
-          <!-- Optional news link -->
           {% if news.url %}
-            <a href="{{ news.url }}" class="news-link">Read more</a>
+            <a href="{{ news.url }}" class="news-item__link" target="_blank" rel="noopener noreferrer">
+              Read more <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
           {% endif %}
         </div>
-        {% assign news_count = news_count | plus: 1 %}
-      {% endif %}
-    {% endfor %}
+      </div>
+
+      {% assign news_count = news_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
 </div>

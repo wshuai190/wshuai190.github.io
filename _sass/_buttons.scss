@@ -10,20 +10,30 @@
   /* default button */
   display: inline-block;
   margin-bottom: 0.25em;
-  padding: 0.5em 1em;
+  padding: 0.5em 1.25em;
   color: #fff !important;
   font-family: $sans-serif;
   font-size: $type-size-6;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
   background-color: $primary-color;
   border: 0 !important;
-  border-radius: $border-radius;
+  border-radius: 8px;
   cursor: pointer;
+  transition: transform $transition-fast, box-shadow $transition-fast, background-color $transition-fast;
+  box-shadow: $shadow-sm;
 
   &:hover {
-    background-color: mix(white, #000, 20%);
+    background-color: $primary-dark;
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
   }
 
   .icon {
@@ -45,16 +55,52 @@
     }
   }
 
-  /* for dark backgrounds */
+  /* primary — blue gradient with hover lift */
+
+  &--primary {
+    background: linear-gradient(135deg, $primary-color 0%, $primary-dark 100%);
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba($primary-color, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, $primary-light 0%, $primary-color 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba($primary-color, 0.4);
+    }
+  }
+
+  /* for dark backgrounds — white/outline button */
 
   &--inverse {
-    color: $gray !important;
-    border: 1px solid $light-gray !important; /* override*/
+    color: $primary-color !important;
+    border: 1.5px solid $primary-color !important;
     background-color: #fff;
+    box-shadow: $shadow-xs;
 
     &:hover {
       color: #fff !important;
-      border-color: $gray;
+      background-color: $primary-color;
+      border-color: $primary-color !important;
+      transform: translateY(-1px);
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  /* light — subtle surface button */
+
+  &--light {
+    color: $text-primary !important;
+    border: 1px solid $border-color !important;
+    background-color: $surface-color;
+    box-shadow: $shadow-xs;
+
+    &:hover {
+      background-color: $surface-elevated;
+      border-color: $border-color !important;
+      color: $text-primary !important;
+      transform: translateY(-1px);
+      box-shadow: $shadow-sm;
     }
   }
 
@@ -65,6 +111,21 @@
     background-color: transparent;
   }
 
+  /* accent — purple gradient */
+
+  &--accent {
+    background: linear-gradient(135deg, $accent-color 0%, $accent-light 100%);
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 2px 8px rgba($accent-color, 0.3);
+
+    &:hover {
+      background: linear-gradient(135deg, $accent-light 0%, $accent-color 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba($accent-color, 0.4);
+    }
+  }
+
   /* information */
 
   &--info {
@@ -72,6 +133,7 @@
 
     &:hover {
       background-color: mix(#000, $info-color, 20%);
+      transform: translateY(-1px);
     }
   }
 
@@ -82,6 +144,7 @@
 
     &:hover {
       background-color: mix(#000, $warning-color, 20%);
+      transform: translateY(-1px);
     }
   }
 
@@ -92,6 +155,7 @@
 
     &:hover {
       background-color: mix(#000, $success-color, 20%);
+      transform: translateY(-1px);
     }
   }
 
@@ -102,6 +166,7 @@
 
     &:hover {
       background-color: mix(#000, $danger-color, 20%);
+      transform: translateY(-1px);
     }
   }
 
@@ -113,6 +178,7 @@
     filter: alpha(opacity=65);
     box-shadow: none;
     opacity: 0.65;
+    transform: none !important;
   }
 
   /* social buttons */
@@ -129,6 +195,7 @@
 
       &:hover {
         background-color: mix(#000, $color, 20%);
+        transform: translateY(-1px);
       }
     }
   }
@@ -137,18 +204,24 @@
 
   &--x-large {
     font-size: $type-size-4;
+    padding: 0.65em 1.75em;
+    border-radius: 10px;
   }
 
   /* large button */
 
   &--large {
     font-size: $type-size-5;
+    padding: 0.6em 1.5em;
+    border-radius: 9px;
   }
 
   /* small button */
 
   &--small {
     font-size: $type-size-7;
+    padding: 0.35em 0.85em;
+    border-radius: 6px;
   }
 }
 

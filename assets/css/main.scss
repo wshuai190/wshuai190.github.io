@@ -39,9 +39,11 @@
 @import "vendor/font-awesome/brands";
 @import "vendor/magnific-popup/magnific-popup";
 @import "print";
+@import "cv";
+@import "custom";
 
-/* Import Google Fonts for better typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+/* Google Fonts — Inter, Plus Jakarta Sans, JetBrains Mono */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* Ensure Font Awesome and Academicons load */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
@@ -208,85 +210,15 @@ ul li {
 }
 
 
-.news-status {
-  position: absolute;
-  top: 0;
-  left: -1.5rem;
-  font-size: 1.2rem;
-}
+/* Legacy FA icon content overrides */
+.fa-plane:before { content: "\f072"; }
+.fa-home:before  { content: "\f015"; }
 
-.fa-plane:before {
-  content: "\f072";
-}
-
-.fa-home:before {
-  content: "\f015";
-}
-
-.news-item {
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.news-status {
-  position: absolute;
-  top: 0;
-  left: -1.5rem;
-  font-size: 1.2rem;
-}
-
-.news-date {
-  margin-right: 1.5rem;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.news-title {
-  margin: 0;
-  font-size: 1.2rem;
-}
-
-.news-description {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.news-link {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Reduce margin between news items */
-.news-item + .news-item {
-  margin-top: 1rem;
-}
-
-/* Enhanced sidebar */
+/* Sidebar — layout only; the author-profile-card handles its own visual styling */
 .sidebar {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  border: 1px solid #e2e8f0;
-  position: sticky;
-  top: 2rem;
-  max-width: 280px;
-  width: 100%;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  margin-right: 0.5rem;
-  /* Allow content to be visible */
-  overflow: visible;
   min-width: 0;
   box-sizing: border-box;
-  animation: slideInLeft 0.5s ease-out;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.15);
-  }
+  overflow: visible;
 }
 
 /* Sidebar content wrapping */
@@ -334,21 +266,19 @@ ul li {
   margin-bottom: 1rem;
 }
 
-/* Enhanced social links - Always visible without Follow button */
+/* Social links — always visible on desktop, no extra box */
 .author__urls {
-  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  font-size: 0.85rem;
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
   position: static !important;
   height: auto !important;
   overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
 }
 
 /* Hide the Follow button completely */
@@ -486,7 +416,6 @@ ul li {
   font-weight: 500;
   text-decoration: none;
   display: inline-block;
-  margin-top: 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.35);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1055,33 +984,48 @@ h3.archive__item-title,
 
 /* Modern Grid Layout Override */
 #main {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 2rem;
   max-width: 1200px;
   margin: 0 auto 6rem auto;
-  padding: 2rem 2rem 4rem 2rem;
+  padding: 1rem 1rem 4rem 1rem;
   min-height: calc(100vh - 200px);
 }
 
-.sidebar {
-  grid-column: 1;
-  position: sticky !important;
-  top: 2rem !important;
-  float: none !important;
-  width: 100% !important;
-  max-width: 280px !important;
-  margin: 0 !important;
-  height: fit-content !important;
-  align-self: start !important;
+@media (min-width: 925px) {
+  #main {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    padding: 2rem 2rem 4rem 2rem;
+  }
+
+  .sidebar {
+    grid-column: 1;
+    position: sticky !important;
+    top: 2rem !important;
+    float: none !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 0 !important;
+    height: fit-content !important;
+    align-self: start !important;
+  }
+
+  .page {
+    grid-column: 2;
+    width: 100% !important;
+    max-width: none !important;
+    float: none !important;
+    position: static !important;
+  }
 }
 
-.page {
-  grid-column: 2;
-  width: 100% !important;
-  max-width: none !important;
-  float: none !important;
-  position: static !important;
+@media (max-width: 924px) {
+  .sidebar {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 1.5rem !important;
+  }
 }
 
 .page__inner-wrap {
@@ -1166,23 +1110,7 @@ h3.archive__item-title,
     visibility: visible !important;
   }
   
-  /* FORCE navigation items to hidden dropdown on mobile */
-  .greedy-nav .visible-links {
-    position: absolute !important;
-    left: -9999px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    overflow: hidden !important;
-    width: 1px !important;
-    height: 1px !important;
-  }
-  
-  /* Force all nav items to be in hidden dropdown */
-  .greedy-nav .visible-links .masthead__menu-item:not(.masthead__menu-item--lg) {
-    display: none !important;
-  }
-  
-  /* STEP 2: Dropdown positioning - FULL WIDTH MOBILE */
+  /* Dropdown positioning - FULL WIDTH MOBILE */
   .greedy-nav .hidden-links {
     position: fixed !important;
     top: 52px !important;
@@ -1197,47 +1125,21 @@ h3.archive__item-title,
     z-index: 1001 !important;
     padding: 0 !important;
     transform: none !important;
-    transition: all 0.3s ease !important;
-    /* FORCE IT TO BE VISIBLE AND FULL WIDTH */
-    min-height: 300px !important;
     max-height: 80vh !important;
     overflow-y: auto !important;
     box-sizing: border-box !important;
   }
-  
+
   /* Hidden state - completely hidden */
   .greedy-nav .hidden-links.hidden {
     display: none !important;
   }
-  
+
   /* Visible state - show the dropdown */
   .greedy-nav .hidden-links:not(.hidden) {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-  }
-  
-  /* BYPASS JAVASCRIPT - Create our own mobile menu */
-  .greedy-nav .hidden-links {
-    /* Always show content when visible */
-  }
-  
-  /* FALLBACK: Show placeholder if JavaScript hasn't loaded yet */
-  .greedy-nav .hidden-links:empty::after {
-    content: "Loading menu..." !important;
-    display: block !important;
-    color: white !important;
-    background: #000000 !important;
-    padding: 2rem 1rem !important;
-    text-align: center !important;
-    font-size: 1.1rem !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Make each line look like a menu item */
-  .greedy-nav .hidden-links:not(.hidden):empty {
-    line-height: 0 !important;
   }
   
   /* Force masthead and nav positioning - MOBILE FULL WIDTH */
@@ -2254,4 +2156,162 @@ h3 {
   }
 }
 
+/* ==========================================================================
+   News Feed Component  (BEM — .news-feed / .news-item)
+   ========================================================================== */
+
+/* Status-based accent colours */
+$news-color-travel   : #0ea5e9;   /* sky blue  */
+$news-color-home     : #10b981;   /* emerald   */
+$news-color-celebrate: #f59e0b;   /* amber     */
+
+.news-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.news-item {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem 1.25rem 1.6rem;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  animation: fadeInUp 0.45s ease-out backwards;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+
+  /* Coloured left-border accent */
+  &__accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    border-radius: 14px 0 0 14px;
+    background: linear-gradient(180deg, #2563eb, #7c3aed);
+    transition: width 0.25s ease;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.13);
+    border-color: rgba(37, 99, 235, 0.25);
+  }
+
+  /* status colour overrides */
+  &--travel {
+    .news-item__accent  { background: linear-gradient(180deg, $news-color-travel, darken($news-color-travel, 10%)); }
+    .news-item__badge   { background: rgba($news-color-travel, 0.1); color: darken($news-color-travel, 8%); }
+  }
+
+  &--home {
+    .news-item__accent  { background: linear-gradient(180deg, $news-color-home, darken($news-color-home, 10%)); }
+    .news-item__badge   { background: rgba($news-color-home, 0.1); color: darken($news-color-home, 8%); }
+  }
+
+  &--celebrate {
+    .news-item__accent  { background: linear-gradient(180deg, $news-color-celebrate, darken($news-color-celebrate, 10%)); }
+    .news-item__badge   { background: rgba($news-color-celebrate, 0.12); color: darken($news-color-celebrate, 10%); }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    /* default (celebrate) colours — overridden per status above */
+    background: rgba($news-color-celebrate, 0.12);
+    color: darken($news-color-celebrate, 10%);
+
+    i { font-size: 0.68rem; }
+  }
+
+  &__date {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #111827;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover { color: #2563eb; text-decoration: none; }
+    }
+  }
+
+  &__description {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.6;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    margin-top: 0.2rem;
+    transition: gap 0.2s ease, opacity 0.2s ease;
+
+    i { font-size: 0.65rem; transition: transform 0.2s ease; }
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: none;
+      i { transform: translateX(3px); }
+    }
+  }
+
+  /* staggered entrance */
+  &:nth-child(1) { animation-delay: 0.05s; }
+  &:nth-child(2) { animation-delay: 0.12s; }
+  &:nth-child(3) { animation-delay: 0.19s; }
+  &:nth-child(4) { animation-delay: 0.26s; }
+  &:nth-child(5) { animation-delay: 0.33s; }
+}
+
+/* Mobile adjustments for news feed */
+@media (max-width: 600px) {
+  .news-item {
+    padding: 1rem 1.1rem 1rem 1.3rem;
+  }
+
+  .news-item__badge { font-size: 0.65rem; }
+  .news-item__title { font-size: 0.92rem; }
+}
 

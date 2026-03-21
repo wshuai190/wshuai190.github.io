@@ -14,13 +14,31 @@
   @include breakpoint($x-large) {
     max-width: $x-large;
   }
+
+  // Switch to flexbox on large screens so the sidebar can have a proper width
+  @include breakpoint($large) {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+  }
 }
 
 .page {
+  // Susy float fallback (small screens)
   @include breakpoint($large) {
     @include span(9 of 12 last);
     @include prefix(0.25 of 12);
     @include suffix(2.75 of 12);
+  }
+
+  // Flexbox override (large screens) — cancel Susy floats, fill remaining space
+  @include breakpoint($large) {
+    float: none;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    flex: 1 1 0;
+    min-width: 0; // prevent flex child overflow
   }
 
   .page__inner-wrap {
@@ -49,19 +67,64 @@
 }
 
 .page__content {
+  /* Base typography */
+  font-family: $global-font-family;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: $text-primary;
 
+  /* Section headings */
   h2 {
+    font-family: $header-font-family;
+    font-size: $type-size-3;
+    font-weight: 700;
+    color: $text-primary;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 2px solid $border-color;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-family: $header-font-family;
+    font-size: $type-size-4;
+    font-weight: 600;
+    color: $text-primary;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.015em;
+  }
+
+  h4 {
+    font-family: $header-font-family;
+    font-size: $type-size-5;
+    font-weight: 600;
+    color: $text-secondary;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: $type-size-8;
   }
 
   p, li, dl {
-    font-size: 1em;
+    font-size: $type-size-7;
+    line-height: 1.75;
+  }
+
+  /* Better list spacing */
+  ul, ol {
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.35rem;
+    }
   }
 
   /* paragraph indents */
   p {
-    margin: 0 0 $indent-var;
+    margin: 0 0 1.1rem;
 
     /* sibling indentation*/
     @if $paragraph-indent == true {
@@ -82,6 +145,41 @@
         box-shadow: 0 0 10px rgba(#000, 0.25);
       }
     }
+  }
+
+  /* Blockquote styling */
+  blockquote {
+    border-left: 3px solid $primary-color;
+    padding: 0.75rem 1.25rem;
+    margin: 1.5rem 0;
+    color: $text-secondary;
+    font-style: italic;
+    background: $surface-color;
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+  }
+
+  /* Code blocks */
+  pre {
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    font-size: $type-size-8;
+  }
+
+  code {
+    font-family: $monospace-font-family;
+    font-size: 0.875em;
+    background: $code-background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-xs;
+    padding: 0.1em 0.35em;
+    color: $accent-color;
+  }
+
+  /* Section dividers */
+  hr {
+    border: none;
+    border-top: 1px solid $border-color;
+    margin: 2rem 0;
   }
 
   dt {
@@ -107,6 +205,40 @@
   }
 }
 
+/* ==========================================================================
+   Hero animations
+   ========================================================================== */
+
+@keyframes heroGradient {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.08) translate(-15px, 10px); }
+  100% { transform: scale(1.04) translate(10px, -8px); }
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.8; }
+  50%       { transform: rotate(45deg) translate(4px, 4px); opacity: 0.3; }
+}
+
+@keyframes floatA {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-18px) rotate(6deg); }
+}
+
+@keyframes floatB {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(12px) rotate(-5deg); }
+}
+
+@keyframes floatC {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-10px) scale(1.07); }
+}
+
+/* ==========================================================================
+   Hero component
+   ========================================================================== */
+
 .page__hero {
   position: relative;
   margin-bottom: 2em;
@@ -114,49 +246,121 @@
   animation: intro 0.3s both;
   animation-delay: 0.25s;
 
+  /* ---- Overlay / dark-gradient variant ---- */
   &--overlay {
     position: relative;
     margin-bottom: 2em;
-    padding: 3em 0;
+    background: #0f172a;
+    overflow: hidden;
+    display: block;
     @include clearfix;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
     animation: intro 0.3s both;
     animation-delay: 0.25s;
+
+    /* Base deep-navy fill (also acts as fallback) */
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 60%, #0f2440 100%);
+      z-index: 0;
+    }
 
     a {
       color: #fff;
     }
+  }
 
-    .wrapper {
-      padding-left: 1em;
-      padding-right: 1em;
+  /* ---- Animated radial-gradient layer ---- */
+  &-bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 18% 55%, rgba(37, 99, 235, 0.32) 0%, transparent 58%),
+      radial-gradient(ellipse at 78% 18%, rgba(124, 58, 237, 0.22) 0%, transparent 55%),
+      radial-gradient(ellipse at 58% 82%, rgba(14, 165, 233, 0.18) 0%, transparent 50%);
+    animation: heroGradient 10s ease-in-out infinite alternate;
+    z-index: 1;
+  }
 
-      @include breakpoint($x-large) {
-        max-width: $x-large;
-      }
-    }
+  /* ---- Subtle dot-grid pattern ---- */
+  &-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 36px 36px;
+    z-index: 2;
+  }
 
-    .page__title,
-    .page__meta,
-    .page__lead,
-    .btn {
+  /* ---- Content wrapper ---- */
+  &-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: $x-large;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem 2rem;
+
+    /* Title with gradient text */
+    .page__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 0;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 0%, #93c5fd 55%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      /* Fallback for browsers that don't support background-clip: text */
       color: #fff;
-      text-shadow: 1px 1px 4px rgba(#000, 0.5);
+      text-shadow: none;
     }
 
     .page__lead {
-      max-width: $medium;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 640px;
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+      text-shadow: none;
     }
 
-    .page__title {
-      font-size: $type-size-2;
+    .page__meta {
+      color: rgba(255, 255, 255, 0.6);
+      text-shadow: none;
+    }
 
-      @include breakpoint($small) {
-        font-size: $type-size-1;
+    /* Hero CTA button */
+    .btn--hero {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff !important;
+      border: none;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      text-shadow: none;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(37, 99, 235, 0.5);
+        color: #fff;
+        text-decoration: none;
       }
     }
+  }
+
+  /* ---- Scroll hint chevron (hidden — section is compact now) ---- */
+  &-scroll-hint {
+    display: none;
   }
 }
 

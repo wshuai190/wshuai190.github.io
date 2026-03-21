@@ -1,70 +1,190 @@
 /* ==========================================================================
-   BASE ELEMENTS
+   BASE ELEMENTS — Premium Design System
    ========================================================================== */
+
+
+/*
+   Root & HTML
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   /* sticky footer fix */
   position: relative;
   min-height: 100%;
+  /* Smooth anchor scrolling */
+  scroll-behavior: smooth;
+  /* Prevent font-size inflation on mobile */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Subpixel rendering */
+  font-size: 16px;
 }
+
+
+/*
+   Body
+   ========================================================================== */
 
 body {
   margin: 0;
   padding: 0;
   padding-bottom: 9em;
-  color: $text-color;
+  color: $text-primary;
   font-family: $global-font-family;
-  line-height: 1.5;
+  font-size: $type-size-7;
+  font-weight: 400;
+  line-height: 1.7;
+  /* Crisp, smooth rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Subtle ambient background */
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(37, 99, 235, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 95%, rgba(124, 58, 237, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(14, 165, 233, 0.02) 0%, transparent 70%),
+    $background-color;
+  background-attachment: fixed;
+  min-height: 100vh;
 
   &.overflow--hidden {
-    /* when primary navigation is visible, the content in the background won't scroll */
+    /* lock scroll when primary nav is open */
     overflow: hidden;
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 2em 0 0.5em;
+
+/*
+   Selection
+   ========================================================================== */
+
+::selection {
+  background-color: rgba(37, 99, 235, 0.18);
+  color: $text-primary;
+}
+
+::-moz-selection {
+  background-color: rgba(37, 99, 235, 0.18);
+  color: $text-primary;
+}
+
+
+/*
+   Headings
+   ========================================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2em 0 0.6em;
+  font-family: $display-font-family;
+  font-weight: 700;
   line-height: 1.2;
-  font-family: $header-font-family;
-  font-weight: bold;
+  letter-spacing: -0.025em;
+  color: $text-primary;
+  -webkit-transition: color $transition-base;
+  transition: color $transition-base;
 }
 
 h1 {
   margin-top: 0;
-  font-size: $type-size-3;
+  font-size: $type-size-2;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: $text-primary;
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 h2 {
-  font-size: $type-size-4;
+  font-size: $type-size-3;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  position: relative;
+  display: inline-block;
+
+  /* Animated gradient underline */
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 48px;
+    height: 3px;
+    background: $gradient-primary;
+    border-radius: $border-radius-full;
+    -webkit-transition: width $transition-slow cubic-bezier(0.4, 0, 0.2, 1);
+    transition: width $transition-slow cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 }
 
 h3 {
-  font-size: $type-size-5;
+  font-size: $type-size-4;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 h4 {
-  font-size: $type-size-6;
+  font-size: $type-size-5;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 h5 {
   font-size: $type-size-6;
+  font-weight: 600;
 }
 
 h6 {
-  font-size: $type-size-6;
+  font-size: $type-size-8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $text-secondary;
 }
 
-small, .small {
-  font-size: $type-size-6;
+small,
+.small {
+  font-size: $type-size-8;
 }
+
+
+/*
+   Paragraphs & inline text
+   ========================================================================== */
 
 p {
-  margin-bottom: 1.3em;
+  margin-top: 0;
+  margin-bottom: 1.4em;
+  color: $text-secondary;
+  line-height: 1.75;
+}
+
+/* First paragraph after a heading gets primary color */
+h1 + p,
+h2 + p,
+h3 + p {
+  color: $text-primary;
 }
 
 u,
 ins {
   text-decoration: none;
-  border-bottom: 1px solid $text-color;
+  border-bottom: 2px solid $border-color;
+
   a {
     color: inherit;
   }
@@ -74,97 +194,240 @@ del a {
   color: inherit;
 }
 
-/* reduce orphans and widows when printing */
+strong {
+  font-weight: 600;
+  color: $text-primary;
+}
+
+em {
+  font-style: italic;
+}
+
+mark {
+  background: rgba(245, 158, 11, 0.2);
+  color: $text-primary;
+  padding: 0.1em 0.25em;
+  border-radius: $border-radius-xs;
+}
+
+
+/*
+   Print orphan / widow control
+   ========================================================================== */
 
 p, pre, blockquote, ul, ol, dl, figure, table, fieldset {
   orphans: 3;
   widows: 3;
 }
 
-/* abbreviations */
+
+/*
+   Abbreviations
+   ========================================================================== */
 
 abbr[title],
 abbr[data-original-title] {
   text-decoration: none;
   cursor: help;
-  border-bottom: 1px dotted $text-color;
+  border-bottom: 1px dotted $text-tertiary;
 }
 
-/* blockquotes */
+
+/*
+   Blockquotes
+   ========================================================================== */
 
 blockquote {
-  margin: 2em 1em 2em 0;
-  padding-left: 1em;
-  padding-right: 1em;
+  margin: 2em 0;
+  padding: $spacing-6 $spacing-8;
+  background: $gradient-subtle;
+  border-left: 4px solid $primary-color;
+  border-radius: 0 $border-radius-md $border-radius-md 0;
   font-style: italic;
-  border-left: 0.25em solid $primary-color;
+  color: $text-secondary;
+  position: relative;
+
+  /* Opening quotation mark */
+  &::before {
+    content: '\201C';
+    font-size: 4rem;
+    line-height: 1;
+    color: rgba(37, 99, 235, 0.15);
+    position: absolute;
+    top: $spacing-2;
+    left: $spacing-4;
+    font-family: $serif-font-family;
+    pointer-events: none;
+  }
+
+  p {
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+  }
 
   cite {
-    font-style: italic;
+    display: block;
+    margin-top: $spacing-3;
+    font-style: normal;
+    font-size: $type-size-8;
+    font-weight: 500;
+    color: $text-tertiary;
 
     &:before {
-      content: "\2014";
-      padding-right: 5px;
+      content: "\2014\00a0";
     }
   }
 }
 
-/* links */
+
+/*
+   Links
+   ========================================================================== */
 
 a {
-  &:focus {
-    @extend %tab-focus;
-  }
+  color: $link-color;
+  text-decoration: none;
+  -webkit-transition: color $transition-fast, opacity $transition-fast;
+  transition: color $transition-fast, opacity $transition-fast;
 
   &:hover,
   &:active {
+    color: $link-color-hover;
     outline: 0;
+  }
+
+  &:visited {
+    color: $link-color-visited;
+  }
+
+  &:focus {
+    @extend %tab-focus;
   }
 }
 
-/* code */
+
+/*
+   Code & Monospace
+   ========================================================================== */
 
 tt, code, kbd, samp, pre {
-  font-family: $monospace;
+  font-family: $monospace-font-family;
 }
 
-pre {
-  overflow-x: auto; /* add scrollbars to wide code blocks*/
-}
-
+/* Inline code */
 p > code,
 a > code,
 li > code,
 figcaption > code,
 td > code {
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  font-size: $type-size-6;
-  background: $code-background-color;
-  border: 1px solid $lighter-gray;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
+  padding: 0.15em 0.45em;
+  font-size: $type-size-8;
+  font-weight: 500;
+  background: $surface-elevated;
+  color: $primary-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-sm;
+  box-shadow: $shadow-xs;
+  white-space: nowrap;
 
-  &:before, &:after {
+  /* Optical spacing trick from old system — keeps it tidy */
+  &:before,
+  &:after {
     letter-spacing: -0.2em;
-    content: "\00a0"; /* non-breaking space*/
+    content: "\00a0"; /* non-breaking space */
   }
 }
 
-/* horizontal rule */
+/* Block code */
+pre {
+  overflow-x: auto;
+  margin: $spacing-6 0;
+  padding: $spacing-6 $spacing-8;
+  background: $dark-bg;
+  color: #e2e8f0;
+  border-radius: $border-radius-lg;
+  border: 1px solid $dark-border;
+  font-size: $type-size-8;
+  line-height: 1.7;
+  box-shadow: $shadow-xl;
+  position: relative;
+
+  /* Top-bar decoration mimicking a terminal / code editor */
+  &::before {
+    content: '\25CF\00a0\25CF\00a0\25CF';
+    display: block;
+    position: absolute;
+    top: $spacing-3;
+    left: $spacing-4;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 2px;
+    pointer-events: none;
+  }
+
+  code {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+    white-space: pre;
+
+    &:before,
+    &:after {
+      content: none;
+      letter-spacing: normal;
+    }
+  }
+}
+
+
+/*
+   Horizontal Rule
+   ========================================================================== */
 
 hr {
   display: block;
-  margin: 1em 0;
+  position: relative;
+  margin: $spacing-8 0;
   border: 0;
-  border-top: 1px solid $border-color;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    $border-color 20%,
+    $border-color 80%,
+    transparent 100%
+  );
+  overflow: visible;
+
+  /* Central diamond ornament */
+  &::after {
+    content: '\25C6';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background: $background-color;
+    color: $border-color;
+    padding: 0 $spacing-2;
+    font-size: 0.5rem;
+    line-height: 1;
+  }
 }
 
-/* lists */
+
+/*
+   Lists
+   ========================================================================== */
 
 ul li,
 ol li {
   margin-bottom: 0.5em;
+  line-height: 1.7;
 }
 
 li ul,
@@ -172,12 +435,53 @@ li ol {
   margin-top: 0.5em;
 }
 
+
 /*
-   Media and embeds
+   Tables
+   ========================================================================== */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $type-size-8;
+}
+
+thead {
+  background: $surface-elevated;
+}
+
+th {
+  padding: $spacing-3 $spacing-4;
+  text-align: left;
+  font-weight: 600;
+  font-size: $type-size-9;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $text-secondary;
+  border-bottom: 2px solid $border-color;
+}
+
+td {
+  padding: $spacing-3 $spacing-4;
+  border-bottom: 1px solid $border-subtle;
+  color: $text-secondary;
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover td {
+  background: $surface-color;
+}
+
+
+/*
+   Media & Embeds
    ========================================================================== */
 
 /* Figures and images */
-
 figure {
   display: -webkit-box;
   display: flex;
@@ -196,9 +500,21 @@ figure {
 
   img {
     width: 100%;
-    border-radius: $border-radius;
-    -webkit-transition: $global-transition;
-    transition: $global-transition;
+    border-radius: $border-radius-md;
+    border: 1px solid $border-subtle;
+    box-shadow: $shadow-md;
+    -webkit-transition: box-shadow $transition-base,
+                        transform $transition-base,
+                        border-color $transition-base;
+    transition: box-shadow $transition-base,
+                transform $transition-base,
+                border-color $transition-base;
+
+    &:hover {
+      box-shadow: $shadow-xl;
+      transform: translateY(-2px);
+      border-color: $border-color;
+    }
   }
 
   > a {
@@ -233,52 +549,55 @@ figure {
 }
 
 /* Figure captions */
-
 figcaption {
   margin-bottom: 0.5em;
-  color: mix(#fff, $text-color, 25%);
   font-family: $caption-font-family;
-  font-size: $type-size-6;
+  font-size: $type-size-8;
+  font-style: italic;
+  color: $text-tertiary;
 
   a {
     color: inherit;
     text-decoration: none;
-    border-bottom: 1px solid $light-gray;
-    -webkit-transition: $global-transition;
-    transition: $global-transition;
+    border-bottom: 1px solid $border-color;
+    -webkit-transition: color $transition-fast,
+                        border-color $transition-fast;
+    transition: color $transition-fast,
+                border-color $transition-fast;
 
     &:hover {
-      color: #000;
-      border-bottom-color: #000;
+      color: $text-primary;
+      border-bottom-color: $text-primary;
     }
   }
 }
 
-
 /* Fix IE9 SVG bug */
-
 svg:not(:root) {
   overflow: hidden;
 }
 
+/* Responsive images & video */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Smooth image loading */
+img {
+  -webkit-transition: opacity $transition-base;
+  transition: opacity $transition-base;
+}
+
 
 /*
-   Navigation lists
+   Navigation Lists
    ========================================================================== */
 
 /**
- * Removes margins, padding, and bullet points from navigation lists
- *
- * Example usage:
- * <nav>
- *    <ul>
- *      <li><a href="#link-1">Link 1</a></li>
- *      <li><a href="#link-2">Link 2</a></li>
- *      <li><a href="#link-3">Link 3</a></li>
- *    </ul>
- *  </nav>
+ * Strips margins, padding, and bullet points from nav lists.
  */
-
 nav {
   ul {
     margin: 0;
@@ -305,11 +624,49 @@ nav {
   }
 }
 
+
 /*
-   Global animation transition
+   Focus styles
    ========================================================================== */
 
-b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a, tr, td, form button, input[type="submit"], .btn, .highlight, .archive__item-teaser {
+:focus-visible {
+  outline: 2px solid $primary-color;
+  outline-offset: 3px;
+  border-radius: $border-radius-xs;
+}
+
+
+/*
+   Scrollbar (Webkit)
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $surface-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $border-color;
+  border-radius: $border-radius-full;
+
+  &:hover {
+    background: $text-tertiary;
+  }
+}
+
+
+/*
+   Global animation transition (broad selector kept for theme compatibility)
+   ========================================================================== */
+
+b, i, strong, em, blockquote, p, q, span, figure, img,
+h1, h2, header, input, a, tr, td,
+form button, input[type="submit"],
+.btn, .highlight, .archive__item-teaser {
   -webkit-transition: $global-transition;
   transition: $global-transition;
 }

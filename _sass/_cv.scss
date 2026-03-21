@@ -1,0 +1,170 @@
+/* ==========================================================================
+   CV PAGE STYLES
+   Timeline layout · Section headers · Typography
+   ========================================================================== */
+
+
+/* ==========================================================================
+   CV Section wrapper
+   ========================================================================== */
+
+.cv-section {
+  margin-bottom: 2rem;
+
+  /* Section heading with gradient underline */
+  &__heading,
+  h2.cv-section__heading {
+    font-family: $header-font-family;
+    font-size: $type-size-3;
+    font-weight: 700;
+    color: $text-primary;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+    display: block;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 56px;
+      height: 3px;
+      background: $gradient-primary;
+      border-radius: $border-radius-full;
+      transition: width $transition-base;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+/* Section dividers between CV sections */
+.page__content hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, $border-color 0%, transparent 100%);
+  margin: 2rem 0;
+}
+
+
+/* ==========================================================================
+   Timeline — education & work history
+   ========================================================================== */
+
+.cv-timeline {
+  position: relative;
+  padding-left: 1rem;
+
+  /* Vertical track */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.35rem;
+    bottom: 0.35rem;
+    width: 2px;
+    background: linear-gradient(180deg, $primary-color 0%, $accent-color 100%);
+    border-radius: $border-radius-full;
+    opacity: 0.25;
+  }
+
+  &__item {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+
+    /* Timeline dot */
+    &::before {
+      content: '';
+      position: absolute;
+      left: -1.3rem;
+      top: 0.4rem;
+      width: 10px;
+      height: 10px;
+      background: $primary-color;
+      border: 2px solid $background-color;
+      border-radius: $border-radius-full;
+      box-shadow: 0 0 0 2px $primary-color;
+      flex-shrink: 0;
+    }
+  }
+
+  &__date {
+    min-width: 3rem;
+    font-size: $type-size-8;
+    font-weight: 700;
+    color: $primary-color;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    text-align: right;
+    padding-top: 0.05rem;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    flex: 1;
+    font-size: $type-size-7;
+    line-height: 1.65;
+    color: $text-primary;
+
+    strong {
+      color: $text-primary;
+      font-weight: 600;
+    }
+
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      border-bottom: 1px solid rgba($primary-color, 0.3);
+      transition: border-color $transition-fast, color $transition-fast;
+
+      &:hover {
+        color: $primary-dark;
+        border-bottom-color: $primary-dark;
+      }
+    }
+  }
+
+  &__period {
+    display: inline-block;
+    font-size: $type-size-9;
+    font-weight: 500;
+    color: $text-tertiary;
+    background: $surface-color;
+    border: 1px solid $border-subtle;
+    border-radius: $border-radius-full;
+    padding: 0.1rem 0.6rem;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+  }
+}
+
+
+/* ==========================================================================
+   CV List items (publications, talks, etc.)
+   ========================================================================== */
+
+.page__content ul > li {
+  padding-left: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: $text-primary;
+  line-height: 1.65;
+}
+
+/* Archive items inside CV lists */
+.page__content .archive__item-title {
+  font-size: $type-size-6;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.page__content .archive__item-excerpt {
+  font-size: $type-size-8;
+  color: $text-secondary;
+  line-height: 1.55;
+}

@@ -1,5 +1,7 @@
 {% include base_path %}
 
+{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
+
 {% if page.header.image contains "://" %}
   {% capture img_path %}{{ page.header.image }}{% endcapture %}
 {% else %}
@@ -24,32 +26,62 @@
   {% capture overlay_filter %}rgba(0, 0, 0, {{ page.header.overlay_filter }}){% endcapture %}
 {% endif %}
 
-<div class="page__hero{% if page.header.overlay_color or page.header.overlay_image %}--overlay{% endif %}"
-  style="{% if page.header.overlay_color %}background-color: {{ page.header.overlay_color | default: 'transparent' }};{% endif %} {% if overlay_img_path %}background-image: {% if overlay_filter %}linear-gradient({{ overlay_filter }}, {{ overlay_filter }}), {% endif %}url('{{ overlay_img_path }}');{% endif %}"
->
-  {% if page.header.overlay_color or page.header.overlay_image %}
-    <div class="wrapper">
-      <h1 class="page__title" itemprop="headline">
-        {% if paginator %}
+{% if page.header.overlay_color or page.header.overlay_image %}
+<div class="page__hero page__hero--overlay" role="banner"
+  style="{% if overlay_img_path %}background-image: {% if overlay_filter %}linear-gradient({{ overlay_filter }}, {{ overlay_filter }}), {% endif %}url('{{ overlay_img_path }}');{% endif %}">
+
+  <!-- Animated radial gradient layer -->
+  <div class="page__hero-bg-gradient" aria-hidden="true"></div>
+
+  <!-- Subtle grid / dot pattern overlay -->
+  <div class="page__hero-bg-pattern" aria-hidden="true"></div>
+
+  <div class="page__hero-content">
+    <div class="page__hero-text">
+      {% if page.header.show_overlay_excerpt != false %}
+        {% if page.title %}
+        <h1 id="page-title" class="page__title" itemprop="headline">
+          {{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}
+        </h1>
+        {% elsif paginator %}
+        <h1 id="page-title" class="page__title" itemprop="headline">
           {{ site.title }}{% unless paginator.page == 1 %} {{ site.data.ui-text[site.locale].page | default: "Page" }} {{ paginator.page }}{% endunless %}
-        {% else %}
-          {{ page.title | default: site.title | markdownify | remove: "<p>" | remove: "</p>" }}
+        </h1>
         {% endif %}
-      </h1>
-      {% if page.excerpt %}
-        <p class="page__lead">{{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" }}</p>
-      {% endif %}
-      {% if site.read_time and page.read_time %}
+
+        {% if page.header.tagline %}
+        <p class="page__lead">{{ page.header.tagline | markdownify | remove: "<p>" | remove: "</p>" }}</p>
+        {% elsif page.excerpt %}
+        <p class="page__lead">{{ page.excerpt | markdownify | remove: "<p>" | remove: "</p>" | truncate: 160 }}</p>
+        {% endif %}
+
+        {% if site.read_time and page.read_time %}
         <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
-      {% endif %}
-      {% if page.header.cta_url %}
-        <p><a href="{{ cta_path }}" class="btn btn--light-outline btn--large">{{ page.header.cta_label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a></p>
+        {% endif %}
+
+        {% if page.header.cta_url %}
+        <p><a href="{{ cta_path }}" class="btn btn--hero btn--large">{{ page.header.cta_label | default: site.data.ui-text[site.locale].more_label | default: "Learn More" }}</a></p>
+        {% endif %}
       {% endif %}
     </div>
-  {% else %}
-    <img src="{{ img_path }}" alt="{{ page.title }}" class="page__hero-image">
-  {% endif %}
+  </div>
+
   {% if page.header.caption %}
-    <span class="page__hero-caption">{{ page.header.caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+  <span class="page__hero-caption" role="note">{{ page.header.caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>
   {% endif %}
+
+  <!-- Scroll hint chevron -->
+  <div class="page__hero-scroll-hint" aria-hidden="true">
+    <div class="scroll-arrow"></div>
+  </div>
 </div>
+
+{% else %}
+<div class="page__hero" role="banner">
+  <img src="{{ img_path }}" alt="{{ page.header.image_description | default: page.title }}" class="page__hero-image" itemprop="image">
+  {% if page.header.image_description %}<span class="sr-only">{{ page.header.image_description }}</span>{% endif %}
+  {% if page.header.caption %}<span class="page__hero-caption" role="note">{{ page.header.caption | markdownify | remove: "<p>" | remove: "</p>" }}</span>{% endif %}
+</div>
+{% endif %}
+
+{% endif %}

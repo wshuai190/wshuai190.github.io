@@ -1,28 +1,115 @@
 {% include base_path %}
 
-<div class="masthead">
+<div class="masthead" id="site-masthead">
   <div class="masthead__inner-wrap">
-    <div class="masthead__menu">
-      <nav id="site-nav" class="greedy-nav">
-        <button><div class="navicon"></div></button>
-        <ul class="visible-links">
-          <li class="masthead__menu-item masthead__menu-item--lg"><a href="{{ base_path }}/">{{ site.title }}</a></li>
-          {% if page.lang == 'zh' %}
-            {% assign nav_links = site.data.navigation.main_zh %}
-          {% else %}
-            {% assign nav_links = site.data.navigation.main %}
-          {% endif %}
-          {% for link in nav_links %}
-            {% if link.url contains 'http' %}
-              {% assign domain = '' %}
-              {% else %}
-              {% assign domain = base_path %}
-            {% endif %}
-            <li class="masthead__menu-item"><a href="{{ domain }}{{ link.url }}">{{ link.title }}</a></li>
-          {% endfor %}
-        </ul>
-        <ul class="hidden-links hidden"></ul>
-      </nav>
+    <div class="masthead__branding">
+      <a href="{{ base_path }}/" class="masthead__site-title" aria-label="Home">
+        <span class="masthead__title-prefix">Dr. </span><span class="masthead__title-gradient">Shuai Wang</span>
+      </a>
     </div>
+
+    <nav id="site-nav" class="masthead__nav greedy-nav" role="navigation" aria-label="Primary navigation">
+      <ul class="visible-links">
+        {% if page.lang == 'zh' %}
+          {% assign nav_links = site.data.navigation.main_zh %}
+        {% else %}
+          {% assign nav_links = site.data.navigation.main %}
+        {% endif %}
+        {% for link in nav_links %}
+          {% if link.url contains 'http' %}
+            {% assign domain = '' %}
+          {% else %}
+            {% assign domain = base_path %}
+          {% endif %}
+          <li class="masthead__menu-item">
+            <a href="{{ domain }}{{ link.url }}"
+               {% if page.url == link.url %}class="is-active" aria-current="page"{% endif %}>
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <button class="greedy-nav__toggle hidden" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="hidden-links">
+        <div class="navicon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+
+      <ul class="hidden-links hidden" id="hidden-links" aria-label="More navigation items"></ul>
+    </nav>
   </div>
+
+  <div class="masthead__gradient-border" aria-hidden="true"></div>
 </div>
+
+<script>
+  (function () {
+    var masthead = document.getElementById('site-masthead');
+    if (!masthead) return;
+
+    var scrollThreshold = 50;
+    var ticking = false;
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          if (window.scrollY > scrollThreshold) {
+            masthead.classList.add('is-scrolled');
+          } else {
+            masthead.classList.remove('is-scrolled');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Run once on load in case the page is already scrolled
+    onScroll();
+
+    // Mobile nav: move all items into hamburger dropdown on narrow screens
+    document.addEventListener('DOMContentLoaded', function () {
+      var nav = document.getElementById('site-nav');
+      if (!nav) return;
+      var vlinks = nav.querySelector('.visible-links');
+      var hlinks = nav.querySelector('.hidden-links');
+      var btn = nav.querySelector('.greedy-nav__toggle');
+      if (!vlinks || !hlinks || !btn) return;
+
+      function setupMobileNav() {
+        if (window.innerWidth > 768) return;
+        // If greedy-nav hasn't moved items (flex container doesn't report overflow), do it now
+        if (hlinks.children.length === 0 && vlinks.children.length > 0) {
+          Array.from(vlinks.children).forEach(function (item) {
+            hlinks.appendChild(item);
+          });
+          btn.classList.remove('hidden');
+        }
+      }
+
+      setupMobileNav();
+      window.addEventListener('resize', setupMobileNav);
+
+      // Close menu when clicking a nav link
+      hlinks.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          hlinks.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!nav.contains(e.target)) {
+          hlinks.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+  })();
+</script>

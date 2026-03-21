@@ -1,13 +1,13 @@
 ---
 layout: single
 header:
-  overlay_color: "#000000"
+  overlay_color: "#0f172a"
   overlay_filter: "0.5"
-excerpt: "🎓 Postdoc • 🔍 IR • 🤖 NLP • 📊 ML"
+  tagline: "Postdoctoral Researcher · Information Retrieval · NLP"
 permalink: /
 title: "Dr. Shuai Wang (Dylan)"
 author_profile: true
-redirect_from: 
+redirect_from:
   - /about/
   - /about.html
 ---
@@ -51,10 +51,9 @@ Since February 2025, I have been working as a Postdoc at UQ. I'm actively seekin
 {% include base_path %}
 
 ## 📰 Latest News
-<div class="news-section">
+
 {% include news.html %}
-<a href="/news/" class="btn btn--primary btn--large">📖 Read All News</a>
-</div>
+<a href="/news/" class="btn btn--primary btn--large" style="margin-top:1rem;">Read All News</a>
 
 ## 🤝 Professional Services
 

@@ -10,28 +10,50 @@
  *  </div>
  */
 
-@mixin notice($notice-color) {
-  margin: 2em 0 !important;  /* override*/
-  padding: 1em;
+@mixin notice($notice-color, $notice-icon: '') {
+  margin: 1.75em 0 !important;  /* override*/
+  padding: 1rem 1.25rem 1rem 1rem;
   font-family: $global-font-family;
   font-size: $type-size-6 !important;
   text-indent: initial; /* override*/
-  background-color: mix(#fff, $notice-color, 90%);
-  border-radius: $border-radius;
-  box-shadow: 0 1px 1px rgba($notice-color, 0.25);
+  background-color: mix(#fff, $notice-color, 92%);
+  border-radius: $border-radius-md;
+  border-left: 4px solid $notice-color;
+  box-shadow: $shadow-xs, inset 0 0 0 1px mix(#fff, $notice-color, 80%);
+  position: relative;
+
+  /* Icon indicator strip */
+  @if $notice-icon != '' {
+    &::before {
+      content: $notice-icon;
+      position: absolute;
+      top: 0.9rem;
+      right: 1rem;
+      font-size: 1rem;
+      opacity: 0.5;
+      line-height: 1;
+    }
+  }
 
   h4 {
     margin-top: 0 !important; /* override*/
-    margin-bottom: 0.75em;
+    margin-bottom: 0.5em;
+    color: mix(#000, $notice-color, 20%);
+    font-weight: 600;
+    font-size: $type-size-7 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   @at-root .page__content #{&} h4 {
     /* using at-root to override .page-content h4 font size*/
     margin-bottom: 0;
-    font-size: 1em;
+    font-size: $type-size-8 !important;
   }
 
   p {
+    color: mix(#000, mix(#fff, $notice-color, 60%), 30%);
+
     &:last-child {
       margin-bottom: 0 !important; /* override*/
     }
@@ -44,7 +66,8 @@
   }
 
   a {
-    color: $notice-color;
+    color: mix(#000, $notice-color, 15%);
+    font-weight: 500;
 
     &:hover {
       color: mix(#000, $notice-color, 40%);
@@ -52,10 +75,14 @@
   }
 
   code {
-    background-color: mix(#fff, $notice-color, 95%)
+    background-color: mix(#fff, $notice-color, 95%);
+    border-color: mix(#fff, $notice-color, 80%);
+    color: mix(#000, $notice-color, 20%);
   }
 
   ul {
+    color: mix(#000, mix(#fff, $notice-color, 60%), 30%);
+
     &:last-child {
       margin-bottom: 0; /* override*/
     }
@@ -65,35 +92,35 @@
 /* Default notice */
 
 .notice {
-  @include notice($light-gray);
+  @include notice($gray, '"ℹ"');
 }
 
 /* Primary notice */
 
 .notice--primary {
-  @include notice($primary-color);
+  @include notice($primary-color, '"★"');
 }
 
 /* Info notice */
 
 .notice--info {
-  @include notice($info-color);
+  @include notice($info-color, '"ℹ"');
 }
 
 /* Warning notice */
 
 .notice--warning {
-  @include notice($warning-color);
+  @include notice($warning-color, '"⚠"');
 }
 
 /* Success notice */
 
 .notice--success {
-  @include notice($success-color);
+  @include notice($success-color, '"✓"');
 }
 
 /* Danger notice */
 
 .notice--danger {
-  @include notice($danger-color);
+  @include notice($danger-color, '"✕"');
 }

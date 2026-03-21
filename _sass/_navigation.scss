@@ -174,138 +174,206 @@
 
 .greedy-nav {
   position: relative;
-  min-width: 250px;
-  background: $background-color;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  // No opaque background — the masthead provides the glass layer
+  background: transparent;
 
+  // ── Visible nav links ────────────────────────────────────────────────────
+  .visible-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: 0.125rem;
+
+    li {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // ── All anchor styles (visible + hidden) ─────────────────────────────────
   a {
-    display: block;
-    margin: 0 1rem;
-    padding: 0.5rem 0;
-    color: $masthead-link-color;
+    position: relative;
+    display: inline-block;
+    margin: 0 0.25rem;
+    padding: 0.375rem 0.625rem;
+    font-size: 0.875rem;         // 14px
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    color: $dark-gray;
     text-decoration: none;
+    border-radius: 6px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    // Sliding underline accent
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0px;
+      left: 0.625rem;
+      right: 0.625rem;
+      height: 2px;
+      background: linear-gradient(90deg, $primary-color, $accent-color);
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
     &:hover {
-      color: $masthead-link-color-hover;
+      color: $primary-color;
+      background-color: rgba(37, 99, 235, 0.06);
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+
+    // Active page indicator
+    &.is-active {
+      color: $primary-color;
+      font-weight: 600;
+
+      &::after {
+        transform: scaleX(1);
+        background: linear-gradient(90deg, $primary-color, $accent-color);
+      }
     }
   }
 
-  button {
-    position: absolute;
-    height: 100%;
-    right: 0;
-    padding: 0 0.5rem;
-    border: 0;
-    outline: none;
-    background-color: $primary-color;
-    color: #fff;
+  // ── Hamburger toggle button ───────────────────────────────────────────────
+  // Greedy-nav plugin controls visibility via .hidden class (not CSS media queries)
+  // The plugin also replaces button innerHTML with "+N" text — we hide that
+  // with font-size:0 and draw our own hamburger via ::before/::after pseudo-elements.
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin-left: 0.5rem;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    background: transparent;
+    color: $dark-gray;
     cursor: pointer;
-  }
+    font-size: 0;           // hide the "+N" count text the plugin injects
+    line-height: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 
-  .visible-links {
-    display: table;
-
-    li {
-      display: table-cell;
-      vertical-align: middle;
-
-      &:first-child {
-        font-weight: bold;
-
-        a {
-          margin-left: 0;
-        }
-      }
-
-      &:last-child {
-        a {
-          margin-right: 0;
-        }
-      }
+    &.hidden {
+      display: none;
     }
 
-    a {
-      position: relative;
+    &:hover {
+      background-color: rgba(37, 99, 235, 0.06);
+      border-color: rgba(37, 99, 235, 0.3);
+    }
 
-      &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 4px;
-        background: mix(#fff, $primary-color, 50%);
-        width: 100%;
-        -webkit-transition: $global-transition;
-        transition: $global-transition;
-        -webkit-transform: scaleX(0);
-            -ms-transform: scaleX(0);
-                transform: scaleX(0); /* hide*/
-      }
-
-      &:hover:before {
-        -webkit-transform: scaleX(1);
-            -ms-transform: scaleX(1);
-                transform: scaleX(1); /* reveal*/
-      }
+    // CSS hamburger — three lines via box-shadow trick
+    &::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 2px;
+      background: $dark-gray;
+      border-radius: 2px;
+      box-shadow: 0 5px 0 $dark-gray, 0 10px 0 $dark-gray;
+      flex-shrink: 0;
     }
   }
 
+  // ── Navicon (three-bar icon) ──────────────────────────────────────────────
+  .navicon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: $navicon-width;
+    height: 18px; // fixed height for three bars
+    pointer-events: none;
+
+    span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: $dark-gray;
+      border-radius: 2px;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.2s ease;
+    }
+  }
+
+  // ── Hidden overflow links (dropdown) ─────────────────────────────────────
   .hidden-links {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 8px);
     right: 0;
-    margin-top: 15px;
-    padding: 5px;
+    min-width: 180px;
+    padding: 0.375rem;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(#000, 0.25);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+    z-index: 10;
+    list-style: none;
+    margin: 0;
 
-    a {
-      margin: 0;
-      padding: 10px 20px;
-      font-size: $type-size-5;
-
-      &:hover {
-        color: $masthead-link-color-hover;
-        background: mix(#fff, $primary-color, 75%);
-      }
+    // Tooltip caret
+    &::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      right: 14px;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-top: 1px solid $border-color;
+      border-left: 1px solid $border-color;
+      transform: rotate(45deg);
     }
 
-    &:before {
-      content: "";
-      position: absolute;
-      top: -11px;
-      right: 10px;
-      width: 0;
-      border-style: solid;
-      border-width: 0 10px 10px;
-      border-color: $border-color transparent;
-      display: block;
-      z-index: 0;
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: -10px;
-      right: 10px;
-      width: 0;
-      border-style: solid;
-      border-width: 0 10px 10px;
-      border-color: #fff transparent;
-      display: block;
-      z-index: 1;
+    &.hidden {
+      display: none;
     }
 
     li {
       display: block;
-      border-bottom: 1px solid $border-color;
 
-      &:last-child {
-        border-bottom: none;
+      &:not(:last-child) {
+        border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+      }
+    }
+
+    a {
+      display: block;
+      margin: 0;
+      padding: 0.625rem 1rem;
+      font-size: $type-size-6;
+      border-radius: 6px;
+      color: $dark-gray;
+
+      &::after {
+        display: none; // no underline in dropdown
+      }
+
+      &:hover {
+        color: $primary-color;
+        background: rgba(37, 99, 235, 0.06);
       }
     }
   }
+
 }
 
 
