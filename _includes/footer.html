@@ -87,19 +87,9 @@
           <span>Built with <i class="fas fa-heart" aria-hidden="true"></i> using <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a>.</span>
         </p>
         <p class="site-footer__powered">
-          <a href="/" class="site-footer__lang-switch" id="footer-en-switch">English</a>
+          <a href="#" class="site-footer__lang-switch" onclick="var p=location.pathname;location.href=(/^\/zh(\/|$)/.test(p)?p.replace(/^\/zh(\/|$)/,'/')||'/':p);return false;">English</a>
           <span class="site-footer__divider">|</span>
-          <a href="/zh/" class="site-footer__lang-switch" id="footer-zh-switch">&#20013;&#25991;</a>
-        </p>
-        <script>
-          (function () {
-            var path = window.location.pathname;
-            var enLink = document.getElementById('footer-en-switch');
-            var zhLink = document.getElementById('footer-zh-switch');
-            if (enLink) enLink.href = path.replace(/^\/zh(\/|$)/, '/') || '/';
-            if (zhLink) zhLink.href = path.match(/^\/zh(\/|$)/) ? path : '/zh' + path;
-          })();
-        </script>
+          <a href="#" class="site-footer__lang-switch" onclick="var p=location.pathname;location.href=/^\/zh(\/|$)/.test(p)?p:'/zh'+p;return false;">&#20013;&#25991;</a>
       </div>
     </div>
   </div>
