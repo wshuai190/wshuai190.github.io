@@ -72,44 +72,5 @@
     // Run once on load in case the page is already scrolled
     onScroll();
 
-    // Mobile nav: move all items into hamburger dropdown on narrow screens
-    document.addEventListener('DOMContentLoaded', function () {
-      var nav = document.getElementById('site-nav');
-      if (!nav) return;
-      var vlinks = nav.querySelector('.visible-links');
-      var hlinks = nav.querySelector('.hidden-links');
-      var btn = nav.querySelector('.greedy-nav__toggle');
-      if (!vlinks || !hlinks || !btn) return;
-
-      function setupMobileNav() {
-        if (window.innerWidth > 768) return;
-        // If greedy-nav hasn't moved items (flex container doesn't report overflow), do it now
-        if (hlinks.children.length === 0 && vlinks.children.length > 0) {
-          Array.from(vlinks.children).forEach(function (item) {
-            hlinks.appendChild(item);
-          });
-          btn.classList.remove('hidden');
-        }
-      }
-
-      setupMobileNav();
-      window.addEventListener('resize', setupMobileNav);
-
-      // Close menu when clicking a nav link
-      hlinks.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') {
-          hlinks.classList.add('hidden');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-
-      // Close menu when clicking outside
-      document.addEventListener('click', function (e) {
-        if (!nav.contains(e.target)) {
-          hlinks.classList.add('hidden');
-          btn.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
   })();
 </script>

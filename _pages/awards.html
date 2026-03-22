@@ -2,10 +2,14 @@
 layout: archive
 title: "Awards"
 permalink: /awards/
+author_profile: true
 ---
 
-
 {% include base_path %}
+
+{% if site.active_lang == 'zh' %}
+<p>以下为本人获得的荣誉与奖项。</p>
+{% endif %}
 
 {% for post in site.awards reversed %}
   {% include archive-single.html %}

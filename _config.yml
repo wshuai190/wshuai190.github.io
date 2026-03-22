@@ -12,9 +12,11 @@ title_separator          : "-"
 name                     : &name "Dr. Shuai Wang"
 description              : &description "Dr. Shuai Wang is currently a Postdoc at the University of Queensland. He completed his PhD under the supervision of Dr Guido Zuccon and Dr Bevan Koopman in 2025. Dr. Shuai Wang obtained his B.S degree from the University of Western Australia in Dec 2019 and completed his MEngSc degree from the University of Queensland in July 2021. Dr. Shuai Wang is interested in various research areas, including information retrieval, NLP, machine learning and security. More info: https://ielab.io/people/shuai-wang"
 
-# Language settings
+# Language settings (jekyll-polyglot)
 languages: ["en", "zh"]
 default_lang: "en"
+exclude_from_localization: ["assets", "images", "files", "javascript", "css"]
+parallel_localization: false
 url                      : https://wshuai190.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "wshuai190/wshuai190.github.io"
@@ -169,8 +171,8 @@ include:
   - _pages
   - files
 exclude:
-  - "*.sublime-project"
-  - "*.sublime-workspace"
+  - .sublime-project
+  - .sublime-workspace
   - .asset-cache
   - .bundle
   - .jekyll-assets-cache
@@ -320,6 +322,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-redirect-from
+  - jekyll-polyglot
 # mimic GitHub Pages with --safe
 whitelist:
   - jekyll-paginate

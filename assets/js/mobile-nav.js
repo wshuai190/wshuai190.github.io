@@ -1,66 +1,65 @@
-// Mobile Navigation — works with the redesigned greedy-nav markup
+// Mobile Navigation — bypasses greedy-nav on narrow screens
 (function () {
   'use strict';
 
   function initMobileNav() {
-    var nav        = document.querySelector('.greedy-nav');
-    var toggleBtn  = nav && nav.querySelector('.greedy-nav__toggle');
-    var hiddenLinks = nav && nav.querySelector('.hidden-links');
+    if (window.innerWidth > 768) return;
 
-    if (!nav || !toggleBtn || !hiddenLinks) return;
+    var nav       = document.getElementById('site-nav');
+    var btn       = nav && nav.querySelector('.greedy-nav__toggle');
+    var hlinks    = nav && nav.querySelector('.hidden-links');
+    var vlinks    = nav && nav.querySelector('.visible-links');
 
-    // Populate hidden-links from the visible-links so the server-rendered
-    // list is the single source of truth (no hardcoded duplicates).
-    var visibleItems = nav.querySelectorAll('.visible-links .masthead__menu-item');
-    if (hiddenLinks.children.length === 0 && visibleItems.length > 0) {
-      visibleItems.forEach(function (item) {
-        var clone = item.cloneNode(true);
-        hiddenLinks.appendChild(clone);
+    if (!nav || !btn || !hlinks || !vlinks) return;
+
+    // Remove greedy-nav's click handler so it doesn't double-toggle
+    if (window.jQuery) {
+      jQuery(btn).off('click');
+    }
+
+    // Populate hidden-links by cloning from visible-links (one-time)
+    if (hlinks.children.length === 0) {
+      Array.from(vlinks.children).forEach(function (item) {
+        hlinks.appendChild(item.cloneNode(true));
       });
     }
 
     var isOpen = false;
 
     function openMenu() {
-      hiddenLinks.classList.remove('hidden');
-      toggleBtn.setAttribute('aria-expanded', 'true');
+      hlinks.classList.remove('hidden');
+      btn.setAttribute('aria-expanded', 'true');
       isOpen = true;
     }
 
     function closeMenu() {
-      hiddenLinks.classList.add('hidden');
-      toggleBtn.setAttribute('aria-expanded', 'false');
+      hlinks.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
       isOpen = false;
     }
 
-    toggleBtn.addEventListener('click', function (e) {
+    btn.addEventListener('click', function (e) {
       e.stopPropagation();
       isOpen ? closeMenu() : openMenu();
     });
 
-    // Close when clicking outside the nav
     document.addEventListener('click', function (e) {
-      if (isOpen && !nav.contains(e.target)) {
-        closeMenu();
-      }
+      if (isOpen && !nav.contains(e.target)) closeMenu();
     });
 
-    // Close when a link inside the dropdown is followed
-    hiddenLinks.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') {
-        closeMenu();
-      }
+    hlinks.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') closeMenu();
     });
 
-    // Close on Escape
     document.addEventListener('keydown', function (e) {
       if (isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
         closeMenu();
-        toggleBtn.focus();
+        btn.focus();
       }
     });
   }
 
+  // Run after main.min.js (which includes greedy-nav) has executed
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initMobileNav);
   } else {

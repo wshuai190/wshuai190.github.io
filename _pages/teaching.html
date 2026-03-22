@@ -7,6 +7,10 @@ author_profile: true
 
 {% include base_path %}
 
+{% if site.active_lang == 'zh' %}
+<p>以下为本人在昆士兰大学的教学经历。</p>
+{% endif %}
+
 {% for post in site.teaching reversed %}
   {% include archive-single.html %}
 {% endfor %}

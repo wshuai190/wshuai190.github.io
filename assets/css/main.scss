@@ -1041,7 +1041,12 @@ h3.archive__item-title,
 
 /* Mobile navigation - COMPLETELY REBUILD */
 @media (max-width: 768px) {
-  
+
+  /* Hide nav items — mobile-nav.js clones them into the dropdown */
+  .greedy-nav .visible-links {
+    display: none !important;
+  }
+
   /* STEP 1: Show hamburger button - fits within nav bar */
   .greedy-nav button {
     display: flex !important;
