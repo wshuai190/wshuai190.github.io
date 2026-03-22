@@ -18,21 +18,21 @@ main:
   - title: "中文"
     url: /zh/
     
-# Chinese navigation
+# Chinese navigation — English labels, /zh/ URLs
 main_zh:
-  - title: "学术论文"
+  - title: "Publications"
     url: /zh/publications/
 
-  - title: "获奖情况"
+  - title: "Awards"
     url: /zh/awards/
 
-  - title: "学术报告"
+  - title: "Talks"
     url: /zh/talks/
 
-  - title: "教学经历"
+  - title: "Teaching"
     url: /zh/teaching/
 
-  - title: "简历"
+  - title: "CV"
     url: /zh/cv/
 
   - title: "English"

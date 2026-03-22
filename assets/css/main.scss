@@ -616,7 +616,7 @@ ul li {
   display: block !important;
 }
 
-.greedy-nav ul {
+.greedy-nav .visible-links {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -625,9 +625,7 @@ ul li {
   padding: 0 !important;
 }
 
-.greedy-nav ul li,
 .visible-links li,
-.hidden-links li,
 .masthead__menu-item {
   display: inline-block !important;
   float: left !important;
@@ -635,10 +633,9 @@ ul li {
   list-style: none !important;
 }
 
-.visible-links,
-.hidden-links {
+.visible-links {
   position: static !important;
-  display: inline !important;
+  display: inline-flex !important;
   visibility: visible !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -1261,23 +1258,6 @@ h3.archive__item-title,
     z-index: 1000 !important;
     position: relative !important;
   }
-  
-  /* FALLBACK: Ensure dropdown shows on any button interaction */
-  .greedy-nav button:focus + .hidden-links,
-  .greedy-nav button:active + .hidden-links,
-  .greedy-nav button:hover + .hidden-links {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  
-  /* Force immediate visibility when button is interacted with */
-  .greedy-nav button:focus ~ .hidden-links,
-  .greedy-nav button:active ~ .hidden-links {
-    display: block !important;
-  }
-  
-  /* JavaScript will populate the dropdown with real clickable links */
   
   /* Prevent any elements from blocking the button */
   .greedy-nav button {

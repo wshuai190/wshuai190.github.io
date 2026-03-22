@@ -10,12 +10,17 @@
 
     <nav id="site-nav" class="masthead__nav greedy-nav" role="navigation" aria-label="Primary navigation">
       <ul class="visible-links">
-        {% if page.lang == 'zh' %}
+        {% if site.active_lang == 'zh' %}
           {% assign nav_links = site.data.navigation.main_zh %}
+          {% assign lang_switch_url = page.url | remove_first: '/zh' %}
+          {% assign lang_switch_label = 'English' %}
         {% else %}
           {% assign nav_links = site.data.navigation.main %}
+          {% assign lang_switch_url = '/zh' | append: page.url %}
+          {% assign lang_switch_label = '中文' %}
         {% endif %}
         {% for link in nav_links %}
+          {% unless link.title == 'English' or link.title == '中文' %}
           {% if link.url contains 'http' %}
             {% assign domain = '' %}
           {% else %}
@@ -27,7 +32,11 @@
               {{ link.title }}
             </a>
           </li>
+          {% endunless %}
         {% endfor %}
+        <li class="masthead__menu-item">
+          <a href="#" id="lang-switch-link">{{ lang_switch_label }}</a>
+        </li>
       </ul>
 
       <button class="greedy-nav__toggle hidden" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="hidden-links">
@@ -72,5 +81,19 @@
     // Run once on load in case the page is already scrolled
     onScroll();
 
+  })();
+
+  // Language switcher — use real pathname so it works regardless of Polyglot's page.url
+  (function () {
+    var link = document.getElementById('lang-switch-link');
+    if (!link) return;
+    var path = window.location.pathname;
+    {% if site.active_lang == 'zh' %}
+    // Strip /zh prefix to get English URL
+    link.href = path.replace(/^\/zh(\/|$)/, '/') || '/';
+    {% else %}
+    // Add /zh prefix to get Chinese URL
+    link.href = '/zh' + path;
+    {% endif %}
   })();
 </script>
