@@ -48,11 +48,13 @@
     });
   }
 
-  // Use 'load' event: guarantees greedy-nav's $(document).ready() has already run,
-  // so our clone-button trick reliably strips its handler.
-  if (document.readyState === 'complete') {
-    initMobileNav();
+  // Scripts load at end of body, so readyState is already 'interactive' or 'complete'.
+  // jQuery's $(document).ready() fires synchronously at 'interactive', meaning
+  // greedy-nav's click handler is already registered by the time we run.
+  // The clone-button approach strips it reliably without any timing concerns.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMobileNav);
   } else {
-    window.addEventListener('load', initMobileNav);
+    initMobileNav(); // DOM + all prior scripts done — run immediately
   }
 })();
