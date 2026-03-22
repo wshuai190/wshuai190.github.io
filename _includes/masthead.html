@@ -35,7 +35,7 @@
           {% endunless %}
         {% endfor %}
         <li class="masthead__menu-item">
-          <a href="{{ base_path }}{{ lang_switch_url }}">{{ lang_switch_label }}</a>
+          <a href="{{ base_path }}{{ lang_switch_url }}" id="nav-lang-switch">{{ lang_switch_label }}</a>
         </li>
       </ul>
 
@@ -77,9 +77,18 @@
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Run once on load in case the page is already scrolled
     onScroll();
+  })();
 
+  // Fix language switch URL using real pathname (Polyglot's page.url is unreliable)
+  (function () {
+    var link = document.getElementById('nav-lang-switch');
+    if (!link) return;
+    var path = window.location.pathname;
+    {% if site.active_lang == 'zh' %}
+    link.href = path.replace(/^\/zh(\/|$)/, '/') || '/';
+    {% else %}
+    link.href = '/zh' + path;
+    {% endif %}
   })();
 </script>
