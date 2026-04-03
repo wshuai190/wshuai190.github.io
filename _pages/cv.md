@@ -169,21 +169,36 @@ redirect_from:
 
 <div class="cv-timeline">
   <div class="cv-timeline__item">
+    <div class="cv-timeline__date">2025–present</div>
+    <div class="cv-timeline__body">
+      <strong>Postdoctoral Research Fellow</strong> — University of Queensland, IELab<br>
+      Supervisor: Prof. Guido Zuccon
+    </div>
+  </div>
+  <div class="cv-timeline__item">
+    <div class="cv-timeline__date">2024</div>
+    <div class="cv-timeline__body">
+      <strong>Research Intern</strong> — Naver Labs Europe, Grenoble, France<br>
+      <span class="cv-timeline__period">February – July 2024</span><br>
+      Research on context compression for Retrieval-Augmented Generation (RAG)
+    </div>
+  </div>
+  <div class="cv-timeline__item">
+    <div class="cv-timeline__date">2022–2024</div>
+    <div class="cv-timeline__body">
+      <strong>Teaching Assistant</strong> — University of Queensland<br>
+      <span class="cv-timeline__period">From February 2022</span><br>
+      Courses: INFS7205, INFS7410, DATA7901 &amp; 7902/7903<br>
+      Course Coordinators: Professor Helen Huang, A. Professor Guido Zuccon, Dr. Miao Xu
+    </div>
+  </div>
+  <div class="cv-timeline__item">
     <div class="cv-timeline__date">2021</div>
     <div class="cv-timeline__body">
       <strong>Research Assistant</strong> — University of Queensland<br>
       <span class="cv-timeline__period">July – September 2021</span><br>
       Participated in the TREC Competition and worked on Neural Information Retrieval projects.<br>
       Supervisor: A. Professor Guido Zuccon
-    </div>
-  </div>
-  <div class="cv-timeline__item">
-    <div class="cv-timeline__date">2022–</div>
-    <div class="cv-timeline__body">
-      <strong>Teaching Assistant</strong> — University of Queensland<br>
-      <span class="cv-timeline__period">From February 2022</span><br>
-      Courses: INFS7205, INFS7410, DATA7901 &amp; 7902/7903<br>
-      Course Coordinators: Professor Helen Huang, A. Professor Guido Zuccon, Dr. Miao Xu
     </div>
   </div>
 </div>
