@@ -72,9 +72,13 @@ redirect_from:
 ## 📝 学术论文
 
 <ul>
-{% assign sorted_publications = site.publications | sort: 'date' | reverse %}
-{% for post in sorted_publications %}
-  {% include archive-single-cv.html %}
+{% assign type_order = "Long,Journal,Resource,Reproduce,Short,Notebook" | split: "," %}
+{% assign date_sorted = site.publications | sort: 'date' | reverse %}
+{% for type in type_order %}
+  {% assign group = date_sorted | where: 'page_type', type %}
+  {% for post in group %}
+    {% include archive-single-cv.html %}
+  {% endfor %}
 {% endfor %}
 </ul>
 
@@ -138,9 +142,13 @@ I contribute to the academic community by serving as a **PC/SPC (reviewer) membe
 ## 📝 Publications
 
 <ul>
-{% assign sorted_publications = site.publications | sort: 'date' | reverse %}
-{% for post in sorted_publications %}
-  {% include archive-single-cv.html %}
+{% assign type_order = "Long,Journal,Resource,Reproduce,Short,Notebook" | split: "," %}
+{% assign date_sorted = site.publications | sort: 'date' | reverse %}
+{% for type in type_order %}
+  {% assign group = date_sorted | where: 'page_type', type %}
+  {% for post in group %}
+    {% include archive-single-cv.html %}
+  {% endfor %}
 {% endfor %}
 </ul>
 
