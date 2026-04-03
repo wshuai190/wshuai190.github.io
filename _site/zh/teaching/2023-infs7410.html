@@ -1,0 +1,529 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>INFS7410 Information Retrieval and Web Search (Tutorial Coordinator) - Dr. Shuai Wang (Dylan)</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Dr. Shuai Wang (Dylan)">
+<meta property="og:title" content="INFS7410 Information Retrieval and Web Search (Tutorial Coordinator)">
+
+
+  <link rel="canonical" href="http://localhost:4000/zh/teaching/2023-infs7410">
+  <meta property="og:url" content="http://localhost:4000/teaching/2023-infs7410">
+
+
+
+  <meta property="og:description" content="Please link here to see course details">
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2023-07-25T00:00:00-07:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dr. Shuai Wang",
+      "url" : "http://localhost:4000",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="http://localhost:4000/zh/feed.xml" type="application/atom+xml" rel="alternate" title="Dr. Shuai Wang (Dylan) Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+
+<!-- start custom head snippets -->
+
+<link rel="icon" type="image/png" href="http://localhost:4000/images/site-logo.png">
+<link rel="apple-touch-icon" href="http://localhost:4000/images/site-logo.png">
+<!-- Mobile browser chrome theme color -->
+<meta name="theme-color" content="#2563eb">
+
+<link rel="stylesheet" href="http://localhost:4000/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead" id="site-masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__branding">
+      <a href="http://localhost:4000/zh/" class="masthead__site-title" aria-label="Home">
+        <span class="masthead__title-prefix">Dr. </span><span class="masthead__title-gradient">Shuai Wang</span>
+      </a>
+    </div>
+
+    <nav id="site-nav" class="masthead__nav greedy-nav" role="navigation" aria-label="Primary navigation">
+      <ul class="visible-links">
+        
+        
+          
+          
+          <li class="masthead__menu-item">
+            <a href="http://localhost:4000/zh/publications/"
+               >
+              Publications
+            </a>
+          </li>
+          
+        
+          
+          
+          <li class="masthead__menu-item">
+            <a href="http://localhost:4000/zh/awards/"
+               >
+              Awards
+            </a>
+          </li>
+          
+        
+          
+          
+          <li class="masthead__menu-item">
+            <a href="http://localhost:4000/zh/talks/"
+               >
+              Talks
+            </a>
+          </li>
+          
+        
+          
+          
+          <li class="masthead__menu-item">
+            <a href="http://localhost:4000/zh/teaching/"
+               >
+              Teaching
+            </a>
+          </li>
+          
+        
+          
+          
+          <li class="masthead__menu-item">
+            <a href="http://localhost:4000/zh/cv/"
+               >
+              CV
+            </a>
+          </li>
+          
+        
+          
+        
+        <li class="masthead__menu-item">
+          <a href="#" data-lang-switch>English</a>
+        </li>
+      </ul>
+
+      <button class="greedy-nav__toggle hidden" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="hidden-links">
+        <div class="navicon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+
+      <ul class="hidden-links hidden" id="hidden-links" aria-label="More navigation items"></ul>
+    </nav>
+  </div>
+
+  <div class="masthead__gradient-border" aria-hidden="true"></div>
+</div>
+
+<script>
+  (function () {
+    var masthead = document.getElementById('site-masthead');
+    if (!masthead) return;
+
+    var scrollThreshold = 50;
+    var ticking = false;
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () {
+          if (window.scrollY > scrollThreshold) {
+            masthead.classList.add('is-scrolled');
+          } else {
+            masthead.classList.remove('is-scrolled');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+</script>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="http://localhost:4000/images/ws.jpg" class="author__avatar" alt="王率博士 (Dylan)">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">王率博士 (Dylan)</h3>
+    
+    
+    <p style="font-size:0.72em; color:#999; margin-top:0.2em; margin-bottom:0.3em;">
+      <a href="https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">
+        <i class="fas fa-graduation-cap" style="font-size:0.9em;"></i> 1083 citations &middot; h-index 15 &middot; 02/04/26
+      </a>
+    </p>
+    
+    <p class="author__bio">博士后研究员, 昆士兰大学; 博士 (2025); 曾任职: Naver实验室欧洲, 莱比锡大学</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">联系方式</button>
+    <ul class="author__urls social-icons">
+      
+        <li><span style="display:block; margin-bottom:5px; padding-top:2px; padding-bottom:2px;"><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> 澳大利亚布里斯班</span></li>
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en" target="_blank" rel="noopener"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+        <li><a href="https://www.researchgate.net/profile/Shuai-Wang-202"><i class="fab fa-fw fa-researchgate" aria-hidden="true"></i> ResearchGate</a></li>
+      
+      
+        <li><a href="https://orcid.org/0000-0002-0726-5250"><i class="fab fa-fw fa-orcid"></i> ORCID</a></li>
+      
+      
+        <li><a href="https://twitter.com/dylan_wangs"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+      
+      
+        <li><a href="https://www.linkedin.com/in/shuai-wang-33125b196"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+      
+      
+        <li><a href="https://github.com/wshuai190"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+        <li><a href="mailto:shuai.wang2@uq.edu.au"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> Email</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="INFS7410 Information Retrieval and Web Search (Tutorial Coordinator)">
+    <meta itemprop="description" content="Please link here to see course details">
+    <meta itemprop="datePublished" content="July 25, 2023">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">INFS7410 Information Retrieval and Web Search (Tutorial Coordinator)
+</h1>
+          
+        
+        
+        
+          <p> Postgraduate course, <i>University of Queensland</i>, 2023 </p>
+        
+        
+             
+        
+    
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <p>Please link <a href="https://course-profiles.uq.edu.au/student_section_loader/section_1/130473">here</a> to see course details</p>
+
+        
+      </section>
+
+      
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+<section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=http://localhost:4000/teaching/2023-infs7410" class="btn btn--twitter" title="Share on Twitter"><i class="fab fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/teaching/2023-infs7410" class="btn btn--facebook" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/teaching/2023-infs7410" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+      
+
+
+  <nav class="pagination">
+    
+      <a href="http://localhost:4000/zh/teaching/2022-infs7410" class="pagination--pager" title="INFS7410 Information Retrieval and Web Search (Tutor)
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    
+
+<footer class="site-footer">
+  <div class="site-footer__top-accent"></div>
+
+  <div class="site-footer__main">
+    <div class="wrapper">
+      <div class="site-footer__grid">
+
+        <!-- Col 1: Identity -->
+        <div class="site-footer__col site-footer__col--identity">
+          <h3 class="site-footer__name">Dr. Shuai Wang (Dylan)</h3>
+          <p class="site-footer__tagline">Postdoctoral Researcher</p>
+          <p class="site-footer__affiliation">
+            <i class="fas fa-university" aria-hidden="true"></i> University of Queensland
+          </p>
+          <p class="site-footer__affiliation">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Brisbane, Australia
+          </p>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="site-footer__col site-footer__col--links">
+          <h4 class="site-footer__col-title">Quick Links</h4>
+          <ul class="site-footer__nav">
+            <li><a href="http://localhost:4000/zh/publications/">Publications</a></li>
+            <li><a href="http://localhost:4000/zh/awards/">Awards</a></li>
+            <li><a href="http://localhost:4000/zh/talks/">Talks</a></li>
+            <li><a href="http://localhost:4000/zh/teaching/">Teaching</a></li>
+            <li><a href="http://localhost:4000/zh/cv/">CV</a></li>
+            <li><a href="http://localhost:4000/zh/feed.xml"><i class="fa fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Connect -->
+        <div class="site-footer__col site-footer__col--connect">
+          <h4 class="site-footer__col-title">Connect</h4>
+          <div class="site-footer__social">
+            
+            <a href="mailto:shuai.wang2@uq.edu.au" class="site-footer__social-link" aria-label="Email" title="Email">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+            </a>
+            
+            
+            <a href="https://github.com/wshuai190" class="site-footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
+              <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            
+            
+            <a href="https://twitter.com/dylan_wangs" class="site-footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter" title="Twitter">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+            
+            
+            <a href="https://www.linkedin.com/in/shuai-wang-33125b196" class="site-footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn">
+              <i class="fab fa-linkedin" aria-hidden="true"></i>
+            </a>
+            
+            
+            <a href="https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en" class="site-footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar" title="Google Scholar">
+              <i class="ai ai-google-scholar" aria-hidden="true"></i>
+            </a>
+            
+            
+            <a href="https://orcid.org/0000-0002-0726-5250" class="site-footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="ORCID" title="ORCID">
+              <i class="ai ai-orcid" aria-hidden="true"></i>
+            </a>
+            
+            
+            <a href="https://www.researchgate.net/profile/Shuai-Wang-202" class="site-footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="ResearchGate" title="ResearchGate">
+              <i class="ai ai-researchgate" aria-hidden="true"></i>
+            </a>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="site-footer__bottom">
+    <div class="wrapper">
+      <div class="site-footer__bottom-content">
+        <p class="site-footer__copyright">
+          &copy; 2026 Dr. Shuai Wang (Dylan).
+          <span>Built with <i class="fas fa-heart" aria-hidden="true"></i> using <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a>.</span>
+        </p>
+        <p class="site-footer__powered">
+          <a href="#" class="site-footer__lang-switch" onclick="var p=location.pathname;location.href=(/^\/zh(\/|$)/.test(p)?p.replace(/^\/zh(\/|$)/,'/')||'/':p);return false;">English</a>
+          <span class="site-footer__divider">|</span>
+          <a href="#" class="site-footer__lang-switch" onclick="var p=location.pathname;location.href=/^\/zh(\/|$)/.test(p)?p:'/zh'+p;return false;">&#20013;&#25991;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- start custom footer snippets -->
+<!-- end custom footer snippets -->
+
+</footer>
+
+
+    <script src="http://localhost:4000/assets/js/main.min.js"></script>
+<script src="http://localhost:4000/assets/js/mobile-nav.js"></script>
+
+
+
+
+
+  </body>
+</html>
+
