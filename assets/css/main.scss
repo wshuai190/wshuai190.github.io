@@ -2205,7 +2205,7 @@ $news-color-celebrate: #f59e0b;   /* amber     */
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.2rem;
   }
 
   &__meta {
@@ -2240,7 +2240,7 @@ $news-color-celebrate: #f59e0b;   /* amber     */
   }
 
   &__title {
-    margin: 0;
+    margin: 8px 0 !important;
     font-size: 1rem;
     font-weight: 600;
     line-height: 1.4;
