@@ -8,3 +8,5 @@ _site/
 .idea/workspace.xml
 /vendor/bundle
 Screenshot 2026-03-21 at 9.40.08 PM.png
+/.idea
+/_includes

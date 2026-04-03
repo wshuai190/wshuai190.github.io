@@ -5,31 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aacad00c-0ce7-40a4-b48e-7ac71e27173b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/_includes/archive-single.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/archive-single.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/head/custom.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/head/custom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_includes/masthead.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/masthead.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/news.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/page__hero.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/page__hero.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/scholar-stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/scholar-stats.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_includes/scripts.html" beforeDir="false" afterPath="$PROJECT_DIR$/_includes/scripts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_layouts/default.html" beforeDir="false" afterPath="$PROJECT_DIR$/_layouts/default.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_pages/about.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/about.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_pages/cv.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/cv.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_pages/publications.md" beforeDir="false" afterPath="$PROJECT_DIR$/_pages/publications.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_archive.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_archive.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_base.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_footer.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_masthead.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_masthead.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_navigation.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_navigation.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_notices.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_notices.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_sass/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/_sass/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/_main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/mobile-nav.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/mobile-nav.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,6 +193,10 @@
       <workItem from="1769727405710" duration="1968000" />
       <workItem from="1770164320651" duration="3670000" />
       <workItem from="1774085544479" duration="7908000" />
+      <workItem from="1774093480124" duration="14783000" />
+      <workItem from="1774435158213" duration="11000" />
+      <workItem from="1774565281632" duration="273000" />
+      <workItem from="1774757290749" duration="2352000" />
     </task>
     <servers />
   </component>

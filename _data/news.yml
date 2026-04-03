@@ -155,3 +155,8 @@
   date: 2026-01-20
   description: "I will be serving as the Communication (Social Media) Chair for SIGIR 2026 conference to be held in Melbourne | Naarm, Australia."
   status: travel
+
+- title: "Three Papers Accepted in SIGIR 2026"
+  date: 2026-04-03
+  description: "[Reproducibility Paper]: Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval; [Reproducibility Paper]: The Vulnerability of LLM Rankers to Prompt Injection Attacks; [Short Paper]: Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning."
+  status: celebrate
