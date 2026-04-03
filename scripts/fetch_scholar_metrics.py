@@ -2,6 +2,10 @@
 """
 Fetch Google Scholar metrics and save to _data/scholar_metrics.json.
 Run by GitHub Actions daily. Falls back to keeping existing data on failure.
+
+Proxy priority:
+  1. ScraperAPI  — if SCRAPERAPI_KEY env var is set (most reliable)
+  2. FreeProxies — fallback when no key is available
 """
 
 import json
@@ -13,14 +17,26 @@ from datetime import datetime
 def fetch_metrics(scholar_id):
     from scholarly import scholarly, ProxyGenerator
 
-    # Try free proxies to reduce chance of being blocked on cloud runners
-    try:
-        pg = ProxyGenerator()
-        pg.FreeProxies()
-        scholarly.use_proxy(pg)
-        print("Using free proxy.")
-    except Exception as e:
-        print(f"Note: skipping proxy ({e}).", file=sys.stderr)
+    pg = ProxyGenerator()
+    scraper_key = os.environ.get("SCRAPERAPI_KEY", "").strip()
+
+    if scraper_key:
+        success = pg.ScraperAPI(scraper_key)
+        if success:
+            scholarly.use_proxy(pg)
+            print("Using ScraperAPI proxy.")
+        else:
+            print("ScraperAPI setup failed; falling back to FreeProxies.", file=sys.stderr)
+            pg2 = ProxyGenerator()
+            pg2.FreeProxies()
+            scholarly.use_proxy(pg2)
+    else:
+        try:
+            pg.FreeProxies()
+            scholarly.use_proxy(pg)
+            print("No SCRAPERAPI_KEY set — using free proxy.")
+        except Exception as e:
+            print(f"Note: skipping proxy ({e}).", file=sys.stderr)
 
     author = scholarly.search_author_id(scholar_id)
     author = scholarly.fill(author, sections=["basics", "indices", "counts"])

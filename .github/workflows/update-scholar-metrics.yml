@@ -24,6 +24,8 @@ jobs:
         run: pip install scholarly free-proxy
 
       - name: Fetch Google Scholar metrics
+        env:
+          SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
         run: python scripts/fetch_scholar_metrics.py
 
       - name: Commit and push if data changed
