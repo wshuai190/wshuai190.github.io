@@ -20,3 +20,55 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
 
 <meta http-equiv="cleartype" content="on">
+
+{% if page.url == "/" or page.url == "/zh/" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Shuai Wang",
+  "alternateName": ["Dylan Wang", "Shuai (Dylan) Wang", "Dr. Shuai Wang"],
+  "givenName": "Shuai",
+  "familyName": "Wang",
+  "honorificPrefix": "Dr.",
+  "jobTitle": "Postdoctoral Research Fellow",
+  "description": "Postdoctoral Research Fellow at the University of Queensland (IELab) specializing in Information Retrieval, Large Language Models, and Retrieval-Augmented Generation (RAG). Published 30+ peer-reviewed papers in top-tier venues including SIGIR, WSDM, WWW, ECIR, EMNLP, and EACL with 1000+ citations.",
+  "affiliation": {
+    "@type": "Organization",
+    "name": "University of Queensland",
+    "department": "IELab, School of Electrical Engineering and Computer Science",
+    "url": "https://ielab.io/"
+  },
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Queensland"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "University of Western Australia"
+    }
+  ],
+  "knowsAbout": [
+    "Information Retrieval",
+    "Natural Language Processing",
+    "Large Language Models",
+    "Retrieval-Augmented Generation",
+    "Dense Retrieval",
+    "Systematic Review Automation",
+    "Biomedical Information Retrieval",
+    "Neural Search"
+  ],
+  "url": "https://wshuai190.github.io",
+  "image": "https://wshuai190.github.io/images/dylan2.jpg",
+  "sameAs": [
+    "https://orcid.org/0000-0002-0726-5250",
+    "https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en",
+    "https://github.com/wshuai190",
+    "https://www.linkedin.com/in/shuai-wang-33125b196",
+    "https://twitter.com/dylan_wangs",
+    "https://www.semanticscholar.org/author/Shuai-Wang/2113801108"
+  ]
+}
+</script>
+{% endif %}

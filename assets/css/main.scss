@@ -2142,6 +2142,62 @@ h3 {
 }
 
 /* ==========================================================================
+   Researcher Summary (third-person bio block, optimized for LLM extraction
+   and search-engine ingestion).
+   ========================================================================== */
+.researcher-summary {
+  background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
+  border-left: 4px solid #2563eb;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin: 0 0 2rem 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #1f2937;
+  box-shadow: 0 4px 12px -4px rgba(37, 99, 235, 0.1);
+
+  p {
+    margin: 0 !important;
+  }
+
+  strong {
+    color: #1e3a8a;
+    font-weight: 700;
+  }
+
+  a {
+    color: #2563eb;
+    font-weight: 500;
+  }
+}
+
+/* Author-disambiguation note next to publications */
+.author-disambiguation {
+  font-size: 0.85rem !important;
+  color: #6b7280 !important;
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 0.75rem 1rem !important;
+  margin: 0 0 1.5rem 0 !important;
+  line-height: 1.55 !important;
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    color: #1f2937;
+  }
+
+  a {
+    color: #2563eb !important;
+    text-decoration: underline;
+    text-decoration-color: rgba(37, 99, 235, 0.3);
+  }
+}
+
+/* ==========================================================================
    News Feed Component  (BEM — .news-feed / .news-item)
    ========================================================================== */
 
