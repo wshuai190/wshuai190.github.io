@@ -35,7 +35,7 @@
           {% endunless %}
         {% endfor %}
         <li class="masthead__menu-item">
-          <a href="#" data-lang-switch>{{ lang_switch_label }}</a>
+          <a href="#" data-lang-switch onclick="var p=location.pathname;location.href=(/^\/zh(\/|$)/.test(p)?(p.replace(/^\/zh(\/|$)/,'/')||'/'):'/zh'+p);return false;">{{ lang_switch_label }}</a>
         </li>
       </ul>
 
