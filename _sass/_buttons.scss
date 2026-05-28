@@ -225,50 +225,5 @@
   }
 }
 
-.page-type-btn {
-  display: inline-block;
-  color: white;
-  font-size: 0.72em;
-  font-weight: 600;
-  padding: 3px 9px;
-  margin-right: 5px;
-  border-radius: 20px;
-  vertical-align: middle;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  transition: opacity 0.15s ease;
-
-  &:hover {
-    opacity: 0.85;
-    color: white;
-    text-decoration: none;
-  }
-}
-
-.page-type-btn.long {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-}
-
-.page-type-btn.short {
-  background: linear-gradient(135deg, #10b981, #047857);
-}
-
-.page-type-btn.reproduce {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
-  color: #fff;
-}
-
-.page-type-btn.resource {
-  background: linear-gradient(135deg, #6b7280, #374151);
-}
-
-.page-type-btn.notebook {
-  background: linear-gradient(135deg, #f97316, #c2410c);
-}
-
-.page-type-btn.journal {
-  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-}
-
-.page-type-btn.demo {
-  background: linear-gradient(135deg, #ec4899, #9333ea);
-}
+/* Legacy .page-type-btn block removed — now defined in main.scss
+   under the Professional Academic palette. */

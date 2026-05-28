@@ -60,14 +60,15 @@ $type-size-9                : 0.75rem;    // 12px  — XSmall
    Colors — Primary Palette
    ========================================================================== */
 
-$primary-color              : #2563eb;   // Vibrant blue
-$primary-dark               : #1d4ed8;   // Deeper blue
-$primary-light              : #3b82f6;   // Lighter blue
-$accent-color               : #7c3aed;   // Electric purple
-$accent-light               : #8b5cf6;   // Lighter purple
-$secondary-color            : #0ea5e9;   // Sky blue
-$teal-accent                : #14b8a6;   // Teal
-$coral-accent               : #f43f5e;   // Coral / Rose
+/* Quiet Scholar palette — muted gold + deep navy + warm cream */
+$primary-color              : #B8893C;   // Muted gold (was vibrant blue)
+$primary-dark               : #8E6A2D;   // Deeper gold (was deeper blue)
+$primary-light              : #D4AC68;   // Lighter gold
+$accent-color               : #1A2540;   // Deep navy (was electric purple)
+$accent-light               : #4B5670;   // Muted navy
+$secondary-color            : #2E5C61;   // Deep teal (replaces sky blue)
+$teal-accent                : #2E5C61;   // Deep teal
+$coral-accent               : #8B5A3C;   // Warm brown (replaces coral)
 
 /* Semantic colors */
 $success-color              : #10b981;   // Emerald
@@ -80,24 +81,24 @@ $info-color                 : #0ea5e9;   // Sky blue
    Colors — Neutral Scale (Slate-based)
    ========================================================================== */
 
-/* Surface & background */
-$background-color           : #ffffff;
-$body-color                 : #ffffff;
-$surface-color              : #f8fafc;   // Lightest surface
-$surface-elevated           : #f1f5f9;   // Slightly lifted surface
-$code-background-color      : #f8fafc;
-$code-background-color-dark : #e2e8f0;
+/* Surface & background — Quiet Scholar */
+$background-color           : #FBF7F0;   // Warm cream
+$body-color                 : #FBF7F0;
+$surface-color              : #F4EFE4;   // Slightly recessed surface
+$surface-elevated           : #FFFFFF;   // Paper card
+$code-background-color      : #F4EFE4;
+$code-background-color-dark : #E5DDC9;
 
 /* Borders */
-$border-color               : #e2e8f0;   // Standard border
-$border-subtle              : #f1f5f9;   // Subtle / barely-there border
+$border-color               : #E5DDC9;   // Hairline cream
+$border-subtle              : #EFE7D2;   // Subtler hairline
 
 /* Text */
-$text-color                 : #0f172a;   // Alias kept for legacy compatibility
-$text-primary               : #0f172a;   // Near black
-$text-secondary             : #475569;   // Medium gray
-$text-tertiary              : #94a3b8;   // Light gray
-$text-inverse               : #ffffff;
+$text-color                 : #1A2540;   // Deep navy
+$text-primary               : #1A2540;   // Deep navy
+$text-secondary             : #4B5670;   // Soft navy
+$text-tertiary              : #8B8675;   // Muted
+$text-inverse               : #FBF7F0;
 
 /* Gray shades (legacy aliases) */
 $gray                       : #64748b;
@@ -157,13 +158,14 @@ $masthead-link-color-hover  : rgba(255, 255, 255, 0.8);
    Gradients
    ========================================================================== */
 
-$gradient-primary           : linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-$gradient-secondary         : linear-gradient(135deg, #0ea5e9 0%, #14b8a6 100%);
-$gradient-hero              : linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
-$gradient-subtle            : linear-gradient(135deg, #f0f9ff 0%, #eff6ff 50%, #faf5ff 100%);
-$gradient-warm              : linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-$gradient-success           : linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-$gradient-coral             : linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%);
+/* Quiet Scholar — gradients collapsed to solid accents */
+$gradient-primary           : #B8893C;                    // Solid muted gold
+$gradient-secondary         : #2E5C61;                    // Deep teal
+$gradient-hero              : #1A2540;                    // Deep navy hero
+$gradient-subtle            : #F4EFE4;                    // Recessed cream
+$gradient-warm              : linear-gradient(135deg, #F4EFE4 0%, #E8D5A8 100%);
+$gradient-success           : linear-gradient(135deg, #E8E3D2 0%, #C4D2B5 100%);
+$gradient-coral             : linear-gradient(135deg, #E8D5A8 0%, #B8893C 100%);
 
 
 /*

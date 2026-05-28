@@ -27,8 +27,8 @@
 // ---------------------------------------------------------------------------
 
 .site-footer {
-  background: #0f172a;
-  color: rgba(255, 255, 255, 0.7);
+  background: #1A2540;
+  color: rgba(251, 247, 240, 0.78);
   position: relative;
   overflow: hidden;
   font-family: $global-font-family;
@@ -38,18 +38,16 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(rgba(232, 213, 168, 0.06) 1px, transparent 1px);
     background-size: 30px 30px;
     pointer-events: none;
     z-index: 0;
   }
 
-  // ---- Top gradient accent bar ----
+  // ---- Top accent rule (Quiet Scholar — single gold) ----
   &__top-accent {
-    height: 3px;
-    background: linear-gradient(90deg, #2563eb, #7c3aed, #0ea5e9, #14b8a6);
-    background-size: 200% 100%;
-    animation: footerGradientSlide 4s linear infinite;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 8%, #B8893C 50%, transparent 92%);
     position: relative;
     z-index: 1;
   }
@@ -146,7 +144,7 @@
     }
 
     a {
-      color: #64748b;
+      color: rgba(251, 247, 240, 0.62);
       text-decoration: none;
       font-size: 0.875rem;
       transition: color 0.2s ease;
@@ -159,7 +157,7 @@
       }
 
       &:hover {
-        color: #93c5fd;
+        color: #E8D5A8;
         text-decoration: none;
       }
     }
@@ -176,21 +174,21 @@
   &__social-link {
     width: 36px;
     height: 36px;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background: rgba(232, 213, 168, 0.06);
+    border: 1px solid rgba(232, 213, 168, 0.12);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
+    color: rgba(251, 247, 240, 0.7);
     text-decoration: none;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
     font-size: 0.9rem;
 
     &:hover {
-      background: rgba(37, 99, 235, 0.25);
-      border-color: rgba(37, 99, 235, 0.45);
-      color: #93c5fd;
+      background: rgba(184, 137, 60, 0.22);
+      border-color: rgba(184, 137, 60, 0.5);
+      color: #E8D5A8;
       transform: translateY(-2px);
       text-decoration: none;
     }

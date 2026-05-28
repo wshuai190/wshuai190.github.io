@@ -42,11 +42,54 @@
 @import "cv";
 @import "custom";
 
-/* Google Fonts — Inter, Plus Jakarta Sans, JetBrains Mono */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Google Fonts — Inter (everything), JetBrains Mono (code) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* Ensure Font Awesome and Academicons load */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+/* =====================================================================
+   PROFESSIONAL ACADEMIC design tokens — clean, austere, faculty-page feel.
+   No gold, no warm cream, no italic-serif citations. White paper, slate
+   ink, one restrained navy accent. Inter throughout.
+   ===================================================================== */
+:root {
+  /* Surface */
+  --qs-bg:        #FFFFFF;   /* white page */
+  --qs-paper:     #FFFFFF;   /* card surface */
+  --qs-surface-2: #F8FAFC;   /* slightly recessed gray */
+
+  /* Ink */
+  --qs-ink:       #0F172A;   /* near-black slate */
+  --qs-ink-soft:  #334155;   /* body secondary */
+  --qs-muted:     #64748B;   /* captions, metadata */
+
+  /* Accent — single restrained navy-blue */
+  --qs-accent:        #1E40AF;
+  --qs-accent-deep:   #1E3A8A;
+  --qs-accent-soft:   #DBEAFE;
+  --qs-accent-tint:   #EFF6FF;
+
+  /* Lines & rules */
+  --qs-hairline:  #E5E7EB;
+  --qs-rule:      #D1D5DB;
+
+  /* Per-publication-type accents — muted, scannable, not loud */
+  --qs-type-long:     #1E40AF;   /* navy blue — flagship */
+  --qs-type-journal:  #15803D;   /* deep green */
+  --qs-type-resource: #6B21A8;   /* deep purple */
+  --qs-type-reproduce:#C2410C;   /* burnt orange */
+  --qs-type-short:    #475569;   /* slate */
+  --qs-type-notebook: #BE185D;   /* deep magenta */
+
+  /* Typography — Inter only, no serif drama */
+  --qs-font-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --qs-font-body:  "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --qs-font-mono:  "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Motion */
+  --qs-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
 
 /* Global enhancements */
 html {
@@ -54,14 +97,13 @@ html {
 }
 
 body {
+  font-family: var(--qs-font-body);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.65;
+  color: var(--qs-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background:
-    radial-gradient(ellipse at 20% 0%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(124, 58, 237, 0.03) 0%, transparent 50%),
-    linear-gradient(180deg, #ffffff 0%, #fafbfc 50%, #f8fafc 100%);
+  background: var(--qs-bg);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -116,69 +158,48 @@ body {
   transform: translateY(0);
 }
 
-/* Enhanced headings */
+/* Professional headings — Inter, restrained, tight letter-spacing */
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--qs-font-body);
   font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+  color: var(--qs-ink);
 }
 
 h1 {
-  color: #1f2937;
-  font-weight: 800;
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.025em;
   animation: fadeInUp 0.6s ease-out;
 }
 
 h2 {
-  position: relative;
-  display: inline-block;
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif;
-  font-weight: 700;
-  color: #111827;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 0;
-    width: 50px;
-    height: 4px;
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-  }
-
-  &:hover::after {
-    width: 100%;
-  }
+  font-weight: 600;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  /* no decorative underline — keep it clean */
 }
 
-/* Enhanced links with smooth transitions */
+/* Links — single restrained navy accent, no animated underlines */
 a {
-  color: #2563eb;
+  color: var(--qs-accent);
   text-decoration: none;
-  transition: all 0.2s ease;
-  position: relative;
+  transition: color 0.15s var(--qs-ease);
 
   &:hover {
-    color: #1d4ed8;
+    color: var(--qs-accent-deep);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 }
 
 .page__content a:not(.btn) {
-  background: linear-gradient(120deg, transparent 0%, transparent 50%, rgba(37, 99, 235, 0.1) 50%);
-  background-size: 220% 100%;
-  background-position: 0%;
-  transition: background-position 0.3s ease, color 0.2s ease;
-  padding: 0 2px;
-  border-radius: 2px;
-
-  &:hover {
-    background-position: 100%;
-    color: #1d4ed8;
-  }
+  /* no gradient highlight, no extra borders — just the link color & subtle hover underline */
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 /* News section */
@@ -251,16 +272,16 @@ ul li {
 /* Enhanced author profile styling - merged with premium styles below */
 
 .author__name {
-  color: #111827 !important;
+  color: var(--qs-ink) !important;
   font-weight: 700 !important;
-  font-family: "Plus Jakarta Sans", "Inter", -apple-system, sans-serif !important;
+  font-family: var(--qs-font-serif) !important;
   margin-bottom: 0.5rem !important;
   font-size: 1.2rem !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.005em !important;
 }
 
 .author__bio {
-  color: #6b7280;
+  color: var(--qs-ink-soft);
   font-size: 0.95rem;
   line-height: 1.5;
   margin-bottom: 1rem;
@@ -325,17 +346,17 @@ ul li {
 }
 
 .author__urls a {
-  color: #4b5563;
+  color: var(--qs-ink-soft);
   text-decoration: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s var(--qs-ease);
   padding: 0.25rem 0;
   border-radius: 4px;
 }
 
 .author__urls a:hover {
-  color: #2563eb;
+  color: var(--qs-accent-deep);
   transform: translateX(4px);
-  background: rgba(37, 99, 235, 0.05);
+  background: var(--qs-accent-tint);
 }
 
 /* Enhanced buttons */
@@ -352,13 +373,14 @@ ul li {
 }
 
 .btn--inverse {
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  color: white;
+  background: var(--qs-ink);
+  color: var(--qs-bg);
   border: none;
 }
 
 .btn--inverse:hover {
-  background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+  background: var(--qs-accent-deep);
+  color: var(--qs-bg);
 }
 
 /* Enhanced news section */
@@ -367,14 +389,14 @@ ul li {
 }
 
 .news-item {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  background: var(--qs-paper);
+  border: 1px solid var(--qs-hairline);
+  border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.3s var(--qs-ease);
+  box-shadow: 0 1px 2px rgba(26, 37, 64, 0.04);
   animation: fadeInUp 0.5s ease-out backwards;
 
   &::before {
@@ -382,19 +404,19 @@ ul li {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
-    background: linear-gradient(180deg, #2563eb, #7c3aed);
-    border-radius: 16px 0 0 16px;
+    background: var(--qs-accent);
+    border-radius: 8px 0 0 8px;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s var(--qs-ease);
   }
 }
 
 .news-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1), 0 10px 10px -5px rgba(37, 99, 235, 0.04);
-  border-color: rgba(37, 99, 235, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 37, 64, 0.06);
+  border-color: var(--qs-rule);
 
   &::before {
     opacity: 1;
@@ -409,81 +431,63 @@ ul li {
 .news-item:nth-child(5) { animation-delay: 0.5s; }
 
 .btn--primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: white;
+  background: var(--qs-ink);
+  color: var(--qs-bg);
   border: none;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
   text-decoration: none;
   display: inline-block;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.35);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(26, 37, 64, 0.15);
+  transition: all 0.25s var(--qs-ease);
 }
 
 .btn--primary:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  color: white;
+  background: var(--qs-accent-deep);
+  color: var(--qs-bg);
   text-decoration: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(142, 106, 45, 0.25);
 }
 
 .btn--accent {
-  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-  color: white;
+  background: var(--qs-accent);
+  color: var(--qs-bg);
   border: none;
   padding: 0.75rem 1.5rem;
   font-weight: 500;
   text-decoration: none;
   display: inline-block;
-  border-radius: 10px;
-  box-shadow: 0 4px 14px 0 rgba(124, 58, 237, 0.35);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(184, 137, 60, 0.2);
+  transition: all 0.25s var(--qs-ease);
 }
 
 .btn--accent:hover {
-  background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(124, 58, 237, 0.45);
-  color: white;
+  background: var(--qs-accent-deep);
+  transform: translateY(-1px);
+  color: var(--qs-bg);
 }
 
 .btn--large {
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .btn--outline {
   background: transparent;
-  border: 2px solid #2563eb;
-  color: #2563eb;
+  border: 1.5px solid var(--qs-accent-deep);
+  color: var(--qs-accent-deep);
   padding: 0.75rem 1.5rem;
   font-weight: 500;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+  border-radius: 6px;
+  transition: all 0.25s var(--qs-ease);
 
   &:hover {
-    background: #2563eb;
-    color: white;
-    transform: translateY(-2px);
+    background: var(--qs-accent-deep);
+    color: var(--qs-bg);
+    transform: translateY(-1px);
   }
 }
 
@@ -550,8 +554,8 @@ ul li {
 
 /* Enhanced masthead - Force black background */
 .masthead, .masthead * {
-  background: #000000 !important;
-  background-color: #000000 !important;
+  background: #1A2540 !important;
+  background-color: #1A2540 !important;
 }
 
 .masthead {
@@ -563,8 +567,8 @@ ul li {
 }
 
 .masthead__inner-wrap {
-  background: #000000 !important;
-  background-color: #000000 !important;
+  background: #1A2540 !important;
+  background-color: #1A2540 !important;
 }
 
 .masthead a, 
@@ -583,15 +587,15 @@ ul li {
 .greedy-nav a:hover,
 .visible-links a:hover,
 .visible-links li a:hover {
-  color: #60a5fa !important;
+  color: var(--qs-accent-soft) !important;
   background: transparent !important;
-  text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+  text-shadow: 0 0 6px rgba(232, 213, 168, 0.3);
 }
 
 .masthead__menu-item--lg a {
   color: #ffffff !important;
   font-weight: 600 !important;
-  background: #000000 !important;
+  background: #1A2540 !important;
 }
 
 /* Force all masthead elements to have black background */
@@ -599,8 +603,8 @@ ul li {
 .masthead nav,
 .masthead ul,
 .masthead li {
-  background: #000000 !important;
-  background-color: #000000 !important;
+  background: #1A2540 !important;
+  background-color: #1A2540 !important;
 }
 
 /* FORCE TOP navigation to be horizontal on desktop */
@@ -651,7 +655,7 @@ ul li {
 
 /* Stylish hero section */
 .page__hero {
-  background: #000000 !important;
+  background: #1A2540 !important;
   color: white;
   text-align: center;
   padding: 4rem 0;
@@ -666,12 +670,12 @@ ul li {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #000000 !important;
+  background: #1A2540 !important;
   pointer-events: none;
 }
 
 .page__hero-caption {
-  background: #000000 !important;
+  background: #1A2540 !important;
   color: white;
   padding: 1rem 2rem;
   border-radius: 12px;
@@ -694,15 +698,15 @@ ul li {
   font-weight: 700;
 }
 
-/* Enhanced archive items - Full width like news items */
+/* Editorial publication cards */
 .archive__item {
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.25rem;
+  transition: all 0.3s var(--qs-ease);
+  background: var(--qs-paper);
+  border: 1px solid var(--qs-hairline);
+  box-shadow: 0 1px 2px rgba(26, 37, 64, 0.04);
   width: 100% !important;
   max-width: none !important;
   position: relative;
@@ -719,20 +723,20 @@ ul li {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
-    background: linear-gradient(180deg, #2563eb, #7c3aed);
-    border-radius: 16px 0 0 16px;
+    background: var(--qs-accent);
+    border-radius: 8px 0 0 8px;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s var(--qs-ease);
   }
 }
 
 .archive__item:hover {
-  background: #ffffff;
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1), 0 10px 10px -5px rgba(37, 99, 235, 0.04);
-  border-color: rgba(37, 99, 235, 0.3);
+  background: var(--qs-paper);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 37, 64, 0.06);
+  border-color: var(--qs-rule);
 
   &::before {
     opacity: 1;
@@ -834,16 +838,18 @@ ul li {
   clear: both;
 }
 
-/* Hide visitor map widget completely */
+/* Visitor map widget — bounded, restrained, sits in sidebar/footer area */
 .visitor-map,
 #clustrmaps,
 #mapmyvisitors,
-script#mapmyvisitors,
 .mapmyvisitors-map,
 div.mapmyvisitors-map {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+  display: block;
+  max-width: 300px;
+  margin: 1.5rem auto;
+  opacity: 0.85;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 /* FORCE publications section to be full width on homepage */
@@ -1121,7 +1127,7 @@ h3.archive__item-title,
     width: 100vw !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
-    background: #000000 !important;
+    background: #1A2540 !important;
     border: 1px solid #333 !important;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5) !important;
     z-index: 1001 !important;
@@ -1655,26 +1661,36 @@ h3.archive__item-title,
 
 /* Language switching styles */
 .lang-switch {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  color: white;
+  background: var(--qs-accent);
+  color: var(--qs-bg);
   padding: 0.5rem 1rem;
-  border-radius: 20px;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: 500;
   font-size: 0.9rem;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.25s var(--qs-ease);
 }
 
 .lang-switch:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  color: white;
+  background: var(--qs-accent-deep);
+  color: var(--qs-bg);
   text-decoration: none;
   transform: translateY(-1px);
 }
 
-/* Chinese font support */
-html[lang="zh"], html[lang="zh"] * {
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+/* Chinese font support — modern system CJK sans stack */
+html[lang="zh"] body,
+html[lang="zh"] p,
+html[lang="zh"] li,
+html[lang="zh"] div,
+html[lang="zh"] h1,
+html[lang="zh"] h2,
+html[lang="zh"] h3,
+html[lang="zh"] h4,
+html[lang="zh"] h5,
+html[lang="zh"] h6,
+html[lang="zh"] .researcher-summary {
+  font-family: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }
 
 /* Custom scrollbar */
@@ -1817,42 +1833,44 @@ pre:hover {
   height: 100px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid white !important;
+  border: 2px solid var(--qs-paper) !important;
   box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.4),
-    0 0 0 6px rgba(124, 58, 237, 0.2),
-    0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
-  transition: all 0.3s ease !important;
+    0 0 0 1px var(--qs-hairline),
+    0 4px 14px rgba(26, 37, 64, 0.08) !important;
+  transition: all 0.3s var(--qs-ease) !important;
 }
 
 .author__avatar img:hover {
   box-shadow:
-    0 0 0 4px rgba(37, 99, 235, 0.5),
-    0 0 0 8px rgba(124, 58, 237, 0.3),
-    0 15px 30px -5px rgba(0, 0, 0, 0.2) !important;
-  transform: scale(1.05);
+    0 0 0 1px var(--qs-accent-soft),
+    0 6px 20px rgba(26, 37, 64, 0.12) !important;
+  transform: scale(1.03);
 }
 
-/* Gradient text for page title */
+/* Page title — solid editorial serif, no rainbow gradient.
+   Uses `inherit` so it picks up white on the dark hero, navy elsewhere. */
 .page__title,
 h1.page__title {
-  background: linear-gradient(135deg, #1f2937 0%, #2563eb 50%, #7c3aed 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: gradientShift 5s ease infinite;
+  color: inherit;
   padding-bottom: 0.1em;
   display: inline-block;
-  line-height: 1.3;
+  line-height: 1.25;
+  font-family: var(--qs-font-serif);
+  font-weight: 700;
 }
 
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+/* Hero overlay tagline (page__lead) — soft cream */
+.page__hero .page__lead,
+.page__hero-text .page__lead {
+  color: var(--qs-accent-soft);
+  font-family: var(--qs-font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 300;
+  letter-spacing: 0.02em;
 }
 
-/* Enhanced section styling with subtle backgrounds */
+/* Section spacing with subtle horizontal rule */
 .page__content h2 {
   margin-top: 3rem;
   padding-top: 2rem;
@@ -1862,10 +1880,10 @@ h1.page__title {
     content: '';
     position: absolute;
     top: 0;
-    left: -2rem;
-    right: -2rem;
+    left: 0;
+    right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #e2e8f0 20%, #e2e8f0 80%, transparent);
+    background: var(--qs-hairline);
   }
 }
 
@@ -1878,102 +1896,71 @@ h1.page__title {
   }
 }
 
-/* Better h3 styling */
+/* h3 — subtle gold left bar */
 h3 {
-  color: #374151;
+  color: var(--qs-ink);
   font-weight: 600;
   position: relative;
-  padding-left: 1rem;
+  padding-left: 0.85rem;
 
   &::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.2em;
-    width: 4px;
-    height: 1em;
-    background: linear-gradient(180deg, #2563eb, #7c3aed);
-    border-radius: 2px;
+    top: 0.25em;
+    width: 2px;
+    height: 0.95em;
+    background: var(--qs-accent);
+    border-radius: 1px;
   }
 }
 
-/* Enhanced list styling */
+/* List styling — small gold square bullets */
 .page__content ul:not(.author__urls):not(.social-icons):not(.hidden-links) {
   list-style: none !important;
   padding-left: 0 !important;
 
   > li {
     position: relative;
-    padding-left: 1.75rem !important;
-    margin-bottom: 0.75rem !important;
+    padding-left: 1.5rem !important;
+    margin-bottom: 0.55rem !important;
 
     &::before {
       content: '';
       position: absolute;
       left: 0;
-      top: 0.5em;
-      width: 8px;
-      height: 8px;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
-      border-radius: 50%;
-      box-shadow: 0 0 8px rgba(37, 99, 235, 0.3);
+      top: 0.7em;
+      width: 5px;
+      height: 5px;
+      background: var(--qs-accent);
+      border-radius: 1px;
     }
   }
 }
 
-/* Better blockquote styling only */
+/* Blockquote — paper card with gold rule */
 .page__content blockquote {
-  background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
-  border-left: 4px solid #2563eb;
-  padding: 1.25rem 1.5rem;
+  background: var(--qs-surface-2);
+  border-left: 3px solid var(--qs-accent);
+  padding: 1.1rem 1.4rem;
   margin: 1.5rem 0;
-  border-radius: 0 12px 12px 0;
+  border-radius: 0 6px 6px 0;
   font-style: italic;
-  color: #4b5563;
-  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.05);
+  color: var(--qs-ink-soft);
+  box-shadow: none;
 }
 
-/* Italic text enhancement - subtle only */
+/* Italic text — slightly darker than body */
 .page__content p em {
-  color: #4b5563;
+  color: var(--qs-ink);
   font-style: italic;
 }
 
-/* Subtle floating background orbs */
-.page__content {
-  position: relative;
+/* (removed: floating background orbs — too much noise for editorial vibe) */
 
-  &::before,
-  &::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  &::before {
-    top: 20%;
-    right: 5%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
-  }
-
-  &::after {
-    bottom: 30%;
-    left: 5%;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
-  }
-}
-
-/* Enhanced masthead with gradient */
+/* Editorial masthead — deep navy, thin gold rule */
 .masthead {
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%) !important;
+  background: var(--qs-ink) !important;
 
   &::after {
     content: '';
@@ -1982,7 +1969,8 @@ h3 {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.5), transparent);
+    background: linear-gradient(90deg, transparent 10%, var(--qs-accent) 50%, transparent 90%);
+    opacity: 0.5;
   }
 }
 
@@ -2047,15 +2035,7 @@ h3 {
   font-weight: 600;
 }
 
-/* Subtle pulse animation for CTA buttons */
-.btn--primary.btn--large {
-  animation: subtlePulse 3s ease-in-out infinite;
-}
-
-@keyframes subtlePulse {
-  0%, 100% { box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.35); }
-  50% { box-shadow: 0 4px 20px 0 rgba(37, 99, 235, 0.5); }
-}
+/* (removed: subtlePulse animation — gimmicky for editorial vibe) */
 
 /* Professional services section styling */
 .page__content h3 + ul {
@@ -2145,55 +2125,52 @@ h3 {
    Researcher Summary (third-person bio block, optimized for LLM extraction
    and search-engine ingestion).
    ========================================================================== */
+/* Researcher summary — plain prose block, no decorative card */
 .researcher-summary {
-  background: linear-gradient(135deg, #eff6ff 0%, #f5f3ff 100%);
-  border-left: 4px solid #2563eb;
-  border-radius: 12px;
-  padding: 1.25rem 1.5rem;
-  margin: 0 0 2rem 0;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: #1f2937;
-  box-shadow: 0 4px 12px -4px rgba(37, 99, 235, 0.1);
+  background: transparent;
+  border-left: 3px solid var(--qs-accent);
+  border-radius: 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  margin: 0 0 1.75rem 0;
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--qs-ink-soft);
+  font-family: var(--qs-font-body);
+  font-weight: 400;
+  box-shadow: none;
 
-  p {
-    margin: 0 !important;
-  }
+  p { margin: 0 !important; }
 
   strong {
-    color: #1e3a8a;
-    font-weight: 700;
+    color: var(--qs-ink);
+    font-weight: 600;
   }
 
   a {
-    color: #2563eb;
+    color: var(--qs-accent);
     font-weight: 500;
   }
 }
 
-/* Author-disambiguation note next to publications */
+/* Author-disambiguation note above publications */
 .author-disambiguation {
-  font-size: 0.85rem !important;
-  color: #6b7280 !important;
-  background: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  border-radius: 10px;
-  padding: 0.75rem 1rem !important;
+  font-size: 0.82rem !important;
+  color: var(--qs-muted) !important;
+  background: var(--qs-surface-2);
+  border: 1px solid var(--qs-hairline);
+  border-radius: 4px;
+  padding: 0.65rem 0.9rem !important;
   margin: 0 0 1.5rem 0 !important;
   line-height: 1.55 !important;
 
-  em {
-    font-style: italic;
-  }
+  em { font-style: normal; }
 
-  strong {
-    color: #1f2937;
-  }
+  strong { color: var(--qs-ink); }
 
   a {
-    color: #2563eb !important;
+    color: var(--qs-accent) !important;
     text-decoration: underline;
-    text-decoration-color: rgba(37, 99, 235, 0.3);
+    text-decoration-color: var(--qs-hairline);
   }
 }
 
@@ -2215,31 +2192,31 @@ $news-color-celebrate: #f59e0b;   /* amber     */
 
 .news-item {
   position: relative;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  background: var(--qs-paper);
+  border: 1px solid var(--qs-hairline);
+  border-radius: 8px;
   padding: 1.25rem 1.5rem 1.25rem 1.6rem;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  transition: transform 0.25s var(--qs-ease), box-shadow 0.25s var(--qs-ease), border-color 0.25s var(--qs-ease);
   animation: fadeInUp 0.45s ease-out backwards;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(26, 37, 64, 0.04);
 
-  /* Coloured left-border accent */
+  /* Coloured left-border accent (overridden per status below) */
   &__accent {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 3px;
     height: 100%;
-    border-radius: 14px 0 0 14px;
-    background: linear-gradient(180deg, #2563eb, #7c3aed);
-    transition: width 0.25s ease;
+    border-radius: 8px 0 0 8px;
+    background: var(--qs-accent);
+    transition: width 0.25s var(--qs-ease);
   }
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 28px -6px rgba(37, 99, 235, 0.13);
-    border-color: rgba(37, 99, 235, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 37, 64, 0.06);
+    border-color: var(--qs-rule);
   }
 
   /* status colour overrides */
@@ -2356,3 +2333,139 @@ $news-color-celebrate: #f59e0b;   /* amber     */
   .news-item__title { font-size: 0.92rem; }
 }
 
+
+/* ==========================================================================
+   Publication type badges (page-type-btn) — Quiet Scholar restrained accents.
+   Each page_type gets a distinct muted accent for quick scanning, without
+   resorting to rainbow gradients.
+   ========================================================================== */
+/* Publication type badges — subtle tinted pill (GitHub/Linear/Stripe style).
+   Solid lightly-tinted background + matching colored text. Clear, readable,
+   professional. NOT a gradient, NOT a pure transparent typographic mark. */
+.page-type-btn {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.55rem;
+  font-family: var(--qs-font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 0.15em;
+  line-height: 1.4;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  /* default fallback — neutral slate */
+  background: #F1F5F9;
+  color: #334155;
+  box-shadow: none !important;
+  transition: background 0.15s var(--qs-ease), color 0.15s var(--qs-ease);
+
+  &.long {
+    background: #DBEAFE;            /* light blue tint */
+    color: #1E40AF;                  /* deep navy blue text */
+  }
+  &.journal {
+    background: #DCFCE7;            /* light green tint */
+    color: #166534;                  /* deep green text */
+  }
+  &.resource {
+    background: #F3E8FF;            /* light purple tint */
+    color: #6B21A8;                  /* deep purple text */
+  }
+  &.reproduce {
+    background: #FFEDD5;            /* light orange tint */
+    color: #9A3412;                  /* deep burnt-orange text */
+  }
+  &.short {
+    background: #E2E8F0;            /* light slate tint */
+    color: #334155;                  /* slate text */
+  }
+  &.notebook {
+    background: #FCE7F3;            /* light pink tint */
+    color: #9D174D;                  /* deep magenta text */
+  }
+
+  &.demo {
+    background: var(--qs-ink) !important;
+    color: #FFFFFF !important;        /* beats .archive__item-title a { color: inherit !important } */
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 4px;
+
+    i {
+      margin-right: 0.3rem;
+      font-size: 0.7rem;
+      color: #FFFFFF !important;
+    }
+
+    &:hover {
+      background: var(--qs-accent) !important;
+      color: #FFFFFF !important;
+      text-decoration: none !important;
+    }
+
+    &:hover i { color: #FFFFFF !important; }
+  }
+}
+
+/* Per-type left bar on the card itself — gives at-a-glance type scanability */
+.archive__item:has(.page-type-btn.long)::before      { background: var(--qs-type-long); }
+.archive__item:has(.page-type-btn.journal)::before   { background: var(--qs-type-journal); }
+.archive__item:has(.page-type-btn.resource)::before  { background: var(--qs-type-resource); }
+.archive__item:has(.page-type-btn.reproduce)::before { background: var(--qs-type-reproduce); }
+.archive__item:has(.page-type-btn.short)::before     { background: var(--qs-type-short); }
+.archive__item:has(.page-type-btn.notebook)::before  { background: var(--qs-type-notebook); }
+/* Always show the bar (was hover-only) — useful for scanning */
+.archive__item::before { opacity: 1 !important; }
+
+/* Publication citation — plain sans, no italics, slate body */
+.archive__item-excerpt {
+  color: var(--qs-ink-soft) !important;
+  font-family: var(--qs-font-body) !important;
+  font-style: normal !important;
+  font-size: 0.875rem !important;
+  line-height: 1.55 !important;
+  margin-top: 0.35rem !important;
+  margin-bottom: 0 !important;
+}
+
+.archive__item-title {
+  font-family: var(--qs-font-body) !important;
+  font-weight: 600 !important;
+  color: var(--qs-ink) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.4 !important;
+  margin-bottom: 0.25rem !important;
+  display: block !important;
+  letter-spacing: -0.005em !important;
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: var(--qs-accent) !important;
+    }
+  }
+
+  /* Permalink icon — softened */
+  > a > i.fa-link {
+    color: var(--qs-muted);
+    font-size: 0.7rem;
+    margin-left: 0.25rem;
+    transition: color 0.2s var(--qs-ease);
+  }
+  > a > i.fa-link:hover {
+    color: var(--qs-accent);
+  }
+}
+
+/* Tighten the inner <li> so cards aren't bloated */
+.archive__item li {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
