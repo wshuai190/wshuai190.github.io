@@ -4,9 +4,10 @@ Fetch Google Scholar metrics and save to _data/scholar_metrics.json.
 Run by GitHub Actions daily.
 
 Strategy (tries in order, returns first success):
-  1. ScraperAPI via scholarly (if SCRAPERAPI_KEY set) — most reliable
-  2. Direct HTML scrape of the public Scholar profile (no proxy)
-  3. FreeProxies via scholarly — last resort, often blocked
+  1. SerpAPI    — Scholar-specific endpoint, most reliable (free 100/mo)
+  2. ScraperAPI — generic web scraper via scholarly (free 1000/mo)
+  3. DirectHTML — bare HTTPS to scholar.google.com (blocked from CI IPs)
+  4. FreeProxies — public proxy list via scholarly (last resort)
 
 On total failure: exits non-zero so the GitHub Actions run shows red ✗
 (previously we silently exited 0 which hid the failure for weeks).
@@ -17,6 +18,7 @@ import os
 import re
 import sys
 import urllib.request
+import urllib.parse
 from datetime import datetime
 
 
@@ -26,6 +28,51 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/125.0.0.0 Safari/537.36"
 )
+
+
+def fetch_via_serpapi():
+    """SerpAPI google_scholar_author engine. Most reliable: SerpAPI handles
+    proxies/captcha and returns a clean JSON object with `cited_by` table."""
+    key = os.environ.get("SERPAPI_KEY", "").strip()
+    if not key:
+        raise RuntimeError("SERPAPI_KEY not set")
+
+    params = {
+        "engine":     "google_scholar_author",
+        "author_id":  SCHOLAR_ID,
+        "hl":         "en",
+        "api_key":    key,
+    }
+    url = "https://serpapi.com/search.json?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+    with urllib.request.urlopen(req, timeout=45) as resp:
+        data = json.loads(resp.read().decode("utf-8"))
+
+    if "error" in data:
+        raise RuntimeError(f"SerpAPI error: {data['error']}")
+
+    table = data.get("cited_by", {}).get("table", [])
+    flat = {}
+    for entry in table:
+        for k, v in entry.items():
+            flat[k] = v   # e.g. {"citations": {"all": N, "since_2020": M}, ...}
+
+    citations    = int(flat.get("citations", {}).get("all", 0))
+    citations_5y = int(flat.get("citations", {}).get("since_2020", citations))
+    h_index      = int(flat.get("h_index", {}).get("all", 0))
+    h_5y         = int(flat.get("h_index", {}).get("since_2020", h_index))
+    i10          = int(flat.get("i10_index", {}).get("all", 0))
+    i10_5y       = int(flat.get("i10_index", {}).get("since_2020", i10))
+
+    print(f"[serpapi] citations={citations} h={h_index} i10={i10}")
+    return {
+        "citations":    citations,
+        "h_index":      h_index,
+        "i10_index":    i10,
+        "citations_5y": citations_5y,
+        "h_index_5y":   h_5y,
+        "i10_index_5y": i10_5y,
+    }
 
 
 def fetch_via_scholarly(use_scraperapi: bool):
@@ -93,6 +140,7 @@ def main():
     data_file = os.path.join(repo_root, "_data", "scholar_metrics.json")
 
     attempts = [
+        ("SerpAPI",      fetch_via_serpapi),
         ("ScraperAPI",   lambda: fetch_via_scholarly(use_scraperapi=True)),
         ("DirectHTML",   fetch_via_direct_html),
         ("FreeProxies",  lambda: fetch_via_scholarly(use_scraperapi=False)),
@@ -115,9 +163,13 @@ def main():
         print("\nALL fetch attempts failed:", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
-        print("\nTo fix: add SCRAPERAPI_KEY repo secret "
-              "(free tier at https://scraperapi.com gives 1000 reqs/mo).",
-              file=sys.stderr)
+        print(
+            "\nTo fix, add ONE of these GitHub repo secrets "
+            "(Settings → Secrets and variables → Actions):\n"
+            "  - SERPAPI_KEY    (recommended; 100 free/mo at https://serpapi.com)\n"
+            "  - SCRAPERAPI_KEY (1000 free/mo at https://scraperapi.com)\n",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     metrics["last_updated"] = datetime.utcnow().strftime("%Y-%m-%d")

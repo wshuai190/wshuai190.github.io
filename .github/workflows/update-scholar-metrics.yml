@@ -21,14 +21,24 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install scholarly free-proxy
+        # Pin httpx<0.28: scholarly/free-proxy pass `proxies=` kwarg which httpx
+        # 0.28+ removed (renamed to singular `proxy=`). Without this pin the
+        # FreeProxies fallback dies with TypeError: unexpected kwarg 'proxies'.
+        run: pip install "scholarly>=1.7.11" "free-proxy>=1.1.1" "httpx<0.28" requests
 
       - name: Fetch Google Scholar metrics
         env:
           SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
+          SERPAPI_KEY:    ${{ secrets.SERPAPI_KEY }}
+        # Don't fail the whole workflow on fetch failure — just skip the commit
+        # step below. Failures still print loudly in the run log.
+        continue-on-error: true
+        id: fetch
         run: python scripts/fetch_scholar_metrics.py
 
       - name: Commit and push if data changed
+        # Skip the commit step when the fetch step errored out.
+        if: steps.fetch.outcome == 'success'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
