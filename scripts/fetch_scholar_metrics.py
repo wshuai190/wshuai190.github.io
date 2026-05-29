@@ -55,14 +55,19 @@ def fetch_via_serpapi():
     flat = {}
     for entry in table:
         for k, v in entry.items():
-            flat[k] = v   # e.g. {"citations": {"all": N, "since_2020": M}, ...}
+            flat[k] = v   # e.g. {"citations": {"all": N, "since_2021": M}, ...}
 
-    citations    = int(flat.get("citations", {}).get("all", 0))
-    citations_5y = int(flat.get("citations", {}).get("since_2020", citations))
-    h_index      = int(flat.get("h_index", {}).get("all", 0))
-    h_5y         = int(flat.get("h_index", {}).get("since_2020", h_index))
-    i10          = int(flat.get("i10_index", {}).get("all", 0))
-    i10_5y       = int(flat.get("i10_index", {}).get("since_2020", i10))
+    def pick(metric):
+        """Return (all_time, 5_year). The 5-year key is dynamic — looks
+        like 'since_<YYYY>'. Fall back to all-time if missing."""
+        d = flat.get(metric, {}) or {}
+        all_v = int(d.get("all", 0))
+        five_v = next((int(v) for k, v in d.items() if k != "all"), all_v)
+        return all_v, five_v
+
+    citations,    citations_5y = pick("citations")
+    h_index,      h_5y         = pick("h_index")
+    i10,          i10_5y       = pick("i10_index")
 
     print(f"[serpapi] citations={citations} h={h_index} i10={i10}")
     return {
