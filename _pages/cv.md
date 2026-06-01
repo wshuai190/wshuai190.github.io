@@ -49,7 +49,7 @@ redirect_from:
   <div class="cv-timeline__item">
     <div class="cv-timeline__date">2025–至今</div>
     <div class="cv-timeline__body">
-      <strong>博士后研究员</strong> — 昆士兰大学 IeLab<br>
+      <strong>研究员（Research Fellow）</strong> — 昆士兰大学 IeLab<br>
       导师：Prof. Guido Zuccon
     </div>
   </div>
@@ -171,7 +171,7 @@ redirect_from:
   <div class="cv-timeline__item">
     <div class="cv-timeline__date">2025–present</div>
     <div class="cv-timeline__body">
-      <strong>Postdoctoral Research Fellow</strong> — University of Queensland, IELab<br>
+      <strong>Research Fellow</strong> — University of Queensland, IELab<br>
       Supervisor: Prof. Guido Zuccon
     </div>
   </div>

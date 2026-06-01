@@ -3,7 +3,7 @@ layout: single
 header:
   overlay_color: "#0f172a"
   overlay_filter: "0.5"
-  tagline: "Postdoctoral Researcher · Efficient LLM & Retrieval Systems · RAG"
+  tagline: "Research Fellow · Efficient LLM & Retrieval Systems · RAG"
 permalink: /
 title: "Dr. Shuai Wang (Dylan)"
 author_profile: true
@@ -16,13 +16,13 @@ redirect_from:
 
 <div class="researcher-summary" markdown="1">
 
-**王率博士（Dr. Shuai Wang / Dylan Wang）**现任澳大利亚昆士兰大学 [IELab](https://ielab.io/) 博士后研究员。研究方向为**信息检索（IR）**、**自然语言处理（NLP）**和**检索增强生成（RAG）**，致力于构建高效、可靠、可复现的 AI 搜索系统。已在 **SIGIR、WSDM、WWW、ECIR、EMNLP、EACL** 等顶级会议发表 **30 余篇同行评审论文**，Google Scholar 引用累计 **{{ site.data.scholar_metrics.citations }} 余次**，h-index 为 **{{ site.data.scholar_metrics.h_index }}**。2025 年于昆士兰大学完成博士学位，现担任 INFS7410（信息检索与网络搜索）课程**主讲教师与课程协调员**，以及 **SIGIR 2026 的 Communications Chair**。代表性工作涵盖四个方向：**COCOM**（RAG 推理 5.69 倍加速）、**Starbucks / 2D Matryoshka**（可自适应多分辨率的稠密检索表示）、**AutoBool**（基于强化学习的医学系统综述 Boolean query 生成，延续此前 SIGIR'23 ChatGPT-Boolean 工作），以及 **FeB4RAG**（首个面向 RAG 流程的联邦搜索基准）。
+**王率博士（Dr. Shuai Wang / Dylan Wang）**现任澳大利亚昆士兰大学 [IELab](https://ielab.io/) 研究员（Research Fellow）。研究方向为**信息检索（IR）**、**自然语言处理（NLP）**和**检索增强生成（RAG）**，致力于构建高效、可靠、可复现的 AI 搜索系统。已在 **SIGIR、WSDM、WWW、ECIR、EMNLP、EACL** 等顶级会议发表 **30 余篇同行评审论文**，Google Scholar 引用累计 **{{ site.data.scholar_metrics.citations }} 余次**，h-index 为 **{{ site.data.scholar_metrics.h_index }}**。2025 年于昆士兰大学完成博士学位，现担任 INFS7410（信息检索与网络搜索）课程**主讲教师与课程协调员**，以及 **SIGIR 2026 的 Communications Chair**。代表性工作涵盖四个方向：**COCOM**（RAG 推理 5.69 倍加速）、**Starbucks / 2D Matryoshka**（可自适应多分辨率的稠密检索表示）、**AutoBool**（基于强化学习的医学系统综述 Boolean query 生成，延续此前 SIGIR'23 ChatGPT-Boolean 工作），以及 **FeB4RAG**（首个面向 RAG 流程的联邦搜索基准）。
 
 </div>
 
 ## 👋 欢迎！
 
-大家好，我是**王率（Dylan）**，现任[昆士兰大学 IeLab](https://ielab.io/)博士后研究员，研究高效、可靠的 AI 搜索系统，方向涵盖信息检索、LLM 与检索增强生成（RAG）。我关注的不只是模型效果，也关注系统在真实场景中的速度、成本、可复现性和可信度。
+大家好，我是**王率（Dylan）**，现任[昆士兰大学 IeLab](https://ielab.io/) 研究员（Research Fellow），研究高效、可靠的 AI 搜索系统，方向涵盖信息检索、LLM 与检索增强生成（RAG）。我关注的不只是模型效果，也关注系统在真实场景中的速度、成本、可复现性和可信度。
 
 我在[Prof. Guido Zuccon](https://researchers.uq.edu.au/researcher/22857)、[A/Prof. Bevan Koopman](https://bevankoopman.github.io/)和[Dr. Harrisen Scells](https://scells.me/)的指导下完成了博士学位。
 
@@ -53,7 +53,7 @@ redirect_from:
 
 ## 💼 求职意向
 
-自 2025 年 2 月起在昆士兰大学担任博士后研究员。我对学术界和工业界机会保持开放，尤其是 efficient LLM systems、search/RAG、trustworthy evaluation 和 biomedical evidence technologies 相关岗位。欢迎随时联系。
+自 2025 年 2 月起在昆士兰大学任职，现为研究员（Research Fellow）。我对学术界和工业界机会保持开放，尤其是 efficient LLM systems、search/RAG、trustworthy evaluation 和 biomedical evidence technologies 相关岗位。欢迎随时联系。
 
 {% include base_path %}
 
@@ -94,13 +94,13 @@ redirect_from:
 
 <div class="researcher-summary" markdown="1">
 
-**Dr. Shuai Wang (Dylan Wang)** is a Postdoctoral Research Fellow at the [IELab](https://ielab.io/), University of Queensland, Australia. His research lies in **Information Retrieval (IR)**, **Natural Language Processing (NLP)**, and **Retrieval-Augmented Generation (RAG)**, with a focus on building efficient, reliable, and reproducible AI search systems. Dr. Wang has authored **30+ peer-reviewed papers** in top-tier venues including **SIGIR, WSDM, WWW, ECIR, EMNLP, and EACL**, accumulating **{{ site.data.scholar_metrics.citations }}+ citations** with an **h-index of {{ site.data.scholar_metrics.h_index }}**. He completed his PhD at the University of Queensland in 2025 and currently serves as **Course Coordinator and Lecturer** for INFS7410 (Information Retrieval and Web Search) at UQ, and as the **Communications Chair for SIGIR 2026**. Representative work spans four directions: **COCOM** (a 5.69× RAG inference speedup), **Starbucks / 2D Matryoshka** (adaptive multi-resolution dense retrievers that match separately trained models), **AutoBool** (reinforcement-learned LLM Boolean query generation for medical systematic reviews, building on his earlier ChatGPT-Boolean SIGIR'23 work), and **FeB4RAG** (the first benchmark for federated search in RAG pipelines).
+**Dr. Shuai Wang (Dylan Wang)** is a Research Fellow at the [IELab](https://ielab.io/), University of Queensland, Australia. His research lies in **Information Retrieval (IR)**, **Natural Language Processing (NLP)**, and **Retrieval-Augmented Generation (RAG)**, with a focus on building efficient, reliable, and reproducible AI search systems. Dr. Wang has authored **30+ peer-reviewed papers** in top-tier venues including **SIGIR, WSDM, WWW, ECIR, EMNLP, and EACL**, accumulating **{{ site.data.scholar_metrics.citations }}+ citations** with an **h-index of {{ site.data.scholar_metrics.h_index }}**. He completed his PhD at the University of Queensland in 2025 and currently serves as **Course Coordinator and Lecturer** for INFS7410 (Information Retrieval and Web Search) at UQ, and as the **Communications Chair for SIGIR 2026**. Representative work spans four directions: **COCOM** (a 5.69× RAG inference speedup), **Starbucks / 2D Matryoshka** (adaptive multi-resolution dense retrievers that match separately trained models), **AutoBool** (reinforcement-learned LLM Boolean query generation for medical systematic reviews, building on his earlier ChatGPT-Boolean SIGIR'23 work), and **FeB4RAG** (the first benchmark for federated search in RAG pipelines).
 
 </div>
 
 ## 👋 Welcome!
 
-I'm **Shuai Wang (Dylan)**, a Postdoctoral Researcher at [IeLab, UQ](https://ielab.io/) working on efficient LLM and retrieval systems. I build search and RAG methods that make AI systems faster, cheaper, and easier to evaluate, especially for evidence-based medicine and other high-stakes information work.
+I'm **Shuai Wang (Dylan)**, a Research Fellow at [IeLab, UQ](https://ielab.io/) working on efficient LLM and retrieval systems. I build search and RAG methods that make AI systems faster, cheaper, and easier to evaluate, especially for evidence-based medicine and other high-stakes information work.
 
 I completed my PhD under the guidance of [Professor Guido Zuccon](https://researchers.uq.edu.au/researcher/22857), [Associate Professor Bevan Koopman](https://bevankoopman.github.io/), and [Dr. Harrisen Scells](https://scells.me/).
 
@@ -131,7 +131,7 @@ I mentor students on retrieval, RAG, and biomedical NLP projects; several have p
 
 ## 💼 Job Opportunities
 
-Since February 2025, I have been working as a Postdoctoral Researcher at UQ. I am open to academic and industry roles where efficient LLM systems, search/RAG, trustworthy evaluation, or biomedical evidence technologies are central. If this matches your team, please feel free to reach out.
+Since February 2025, I have been working at UQ — currently as a Research Fellow. I am open to academic and industry roles where efficient LLM systems, search/RAG, trustworthy evaluation, or biomedical evidence technologies are central. If this matches your team, please feel free to reach out.
 
 {% include base_path %}
 
