@@ -17,7 +17,7 @@ languages: ["en", "zh"]
 default_lang: "en"
 exclude_from_localization: ["assets", "images", "files", "javascript", "css"]
 parallel_localization: false
-url                      : https://wshuai190.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : https://shuaiwang.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "wshuai190/wshuai190.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
