@@ -74,6 +74,7 @@ redirect_from:
 - **ACM ICTIR** 2023、**SIGIR** 2024、**SIGIR** 2025、**SIGIR** 2026
 - **ECIR** 2024、2025
 - **WSDM** 2026
+- **ACL 滚动审稿（ARR）** 2026（面向 ACL / EMNLP / NAACL / EACL 会议）
 
 ## 📝 学术论文
 
@@ -152,6 +153,7 @@ I contribute to the academic community by serving as a **PC/SPC (reviewer) membe
 - **ACM ICTIR** 2023, **SIGIR** 2024, **SIGIR** 2025,  **SIGIR** 2026
 - **ECIR** 2024, 2025
 - **WSDM** 2026
+- **ACL Rolling Review (ARR)** 2026 (feeds ACL / EMNLP / NAACL / EACL)
 
 ## 📝 Publications
 
