@@ -6,6 +6,7 @@ type: "awards"
 permalink: /awards/2021-10-31-DIGIX-challenge
 date: 2021-10-31
 year: 2021
+featured: true
 link: "https://developer.huawei.com/consumer/en/activity/digixActivity/digixWinnersDetail/201621219634131423"
 ---
 

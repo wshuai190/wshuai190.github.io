@@ -6,6 +6,7 @@ type: "awards"
 permalink: /awards/2021-12-31-best-paper
 date: 2021-12-31
 year: 2021
+featured: true
 link: "https://dl.acm.org/doi/pdf/10.1145/3582524.3582532"
 ---
 

@@ -65,8 +65,8 @@ redirect_from:
 ## 🏆 主要荣誉
 
 <ul class="selected-awards">
-{% assign sorted_awards = site.awards | sort: 'date' | reverse %}
-{% for post in sorted_awards limit:5 %}
+{% assign featured_awards = site.awards | where: 'featured', true | sort: 'date' | reverse %}
+{% for post in featured_awards %}
   <li class="selected-awards__item">
     <span class="selected-awards__year">{{ post.date | date: "%Y" }}</span>
     <span class="selected-awards__title">
@@ -80,7 +80,7 @@ redirect_from:
   </li>
 {% endfor %}
 </ul>
-<a href="/zh/awards/" class="btn btn--outline" style="margin-top:0.5rem;">查看全部荣誉</a>
+<a href="/zh/awards/" class="btn btn--primary btn--large" style="margin-top:1rem;">查看全部荣誉 →</a>
 
 ## 🤝 学术服务
 
@@ -164,8 +164,8 @@ Since February 2025, I have been working at UQ — currently as a Research Fello
 ## 🏆 Selected Awards
 
 <ul class="selected-awards">
-{% assign sorted_awards = site.awards | sort: 'date' | reverse %}
-{% for post in sorted_awards limit:5 %}
+{% assign featured_awards = site.awards | where: 'featured', true | sort: 'date' | reverse %}
+{% for post in featured_awards %}
   <li class="selected-awards__item">
     <span class="selected-awards__year">{{ post.date | date: "%Y" }}</span>
     <span class="selected-awards__title">
@@ -179,7 +179,7 @@ Since February 2025, I have been working at UQ — currently as a Research Fello
   </li>
 {% endfor %}
 </ul>
-<a href="/awards/" class="btn btn--outline" style="margin-top:0.5rem;">See all awards</a>
+<a href="/awards/" class="btn btn--primary btn--large" style="margin-top:1rem;">See all awards →</a>
 
 ## 🤝 Professional Services
 
