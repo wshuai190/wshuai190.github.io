@@ -62,6 +62,26 @@ redirect_from:
 {% include news.html %}
 <a href="/zh/news/" class="btn btn--primary btn--large" style="margin-top:1rem;">查看所有动态</a>
 
+## 🏆 主要荣誉
+
+<ul class="selected-awards">
+{% assign sorted_awards = site.awards | sort: 'date' | reverse %}
+{% for post in sorted_awards limit:5 %}
+  <li class="selected-awards__item">
+    <span class="selected-awards__year">{{ post.date | date: "%Y" }}</span>
+    <span class="selected-awards__title">
+      {% if post.link %}
+        <a href="{{ post.link }}" target="_blank" rel="noopener">{{ post.title }}</a>
+      {% else %}
+        {{ post.title }}
+      {% endif %}
+    </span>
+    {% if post.excerpt %}<span class="selected-awards__desc">{{ post.excerpt | strip_html }}</span>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+<a href="/zh/awards/" class="btn btn--outline" style="margin-top:0.5rem;">查看全部荣誉</a>
+
 ## 🤝 学术服务
 
 担任以下期刊和会议的**程序委员会成员（审稿人）**：
@@ -140,6 +160,26 @@ Since February 2025, I have been working at UQ — currently as a Research Fello
 
 {% include news.html %}
 <a href="/news/" class="btn btn--primary btn--large" style="margin-top:1rem;">Read All News</a>
+
+## 🏆 Selected Awards
+
+<ul class="selected-awards">
+{% assign sorted_awards = site.awards | sort: 'date' | reverse %}
+{% for post in sorted_awards limit:5 %}
+  <li class="selected-awards__item">
+    <span class="selected-awards__year">{{ post.date | date: "%Y" }}</span>
+    <span class="selected-awards__title">
+      {% if post.link %}
+        <a href="{{ post.link }}" target="_blank" rel="noopener">{{ post.title }}</a>
+      {% else %}
+        {{ post.title }}
+      {% endif %}
+    </span>
+    {% if post.excerpt %}<span class="selected-awards__desc">{{ post.excerpt | strip_html }}</span>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+<a href="/awards/" class="btn btn--outline" style="margin-top:0.5rem;">See all awards</a>
 
 ## 🤝 Professional Services
 

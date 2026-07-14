@@ -2469,3 +2469,91 @@ $news-color-celebrate: #f59e0b;   /* amber     */
   padding: 0 !important;
   margin: 0 !important;
 }
+
+/* ==========================================================================
+   Selected Awards (homepage highlight strip)
+   Overrides the default page__content ul bullet + spacing rules.
+   ========================================================================== */
+.selected-awards {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 1rem 0 0.75rem 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.selected-awards__item {
+  display: grid !important;
+  grid-template-columns: 3.2rem 1fr;
+  column-gap: 0.9rem;
+  row-gap: 0.15rem;
+  padding: 0.6rem 0.85rem !important;
+  background: var(--qs-surface-2) !important;
+  border: 1px solid var(--qs-hairline) !important;
+  border-radius: 6px;
+  transition: border-color 0.2s var(--qs-ease), background 0.2s var(--qs-ease);
+  line-height: 1.45;
+
+  &::before { content: none !important; }
+
+  &:hover {
+    border-color: var(--qs-accent) !important;
+    background: var(--qs-paper) !important;
+  }
+}
+
+.selected-awards__year {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  font-family: var(--qs-font-mono);
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--qs-accent);
+  align-self: start;
+  padding-top: 0.15rem;
+  letter-spacing: 0.02em;
+}
+
+.selected-awards__title {
+  grid-column: 2;
+  grid-row: 1;
+  font-weight: 600;
+  color: var(--qs-ink);
+  font-size: 0.98rem;
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+    border-bottom: 1px dashed var(--qs-rule);
+    transition: border-color 0.15s var(--qs-ease), color 0.15s var(--qs-ease);
+
+    &:hover {
+      color: var(--qs-accent) !important;
+      border-bottom-color: var(--qs-accent);
+    }
+  }
+}
+
+.selected-awards__desc {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.85rem;
+  color: var(--qs-ink-soft);
+  font-weight: 400;
+}
+
+@media (max-width: 560px) {
+  .selected-awards__item {
+    grid-template-columns: 1fr;
+    row-gap: 0.25rem;
+  }
+  .selected-awards__year {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 0.75rem;
+    padding: 0;
+  }
+  .selected-awards__title { grid-column: 1; grid-row: 2; }
+  .selected-awards__desc  { grid-column: 1; grid-row: 3; }
+}
