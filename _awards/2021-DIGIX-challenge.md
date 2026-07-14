@@ -1,5 +1,5 @@
 ---
-title: "HUAWEI DIGIX Global AI Challenge — Champion (US$30,000)"
+title: "HUAWEI DIGIX Global AI Challenge, Champion (US$30,000)"
 excerpt: "Champion of the 2021 HUAWEI DIGIX Global AI Challenge (Track 4). Team prize US$30,000."
 collection: awards
 type: "awards"

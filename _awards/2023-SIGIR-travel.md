@@ -8,4 +8,4 @@ date: 2023-05-31
 year: 2023
 ---
 
-**ACM SIGIR Student Travel Grant** — US$1,125 plus complimentary conference registration for **SIGIR 2023**, Taipei.
+**ACM SIGIR Student Travel Grant** of US$1,125 plus complimentary conference registration for **SIGIR 2023**, Taipei.

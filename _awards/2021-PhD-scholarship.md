@@ -8,4 +8,4 @@ date: 2021-08-31
 year: 2021
 ---
 
-**Earmarked PhD Scholarship** from the University of Queensland — a competitive, project-linked award covering full tuition fees plus an annual living stipend for the duration of the PhD.
+**Earmarked PhD Scholarship** from the University of Queensland: a competitive, project-linked award covering full tuition fees plus an annual living stipend for the duration of the PhD.

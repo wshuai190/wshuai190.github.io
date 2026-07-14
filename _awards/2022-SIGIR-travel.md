@@ -8,4 +8,4 @@ date: 2022-05-31
 year: 2022
 ---
 
-**ACM SIGIR Student Travel Grant** — US$1,000 to support conference travel and presentation at **SIGIR 2022**, Madrid, Spain.
+**ACM SIGIR Student Travel Grant** of US$1,000 to support conference travel and presentation at **SIGIR 2022**, Madrid, Spain.

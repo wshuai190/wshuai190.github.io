@@ -8,4 +8,4 @@ date: 2024-02-01
 year: 2024
 ---
 
-**ECIR Travel Grant** — complimentary conference registration to attend and present at **ECIR 2024**, Glasgow, UK.
+**ECIR Travel Grant** providing complimentary conference registration to attend and present at **ECIR 2024**, Glasgow, UK.
