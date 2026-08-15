@@ -2,7 +2,8 @@
 layout: archive
 title: "Curriculum Vitae"
 permalink: /cv/
-author_profile: true
+author_profile: false
+hide_title: true
 redirect_from:
   - /resume
 ---
@@ -11,15 +12,33 @@ redirect_from:
 
 {% if site.active_lang == 'zh' %}
 
-<div class="cv-portrait-banner">
-  <div class="cv-portrait-banner__content">
-    <p class="cv-portrait-banner__eyebrow">Curriculum Vitae</p>
-    <p class="cv-portrait-banner__title">王率博士（Dylan）</p>
-    <p class="cv-portrait-banner__body">昆士兰大学研究员，研究方向包括 information retrieval、efficient LLM systems、RAG、search agents 与医学证据检索。</p>
+<div class="cv-page">
+
+<header class="cv-document-header">
+  <div class="cv-document-header__identity">
+    <p class="cv-document-header__label">个人简历</p>
+    <h1 class="cv-document-header__name">王率博士（Dylan）</h1>
+    <p class="cv-document-header__role">昆士兰大学 IElab 研究员</p>
+    <p class="cv-document-header__summary">研究方向包括 information retrieval、efficient LLM systems、retrieval-augmented generation、search agents 与医学证据检索；以第一作者在 SIGIR、WSDM、WWW、ECIR 和 EACL 发表论文。</p>
+    <p class="cv-document-header__contact">
+      <span>Brisbane, Australia</span>
+      <span><a href="mailto:shuai.wang2@uq.edu.au">shuai.wang2@uq.edu.au</a></span>
+      <span><a href="https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></span>
+      <span><a href="https://github.com/wshuai190" target="_blank" rel="noopener">GitHub</a></span>
+      <span><a href="https://ielab.io/skim-search-agent/" target="_blank" rel="noopener">SkimSearchAgent</a></span>
+    </p>
   </div>
-  <div class="cv-portrait-banner__media">
-    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="王率的插画头像" class="cv-portrait-banner__image">
-  </div>
+  <figure class="cv-document-header__photo">
+    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="王率的插画头像" class="cv-document-header__image">
+  </figure>
+</header>
+
+<div class="cv-section">
+
+<h2 class="cv-section__heading">简介</h2>
+
+<p class="cv-profile">专注于构建高效、可检视、可落地的检索与生成系统，尤其面向深度研究流程、系统综述检索与高风险信息场景。</p>
+
 </div>
 
 <div class="cv-section">
@@ -50,7 +69,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -73,10 +92,10 @@ redirect_from:
     </div>
   </div>
   <div class="cv-timeline__item">
-    <div class="cv-timeline__date">2022–</div>
+    <div class="cv-timeline__date">2022–2025</div>
     <div class="cv-timeline__body">
       <strong>助教</strong> — 昆士兰大学<br>
-      <span class="cv-timeline__period">2022年2月起</span><br>
+      <span class="cv-timeline__period">2022年2月 – 2025年7月</span><br>
       课程：INFS7205、INFS7410、DATA7901及7902/7903<br>
       课程负责人：Prof. Helen Huang、A/Prof. Guido Zuccon、Dr. Miao Xu
     </div>
@@ -94,7 +113,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -106,7 +125,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -118,7 +137,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -130,7 +149,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -142,17 +161,37 @@ redirect_from:
 
 </div>
 
+</div>
+
 {% else %}
 
-<div class="cv-portrait-banner">
-  <div class="cv-portrait-banner__content">
-    <p class="cv-portrait-banner__eyebrow">Curriculum Vitae</p>
-    <p class="cv-portrait-banner__title">Dr. Shuai Wang (Dylan)</p>
-    <p class="cv-portrait-banner__body">Research Fellow at the University of Queensland working on information retrieval, efficient LLM systems, RAG, search agents, and evidence-based medicine search.</p>
+<div class="cv-page">
+
+<header class="cv-document-header">
+  <div class="cv-document-header__identity">
+    <p class="cv-document-header__label">Curriculum Vitae</p>
+    <h1 class="cv-document-header__name">Dr. Shuai Wang (Dylan)</h1>
+    <p class="cv-document-header__role">Research Fellow, IElab, The University of Queensland</p>
+    <p class="cv-document-header__summary">Research in information retrieval, efficient LLM systems, retrieval-augmented generation, search agents, and evidence-based medicine search, with first-author work at SIGIR, WSDM, WWW, ECIR, and EACL.</p>
+    <p class="cv-document-header__contact">
+      <span>Brisbane, Australia</span>
+      <span><a href="mailto:shuai.wang2@uq.edu.au">shuai.wang2@uq.edu.au</a></span>
+      <span><a href="https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></span>
+      <span><a href="https://github.com/wshuai190" target="_blank" rel="noopener">GitHub</a></span>
+      <span><a href="https://ielab.io/skim-search-agent/" target="_blank" rel="noopener">SkimSearchAgent</a></span>
+    </p>
   </div>
-  <div class="cv-portrait-banner__media">
-    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="Illustrated portrait of Shuai Wang" class="cv-portrait-banner__image">
-  </div>
+  <figure class="cv-document-header__photo">
+    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="Illustrated portrait of Shuai Wang" class="cv-document-header__image">
+  </figure>
+</header>
+
+<div class="cv-section">
+
+<h2 class="cv-section__heading">Profile</h2>
+
+<p class="cv-profile">I build search and LLM systems that are effective, efficient, and inspectable for expert workflows, with a focus on deep-research agents, systematic review search, and evidence-grounded generation.</p>
+
 </div>
 
 <div class="cv-section">
@@ -183,7 +222,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -206,10 +245,10 @@ redirect_from:
     </div>
   </div>
   <div class="cv-timeline__item">
-    <div class="cv-timeline__date">2022–2024</div>
+    <div class="cv-timeline__date">2022–2025</div>
     <div class="cv-timeline__body">
       <strong>Teaching Assistant</strong> — University of Queensland<br>
-      <span class="cv-timeline__period">From February 2022</span><br>
+      <span class="cv-timeline__period">February 2022 – July 2025</span><br>
       Courses: INFS7205, INFS7410, DATA7901 &amp; 7902/7903<br>
       Course Coordinators: Professor Helen Huang, A. Professor Guido Zuccon, Dr. Miao Xu
     </div>
@@ -227,7 +266,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -239,7 +278,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -251,7 +290,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -263,7 +302,7 @@ redirect_from:
 
 </div>
 
----
+<hr>
 
 <div class="cv-section">
 
@@ -272,6 +311,8 @@ redirect_from:
 <ul>{% for post in site.awards %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
+
+</div>
 
 </div>
 

@@ -12,9 +12,8 @@
   {% assign title = post.title %}
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item">
-  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
-    <li>
+<li class="{{ include.type | default: "list" }}__item cv-list__item">
+  <article class="archive__item archive__item--cv" itemscope itemtype="http://schema.org/CreativeWork">
     {% if include.type == "grid" and teaser %}
       <div class="archive__item-teaser">
         <img src=
@@ -38,11 +37,13 @@
       {% if post.demo %}
       <a href="{{ post.demo }}" class="page-type-btn demo" target="_blank" rel="noopener"><i class="fas fa-play-circle"></i> Live Demo</a>
       {% endif %}
+      {% if post.project %}
+      <a href="{{ post.project }}" class="page-type-btn project" target="_blank" rel="noopener"><i class="fas fa-up-right-from-square"></i> Project Page</a>
+      {% endif %}
     </h3>
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
     {% if post.venue%}<p class="archive__item-excerpt" itemprop="description">{{ post.citation }}</p> {% endif %}
-    </li>
- </article>
-</div>
+  </article>
+</li>

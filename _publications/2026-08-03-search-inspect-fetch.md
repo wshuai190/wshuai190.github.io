@@ -7,7 +7,7 @@ date: 2026-08-03
 page_type: "Long"
 venue: 'arXiv preprint (2026)'
 paperurl: 'https://arxiv.org/abs/2608.02751'
-demo: 'https://ielab.io/skim-search-agent/'
+project: 'https://ielab.io/skim-search-agent/'
 citation: 'Shuai Wang, Haodong Chen, Yu Yin, Shengyao Zhuang, Bevan Koopman and Guido Zuccon. 2026. Search, Inspect, Fetch: Exploiting Structure-Aware Boolean Retrieval for Deep-Research Agents. arXiv preprint arXiv:2608.02751.'
 ---
 ## Abstract

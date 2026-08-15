@@ -426,6 +426,15 @@
   }
 }
 
+.demo-pill--project {
+  background: #1e2a3a;
+  box-shadow: 0 1px 4px rgba(30, 42, 58, 0.18);
+
+  &:hover {
+    background: #243245;
+  }
+}
+
 
 /*
    Card title

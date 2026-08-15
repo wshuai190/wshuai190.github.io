@@ -31,6 +31,11 @@
         <span>🤗 Live Demo</span>
       </a>
       {% endif %}
+      {% if post.project %}
+      <a href="{{ post.project }}" class="demo-pill demo-pill--project" target="_blank" rel="noopener">
+        <span>Project Page</span>
+      </a>
+      {% endif %}
     </div>
 
     <h2 class="publication-card__title" itemprop="headline">
@@ -60,6 +65,11 @@
       {% if post.demo %}
       <a href="{{ post.demo }}" class="btn btn--accent btn--small" target="_blank" rel="noopener">
         <i class="fas fa-play-circle"></i> Demo
+      </a>
+      {% endif %}
+      {% if post.project %}
+      <a href="{{ post.project }}" class="btn btn--inverse btn--small" target="_blank" rel="noopener">
+        <i class="fas fa-up-right-from-square"></i> Project
       </a>
       {% endif %}
       {% if post.paperurl == blank and post.url %}
@@ -125,6 +135,9 @@
 
     {% if post.demo %}
       <p><a href="{{ post.demo }}" target="_blank" rel="noopener" class="btn btn--info btn--small"><i class="fas fa-play-circle"></i> Live Demo</a></p>
+    {% endif %}
+    {% if post.project %}
+      <p><a href="{{ post.project }}" target="_blank" rel="noopener" class="btn btn--inverse btn--small"><i class="fas fa-up-right-from-square"></i> Project Page</a></p>
     {% endif %}
 
   </article>
