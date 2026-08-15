@@ -11,6 +11,17 @@ redirect_from:
 
 {% if site.active_lang == 'zh' %}
 
+<div class="cv-portrait-banner">
+  <div class="cv-portrait-banner__content">
+    <p class="cv-portrait-banner__eyebrow">Curriculum Vitae</p>
+    <p class="cv-portrait-banner__title">王率博士（Dylan）</p>
+    <p class="cv-portrait-banner__body">昆士兰大学研究员，研究方向包括 information retrieval、efficient LLM systems、RAG、search agents 与医学证据检索。</p>
+  </div>
+  <div class="cv-portrait-banner__media">
+    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="王率的插画头像" class="cv-portrait-banner__image">
+  </div>
+</div>
+
 <div class="cv-section">
 
 <h2 class="cv-section__heading">教育背景</h2>
@@ -132,6 +143,17 @@ redirect_from:
 </div>
 
 {% else %}
+
+<div class="cv-portrait-banner">
+  <div class="cv-portrait-banner__content">
+    <p class="cv-portrait-banner__eyebrow">Curriculum Vitae</p>
+    <p class="cv-portrait-banner__title">Dr. Shuai Wang (Dylan)</p>
+    <p class="cv-portrait-banner__body">Research Fellow at the University of Queensland working on information retrieval, efficient LLM systems, RAG, search agents, and evidence-based medicine search.</p>
+  </div>
+  <div class="cv-portrait-banner__media">
+    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="Illustrated portrait of Shuai Wang" class="cv-portrait-banner__image">
+  </div>
+</div>
 
 <div class="cv-section">
 

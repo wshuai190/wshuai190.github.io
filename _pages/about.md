@@ -37,6 +37,7 @@ redirect_from:
 我的研究重点是把检索与生成结合成可部署的系统：
 
 - **高效 RAG 与 LLM 推理**：context embeddings、KV-cache/内存优化，以及检索与生成共享表示
+- **Search agents 与 deep-research workflows**：SkimSearchAgent / Sieve、Boolean retrieval、结构化 inspect cards，以及按章节 fetch 的 agent 设计
 - **医学证据检索**：MeSH 术语建议、筛选优先排序、种子驱动方法、Boolean query 构建和临床问答
 - **评测与基准**：面向 RAG 与联邦搜索的可复现实验工具，包括 BERGEN 和 FeB4RAG
 - **自适应检索与排序**：2D Matryoshka retrieval、prompt variation 研究和更稳健的 LLM rankers
@@ -136,6 +137,7 @@ I completed my PhD under the guidance of [Professor Guido Zuccon](https://resear
 My work connects information retrieval, NLP, and AI systems:
 
 - **Efficient RAG and LLM inference**: context embeddings, KV-cache/memory optimisation, and unified retrieval-generation representations
+- **Search agents and deep-research workflows**: SkimSearchAgent / Sieve, Boolean retrieval, structure-aware inspect cards, and section-level fetching
 - **Evidence-based medicine search**: MeSH suggestion, screening prioritisation, seed-driven methods, Boolean query generation, and clinical question answering
 - **Evaluation infrastructure**: benchmarks and open-source tools for RAG and federated search, including BERGEN and FeB4RAG
 - **Adaptive retrieval and ranking**: 2D Matryoshka retrieval, prompt variation studies, and robust LLM-based rankers

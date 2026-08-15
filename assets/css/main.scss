@@ -1873,7 +1873,7 @@ h1.page__title {
 /* Section spacing with subtle horizontal rule */
 .page__content h2 {
   margin-top: 3rem;
-  padding-top: 2rem;
+  padding-top: 15px;
   position: relative;
 
   &::before {
@@ -2149,6 +2149,67 @@ h3 {
   a {
     color: var(--qs-accent);
     font-weight: 500;
+  }
+}
+
+/* CV banner with illustration */
+.cv-portrait-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0 0 2rem 0;
+  padding: 0 0 1.75rem;
+  border-bottom: 1px solid var(--qs-hairline);
+}
+
+.cv-portrait-banner__eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--qs-accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cv-portrait-banner__title {
+  margin: 0 0 0.55rem;
+  color: var(--qs-ink);
+  font-family: var(--qs-font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.cv-portrait-banner__body {
+  margin: 0;
+  color: var(--qs-ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.cv-portrait-banner__media {
+  justify-self: end;
+  width: 100%;
+  max-width: 300px;
+}
+
+.cv-portrait-banner__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(26, 37, 64, 0.12);
+}
+
+@media (max-width: 760px) {
+  .cv-portrait-banner {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cv-portrait-banner__media {
+    justify-self: start;
+    max-width: 260px;
   }
 }
 
