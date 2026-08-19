@@ -17,7 +17,7 @@ redirect_from:
 <header class="cv-document-header">
   <div class="cv-document-header__identity">
     <p class="cv-document-header__label">个人简历</p>
-    <h1 class="cv-document-header__name">王率博士（Dylan）</h1>
+    <h1 class="cv-document-header__name">王率博士（Dylan）<span class="cv-document-header__life-range">{{ site.author_zh.life_range }}</span></h1>
     <p class="cv-document-header__role">昆士兰大学 IElab 研究员</p>
     <p class="cv-document-header__summary">研究方向包括 information retrieval、efficient LLM systems、retrieval-augmented generation、search agents 与医学证据检索；以第一作者在 SIGIR、WSDM、WWW、ECIR 和 EACL 发表论文。</p>
     <p class="cv-document-header__contact">
@@ -170,7 +170,7 @@ redirect_from:
 <header class="cv-document-header">
   <div class="cv-document-header__identity">
     <p class="cv-document-header__label">Curriculum Vitae</p>
-    <h1 class="cv-document-header__name">Dr. Shuai Wang (Dylan)</h1>
+    <h1 class="cv-document-header__name">Dr. Shuai Wang (Dylan)<span class="cv-document-header__life-range">{{ site.author.life_range }}</span></h1>
     <p class="cv-document-header__role">Research Fellow, IElab, The University of Queensland</p>
     <p class="cv-document-header__summary">Research in information retrieval, efficient LLM systems, retrieval-augmented generation, search agents, and evidence-based medicine search, with first-author work at SIGIR, WSDM, WWW, ECIR, and EACL.</p>
     <p class="cv-document-header__contact">

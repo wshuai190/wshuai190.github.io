@@ -27,7 +27,7 @@
 {% endif %}
 
 {% if page.header.overlay_color or page.header.overlay_image %}
-<div class="page__hero page__hero--overlay" role="banner"
+<div class="page__hero page__hero--overlay{% if page.url == '/' %} page__hero--home{% endif %}" role="banner"
   style="{% if overlay_img_path %}background-image: {% if overlay_filter %}linear-gradient({{ overlay_filter }}, {{ overlay_filter }}), {% endif %}url('{{ overlay_img_path }}');{% endif %}">
 
   <!-- Animated radial gradient layer -->

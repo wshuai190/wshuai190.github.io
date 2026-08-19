@@ -280,6 +280,7 @@ ul li {
   letter-spacing: -0.005em !important;
 }
 
+
 .author__bio {
   color: var(--qs-ink-soft);
   font-size: 0.95rem;
@@ -582,7 +583,7 @@ ul li {
   background: transparent !important;
 }
 
-.masthead a:hover,
+.masthead a:hover:not(.masthead__site-title),
 .masthead__menu-item a:hover,
 .greedy-nav a:hover,
 .visible-links a:hover,
@@ -590,6 +591,14 @@ ul li {
   color: var(--qs-accent-soft) !important;
   background: transparent !important;
   text-shadow: 0 0 6px rgba(232, 213, 168, 0.3);
+}
+
+.masthead__site-title:hover,
+.masthead__site-title:focus {
+  color: #ffffff !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
 }
 
 .masthead__menu-item--lg a {
@@ -996,9 +1005,9 @@ h3.archive__item-title,
 @media (min-width: 925px) {
   #main {
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 2rem;
-    padding: 2rem 2rem 4rem 2rem;
+    grid-template-columns: 290px 1fr;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem 4rem 1.5rem;
   }
 
   .sidebar {
@@ -1007,7 +1016,7 @@ h3.archive__item-title,
     top: 2rem !important;
     float: none !important;
     width: 100% !important;
-    max-width: 300px !important;
+    max-width: 290px !important;
     margin: 0 !important;
     height: fit-content !important;
     align-self: start !important;
@@ -1636,26 +1645,26 @@ h3.archive__item-title,
 
 @media (min-width: 1024px) {
   #main {
-    grid-template-columns: 320px 1fr;
-    gap: 2.5rem;
-    max-width: 1400px;
-    padding: 2.5rem;
+    grid-template-columns: 300px 1fr;
+    gap: 1.75rem;
+    max-width: 1360px;
+    padding: 2.25rem 1.75rem 4rem;
   }
   
   .sidebar {
-    max-width: 320px !important;
+    max-width: 300px !important;
   }
 }
 
 @media (min-width: 1280px) {
   #main {
-    grid-template-columns: 350px 1fr;
-    gap: 3rem;
-    max-width: 1600px;
+    grid-template-columns: 310px 1fr;
+    gap: 2rem;
+    max-width: 1440px;
   }
   
   .sidebar {
-    max-width: 350px !important;
+    max-width: 310px !important;
   }
 }
 
@@ -1887,6 +1896,80 @@ h1.page__title {
   }
 }
 
+.page__hero--home {
+  padding: 2.2rem 0 1.8rem;
+  text-align: left;
+}
+
+.page__hero--home::before {
+  background: linear-gradient(135deg, #122033 0%, #1f3e4b 54%, #51413d 100%) !important;
+}
+
+.page__hero--home .page__hero-bg-gradient {
+  background:
+    radial-gradient(ellipse at 16% 48%, rgba(17, 94, 89, 0.26) 0%, transparent 56%),
+    radial-gradient(ellipse at 76% 20%, rgba(217, 119, 6, 0.18) 0%, transparent 44%),
+    radial-gradient(ellipse at 62% 78%, rgba(14, 116, 144, 0.18) 0%, transparent 48%);
+}
+
+.page__hero--home .page__hero-content {
+  max-width: 1280px;
+  padding: 0.75rem 2.5rem 0.35rem;
+}
+
+.page__hero--home .page__hero-text {
+  max-width: 980px;
+}
+
+.page__hero--home .page__title {
+  display: block !important;
+  max-width: none;
+  margin: 0 0 0.45rem !important;
+  font-size: clamp(1.55rem, 2.35vw, 2.25rem) !important;
+  line-height: 1.06 !important;
+  white-space: nowrap;
+  background: none !important;
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  text-shadow: none !important;
+}
+
+.page__hero--home .page__lead {
+  max-width: 46rem;
+  margin: 0 !important;
+  color: rgba(255, 255, 255, 0.86) !important;
+  font-family: var(--qs-font-body) !important;
+  font-style: normal !important;
+  font-size: clamp(1.05rem, 1.65vw, 1.22rem) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.6 !important;
+}
+
+.page__hero--home + #main {
+  margin-top: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .page__hero--home {
+    padding: 1.6rem 0 1.3rem;
+  }
+
+  .page__hero--home .page__hero-content {
+    padding: 0.5rem 1.25rem 0.2rem;
+  }
+
+  .page__hero--home .page__title {
+    max-width: none;
+    font-size: clamp(1.45rem, 5.8vw, 1.9rem) !important;
+    white-space: normal;
+  }
+
+  .page__hero--home .page__lead {
+    max-width: 100%;
+  }
+}
+
 .page__content h2:first-of-type {
   margin-top: 0;
   padding-top: 0;
@@ -1971,6 +2054,31 @@ h3 {
     height: 1px;
     background: linear-gradient(90deg, transparent 10%, var(--qs-accent) 50%, transparent 90%);
     opacity: 0.5;
+  }
+}
+
+.masthead--home {
+  background: rgba(15, 23, 42, 0.92) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 1px 10px rgba(15, 23, 42, 0.18) !important;
+
+  .masthead__inner-wrap,
+  .masthead__menu,
+  nav,
+  ul,
+  li {
+    background: transparent !important;
+  }
+
+  &.is-scrolled {
+    background: rgba(15, 23, 42, 0.97) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .masthead__gradient-border {
+    opacity: 0.45;
   }
 }
 

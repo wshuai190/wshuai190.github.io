@@ -87,10 +87,9 @@ analytics:
 # Site Author
 author:
   name             : "Dr. Shuai Wang (Dylan)"
+  life_range       : "(1999-)"
   avatar           : "ws.jpg"
-  bio: "Research Fellow, University of Queensland;
-    PhD (2025);
-    Previously: Naver Labs Europe, Leipzig University"
+  bio: "Research Fellow<br>University of Queensland<br>PhD (2025)"
   location         : "Brisbane, Australia"
   employer         :
   pubmed           :
@@ -127,10 +126,9 @@ author:
 # Chinese Author Profile
 author_zh:
   name             : "王率博士 (Dylan)"
+  life_range       : "(1999-)"
   avatar           : "ws.jpg"
-  bio: "研究员 (Research Fellow), 昆士兰大学;
-    博士 (2025);
-    曾任职: Naver实验室欧洲, 莱比锡大学"
+  bio: "研究员 (Research Fellow)<br>昆士兰大学<br>博士 (2025)"
   location         : "澳大利亚布里斯班"
   employer         :
   pubmed           :
