@@ -20,10 +20,15 @@
 
   <div class="author__content">
     <h3 class="author__name">{{ author.name }}</h3>
+    {% if page.url == '/' or page.url == '/zh/' %}
+    <p class="author__subtle-note author__meta-note">
+      he/him{% if author.life_range %} &middot; {{ author.life_range }}{% endif %}
+    </p>
+    {% endif %}
     {% if site.data.scholar_metrics and author.googlescholar %}
     {% assign m = site.data.scholar_metrics %}
-    <p style="font-size:0.72em; color:#999; margin-top:0.2em; margin-bottom:0.3em;">
-      <a href="{{ author.googlescholar }}" target="_blank" rel="noopener" style="color:inherit; text-decoration:none;">
+    <p class="author__subtle-note author__scholar-note">
+      <a href="{{ author.googlescholar }}" target="_blank" rel="noopener">
         <i class="fas fa-graduation-cap" style="font-size:0.9em;"></i> {{ m.citations }} citations &middot; h-index {{ m.h_index }} &middot; {{ m.last_updated | date: "%d/%m/%y" }}
       </a>
     </p>

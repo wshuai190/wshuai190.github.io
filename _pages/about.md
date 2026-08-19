@@ -3,6 +3,7 @@ layout: single
 header:
   overlay_color: "#0f172a"
   overlay_filter: "0.5"
+  title: "Dr. Shuai Wang"
   tagline: "Search agents · Biomedical evidence search · Efficient RAG systems"
 permalink: /
 title: "Dr. Shuai Wang (Dylan)"

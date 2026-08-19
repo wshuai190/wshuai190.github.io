@@ -18,7 +18,7 @@ redirect_from:
   <div class="cv-document-header__identity">
     <p class="cv-document-header__label">个人简历</p>
     <h1 class="cv-document-header__name">王率博士（Dylan）<span class="cv-document-header__life-range">{{ site.author_zh.life_range }}</span></h1>
-    <p class="cv-document-header__role">昆士兰大学 IElab 研究员</p>
+    <p class="cv-document-header__role">昆士兰大学 IElab 研究员（Level B）</p>
     <p class="cv-document-header__summary">研究方向包括 information retrieval、efficient LLM systems、retrieval-augmented generation、search agents 与医学证据检索；以第一作者在 SIGIR、WSDM、WWW、ECIR 和 EACL 发表论文。</p>
     <p class="cv-document-header__contact">
       <span>Brisbane, Australia</span>
@@ -29,7 +29,7 @@ redirect_from:
     </p>
   </div>
   <figure class="cv-document-header__photo">
-    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="王率的插画头像" class="cv-document-header__image">
+    <img src="{{ site.baseurl }}/images/profile/animated-dylan.webp" alt="王率的插画头像" class="cv-document-header__image" width="360" height="480" decoding="async">
   </figure>
 </header>
 
@@ -77,9 +77,16 @@ redirect_from:
 
 <div class="cv-timeline">
   <div class="cv-timeline__item">
-    <div class="cv-timeline__date">2025–至今</div>
+    <div class="cv-timeline__date">2026–至今</div>
     <div class="cv-timeline__body">
-      <strong>研究员（Research Fellow）</strong> — 昆士兰大学 IeLab<br>
+      <strong>研究员（Research Fellow, Level B）</strong> — 昆士兰大学 IeLab<br>
+      导师：Prof. Guido Zuccon
+    </div>
+  </div>
+  <div class="cv-timeline__item">
+    <div class="cv-timeline__date">2025–2026</div>
+    <div class="cv-timeline__body">
+      <strong>博士后研究员（Postdoctoral Research Fellow, Level A）</strong> — 昆士兰大学 IeLab<br>
       导师：Prof. Guido Zuccon
     </div>
   </div>
@@ -153,6 +160,25 @@ redirect_from:
 
 <div class="cv-section">
 
+<h2 class="cv-section__heading">学生指导</h2>
+
+<div class="cv-timeline">
+  <div class="cv-timeline__item">
+    <div class="cv-timeline__date">当前</div>
+    <div class="cv-timeline__body">
+      <strong>博士生联合指导（Associate Supervisor）</strong><br>
+      <a href="https://zhouyongjie.github.io/" target="_blank" rel="noopener">Yongjie Zhou</a><br>
+      <a href="https://yinyubb.github.io/" target="_blank" rel="noopener">Yin Yu</a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<hr>
+
+<div class="cv-section">
+
 <h2 class="cv-section__heading">荣誉与奖项</h2>
 
 <ul>{% for post in site.awards %}
@@ -171,7 +197,7 @@ redirect_from:
   <div class="cv-document-header__identity">
     <p class="cv-document-header__label">Curriculum Vitae</p>
     <h1 class="cv-document-header__name">Dr. Shuai Wang (Dylan)<span class="cv-document-header__life-range">{{ site.author.life_range }}</span></h1>
-    <p class="cv-document-header__role">Research Fellow, IElab, The University of Queensland</p>
+    <p class="cv-document-header__role">Research Fellow (Level B), IElab, The University of Queensland</p>
     <p class="cv-document-header__summary">Research in information retrieval, efficient LLM systems, retrieval-augmented generation, search agents, and evidence-based medicine search, with first-author work at SIGIR, WSDM, WWW, ECIR, and EACL.</p>
     <p class="cv-document-header__contact">
       <span>Brisbane, Australia</span>
@@ -182,7 +208,7 @@ redirect_from:
     </p>
   </div>
   <figure class="cv-document-header__photo">
-    <img src="{{ site.baseurl }}/images/profile/animated-dylan.png" alt="Illustrated portrait of Shuai Wang" class="cv-document-header__image">
+    <img src="{{ site.baseurl }}/images/profile/animated-dylan.webp" alt="Illustrated portrait of Shuai Wang" class="cv-document-header__image" width="360" height="480" decoding="async">
   </figure>
 </header>
 
@@ -230,9 +256,16 @@ redirect_from:
 
 <div class="cv-timeline">
   <div class="cv-timeline__item">
-    <div class="cv-timeline__date">2025–present</div>
+    <div class="cv-timeline__date">2026–present</div>
     <div class="cv-timeline__body">
-      <strong>Research Fellow</strong> — University of Queensland, IELab<br>
+      <strong>Research Fellow (Level B)</strong> — University of Queensland, IELab<br>
+      Supervisor: Prof. Guido Zuccon
+    </div>
+  </div>
+  <div class="cv-timeline__item">
+    <div class="cv-timeline__date">2025–2026</div>
+    <div class="cv-timeline__body">
+      <strong>Postdoctoral Research Fellow (Level A)</strong> — University of Queensland, IELab<br>
       Supervisor: Prof. Guido Zuccon
     </div>
   </div>
@@ -299,6 +332,25 @@ redirect_from:
 <ul>{% for post in site.teaching %}
   {% include archive-single-cv.html %}
 {% endfor %}</ul>
+
+</div>
+
+<hr>
+
+<div class="cv-section">
+
+<h2 class="cv-section__heading">Supervision</h2>
+
+<div class="cv-timeline">
+  <div class="cv-timeline__item">
+    <div class="cv-timeline__date">Current</div>
+    <div class="cv-timeline__body">
+      <strong>Associate PhD Supervisor</strong><br>
+      <a href="https://zhouyongjie.github.io/" target="_blank" rel="noopener">Yongjie Zhou</a><br>
+      <a href="https://yinyubb.github.io/" target="_blank" rel="noopener">Yin Yu</a>
+    </div>
+  </div>
+</div>
 
 </div>
 

@@ -43,7 +43,7 @@
 
 .cv-document-header {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 128px;
+  grid-template-columns: minmax(0, 1fr) 104px;
   gap: 1rem;
   align-items: start;
   margin: 0 0 1.35rem;
@@ -112,7 +112,7 @@
   }
 
   &__photo {
-    width: 128px;
+    width: 104px;
     margin: 0;
     justify-self: end;
   }
@@ -288,7 +288,7 @@
     }
 
     &__photo {
-      width: 104px;
+      width: 88px;
       justify-self: start;
     }
   }

@@ -275,9 +275,30 @@ ul li {
   color: var(--qs-ink) !important;
   font-weight: 700 !important;
   font-family: var(--qs-font-serif) !important;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 0.16rem !important;
   font-size: 1.2rem !important;
   letter-spacing: -0.005em !important;
+}
+
+.author__subtle-note {
+  margin: 0.08rem 0 0.22rem !important;
+  color: #8f97a4 !important;
+  font-size: 0.72em !important;
+  line-height: 1.25 !important;
+}
+
+.author__subtle-note a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.author__meta-note {
+  opacity: 0.8;
+  letter-spacing: 0.01em;
+}
+
+.author__scholar-note {
+  margin-bottom: 0.32rem !important;
 }
 
 
