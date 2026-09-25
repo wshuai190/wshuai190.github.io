@@ -4,7 +4,7 @@ collection: publications
 permalink: /publication/2026-07-31-lightmem-memory-management
 excerpt:
 date: 2026-07-31
-page_type: "Long"
+page_type: "Reproduce"
 venue: 'Proceedings of the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)'
 paperurl: 'https://arxiv.org/abs/2607.29104'
 citation: 'Yongjie Zhou, Shuai Wang, Bevan Koopman and Guido Zuccon. 2026. Reproducing LightMem: Naive RAG Is Just as Good for Memory Management. In Proceedings of the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026).'
