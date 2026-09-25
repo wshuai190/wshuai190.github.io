@@ -160,3 +160,9 @@
   date: 2026-04-03
   description: "[Reproducibility Paper]: Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval; [Reproducibility Paper]: The Vulnerability of LLM Rankers to Prompt Injection Attacks; [Short Paper]: Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning."
   status: celebrate
+
+- title: "Paper Accepted in SIGIR-AP 2026"
+  date: 2026-09-25
+  url: https://arxiv.org/abs/2607.29104
+  description: "[Reproducibility Paper]: Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
+  status: celebrate
