@@ -164,5 +164,5 @@
 - title: "Paper Accepted in SIGIR-AP 2026"
   date: 2026-09-25
   url: https://arxiv.org/abs/2607.29104
-  description: "[Reproducibility Paper]: Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
+  description: "Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
   status: celebrate
