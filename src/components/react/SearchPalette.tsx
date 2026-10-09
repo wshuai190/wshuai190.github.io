@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { t, type Lang } from '../../i18n/ui';
-import { snippet } from '../../lib/search/hybrid.ts';
+import { passageLink, snippet } from '../../lib/search/hybrid.ts';
 import { useHybridSearch } from './useHybridSearch';
 import SearchBadge from './SearchBadge';
+import ScoreChips from './ScoreChips';
 
 const TYPE_LABEL: Record<string, Record<Lang, string>> = {
   paper: { en: 'Paper', zh: '论文' },
+  page: { en: 'Page', zh: '页面' },
   project: { en: 'Project', zh: '项目' },
   news: { en: 'News', zh: '动态' },
   teaching: { en: 'Teaching', zh: '教学' },
@@ -13,7 +15,6 @@ const TYPE_LABEL: Record<string, Record<Lang, string>> = {
   award: { en: 'Award', zh: '奖项' },
 };
 
-const localise = (lang: Lang, url: string) => (lang === 'zh' && url.startsWith('/') ? `/zh${url}` : url);
 
 /** ⌘K / "/" dialog: hybrid BM25 + Starbucks search over papers, projects, news and more. */
 export default function SearchPalette({ lang }: { lang: Lang }) {
@@ -21,7 +22,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { results, mode, model } = useHybridSearch(query, open);
+  const { results, mode, model } = useHybridSearch(query, open, undefined, lang);
   const shown = (results ?? []).slice(0, 8);
 
   const close = useCallback(() => {
@@ -63,7 +64,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
     if (event.key === 'Escape') close();
     else if (event.key === 'ArrowDown') { event.preventDefault(); setActive((i) => Math.min(i + 1, shown.length - 1)); }
     else if (event.key === 'ArrowUp') { event.preventDefault(); setActive((i) => Math.max(i - 1, 0)); }
-    else if (event.key === 'Enter' && shown[active]) window.location.href = localise(lang, shown[active].doc.url);
+    else if (event.key === 'Enter' && shown[active]) window.location.href = passageLink(shown[active].doc, lang);
   };
 
   return (
@@ -83,15 +84,18 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
           <kbd className="mono rounded border border-line px-1.5 py-0.5 text-[11px] text-[var(--muted)]">esc</kbd>
         </div>
         <ul id="search-results" role="listbox" className="max-h-[55vh] overflow-y-auto p-2">
-          {shown.map(({ doc }, i) => (
+          {shown.map(({ doc, lexical, dense }, i) => (
             <li key={doc.url + doc.title} id={`search-result-${i}`} role="option" aria-selected={i === active}>
-              <a href={localise(lang, doc.url)} onMouseEnter={() => setActive(i)} className={`block rounded-xl px-4 py-3 ${i === active ? 'bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]' : ''}`}>
+              <a href={passageLink(doc, lang)} onMouseEnter={() => setActive(i)} className={`block rounded-xl px-4 py-3 ${i === active ? 'bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]' : ''}`}>
                 <span className="flex items-baseline justify-between gap-3">
-                  <span className="font-semibold">{(lang === 'zh' && doc.titleZh) || doc.title}</span>
+                  <span className="font-semibold">{doc.title}{doc.section && <span className="font-normal text-[var(--muted)]"> › {doc.section}</span>}</span>
                   <span className="tag shrink-0">{TYPE_LABEL[doc.type]?.[lang] ?? doc.type}</span>
                 </span>
-                <span className="mono mt-0.5 block truncate text-[11px] text-[var(--muted)]">{doc.meta}</span>
-                {doc.text && <span className="mt-1 block text-sm text-[var(--muted)] [&_mark]:bg-transparent [&_mark]:font-semibold [&_mark]:text-[var(--teal)]" dangerouslySetInnerHTML={{ __html: snippet((lang === 'zh' && doc.textZh) || doc.text, query) }} />}
+                <span className="mt-0.5 flex items-baseline justify-between gap-3">
+                  <span />
+                  <span className="shrink-0"><ScoreChips lexical={lexical} dense={dense} hybrid={mode === 'hybrid'} /></span>
+                </span>
+                <span className="mt-1 block text-sm text-[var(--muted)] [&_mark]:bg-transparent [&_mark]:font-semibold [&_mark]:text-[var(--teal)]" dangerouslySetInnerHTML={{ __html: snippet(doc.text, query) }} />
               </a>
             </li>
           ))}

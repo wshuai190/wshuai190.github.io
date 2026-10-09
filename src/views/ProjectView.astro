@@ -27,7 +27,7 @@ const bibtex = papers.map(bibtexOf).join('\n\n');
         <p class="tag">{pick(TOPIC_LABELS[project.topic], lang)} · {project.year}</p>
         <h1 class="page-title mt-3">{project.name}</h1>
         <p class="lede mt-5">{summary}</p>
-        <div class="mt-6 flex flex-wrap items-center gap-2">
+        <div class="mt-6 flex flex-wrap items-center gap-2" data-search-skip>
           <LinkPills links={project.links} lang={lang} />
           {stars !== undefined && <span class="mono text-sm text-muted">★ {stars} {t(lang, 'project.stars')}</span>}
         </div>
@@ -35,7 +35,7 @@ const bibtex = papers.map(bibtexOf).join('\n\n');
       <figure class="glass p-3">
         <div class="figure-frame p-4"><img src={project.image} alt={`${project.name} — ${project.figure_caption ?? ''}`} class="max-h-[420px]" /></div>
         {project.figure_caption && (
-          <figcaption class="label px-2 pb-1 pt-3">
+          <figcaption class="label px-2 pb-1 pt-3" data-search-skip>
             {project.figure_caption}
             {project.figure_source && <> · <a class="hover:text-ink" href={project.figure_source}>source ↗</a></>}
           </figcaption>
@@ -50,7 +50,7 @@ const bibtex = papers.map(bibtexOf).join('\n\n');
     )}
 
     {abstract && (
-      <section class="mt-14 max-w-[780px]">
+      <section class="mt-14 max-w-[780px]" data-search-skip>
         <h2 class="eyebrow">{t(lang, 'pub.abstract')}</h2>
         <p class="serif mt-4 text-[20px] leading-relaxed text-[var(--ink-soft)]">{abstract.replace(/\*\*/g, '')}</p>
       </section>

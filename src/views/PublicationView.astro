@@ -44,7 +44,7 @@ const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/
       <Authors authors={authors} class="mt-4 text-[17px] text-muted" />
       {authors.some((a) => a.endsWith('*')) && <p class="mt-1 text-xs text-muted">{t(lang, 'pub.equal')}</p>}
       <p class="mt-1 text-sm text-muted">{pub.data.venue}</p>
-      <div class="mt-6 flex flex-wrap gap-2">
+      <div class="mt-6 flex flex-wrap gap-2" data-search-skip>
         {links.map(([key, href]) => <a class="link-pill" href={href} target="_blank" rel="noopener">{t(lang, key)} ↗</a>)}
         {pub.data.citation && <CopyButton client:visible text={pub.data.citation} label={t(lang, 'link.citation')} done={t(lang, 'link.copied')} />}
         <CopyButton client:visible text={bibtexOf(pub)} label={t(lang, 'link.bibtex')} done={t(lang, 'link.copied')} />

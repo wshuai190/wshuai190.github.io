@@ -33,7 +33,7 @@ const themes = profile.themes.map((theme: any) => ({
             <span class="tag">{pick(TOPIC_LABELS[theme.topic], lang)}</span>
             <span class="serif mt-2 text-[19px] leading-snug">{theme.title}</span>
             <span class="mt-2 text-[13px] text-muted">{theme.body}</span>
-            <span class="label mt-auto pt-4">{theme.papers} {t(lang, 'stat.papers')} · {theme.projects.length} {t(lang, 'research.projects')}</span>
+            <span class="label mt-auto pt-4" data-search-skip>{theme.papers} {t(lang, 'stat.papers')} · {theme.projects.length} {t(lang, 'research.projects')}</span>
           </a>
         ))}
       </div>
@@ -45,7 +45,7 @@ const themes = profile.themes.map((theme: any) => ({
         <div id={`topic-${theme.topic}`} class="mt-12 scroll-mt-8">
           <div class="mb-5 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-3">
             <h3 class="serif text-2xl">{theme.title}</h3>
-            <a class="text-sm font-semibold text-teal" href={`${localePath(lang, '/publications/')}?topic=${theme.topic}`}>{theme.papers} {t(lang, 'stat.papers')} →</a>
+            <a class="text-sm font-semibold text-teal" data-search-skip href={`${localePath(lang, '/publications/')}?topic=${theme.topic}`}>{theme.papers} {t(lang, 'stat.papers')} →</a>
           </div>
           <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {theme.projects.map((project: any) => <ProjectCard project={project} lang={lang} />)}
