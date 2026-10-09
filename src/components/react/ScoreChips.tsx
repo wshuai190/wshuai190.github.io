@@ -1,12 +1,14 @@
-import { DENSE_THRESHOLD } from '../../lib/search/encoder.ts';
+import type { SearchResult } from '../../lib/search/hybrid.ts';
 
-/** Raw ranking signals for one result: BM25 and the Starbucks dot product (greyed below the threshold). */
-export default function ScoreChips({ lexical, dense, hybrid }: { lexical: number; dense: number; hybrid: boolean }) {
-  const semantic = hybrid && dense >= DENSE_THRESHOLD;
+/** Min-max normalised BM25 and Starbucks scores and their hybrid; raw scores in the tooltip. */
+export default function ScoreChips({ result, hybrid }: { result: SearchResult; hybrid: boolean }) {
+  const { lexical, dense, lexicalNorm, denseNorm, score } = result;
+  const title = `raw: BM25 ${lexical.toFixed(2)}${hybrid ? ` · Starbucks ${dense.toFixed(1)}` : ''}\nnormalised (min-max per query), hybrid = 0.6·BM25 + 0.4·Starbucks`;
   return (
-    <span className="mono inline-flex items-center gap-2 text-[10.5px] tabular-nums text-[var(--muted)]" title={`Starbucks counts from ${DENSE_THRESHOLD}`}>
-      <span className={lexical > 0 ? 'text-[var(--ink)]' : 'opacity-50'}>BM25 {lexical.toFixed(2)}</span>
-      {hybrid && <span className={semantic ? 'text-[var(--teal)]' : 'opacity-50'}>Starbucks {dense.toFixed(1)}</span>}
+    <span className="mono inline-flex items-center gap-2 text-[10.5px] tabular-nums text-[var(--muted)]" title={title}>
+      <span>BM25 {lexicalNorm.toFixed(2)}</span>
+      {hybrid && <span>Starbucks {denseNorm.toFixed(2)}</span>}
+      <span className="font-semibold text-[var(--teal)]">{hybrid ? 'hybrid' : 'score'} {score.toFixed(2)}</span>
     </span>
   );
 }

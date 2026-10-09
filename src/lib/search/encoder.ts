@@ -17,7 +17,7 @@ export const EMBED_DIM = 32;
  * and DENSE_AGREEMENT (hybrid.ts) from a plateau where 19–21 perform the same.
  */
 export const DENSE_THRESHOLD = 20;
-/** Starbucks score that earns full semantic credit (about the best relevant score observed). */
+/** Upper bound for the alternative 'fixed' normalisation (rank option); unused with min-max. */
 export const DENSE_CEILING = 28;
 
 /** The subset of the onnxruntime API used here (shared by -node and -web). */

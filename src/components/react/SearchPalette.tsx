@@ -84,7 +84,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
           <kbd className="mono rounded border border-line px-1.5 py-0.5 text-[11px] text-[var(--muted)]">esc</kbd>
         </div>
         <ul id="search-results" role="listbox" className="max-h-[55vh] overflow-y-auto p-2">
-          {shown.map(({ doc, lexical, dense }, i) => (
+          {shown.map((result, i) => { const { doc } = result; return (
             <li key={doc.url + doc.title} id={`search-result-${i}`} role="option" aria-selected={i === active}>
               <a href={passageLink(doc, lang)} onMouseEnter={() => setActive(i)} className={`block rounded-xl px-4 py-3 ${i === active ? 'bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]' : ''}`}>
                 <span className="flex items-baseline justify-between gap-3">
@@ -93,12 +93,12 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
                 </span>
                 <span className="mt-0.5 flex items-baseline justify-between gap-3">
                   <span />
-                  <span className="shrink-0"><ScoreChips lexical={lexical} dense={dense} hybrid={mode === 'hybrid'} /></span>
+                  <span className="shrink-0"><ScoreChips result={result} hybrid={mode === 'hybrid'} /></span>
                 </span>
                 <span className="mt-1 block text-sm text-[var(--muted)] [&_mark]:bg-transparent [&_mark]:font-semibold [&_mark]:text-[var(--teal)]" dangerouslySetInnerHTML={{ __html: snippet(doc.text, query) }} />
               </a>
             </li>
-          ))}
+          ); })}
           {query.trim() && results && shown.length === 0 && <li className="px-4 py-6 text-center text-sm text-[var(--muted)]">{t(lang, 'search.empty')}</li>}
         </ul>
         <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-2.5">
