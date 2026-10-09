@@ -1,0 +1,247 @@
+# Research projects. Each entry gets a page at /research/<slug>/.
+# papers: publication slugs (the last part of their permalink).
+- slug: skim-search-agent
+  name: SkimSearchAgent
+  topic: agents
+  year: 2026
+  summary: A research library for deep-search agents, connecting retrieval, tools, agent workflows and reproducible evaluation.
+  summary_zh: 面向深度检索 Agent 的研究工具库，连接检索、工具调用、Agent 工作流与可复现评测。
+  image: /images/research/sieve.webp
+  figure_caption: Sieve workflow, one of the agents built on SkimSearchAgent
+  links:
+    site: https://ielab.io/skim-search-agent/
+    code: https://github.com/ielab/skim-search-agent
+  papers:
+  - 2026-08-03-search-inspect-fetch
+  - 2026-08-28-iter-interaction-aware
+  featured: false
+- slug: sieve
+  name: 'Sieve: Search, Inspect, Fetch'
+  topic: agents
+  year: 2026
+  summary: Boolean search narrows the candidates, inspection exposes document structure, and fetch reads only the selected sections.
+  summary_zh: Boolean 检索缩小候选集，Inspect 展示文档结构，Fetch 只读取所选章节。
+  image: /images/research/sieve.webp
+  figure_caption: Figure 2 · Workflow comparison
+  figure_source: https://arxiv.org/html/2608.02751
+  links:
+    site: https://ielab.io/skim-search-agent/sieve/
+    paper: https://arxiv.org/abs/2608.02751
+    code: https://github.com/ielab/skim-search-agent
+  papers:
+  - 2026-08-03-search-inspect-fetch
+  featured: true
+- slug: iter
+  name: 'ITER: Interaction-Aware Retrieval'
+  topic: agents
+  year: 2026
+  summary: Agent search history conditions the query; document interactions provide the signals for training the retriever.
+  summary_zh: 将 Agent 的检索历史融入查询，并利用文档交互轨迹训练检索模型。
+  image: /images/research/iter.webp
+  figure_caption: Figure 1 · Method overview
+  figure_source: https://github.com/ielab/ITER/blob/main/assets/flowchart.png
+  links:
+    site: https://ielab.io/skim-search-agent/iter/
+    paper: https://arxiv.org/abs/2608.27912
+    code: https://github.com/ielab/ITER
+  papers:
+  - 2026-08-28-iter-interaction-aware
+  featured: true
+- slug: autobool
+  name: AutoBool
+  topic: evidence
+  year: 2026
+  summary: Dataset construction and reinforcement learning for Boolean queries in systematic review literature search.
+  summary_zh: 构建训练数据并使用强化学习生成系统综述文献检索所需的 Boolean 查询。
+  image: /images/research/autobool.webp
+  figure_caption: Figure 1 · Dataset and training
+  figure_source: https://arxiv.org/html/2602.00005v1
+  links:
+    demo: https://huggingface.co/spaces/wshuai190/AutoBool-Demo
+    paper: https://arxiv.org/html/2602.00005v1
+  papers:
+  - 2026-01-04-autobool
+  featured: true
+- slug: cocom
+  name: COCOM
+  topic: rag
+  year: 2025
+  summary: Retrieved contexts are compressed into embeddings before answer generation, connecting retrieval with efficient decoding.
+  summary_zh: 将检索上下文压缩为嵌入后生成答案，连接检索与高效解码。
+  image: /images/research/cocom.webp
+  figure_caption: Figure 2 · COCOM pipeline
+  figure_source: https://arxiv.org/html/2407.09252
+  links:
+    paper: https://arxiv.org/abs/2407.09252
+  papers:
+  - 2024-07-16-COCOM
+  featured: true
+- slug: diffretriever
+  name: DiffRetriever
+  topic: retrieval
+  year: 2026
+  summary: Parallel masked positions in a diffusion language model produce multiple representations for dense and sparse retrieval.
+  summary_zh: 利用扩散语言模型中并行的掩码位置，生成用于稠密与稀疏检索的多重表示。
+  image: /images/research/diffretriever.webp
+  figure_caption: Figure 2 · Retrieval architecture
+  figure_source: https://arxiv.org/html/2605.07210
+  links:
+    paper: https://arxiv.org/abs/2605.07210
+  papers:
+  - 2026-07-08-diffretriever
+  featured: false
+- slug: starbucks
+  name: Starbucks
+  topic: retrieval
+  year: 2026
+  summary: Flexible embedding dimensions and network depths in one retriever, building on Matryoshka and 2D Matryoshka training.
+  summary_zh: 在同一个检索模型中灵活调整嵌入维度与网络深度，扩展 Matryoshka 和 2D Matryoshka 训练。
+  image: /images/research/starbucks.webp
+  figure_caption: Figure 2 · Training approaches
+  figure_source: https://arxiv.org/html/2410.13230
+  links:
+    paper: https://arxiv.org/abs/2410.13230
+  papers:
+  - 2024-10-20-starbucks
+  - 2025-05-14-2dmse-ir
+  featured: false
+- slug: bergen
+  name: BERGEN
+  topic: rag
+  year: 2024
+  summary: A reproducible RAG benchmarking library connecting retrievers, rerankers, language models and evaluation.
+  summary_zh: 可复现的 RAG 评测工具库，连接检索器、重排序器、语言模型与评测。
+  image: /images/research/bergen.webp
+  figure_caption: Figure 1 · BERGEN components
+  figure_source: https://arxiv.org/html/2407.01102
+  links:
+    paper: https://arxiv.org/abs/2407.01102
+  papers:
+  - 2024-07-01-bergen
+  featured: false
+- slug: chunking
+  name: 'Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval'
+  topic: retrieval
+  year: 2026
+  summary: A unified framework for comparing document segmentation and embedding strategies across retrieval tasks.
+  summary_zh: 在不同检索任务中统一比较文档分块与嵌入策略。
+  image: /images/research/chunking.webp
+  figure_caption: Figure 1 · Document chunking evaluation framework
+  figure_source: https://arxiv.org/html/2602.16974
+  links:
+    paper: https://arxiv.org/abs/2602.16974
+  papers:
+  - 2026-07-01-beyond-chunk-then-embed
+  featured: false
+- slug: rag-injection
+  name: Can It Reach the Generator? Investigating the Survival of Prompt-Injection Attacks in Realistic RAG Settings
+  topic: security
+  year: 2026
+  summary: Following prompt-injection attacks through retrieval, reranking and answer generation in realistic RAG settings.
+  summary_zh: 在真实 RAG 设置中追踪提示注入攻击经过检索、重排序与答案生成的过程。
+  image: /images/research/rag-injection.webp
+  figure_caption: Figure 1 · End-to-end evaluation pipeline
+  figure_source: https://arxiv.org/html/2605.28017
+  links:
+    paper: https://arxiv.org/abs/2605.28017
+  papers:
+  - 2026-07-27-geo-injection-rag-survival
+  featured: false
+- slug: ranker-injection
+  name: The Vulnerability of LLM Rankers to Prompt Injection Attacks
+  topic: security
+  year: 2026
+  summary: A reproducibility study examining the vulnerability of LLM rankers to prompt-injection attacks.
+  summary_zh: 对 LLM 排序器提示注入攻击脆弱性的可复现研究。
+  image: /images/research/ranker-injection.webp
+  figure_caption: Figure 1 · Prompt-injection method evaluated in the study
+  figure_source: https://arxiv.org/html/2602.16752
+  links:
+    paper: https://arxiv.org/abs/2602.16752
+  papers:
+  - 2026-07-01-vulnerability-llm-rankers
+  featured: false
+- slug: rank-r1
+  name: 'Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning'
+  topic: retrieval
+  year: 2026
+  summary: Reinforcement learning for reasoning in LLM-based document reranking.
+  summary_zh: 使用强化学习增强 LLM 文档重排序中的推理能力。
+  image: /images/research/rank-r1.webp
+  figure_caption: Figure 1 · Rank-R1 prompt
+  figure_source: https://arxiv.org/html/2503.06034
+  links:
+    paper: https://arxiv.org/abs/2503.06034
+  papers:
+  - 2026-07-01-rank-r1
+  featured: false
+- slug: lightmem
+  name: 'Reproducing LightMem: Naive RAG Is Just as Good for Memory Management'
+  topic: rag
+  year: 2026
+  summary: Comparing constructed long-term memories with retrieval over raw user turns under matched evaluation settings.
+  summary_zh: 在一致的评测设置下比较构建的长期记忆与直接检索原始用户对话。
+  image: /images/research/lightmem.webp
+  figure_caption: Figure 2 · Evaluation framework
+  figure_source: https://arxiv.org/html/2607.29104
+  links:
+    paper: https://arxiv.org/abs/2607.29104
+  papers:
+  - 2026-07-31-lightmem-memory-management
+  featured: false
+- slug: resllm
+  name: 'ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search'
+  topic: retrieval
+  year: 2024
+  summary: Using language models to select resources for federated search, including the SLAT fine-tuning protocol.
+  summary_zh: 利用语言模型为联邦检索选择资源，包括 SLAT 微调流程。
+  image: /images/research/resllm.webp
+  figure_caption: Figure 1 · Resource selection and fine-tuning
+  figure_source: https://arxiv.org/html/2401.17645
+  links:
+    paper: https://arxiv.org/pdf/2401.17645
+  papers:
+  - 2024-02-19-ResLLM
+  featured: false
+- slug: screening
+  name: Generating Natural Language Queries for More Effective Systematic Review Screening Prioritisation
+  topic: evidence
+  year: 2023
+  summary: Generating natural-language queries from Boolean queries to improve systematic review screening prioritisation.
+  summary_zh: 从 Boolean 查询生成自然语言查询，改善系统综述筛选优先级排序。
+  image: /images/research/screening.webp
+  figure_caption: Figure 1 · Screening prioritisation approach
+  figure_source: https://arxiv.org/html/2309.05238
+  links:
+    paper: https://arxiv.org/abs/2309.05238
+  papers:
+  - 2023-09-11-booleanscreening
+  featured: false
+- slug: stemming
+  name: 'Large Language Models for Stemming: Promises, Pitfalls and Failures'
+  topic: retrieval
+  year: 2024
+  summary: Comparing stemming techniques and examining the promises and limitations of language models for stemming.
+  summary_zh: 比较词干提取方法，并研究语言模型在词干提取中的能力与局限。
+  image: /images/research/stemming.webp
+  figure_caption: Figure 1 · Stemming pipeline
+  figure_source: https://arxiv.org/html/2402.11757
+  links:
+    paper: https://arxiv.org/abs/2402.11757
+  papers:
+  - 2024-03-28-llm-stemming
+  featured: false
+- slug: feb4rag
+  name: 'FeB4RAG: Evaluating Federated Search in the Context of Retrieval Augmented Generation'
+  topic: rag
+  year: 2024
+  summary: Evaluating federated search across multiple resources within retrieval-augmented generation.
+  summary_zh: 在检索增强生成中评测跨多个资源的联邦检索。
+  image: /images/research/feb4rag.webp
+  figure_caption: Figure 1 · Federated search within RAG
+  figure_source: https://arxiv.org/html/2402.11891
+  links:
+    paper: https://arxiv.org/abs/2402.11891
+  papers:
+  - 2024-03-26-shuai-feb4rag
+  featured: false
