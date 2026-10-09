@@ -111,6 +111,9 @@ export function projectsForPaper(slug: string): Project[] {
 }
 
 const VENUE_NAMES: [RegExp, string][] = [
+  // Checked before the acronym list: SIGIR-sponsored venues (SIGIR-AP, ICTIR) must not become SIGIR.
+  [/SIGIR[- ]AP\b|SIGIR Asia[- ]Pacific/i, 'SIGIR-AP'],
+  [/\bICTIR\b|Theory of Information Retrieval/i, 'ICTIR'],
   [/web search and data mining/i, 'WSDM'],
   [/intelligent systems with applications/i, 'ISWA'],
 ];
@@ -120,14 +123,14 @@ export function venueLabel(venue: string, fallbackYear?: number): string {
   if (/arxiv/i.test(venue)) return 'arXiv';
   const year = venue.match(/(20\d{2})/)?.[1] ?? fallbackYear;
   // Also matches "SIGIR-2026", "ECIR2026" and "SIGIR-AP-2023".
-  const acronym = venue.match(/\b(SIGIR-AP|SIGIR|WSDM|WWW|ECIR|EMNLP|EACL|ACL|CIKM|ICTIR|ADCS|TOIS|TREC|JASIST|IPM)(?=\b|-?\d)/i)?.[1]
-    ?? VENUE_NAMES.find(([pattern]) => pattern.test(venue))?.[1];
+  const acronym = VENUE_NAMES.find(([pattern]) => pattern.test(venue))?.[1]
+    ?? venue.match(/\b(SIGIR|WSDM|WWW|ECIR|EMNLP|EACL|ACL|CIKM|ICTIR|ADCS|TOIS|TREC|JASIST|IPM)(?=\b|-?\d)/i)?.[1];
   if (acronym) return `${acronym.toUpperCase()}${year ? ` ${year}` : ''}`;
   return venue.replace(/^Accepted\s+/i, '').replace(/^Proceedings of the /i, '').slice(0, 40);
 }
 
 const VENUE_FULL: Record<string, string> = {
-  'SIGIR-AP': 'ACM SIGIR Conference on Information Retrieval in the Asia Pacific',
+  'SIGIR-AP': 'Annual International ACM SIGIR Conference on Research and Development in Information Retrieval in the Asia Pacific Region',
   SIGIR: 'International ACM SIGIR Conference on Research and Development in Information Retrieval',
   WSDM: 'ACM International Conference on Web Search and Data Mining',
   ECIR: 'European Conference on Information Retrieval',
