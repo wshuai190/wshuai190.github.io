@@ -36,7 +36,7 @@ export interface ExplorerLabels {
 
 const normalise = (text: string) => text.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '');
 
-export default function PublicationExplorer({ items, labels, self = 'Shuai Wang' }: { items: ExplorerItem[]; labels: ExplorerLabels; self?: string }) {
+export default function PublicationExplorer({ items, labels, authorLinks = {}, self = 'Shuai Wang' }: { items: ExplorerItem[]; labels: ExplorerLabels; authorLinks?: Record<string, string>; self?: string }) {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('all');
   const [year, setYear] = useState('all');
@@ -128,9 +128,19 @@ export default function PublicationExplorer({ items, labels, self = 'Shuai Wang'
                 </p>
                 <h3 className="serif mt-1 text-[21px] leading-snug"><a href={item.url} className="hover:text-[var(--teal)]">{item.title}</a></h3>
                 <p className="mt-1 text-sm text-[var(--muted)]">
-                  {item.authors.map((name, i) => (
-                    <span key={i}>{i > 0 && ', '}{name.replace(/\*$/, '') === self ? <strong className="font-semibold text-[var(--ink)]">{name.replace(/\*$/, '')}</strong> : name.replace(/\*$/, '')}{name.endsWith('*') && <sup className="text-[var(--teal)]">*</sup>}</span>
-                  ))}
+                  {item.authors.map((raw, i) => {
+                    const name = raw.replace(/\*$/, '');
+                    const href = authorLinks[name];
+                    return (
+                      <span key={i}>
+                        {i > 0 && ', '}
+                        {name === self ? <strong className="font-semibold text-[var(--ink)]">{name}</strong>
+                          : href ? <a href={href} target="_blank" rel="noopener" className="underline decoration-[var(--line)] underline-offset-2 hover:text-[var(--teal)] hover:decoration-current">{name}</a>
+                          : name}
+                        {raw.endsWith('*') && <sup className="text-[var(--teal)]">*</sup>}
+                      </span>
+                    );
+                  })}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {item.links.map((link) => (

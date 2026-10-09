@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import newsRaw from '../data/news.yml?raw';
 import projectsRaw from '../data/projects.yml?raw';
 import profileRaw from '../data/profile.yml?raw';
+import authorsRaw from '../data/authors.yml?raw';
 import metrics from '../data/scholar_metrics.json';
 import citations from '../data/citations.json';
 import github from '../data/github.json';
@@ -72,6 +73,9 @@ export function authorsOf(pub: Publication): string[] {
 }
 
 export const SELF = 'Shuai Wang';
+
+/** Co-author name → personal homepage (src/data/authors.yml). */
+export const authorLinks = (parseYaml(authorsRaw) ?? {}) as Record<string, string>;
 
 /** 'first' when listed first, 'cofirst' when marked with an equal-contribution asterisk. */
 export function authorship(authors: string[]): 'first' | 'cofirst' | undefined {
