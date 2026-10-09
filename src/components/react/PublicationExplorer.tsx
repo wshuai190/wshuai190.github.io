@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import CopyButton from './CopyButton';
+import SearchBadge from './SearchBadge';
+import { useHybridSearch } from './useHybridSearch';
 
 export interface ExplorerItem {
   url: string;
@@ -34,9 +36,9 @@ export interface ExplorerLabels {
   topics: Record<string, string>;
 }
 
-const normalise = (text: string) => text.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '');
+const PAPERS: ['paper'] = ['paper'];
 
-export default function PublicationExplorer({ items, labels, authorLinks = {}, self = 'Shuai Wang' }: { items: ExplorerItem[]; labels: ExplorerLabels; authorLinks?: Record<string, string>; self?: string }) {
+export default function PublicationExplorer({ items, labels, lang, authorLinks = {}, self = 'Shuai Wang' }: { items: ExplorerItem[]; labels: ExplorerLabels; lang: 'en' | 'zh'; authorLinks?: Record<string, string>; self?: string }) {
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('all');
   const [year, setYear] = useState('all');
@@ -60,10 +62,14 @@ export default function PublicationExplorer({ items, labels, authorLinks = {}, s
     window.history.replaceState(null, '', search ? `?${search}` : window.location.pathname);
   }, [query, topic, year, leading]);
 
-  const haystacks = useMemo(
-    () => items.map((item) => normalise([item.title, item.authors.join(' '), item.venue, item.abstract, labels.topics[item.topic] ?? ''].join(' '))),
-    [items, labels.topics],
-  );
+  const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS);
+  // Relevance order for the current query: keep results scoring at least half the best one.
+  const relevance = useMemo(() => {
+    if (!ranked?.length) return null;
+    const top = ranked[0].score;
+    const kept = ranked.filter((r, i) => i < 3 || r.score >= top * 0.5).slice(0, 20);
+    return new Map(kept.map((r, i) => [r.doc.url, i]));
+  }, [ranked]);
   const years = useMemo(() => [...new Set(items.map((i) => i.year))].sort((a, b) => b - a), [items]);
   const topicCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -71,17 +77,20 @@ export default function PublicationExplorer({ items, labels, authorLinks = {}, s
     return counts;
   }, [items]);
 
-  const terms = normalise(query).split(/\s+/).filter(Boolean);
-  const visible = items.filter((item, i) =>
-    (topic === 'all' || item.topic === topic) &&
-    (year === 'all' || String(item.year) === year) &&
-    (!leading || Boolean(item.role)) &&
-    terms.every((term) => haystacks[i].includes(term)),
-  );
-  const filtered = terms.length > 0 || topic !== 'all' || year !== 'all' || leading;
-  const groups = years
-    .map((y) => ({ year: y, items: visible.filter((item) => item.year === y) }))
-    .filter((group) => group.items.length);
+  const searching = query.trim().length > 0;
+  const enPath = (url: string) => url.replace(/^\/zh(?=\/)/, '');
+  const visible = items
+    .filter((item) =>
+      (topic === 'all' || item.topic === topic) &&
+      (year === 'all' || String(item.year) === year) &&
+      (!leading || Boolean(item.role)) &&
+      (!searching || (relevance?.has(enPath(item.url)) ?? false)))
+    .sort((a, b) => (searching && relevance ? relevance.get(enPath(a.url))! - relevance.get(enPath(b.url))! : 0));
+  const filtered = searching || topic !== 'all' || year !== 'all' || leading;
+  // While searching, show one list in relevance order; otherwise group by year.
+  const groups = searching
+    ? (visible.length ? [{ year: 0, items: visible }] : [])
+    : years.map((y) => ({ year: y, items: visible.filter((item) => item.year === y) })).filter((group) => group.items.length);
 
   return (
     <div>
@@ -91,6 +100,7 @@ export default function PublicationExplorer({ items, labels, authorLinks = {}, s
           <span className="sr-only">{labels.search}</span>
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={labels.search} className="h-10 w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]" type="search" />
         </label>
+        <div className="px-2 md:order-last"><SearchBadge mode={mode} model={model} lang={lang} /></div>
         <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 rounded-full border border-line bg-[var(--bg)] px-4 text-sm" aria-label={labels.allYears}>
           <option value="all">{labels.allYears}</option>
           {years.map((y) => <option key={y} value={y}>{y}</option>)}
@@ -115,7 +125,7 @@ export default function PublicationExplorer({ items, labels, authorLinks = {}, s
 
       {groups.map((group) => (
         <section key={group.year} className="mt-10 grid gap-4 md:grid-cols-[88px_1fr]">
-          <h2 className="serif text-3xl text-[var(--muted)] md:sticky md:top-24 md:self-start">{group.year}</h2>
+          <h2 className="serif text-3xl text-[var(--muted)] md:sticky md:top-24 md:self-start">{group.year || '↓'}</h2>
           <ol className="glass px-6">
             {group.items.map((item) => (
               <li key={item.url} className="border-b border-line py-5 last:border-b-0">

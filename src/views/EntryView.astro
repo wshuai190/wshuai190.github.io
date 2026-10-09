@@ -8,16 +8,15 @@ interface Props { lang: Lang; entry: Entry; section: 'teaching' | 'talks' | 'awa
 const { lang, entry, section } = Astro.props;
 const { Content } = await render(entry);
 const sectionTitle = t(lang, section === 'teaching' ? 'teaching.title' : section === 'talks' ? 'talks.title' : 'awards.title');
-const searchType = section === 'teaching' ? 'teaching' : section === 'talks' ? 'talk' : 'award';
 const meta = [entry.data.venue, entry.data.type, entry.data.location].filter(Boolean).join(' · ');
 const date = entry.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-AU', { year: 'numeric', month: 'long', timeZone: 'UTC' });
 ---
-<Base lang={lang} title={entry.data.title} description={entry.data.excerpt ?? undefined} searchType={searchType}>
+<Base lang={lang} title={entry.data.title} description={entry.data.excerpt ?? undefined}>
   <article class="wrap max-w-[860px]">
     <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={localePath(lang, `/${section}/`)}>← {sectionTitle}</a></nav>
     <header class="pt-8">
       <p class="label">{date}</p>
-      <h1 class="serif mt-3 text-[clamp(30px,4.4vw,46px)] leading-[1.12]" data-pagefind-meta="title">{entry.data.title}</h1>
+      <h1 class="serif mt-3 text-[clamp(30px,4.4vw,46px)] leading-[1.12]">{entry.data.title}</h1>
       {meta && <p class="mt-3 text-muted">{meta}</p>}
     </header>
     <div class="paper-body glass mt-8 p-7 text-[17px] leading-relaxed md:p-9"><Content /></div>

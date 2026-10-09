@@ -16,7 +16,7 @@ const themes = profile.themes.map((theme: any) => ({
   projects: projects.filter((p) => p.topic === theme.topic).sort((a, b) => b.year - a.year),
 }));
 ---
-<Base lang={lang} title={t(lang, 'research.title')} glow searchType="page">
+<Base lang={lang} title={t(lang, 'research.title')} glow>
   <div class="wrap">
     <header class="pb-12 pt-10 md:pt-16">
       <p class="eyebrow">{pick(profile.eyebrow, lang)}</p>

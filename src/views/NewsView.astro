@@ -8,7 +8,7 @@ const { lang } = Astro.props;
 const years = [...new Set(news.map((n) => n.date.getUTCFullYear()))].sort((a, b) => b - a);
 const ICON: Record<string, string> = { celebrate: '✦', travel: '✈', home: '●' };
 ---
-<Base lang={lang} title={t(lang, 'news.title')} glow searchType="page">
+<Base lang={lang} title={t(lang, 'news.title')} glow>
   <div class="wrap">
     <header class="pb-6 pt-10 md:pt-16">
       <p class="eyebrow">{news.length} · {pick(profile.eyebrow, lang)}</p>
