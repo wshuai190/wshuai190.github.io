@@ -19,7 +19,7 @@ const contact = [
   ['ORCID', profile.links.orcid],
 ] as const;
 ---
-<Base lang={lang} title={t(lang, 'cv.title')}>
+<Base lang={lang} title={t(lang, 'cv.title')} description={profile.cv_profile[lang]}>
   <article class="wrap max-w-[960px]">
     <header class="grid items-end gap-8 pb-10 pt-10 md:grid-cols-[1fr_180px] md:pt-16">
       <div>

@@ -5,6 +5,7 @@ import PubItem from '../components/PubItem.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/react/CopyButton';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { breadcrumbs, projectSchema } from '../lib/seo';
 import { bibtexOf, getPublications, projects, pubSlug, starsOf, type Project } from '../lib/data';
 
 interface Props { lang: Lang; project: Project }
@@ -18,8 +19,15 @@ const highlights = (lang === 'zh' ? project.highlights_zh : project.highlights) 
 const stars = starsOf(project.links.code);
 const related = projects.filter((p) => p.topic === project.topic && p.slug !== project.slug).slice(0, 3);
 const bibtex = papers.map(bibtexOf).join('\n\n');
+const description = lang === 'zh'
+  ? `${project.name}（${pick(TOPIC_LABELS[project.topic], lang)}，${project.year}）：${summary} 王率的研究项目。`
+  : `${project.name} (${pick(TOPIC_LABELS[project.topic], lang)}, ${project.year}): ${summary} A research project by Shuai Wang.`;
+const schema = [
+  projectSchema(project, lang, pubs),
+  breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'research.title'), '/research/'], [project.name, `/research/${project.slug}/`]]),
+];
 ---
-<Base lang={lang} title={project.name} description={summary} image={project.image} glow>
+<Base lang={lang} title={project.name} description={description} image={project.image} schema={schema} glow>
   <article class="wrap">
     <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={`${localePath(lang, '/research/')}#topic-${project.topic}`}>← {t(lang, 'project.back')}</a></nav>
     <header class="grid gap-10 pb-10 pt-8 lg:grid-cols-[1fr_1.15fr] lg:items-center">

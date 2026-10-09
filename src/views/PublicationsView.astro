@@ -50,7 +50,7 @@ const labels = {
   topics: Object.fromEntries(Object.entries(TOPIC_LABELS).map(([key, value]) => [key, pick(value, lang)])),
 };
 ---
-<Base lang={lang} title={t(lang, 'pubs.title')} glow>
+<Base lang={lang} title={t(lang, 'pubs.title')} description={lang === 'zh' ? `王率的 ${pubs.length} 篇论文：搜索 Agent、检索与重排序、生物医学检索与高效 RAG，可按方向与年份筛选。` : `${pubs.length} papers by Shuai Wang on search agents, retrievers and rerankers, biomedical search and efficient RAG, searchable by topic and year.`} glow>
   <div class="wrap">
     <header class="pb-10 pt-10 md:pt-16">
       <p class="eyebrow">{pubs.length} · {pick(profile.eyebrow, lang)}</p>

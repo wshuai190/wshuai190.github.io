@@ -18,6 +18,7 @@ links:
   linkedin: https://www.linkedin.com/in/shuai-wang-33125b196
   researchgate: https://www.researchgate.net/profile/Shuai-Wang-202
   twitter: https://twitter.com/dylan_wangs
+  semanticscholar: https://www.semanticscholar.org/author/2146514461
   ielab: https://ielab.io/
   thesis: /files/thesis.pdf
 
@@ -155,3 +156,38 @@ service:
     - "WSDM 2026"
     - "ICTIR 2023"
     - "ACL Rolling Review 2026"
+
+# Search engine optimisation: structured data (schema.org Person) and site descriptions.
+seo:
+  given_name: Shuai
+  family_name: Wang
+  honorific: Dr.
+  alternate_names: ["Dylan Wang", "Shuai (Dylan) Wang", "Dr. Shuai Wang", "王率"]
+  department: "ielab, School of Electrical Engineering and Computer Science"
+  alumni_of: ["The University of Queensland", "The University of Western Australia"]
+  knows_about:
+    - Information Retrieval
+    - Search Agents
+    - Deep Research Agents
+    - Dense Retrieval
+    - Neural Rerankers
+    - Retrieval-Augmented Generation
+    - Large Language Models
+    - Biomedical Information Retrieval
+    - Systematic Review Automation
+    - Boolean Query Generation
+  title:
+    en: "Dr. Shuai Wang (王率) — Search Agents, Retrieval and RAG · The University of Queensland"
+    zh: "王率博士 (Shuai Wang) — 搜索 Agent、检索与 RAG · 昆士兰大学"
+  description:
+    en: >-
+      Dr. Shuai Wang (Dylan, 王率) is a Research Fellow at ielab, The University of Queensland,
+      working on search agents, retrievers and rerankers, biomedical evidence search and efficient
+      retrieval-augmented generation (RAG), with papers at SIGIR, WSDM, WWW, ECIR, EMNLP and EACL.
+    zh: >-
+      王率博士（Shuai Wang, Dylan）是昆士兰大学 ielab 研究员，研究搜索 Agent、检索与重排序模型、生物医学证据检索与高效检索增强生成（RAG），
+      成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。
+  # Paste verification codes from Google Search Console / Bing Webmaster Tools here.
+  verification:
+    google: ""
+    bing: ""

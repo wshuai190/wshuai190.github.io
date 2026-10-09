@@ -1,0 +1,8 @@
+# https://shuaiwang.io
+User-agent: *
+Allow: /
+Disallow: /models/
+Disallow: /ort/
+Disallow: /search-index.json
+
+Sitemap: https://shuaiwang.io/sitemap-index.xml

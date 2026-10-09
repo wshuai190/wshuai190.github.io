@@ -125,3 +125,23 @@ export function venueLabel(venue: string, fallbackYear?: number): string {
   if (acronym) return `${acronym.toUpperCase()}${year ? ` ${year}` : ''}`;
   return venue.replace(/^Accepted\s+/i, '').replace(/^Proceedings of the /i, '').slice(0, 40);
 }
+
+const VENUE_FULL: Record<string, string> = {
+  'SIGIR-AP': 'ACM SIGIR Conference on Information Retrieval in the Asia Pacific',
+  SIGIR: 'International ACM SIGIR Conference on Research and Development in Information Retrieval',
+  WSDM: 'ACM International Conference on Web Search and Data Mining',
+  ECIR: 'European Conference on Information Retrieval',
+  EMNLP: 'Conference on Empirical Methods in Natural Language Processing',
+  EACL: 'Conference of the European Chapter of the Association for Computational Linguistics',
+  ICTIR: 'ACM SIGIR International Conference on the Theory of Information Retrieval',
+  ADCS: 'Australasian Document Computing Symposium',
+  TREC: 'Text REtrieval Conference',
+  ISWA: 'Intelligent Systems with Applications',
+};
+
+/** Full venue name for citation metadata, e.g. "European Conference on Information Retrieval (ECIR 2026)". */
+export function venueFull(venue: string, year: number): string {
+  const label = venueLabel(venue, year);
+  const acronym = label.split(' ')[0];
+  return VENUE_FULL[acronym] ? `${VENUE_FULL[acronym]} (${label})` : venue.replace(/^Accepted\s+/i, '');
+}

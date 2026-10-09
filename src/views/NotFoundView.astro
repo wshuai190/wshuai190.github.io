@@ -5,7 +5,7 @@ import { localePath, t, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
-<Base lang={lang} title={t(lang, 'notfound.title')} glow>
+<Base lang={lang} title={t(lang, 'notfound.title')} noindex glow>
   <section class="wrap py-24 text-center md:py-36">
     <p class="eyebrow">404</p>
     <h1 class="page-title mt-4">{t(lang, 'notfound.title')}</h1>
