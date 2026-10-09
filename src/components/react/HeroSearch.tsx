@@ -79,6 +79,7 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
       {value.trim() && results && (
         <div id="hero-results" className="glass absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden !bg-[var(--bg-raised)] shadow-2xl">
           <ul className="max-h-[50vh] overflow-y-auto p-2">
+            {shown[0]?.relaxed && <li className="mono px-4 pb-1 pt-2 text-[11px] uppercase tracking-wide text-[var(--muted)]">{lang === 'zh' ? '没有很匹配的结果 · 最接近的结果' : 'No strong matches — closest results'}</li>}
             {shown.map((result) => { const { doc } = result; return (
               <li key={doc.url + (doc.section ?? '')}>
                 <a href={passageLink(doc, lang)} className="block rounded-xl px-4 py-2.5 hover:bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]">

@@ -133,6 +133,7 @@ const VENUE_FULL: Record<string, string> = {
   'SIGIR-AP': 'Annual International ACM SIGIR Conference on Research and Development in Information Retrieval in the Asia Pacific Region',
   SIGIR: 'International ACM SIGIR Conference on Research and Development in Information Retrieval',
   WSDM: 'ACM International Conference on Web Search and Data Mining',
+  WWW: 'ACM Web Conference',
   ECIR: 'European Conference on Information Retrieval',
   EMNLP: 'Conference on Empirical Methods in Natural Language Processing',
   EACL: 'Conference of the European Chapter of the Association for Computational Linguistics',
@@ -142,9 +143,14 @@ const VENUE_FULL: Record<string, string> = {
   ISWA: 'Intelligent Systems with Applications',
 };
 
-/** Full venue name for citation metadata, e.g. "European Conference on Information Retrieval (ECIR 2026)". */
+/**
+ * Full venue name for citation metadata. Venues already written out in the data are kept as
+ * they are; short forms like "SIGIR-2024" become "International ACM SIGIR Conference … (SIGIR 2024)".
+ */
 export function venueFull(venue: string, year: number): string {
+  const original = venue.replace(/^Accepted\s+/i, '').trim();
+  if (original.split(/\s+/).length >= 4 && /[a-z]{3}/.test(original)) return original;
   const label = venueLabel(venue, year);
   const acronym = label.split(' ')[0];
-  return VENUE_FULL[acronym] ? `${VENUE_FULL[acronym]} (${label})` : venue.replace(/^Accepted\s+/i, '');
+  return VENUE_FULL[acronym] ? `${VENUE_FULL[acronym]} (${label})` : original;
 }

@@ -3,9 +3,8 @@ import { WordPiece } from './wordpiece.ts';
 
 /**
  * Hybrid site search: BM25 over titles, metadata and text, interpolated with Starbucks 2L-32
- * dense scores after per-query min-max normalisation of each over its own top-100 passages
- * (passages below a signal's 100th score get 0 for that signal):
- *   score = 0.6 · minmax₁₀₀(BM25) + 0.4 · minmax₁₀₀(Starbucks)
+ * dense scores after per-query min-max normalisation of each over all passages:
+ *   score = 0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)
  * Thresholds (see rank) only decide which passages are returned, not their scores. A result needs a BM25 match or a dense score ≥ τ. BM25 results
  * are available immediately; dense scores join once the ~15 MB model has loaded.
  */
@@ -23,7 +22,7 @@ export interface SearchDoc {
 }
 export type SearchMode = 'lexical' | 'hybrid';
 /** score = hybrid score; lexicalNorm/denseNorm = min-max normalised BM25/Starbucks; lexical/dense = raw scores. */
-export interface SearchResult { doc: SearchDoc; score: number; lexical: number; dense: number; lexicalNorm: number; denseNorm: number }
+export interface SearchResult { doc: SearchDoc; score: number; lexical: number; dense: number; lexicalNorm: number; denseNorm: number; relaxed?: boolean }
 export interface LexicalScores { scores: number[]; coverage: number[] }
 
 const STOPWORDS = new Set('a an and are as at be by can do does for from how i in is it of on or that the to was what when which who why with my me you'.split(' '));
@@ -38,9 +37,15 @@ const DENSE_AGREEMENT = 16;
 /** How BM25 and Starbucks scores are normalised before interpolation. */
 const NORMALIZATION: 'minmax' | 'fixed' = 'minmax';
 /** Min-max is computed over each signal's top-k passages (scores below the k-th become 0). */
-const NORM_TOP_K = 100;
+const NORM_TOP_K = Infinity; // top-100 lowered R@3 from 0.983 to 0.934 on the query suite
 /** Minimum hybrid score for a passage to be shown (after the relevance gate below). */
-const MIN_HYBRID = 0.3;
+const MIN_HYBRID = 0.4;
+/**
+ * Fallback when nothing passes the normal cutoffs: return up to RELAXED_LIMIT "closest matches"
+ * with a lower hybrid score, a partial keyword match or a lower Starbucks score.
+ */
+const RELAXED = { minHybrid: 0.3, minCoverage: 0.25, threshold: 17 };
+export const RELAXED_LIMIT = 3;
 
 /** Lowercased word tokens; CJK runs become character unigrams and bigrams. */
 export function lexicalTokens(text: string): string[] {
@@ -170,6 +175,19 @@ export async function search(query: string, options: { types?: SearchDoc['type']
   return { mode: (queryVector ? 'hybrid' : 'lexical') as SearchMode, results: results.slice(0, options.limit ?? results.length) };
 }
 
+type RankOptions = Parameters<typeof rankWith>[3];
+
+/**
+ * Rank with the normal cutoffs; if no passage passes them, retry once with relaxed cutoffs and
+ * return the best few pages marked `relaxed`, so semantic queries still get an answer.
+ */
+export function rank(docs: SearchDoc[], lexical: LexicalScores, queryVector: number[] | null, options: RankOptions = {}): SearchResult[] {
+  const strict = rankWith(docs, lexical, queryVector, options);
+  if (strict.length || !queryVector) return strict;
+  const relaxed = rankWith(docs, lexical, queryVector, { ...options, ...RELAXED });
+  return bestPerPage(relaxed).slice(0, RELAXED_LIMIT).map((r) => ({ ...r, relaxed: true }));
+}
+
 /** Keep the highest-scoring passage of each page (results must already be sorted). */
 export function bestPerPage(results: SearchResult[]): SearchResult[] {
   const seen = new Set<string>();
@@ -195,7 +213,7 @@ export function passageLink(doc: SearchDoc, lang: 'en' | 'zh'): string {
  * weight, a Starbucks score ≥ τ, or a keyword hit plus Starbucks ≥ DENSE_AGREEMENT. The gate is
  * needed because min-max is relative: every query, even an off-topic one, has a passage at 1.
  */
-export function rank(
+function rankWith(
   docs: SearchDoc[],
   { scores: lexical, coverage }: LexicalScores,
   queryVector: number[] | null,

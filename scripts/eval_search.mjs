@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import * as ort from 'onnxruntime-web';
 import { WordPiece } from '../src/lib/search/wordpiece.ts';
 import { Encoder, MODEL_FILE, VOCAB_FILE } from '../src/lib/search/encoder.ts';
-import { Bm25, bestPerPage, bm25Text, rank } from '../src/lib/search/hybrid.ts';
+import { Bm25, bestPerPage, bm25Text, rank, RELAXED_LIMIT } from '../src/lib/search/hybrid.ts';
 
 const verbose = process.argv.includes('--verbose');
 const BARS = {
@@ -58,10 +58,17 @@ for (const [category, bar] of Object.entries(BARS)) {
   report(category, mrr / n >= bar.mrr && r3 / n >= bar.r3, `MRR@10 ${(mrr / n).toFixed(3)} (≥ ${bar.mrr})  R@3 ${(r3 / n).toFixed(3)} (≥ ${bar.r3})  n=${n}`);
 }
 
+// Off-topic queries may fall back to at most RELAXED_LIMIT labelled "closest matches"; strong
+// (non-relaxed) results must stay rare.
 const offTopic = [];
 const allBm25 = new Bm25(docs.map(bm25Text));
-for (const q of suite.off_topic) offTopic.push([q, bestPerPage(rank(docs, allBm25.scores(q), await encoder.embed(q))).length]);
-const worst = Math.max(...offTopic.map(([, n]) => n));
-report('off_topic', worst <= MAX_OFF_TOPIC_RESULTS, `max ${worst} results (≤ ${MAX_OFF_TOPIC_RESULTS})  ${offTopic.map(([q, n]) => `${q}: ${n}`).join(' · ')}`);
+for (const q of suite.off_topic) {
+  const results = bestPerPage(rank(docs, allBm25.scores(q), await encoder.embed(q)));
+  offTopic.push([q, results.filter((r) => !r.relaxed).length, results.filter((r) => r.relaxed).length]);
+}
+const worst = Math.max(...offTopic.map(([, strong]) => strong));
+const worstRelaxed = Math.max(...offTopic.map(([, , weak]) => weak));
+report('off_topic', worst <= MAX_OFF_TOPIC_RESULTS && worstRelaxed <= RELAXED_LIMIT,
+  `max ${worst} strong (≤ ${MAX_OFF_TOPIC_RESULTS}), ${worstRelaxed} closest-match (≤ ${RELAXED_LIMIT})  ${offTopic.map(([q, s, w]) => `${q}: ${s}+${w}`).join(' · ')}`);
 
 process.exit(failed ? 1 : 0);
