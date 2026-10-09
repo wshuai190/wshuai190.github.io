@@ -97,6 +97,7 @@ const strings = {
 
   'search.placeholder': { en: 'Search papers, projects, news…', zh: '搜索论文、项目、动态…' },
   'search.empty': { en: 'No results', zh: '没有结果' },
+  'search.closest': { en: 'No strong matches — closest results', zh: '没有很匹配的结果 · 最接近的结果' },
   'search.hint': { en: 'to open · ↑↓ to move · esc to close', zh: '打开 · ↑↓ 选择 · esc 关闭' },
   'search.loading': { en: 'Searching…', zh: '搜索中…' },
   'search.dev': { en: 'Search index is built by `npm run build`.', zh: '搜索索引在 `npm run build` 时生成。' },

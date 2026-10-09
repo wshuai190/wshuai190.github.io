@@ -34,6 +34,7 @@ export interface ExplorerLabels {
   first: string;
   cofirst: string;
   leading: string;
+  closest: string;
   topics: Record<string, string>;
 }
 
@@ -121,6 +122,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
       </div>
 
       {groups.length === 0 && <p className="glass mt-8 p-10 text-center text-[var(--muted)]">{labels.empty}</p>}
+      {searching && ranked?.[0]?.relaxed && groups.length > 0 && <p className="label mt-8">{labels.closest}</p>}
 
       {groups.map((group) => (
         <section key={group.year} className="mt-10 grid gap-4 md:grid-cols-[88px_1fr]">

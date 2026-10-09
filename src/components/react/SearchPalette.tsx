@@ -84,6 +84,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
           <kbd className="mono rounded border border-line px-1.5 py-0.5 text-[11px] text-[var(--muted)]">esc</kbd>
         </div>
         <ul id="search-results" role="listbox" className="max-h-[55vh] overflow-y-auto p-2">
+          {shown[0]?.relaxed && <li className="label px-4 pb-1 pt-2" role="presentation">{t(lang, 'search.closest')}</li>}
           {shown.map((result, i) => { const { doc } = result; return (
             <li key={doc.url + doc.title} id={`search-result-${i}`} role="option" aria-selected={i === active}>
               <a href={passageLink(doc, lang)} onMouseEnter={() => setActive(i)} className={`block rounded-xl px-4 py-3 ${i === active ? 'bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]' : ''}`}>
