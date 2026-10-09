@@ -39,7 +39,7 @@ export interface Project {
 }
 
 export const profile = parseYaml(profileRaw) as any;
-export const scholar = metrics as { citations: number; h_index: number; last_updated: string };
+export const scholar = metrics as { citations: number; h_index: number; i10_index: number; last_updated: string };
 const citationCounts = citations as Record<string, number>;
 const githubStars = github as Record<string, number>;
 

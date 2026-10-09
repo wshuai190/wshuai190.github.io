@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { getPublications, profile, projects } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const pubs = await getPublications();
+const themes = profile.themes.map((theme: any) => ({
+  topic: theme.topic as string,
+  ...theme[lang],
+  papers: pubs.filter((p) => p.data.topic === theme.topic).length,
+  projects: projects.filter((p) => p.topic === theme.topic).sort((a, b) => b.year - a.year),
+}));
+---
+<Base lang={lang} title={t(lang, 'research.title')} glow searchType="page">
+  <div class="wrap">
+    <header class="pb-12 pt-10 md:pt-16">
+      <p class="eyebrow">{pick(profile.eyebrow, lang)}</p>
+      <h1 class="page-title mt-4">{t(lang, 'research.title')}</h1>
+      <p class="lede prose-links mt-6 max-w-[760px]" set:html={profile.summary[lang]} />
+    </header>
+
+    <section aria-labelledby="themes">
+      <h2 id="themes" class="sr-only">{t(lang, 'research.themes')}</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {themes.map((theme: any) => (
+          <a href={`#topic-${theme.topic}`} class="glass lift flex flex-col p-5">
+            <span class="tag">{pick(TOPIC_LABELS[theme.topic], lang)}</span>
+            <span class="serif mt-2 text-[19px] leading-snug">{theme.title}</span>
+            <span class="mt-2 text-[13px] text-muted">{theme.body}</span>
+            <span class="label mt-auto pt-4">{theme.papers} {t(lang, 'stat.papers')} · {theme.projects.length} {t(lang, 'research.projects')}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="projects" class="mt-24 scroll-mt-8">
+      <h2 class="section-title">{t(lang, 'research.projects')}</h2>
+      {themes.filter((theme: any) => theme.projects.length).map((theme: any) => (
+        <div id={`topic-${theme.topic}`} class="mt-12 scroll-mt-8">
+          <div class="mb-5 flex flex-wrap items-baseline justify-between gap-3 border-b border-line pb-3">
+            <h3 class="serif text-2xl">{theme.title}</h3>
+            <a class="text-sm font-semibold text-teal" href={`${localePath(lang, '/publications/')}?topic=${theme.topic}`}>{theme.papers} {t(lang, 'stat.papers')} →</a>
+          </div>
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {theme.projects.map((project: any) => <ProjectCard project={project} lang={lang} />)}
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section id="background" class="mt-28 scroll-mt-8">
+      <h2 class="section-title">{t(lang, 'research.background')}</h2>
+      <div class="mt-8 grid gap-5 lg:grid-cols-2">
+        <div class="glass p-7">
+          <h3 class="eyebrow">{t(lang, 'research.education')}</h3>
+          <ol class="mt-4 space-y-4">
+            {profile.education.map((item: any) => (
+              <li class="grid grid-cols-[64px_1fr] gap-3">
+                <span class="mono text-sm text-muted">{item.year}</span>
+                <span><strong class="font-semibold">{item[lang].title}</strong><br /><span class="text-muted">{item[lang].org}</span>
+                  {item.link && <><br /><a class="text-link text-sm" href={item.link}>{t(lang, 'research.thesis')} ↗</a></>}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="glass p-7">
+          <h3 class="eyebrow">{t(lang, 'research.experience')}</h3>
+          <ol class="mt-4 space-y-4">
+            {profile.experience.map((item: any) => (
+              <li class="grid grid-cols-[96px_1fr] gap-3">
+                <span class="mono text-[13px] text-muted">{item.years[lang]}</span>
+                <span><strong class="font-semibold">{item[lang].title}</strong><br /><span class="text-muted">{item[lang].org}</span>
+                  {item[lang].detail && <><br /><span class="text-sm text-muted">{item[lang].detail}</span></>}
+                </span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="glass p-7 lg:col-span-2" id="service">
+          <h3 class="eyebrow">{t(lang, 'research.service')}</h3>
+          <p class="serif mt-4 text-xl">{profile.service.lead[lang]}</p>
+          <div class="mt-5 grid gap-6 md:grid-cols-2">
+            <div>
+              <p class="label">{t(lang, 'research.journals')}</p>
+              <ul class="mt-2 space-y-1">{profile.service.journals.map((j: any) => <li>{j[lang]}</li>)}</ul>
+            </div>
+            <div>
+              <p class="label">{t(lang, 'research.conferences')}</p>
+              <ul class="mt-2 flex flex-wrap gap-2">{profile.service.conferences.map((c: string) => <li class="chip !cursor-default">{c}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>
