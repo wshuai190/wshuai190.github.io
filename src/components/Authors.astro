@@ -1,7 +1,7 @@
 ---
-import { SELF } from '../lib/data';
+import { authorLinks, SELF } from '../lib/data';
 
-/** Author list with the site owner in bold and equal-contribution asterisks as superscripts. */
+/** Author list: site owner in bold, co-authors linked to their homepages, equal-contribution asterisks as superscripts. */
 interface Props { authors: string[]; class?: string }
 const { authors, class: className } = Astro.props;
 ---
@@ -9,8 +9,11 @@ const { authors, class: className } = Astro.props;
   {authors.map((raw, i) => {
     const name = raw.replace(/\*$/, '');
     const equal = raw.endsWith('*');
+    const href = authorLinks[name];
     return (
-      <>{i > 0 && ', '}{name === SELF ? <strong class="font-semibold text-ink">{name}</strong> : name}{equal && <sup class="text-teal">*</sup>}</>
+      <>{i > 0 && ', '}{name === SELF
+        ? <strong class="font-semibold text-ink">{name}</strong>
+        : href ? <a class="underline decoration-line underline-offset-2 hover:text-teal hover:decoration-current" href={href} target="_blank" rel="noopener">{name}</a> : name}{equal && <sup class="text-teal">*</sup>}</>
     );
   })}
 </p>
