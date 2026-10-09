@@ -1,0 +1,154 @@
+# Hand-written profile content shown on Home, Research, Teaching and CV.
+# Every user-facing string has an `en` and a `zh` version.
+
+name: { en: Dr. Shuai Wang, zh: 王率博士 }
+short_name: { en: Shuai Wang, zh: 王率 }
+nickname: Dylan
+pronouns: he/him
+born: 1999
+location: { en: "Brisbane, Australia", zh: 澳大利亚布里斯班 }
+portrait: /images/ws.jpg
+cv_portrait: /images/profile/animated-dylan.webp
+email: shuai.wang2@uq.edu.au
+orcid: "0000-0002-0726-5250"
+links:
+  scholar: https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en
+  github: https://github.com/wshuai190
+  orcid: https://orcid.org/0000-0002-0726-5250
+  linkedin: https://www.linkedin.com/in/shuai-wang-33125b196
+  researchgate: https://www.researchgate.net/profile/Shuai-Wang-202
+  twitter: https://twitter.com/dylan_wangs
+  ielab: https://ielab.io/
+  thesis: /files/thesis.pdf
+
+role:
+  en: Research Fellow, ielab, The University of Queensland
+  zh: 昆士兰大学 ielab 研究员（Research Fellow）
+eyebrow:
+  en: Information Retrieval · The University of Queensland
+  zh: 信息检索 · 昆士兰大学
+headline:
+  # [[...]] marks words rendered with the gradient emphasis.
+  en: "I build [[search agents]], biomedical evidence search, and [[efficient RAG]]."
+  zh: "我研究[[搜索 Agent]]、生物医学证据检索与[[高效 RAG]]。"
+bio:
+  en: >-
+    Research Fellow at <a href="https://ielab.io/">ielab</a>, The University of Queensland.
+    I coordinate and teach INFS7410 Information Retrieval and Web Search. PhD (2025) with
+    <a href="https://ielab.io/people/guido-zuccon">Guido Zuccon</a>,
+    <a href="https://bevankoopman.github.io/">Bevan Koopman</a> and
+    <a href="https://scells.me/">Harrisen Scells</a>.
+  zh: >-
+    我在昆士兰大学 <a href="https://ielab.io/">ielab</a> 担任研究员，并担任 INFS7410（信息检索与网络搜索）课程协调员与主讲教师。
+    2025 年在 Guido Zuccon、Bevan Koopman 与 Harrisen Scells 指导下完成博士学位。
+highlight: { value: "SIGIR ’26", label: { en: Publicity chair, zh: 宣传主席 } }
+
+summary:
+  en: >-
+    <strong>Dr. Shuai Wang</strong> is a Research Fellow at <a href="https://ielab.io/">ielab</a>,
+    The University of Queensland. He works on <strong>information retrieval</strong>,
+    <strong>search agents</strong>, <strong>biomedical evidence search</strong> and
+    <strong>efficient RAG systems</strong>, with papers at SIGIR, WSDM, WWW, ECIR, EMNLP and EACL.
+    He completed his PhD at UQ in 2025 under the supervision of
+    <a href="https://researchers.uq.edu.au/researcher/22857">Prof. Guido Zuccon</a>,
+    <a href="https://bevankoopman.github.io/">A/Prof. Bevan Koopman</a> and
+    <a href="https://scells.me/">Dr. Harrisen Scells</a>, and is Course Coordinator and Lecturer
+    for INFS7410.
+  zh: >-
+    <strong>王率博士</strong>现任昆士兰大学 <a href="https://ielab.io/">ielab</a> 研究员，研究方向为<strong>信息检索</strong>、
+    <strong>search agents</strong>、<strong>生物医学证据检索</strong>与<strong>高效 RAG 系统</strong>，
+    成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。他于 2025 年在
+    <a href="https://researchers.uq.edu.au/researcher/22857">Prof. Guido Zuccon</a>、
+    <a href="https://bevankoopman.github.io/">A/Prof. Bevan Koopman</a> 与
+    <a href="https://scells.me/">Dr. Harrisen Scells</a> 指导下获得昆士兰大学博士学位，现任 INFS7410 课程协调员与主讲教师。
+
+cv_profile:
+  en: >-
+    I build search and LLM systems that are effective, efficient, and inspectable for expert
+    workflows, with a focus on deep-research agents, systematic review search, and
+    evidence-grounded generation.
+  zh: 专注于构建高效、可检视、可落地的检索与生成系统，尤其面向深度研究流程、系统综述检索与高风险信息场景。
+
+themes:
+  - topic: agents
+    en: { title: Search agents and deep-research workflows, body: "Task decomposition, Boolean retrieval, structured inspect cards, section-level fetching and tool-using agents." }
+    zh: { title: Search agents 与深度研究流程, body: "任务分解、Boolean 检索、结构化 inspect 卡片、章节级 fetch 与工具调用 Agent。" }
+  - topic: evidence
+    en: { title: Biomedical evidence search, body: "MeSH suggestion, screening prioritisation, Boolean query generation and seed-driven retrieval for systematic reviews." }
+    zh: { title: 生物医学证据检索, body: "面向系统综述的 MeSH 推荐、筛选优先级排序、Boolean 查询生成与种子文献驱动检索。" }
+  - topic: rag
+    en: { title: Efficient RAG and LLM systems, body: "Context embeddings, retrieval–generation interfaces, memory optimisation and more efficient inference pipelines." }
+    zh: { title: 高效 RAG 与 LLM 系统, body: "上下文嵌入、检索与生成接口、记忆优化，以及更高效的推理流程。" }
+  - topic: retrieval
+    en: { title: Adaptive retrieval and ranking, body: "2D Matryoshka retrieval, diffusion retrievers, reasoning rerankers, federated search and reproducibility studies." }
+    zh: { title: 自适应检索与排序, body: "2D Matryoshka 检索、扩散检索模型、推理型重排序、联邦检索与可复现研究。" }
+  - topic: security
+    en: { title: Robustness and security, body: "How prompt-injection attacks travel through rankers and realistic RAG pipelines." }
+    zh: { title: 鲁棒性与安全, body: "研究提示注入攻击如何穿过排序器与真实 RAG 流程。" }
+
+education:
+  - year: "2025"
+    en: { title: Doctor of Philosophy, org: The University of Queensland }
+    zh: { title: 哲学博士, org: 昆士兰大学 }
+    link: /files/thesis.pdf
+  - year: "2021"
+    en: { title: Master of Engineering Science, org: The University of Queensland }
+    zh: { title: 工程科学硕士, org: 昆士兰大学 }
+  - year: "2019"
+    en: { title: Bachelor of Science, org: The University of Western Australia }
+    zh: { title: 理学学士, org: 西澳大利亚大学 }
+
+experience:
+  - years: { en: 2026–present, zh: 2026–至今 }
+    en: { title: Research Fellow (Level B), org: "ielab, The University of Queensland", detail: "Supervisor: Prof. Guido Zuccon" }
+    zh: { title: 研究员（Research Fellow, Level B）, org: 昆士兰大学 ielab, detail: "导师：Prof. Guido Zuccon" }
+  - years: { en: 2025–2026, zh: 2025–2026 }
+    en: { title: Postdoctoral Research Fellow (Level A), org: "ielab, The University of Queensland", detail: "Supervisor: Prof. Guido Zuccon" }
+    zh: { title: 博士后研究员（Level A）, org: 昆士兰大学 ielab, detail: "导师：Prof. Guido Zuccon" }
+  - years: { en: Feb–Jul 2024, zh: 2024年2月–7月 }
+    en: { title: Research Intern, org: "Naver Labs Europe, Grenoble", detail: "Co-led COCOM from method design to the WSDM 2025 paper; 5.69× faster RAG inference at near-baseline quality." }
+    zh: { title: 研究实习生, org: Naver Labs Europe（法国格勒诺布尔）, detail: "共同主导 COCOM，从方法设计到 WSDM 2025 论文发表；在接近基线质量下实现 5.69 倍 RAG 推理加速。" }
+  - years: { en: 2022–2025, zh: 2022–2025 }
+    en: { title: Teaching Assistant, org: The University of Queensland, detail: "INFS7205, INFS7410, DATA7901 and DATA7902/7903." }
+    zh: { title: 助教, org: 昆士兰大学, detail: "INFS7205、INFS7410、DATA7901 及 DATA7902/7903。" }
+  - years: { en: Jul–Sep 2021, zh: 2021年7月–9月 }
+    en: { title: Research Assistant, org: The University of Queensland, detail: "TREC participation and neural information retrieval projects." }
+    zh: { title: 研究助理, org: 昆士兰大学, detail: "参与 TREC 评测与神经信息检索项目。" }
+
+supervision:
+  role: { en: Associate PhD Supervisor, zh: 博士生联合指导（Associate Supervisor） }
+  students:
+    - { name: Yongjie Zhou, url: "https://zhouyongjie.github.io/" }
+    - { name: Yu Yin, url: "https://yinyubb.github.io/" }
+
+teaching:
+  course: INFS7410
+  title: { en: Information Retrieval and Web Search, zh: 信息检索与网络搜索 }
+  body:
+    en: >-
+      I coordinate and lecture INFS7410 at UQ, teaching 120+ Master's students across classical
+      IR, dense retrieval, LLMs for search, RAG and evaluation. I mentor students on retrieval,
+      RAG and biomedical NLP projects; several have progressed to PhD scholarships and SIGIR/ECIR papers.
+    zh: >-
+      我担任昆士兰大学 INFS7410 课程协调员与主讲教师，面向 120+ 名硕士生讲授传统信息检索、稠密检索、
+      用于搜索的大语言模型、RAG 与评测。我也指导学生开展检索、RAG 与生物医学 NLP 研究，已有学生获得博士奖学金并发表 SIGIR/ECIR 论文。
+  link: https://my.uq.edu.au/programs-courses/course.html?course_code=INFS7410
+
+opportunities:
+  en: >-
+    I welcome research collaborations, student projects, and academic or industry roles where
+    search agents, retrieval systems, efficient RAG, trustworthy evaluation or biomedical evidence
+    technologies are central.
+  zh: 欢迎就检索、RAG、可信评测与生物医学证据技术交流研究合作、学生项目，以及学术界或工业界的工作机会。
+
+service:
+  lead: { en: "Publicity Chair, SIGIR 2026 (Melbourne | Naarm)", zh: SIGIR 2026 宣传主席（Melbourne | Naarm） }
+  journals:
+    - { en: "ACM Transactions on Information Systems (TOIS)", zh: ACM 信息系统学报（TOIS） }
+    - { en: Journal of Data and Information Quality, zh: Journal of Data and Information Quality }
+  conferences:
+    - "SIGIR 2024, 2025, 2026"
+    - "ECIR 2024, 2025"
+    - "WSDM 2026"
+    - "ICTIR 2023"
+    - "ACL Rolling Review 2026"
