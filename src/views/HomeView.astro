@@ -25,8 +25,8 @@ const stats = [
   { value: String(scholar.i10_index), label: t(lang, 'stat.i10') },
 ];
 const examples = lang === 'zh'
-  ? ['Boolean query generation', 'LLM rerankers', 'efficient RAG', 'systematic review screening', 'deep-search agents']
-  : ['how can LLMs write Boolean queries?', 'deep-search agents', 'prompt injection in RAG', 'Matryoshka embeddings', 'systematic review screening'];
+  ? ['深度检索 Agent', 'LLM 重排序', '系统综述', '高效 RAG', 'Boolean query generation']
+  : ['deep-search agents that read only what matters', 'reasoning rerankers trained with RL', 'how can LLMs write Boolean queries?', 'compressing context for faster RAG', 'embeddings with flexible layers and dimensions'];
 ---
 <Base lang={lang} glow>
   <div class="wrap">
@@ -43,7 +43,7 @@ const examples = lang === 'zh'
           <a class="btn" href={profile.links.scholar} rel="me noopener" target="_blank">{t(lang, 'home.scholar')} ↗</a>
         </div>
         <div class="rise rise-4 mt-8 max-w-[560px]">
-          <HeroSearch client:idle action={localePath(lang, '/publications/')} label={t(lang, 'home.search.label')} button={t(lang, 'home.search.go')} examples={examples} />
+          <HeroSearch client:idle action={localePath(lang, '/publications/')} label={t(lang, 'home.search.label')} button={t(lang, 'home.search.go')} examples={examples} lang={lang} />
         </div>
       </div>
       <figure class="rise rise-3 relative mx-auto w-full max-w-[300px]">
