@@ -34,6 +34,7 @@ const strings = {
 
   'stat.citations': { en: 'Citations', zh: '引用' },
   'stat.hindex': { en: 'h-index', zh: 'h 指数' },
+  'stat.i10': { en: 'i10-index', zh: 'i10 指数' },
   'stat.papers': { en: 'Publications', zh: '论文' },
 
   'research.title': { en: 'Research', zh: '研究' },

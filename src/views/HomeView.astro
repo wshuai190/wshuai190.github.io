@@ -22,7 +22,7 @@ const stats = [
   { value: scholar.citations.toLocaleString('en'), label: t(lang, 'stat.citations') },
   { value: String(scholar.h_index), label: t(lang, 'stat.hindex') },
   { value: String(pubs.length), label: t(lang, 'stat.papers') },
-  { value: profile.highlight.value, label: pick(profile.highlight.label, lang) },
+  { value: String(scholar.i10_index), label: t(lang, 'stat.i10') },
 ];
 const examples = lang === 'zh'
   ? ['Boolean query generation', 'LLM rerankers', 'efficient RAG', 'systematic review screening', 'deep-search agents']

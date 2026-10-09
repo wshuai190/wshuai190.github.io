@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import LinkPills from '../components/LinkPills.astro';
+import PubItem from '../components/PubItem.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CopyButton from '../components/react/CopyButton';
+import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { bibtexOf, getPublications, projects, pubSlug, starsOf, type Project } from '../lib/data';
+
+interface Props { lang: Lang; project: Project }
+const { lang, project } = Astro.props;
+
+const pubs = await getPublications();
+const papers = project.papers.map((slug) => pubs.find((p) => pubSlug(p) === slug)).filter((p) => p !== undefined);
+const abstract = papers[0]?.body?.replace(/^##\s*Abstract\s*/i, '').trim();
+const summary = lang === 'zh' ? project.summary_zh : project.summary;
+const highlights = (lang === 'zh' ? project.highlights_zh : project.highlights) ?? [];
+const stars = starsOf(project.links.code);
+const related = projects.filter((p) => p.topic === project.topic && p.slug !== project.slug).slice(0, 3);
+const bibtex = papers.map(bibtexOf).join('\n\n');
+---
+<Base lang={lang} title={project.name} description={summary} image={project.image} searchType="project" glow>
+  <article class="wrap">
+    <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={`${localePath(lang, '/research/')}#topic-${project.topic}`}>← {t(lang, 'project.back')}</a></nav>
+    <header class="grid gap-10 pb-10 pt-8 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+      <div>
+        <p class="tag">{pick(TOPIC_LABELS[project.topic], lang)} · {project.year}</p>
+        <h1 class="page-title mt-3" data-pagefind-meta="title">{project.name}</h1>
+        <p class="lede mt-5">{summary}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-2">
+          <LinkPills links={project.links} lang={lang} />
+          {stars !== undefined && <span class="mono text-sm text-muted">★ {stars} {t(lang, 'project.stars')}</span>}
+        </div>
+      </div>
+      <figure class="glass p-3">
+        <div class="figure-frame p-4"><img src={project.image} alt={`${project.name} — ${project.figure_caption ?? ''}`} class="max-h-[420px]" /></div>
+        {project.figure_caption && (
+          <figcaption class="label px-2 pb-1 pt-3">
+            {project.figure_caption}
+            {project.figure_source && <> · <a class="hover:text-ink" href={project.figure_source}>source ↗</a></>}
+          </figcaption>
+        )}
+      </figure>
+    </header>
+
+    {highlights.length > 0 && (
+      <ul class="grid gap-4 md:grid-cols-3">
+        {highlights.map((h) => <li class="glass p-5 text-[15px]">{h}</li>)}
+      </ul>
+    )}
+
+    {abstract && (
+      <section class="mt-14 max-w-[780px]">
+        <h2 class="eyebrow">{t(lang, 'pub.abstract')}</h2>
+        <p class="serif mt-4 text-[20px] leading-relaxed text-[var(--ink-soft)]">{abstract.replace(/\*\*/g, '')}</p>
+      </section>
+    )}
+
+    {papers.length > 0 && (
+      <section class="mt-14">
+        <div class="flex flex-wrap items-baseline justify-between gap-3">
+          <h2 class="section-title">{t(lang, 'project.papers')}</h2>
+          <CopyButton client:visible text={bibtex} label={`${t(lang, 'link.bibtex')}`} done={t(lang, 'link.copied')} />
+        </div>
+        <div class="glass mt-5 px-6">{papers.map((pub) => <PubItem pub={pub} lang={lang} showTopic={false} />)}</div>
+      </section>
+    )}
+
+    {related.length > 0 && (
+      <section class="mt-20">
+        <h2 class="section-title">{pick(TOPIC_LABELS[project.topic], lang)}</h2>
+        <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{related.map((p) => <ProjectCard project={p} lang={lang} />)}</div>
+      </section>
+    )}
+  </article>
+</Base>

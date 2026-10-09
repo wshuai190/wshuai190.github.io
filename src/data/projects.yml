@@ -48,7 +48,7 @@
   - 2026-08-28-iter-interaction-aware
   featured: false
 - slug: autobool
-  name: AutoBool
+  name: 'AutoBool'
   topic: evidence
   year: 2026
   summary: Dataset construction and reinforcement learning for Boolean queries in systematic review literature search.
@@ -120,7 +120,7 @@
   - 2024-07-01-bergen
   featured: false
 - slug: chunking
-  name: 'Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval'
+  name: 'Beyond Chunk-Then-Embed'
   topic: retrieval
   year: 2026
   summary: A unified framework for comparing document segmentation and embedding strategies across retrieval tasks.
@@ -134,7 +134,7 @@
   - 2026-07-01-beyond-chunk-then-embed
   featured: false
 - slug: rag-injection
-  name: Can It Reach the Generator? Investigating the Survival of Prompt-Injection Attacks in Realistic RAG Settings
+  name: 'Prompt Injection in Realistic RAG'
   topic: security
   year: 2026
   summary: Following prompt-injection attacks through retrieval, reranking and answer generation in realistic RAG settings.
@@ -148,7 +148,7 @@
   - 2026-07-27-geo-injection-rag-survival
   featured: false
 - slug: ranker-injection
-  name: The Vulnerability of LLM Rankers to Prompt Injection Attacks
+  name: 'Prompt Injection against LLM Rankers'
   topic: security
   year: 2026
   summary: A reproducibility study examining the vulnerability of LLM rankers to prompt-injection attacks.
@@ -162,7 +162,7 @@
   - 2026-07-01-vulnerability-llm-rankers
   featured: false
 - slug: rank-r1
-  name: 'Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning'
+  name: 'Rank-R1'
   topic: retrieval
   year: 2026
   summary: Reinforcement learning for reasoning in LLM-based document reranking.
@@ -176,7 +176,7 @@
   - 2026-07-01-rank-r1
   featured: false
 - slug: lightmem
-  name: 'Reproducing LightMem: Naive RAG Is Just as Good for Memory Management'
+  name: 'Reproducing LightMem'
   topic: rag
   year: 2026
   summary: Comparing constructed long-term memories with retrieval over raw user turns under matched evaluation settings.
@@ -190,7 +190,7 @@
   - 2026-07-31-lightmem-memory-management
   featured: false
 - slug: resllm
-  name: 'ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search'
+  name: 'ReSLLM'
   topic: retrieval
   year: 2024
   summary: Using language models to select resources for federated search, including the SLAT fine-tuning protocol.
@@ -204,7 +204,7 @@
   - 2024-02-19-ResLLM
   featured: false
 - slug: screening
-  name: Generating Natural Language Queries for More Effective Systematic Review Screening Prioritisation
+  name: 'Natural-Language Queries for Screening'
   topic: evidence
   year: 2023
   summary: Generating natural-language queries from Boolean queries to improve systematic review screening prioritisation.
@@ -218,7 +218,7 @@
   - 2023-09-11-booleanscreening
   featured: false
 - slug: stemming
-  name: 'Large Language Models for Stemming: Promises, Pitfalls and Failures'
+  name: 'LLMs for Stemming'
   topic: retrieval
   year: 2024
   summary: Comparing stemming techniques and examining the promises and limitations of language models for stemming.
@@ -232,7 +232,7 @@
   - 2024-03-28-llm-stemming
   featured: false
 - slug: feb4rag
-  name: 'FeB4RAG: Evaluating Federated Search in the Context of Retrieval Augmented Generation'
+  name: 'FeB4RAG'
   topic: rag
   year: 2024
   summary: Evaluating federated search across multiple resources within retrieval-augmented generation.
