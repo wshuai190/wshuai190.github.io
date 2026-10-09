@@ -4,13 +4,15 @@ import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/react/CopyButton';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
-import { authorsOf, bibtexOf, citationsOf, projectsForPaper, pubSlug, venueLabel, type Publication } from '../lib/data';
+import Authors from '../components/Authors.astro';
+import { authorship, authorsOf, bibtexOf, citationsOf, projectsForPaper, pubSlug, venueLabel, type Publication } from '../lib/data';
 
 interface Props { lang: Lang; pub: Publication }
 const { lang, pub } = Astro.props;
 const { Content } = await render(pub);
 const authors = authorsOf(pub);
 const cited = citationsOf(pub);
+const role = authorship(authors);
 const projects = projectsForPaper(pubSlug(pub));
 const links = [
   ['link.paper', pub.data.paperurl],
@@ -36,11 +38,11 @@ const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/
         {pub.data.page_type && <><span aria-hidden="true">·</span><span>{pub.data.page_type}</span></>}
         <span aria-hidden="true">·</span><a class="text-plum" href={`${localePath(lang, '/publications/')}?topic=${pub.data.topic}`}>{pick(TOPIC_LABELS[pub.data.topic], lang)}</a>
         {cited ? <><span aria-hidden="true">·</span><span>{t(lang, 'pubs.cited', { n: cited })}</span></> : null}
+        {role && <span class="rounded-full border border-teal/40 px-2 py-px text-teal">{t(lang, role === 'first' ? 'pub.first' : 'pub.cofirst')}</span>}
       </p>
       <h1 class="serif mt-4 text-[clamp(30px,4.4vw,46px)] leading-[1.12] tracking-[-0.01em]" data-pagefind-meta="title">{pub.data.title}</h1>
-      <p class="mt-4 text-[17px] text-muted">
-        {authors.map((name, i) => <>{i > 0 && ', '}{/^Shuai Wang\*?$/.test(name) ? <strong class="font-semibold text-ink">{name}</strong> : name}</>)}
-      </p>
+      <Authors authors={authors} class="mt-4 text-[17px] text-muted" />
+      {authors.some((a) => a.endsWith('*')) && <p class="mt-1 text-xs text-muted">{t(lang, 'pub.equal')}</p>}
       <p class="mt-1 text-sm text-muted">{pub.data.venue}</p>
       <div class="mt-6 flex flex-wrap gap-2">
         {links.map(([key, href]) => <a class="link-pill" href={href} target="_blank" rel="noopener">{t(lang, key)} ↗</a>)}

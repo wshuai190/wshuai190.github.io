@@ -78,6 +78,9 @@ themes:
   - topic: rag
     en: { title: Efficient RAG and LLM systems, body: "Context embeddings, retrieval–generation interfaces, memory optimisation and more efficient inference pipelines." }
     zh: { title: 高效 RAG 与 LLM 系统, body: "上下文嵌入、检索与生成接口、记忆优化，以及更高效的推理流程。" }
+  - topic: memory
+    en: { title: Memory for LLM agents, body: "How long-term memory for conversational agents should be built, retrieved and evaluated." }
+    zh: { title: LLM Agent 记忆, body: "研究对话 Agent 的长期记忆应如何构建、检索与评测。" }
   - topic: retrieval
     en: { title: Adaptive retrieval and ranking, body: "2D Matryoshka retrieval, diffusion retrievers, reasoning rerankers, federated search and reproducibility studies." }
     zh: { title: 自适应检索与排序, body: "2D Matryoshka 检索、扩散检索模型、推理型重排序、联邦检索与可复现研究。" }

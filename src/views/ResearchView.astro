@@ -2,12 +2,13 @@
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
-import { getPublications, profile, projects } from '../lib/data';
+import { authorship, authorsOf, getPublications, profile, projects } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 
 const pubs = await getPublications();
+const leading = pubs.filter((p) => authorship(authorsOf(p))).length;
 const themes = profile.themes.map((theme: any) => ({
   topic: theme.topic as string,
   ...theme[lang],
@@ -21,11 +22,12 @@ const themes = profile.themes.map((theme: any) => ({
       <p class="eyebrow">{pick(profile.eyebrow, lang)}</p>
       <h1 class="page-title mt-4">{t(lang, 'research.title')}</h1>
       <p class="lede prose-links mt-6 max-w-[760px]" set:html={profile.summary[lang]} />
+      <a class="pill mt-6" href={`${localePath(lang, '/publications/')}?lead=1`}><span class="dot"></span>{leading} {t(lang, 'research.leading')} →</a>
     </header>
 
     <section aria-labelledby="themes">
       <h2 id="themes" class="sr-only">{t(lang, 'research.themes')}</h2>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {themes.map((theme: any) => (
           <a href={`#topic-${theme.topic}`} class="glass lift flex flex-col p-5">
             <span class="tag">{pick(TOPIC_LABELS[theme.topic], lang)}</span>

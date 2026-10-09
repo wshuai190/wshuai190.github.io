@@ -1,25 +1,22 @@
 ---
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
-import { authorsOf, citationsOf, pubSlug, venueLabel, type Publication } from '../lib/data';
+import { authorship, authorsOf, citationsOf, venueLabel, type Publication } from '../lib/data';
+import Authors from './Authors.astro';
 
 interface Props { pub: Publication; lang: Lang; showTopic?: boolean }
 const { pub, lang, showTopic = true } = Astro.props;
 const href = localePath(lang, pub.data.permalink);
 const authors = authorsOf(pub);
 const cited = citationsOf(pub);
+const role = authorship(authors);
 ---
 <article class="group grid gap-1 border-b border-line py-5 last:border-b-0">
   <p class="label flex flex-wrap items-center gap-x-2">
     <span>{pub.data.date.getUTCFullYear()}</span><span aria-hidden="true">·</span><span class="text-ink">{venueLabel(pub.data.venue, pub.data.date.getUTCFullYear())}</span>
     {showTopic && <><span aria-hidden="true">·</span><span class="text-plum">{pick(TOPIC_LABELS[pub.data.topic], lang)}</span></>}
     {cited ? <><span aria-hidden="true">·</span><span>{t(lang, 'pubs.cited', { n: cited })}</span></> : null}
+    {role && <span class="rounded-full border border-teal/40 px-2 py-px text-teal">{t(lang, role === 'first' ? 'pub.first' : 'pub.cofirst')}</span>}
   </p>
   <h3 class="serif text-[21px] leading-snug"><a href={href} class="group-hover:text-teal transition-colors">{pub.data.title}</a></h3>
-  {authors.length > 0 && (
-    <p class="text-sm text-muted">
-      {authors.map((name, i) => (
-        <>{i > 0 && ', '}{/^Shuai Wang\*?$/.test(name) ? <strong class="font-semibold text-ink">{name}</strong> : name}</>
-      ))}
-    </p>
-  )}
+  {authors.length > 0 && <Authors authors={authors} class="text-sm text-muted" />}
 </article>

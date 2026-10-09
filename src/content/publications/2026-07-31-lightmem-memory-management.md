@@ -8,7 +8,7 @@ page_type: "Reproduce"
 venue: 'Proceedings of the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)'
 paperurl: 'https://arxiv.org/abs/2607.29104'
 citation: 'Yongjie Zhou, Shuai Wang, Bevan Koopman and Guido Zuccon. 2026. Reproducing LightMem: Naive RAG Is Just as Good for Memory Management. In Proceedings of the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026).'
-topic: 'rag'
+topic: 'memory'
 arxiv: '2607.29104'
 image: '/images/research/lightmem.webp'
 ---

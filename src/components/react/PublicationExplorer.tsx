@@ -14,6 +14,7 @@ export interface ExplorerItem {
   links: { label: string; href: string }[];
   bibtex: string;
   cited?: number;
+  role?: 'first' | 'cofirst';
 }
 
 export interface ExplorerLabels {
@@ -27,6 +28,9 @@ export interface ExplorerLabels {
   cited: string;
   bibtex: string;
   copied: string;
+  first: string;
+  cofirst: string;
+  leading: string;
   topics: Record<string, string>;
 }
 
@@ -36,12 +40,14 @@ export default function PublicationExplorer({ items, labels, self = 'Shuai Wang'
   const [query, setQuery] = useState('');
   const [topic, setTopic] = useState('all');
   const [year, setYear] = useState('all');
+  const [leading, setLeading] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     setQuery(params.get('q') ?? '');
     setTopic(params.get('topic') ?? 'all');
     setYear(params.get('year') ?? 'all');
+    setLeading(params.get('lead') === '1');
   }, []);
 
   useEffect(() => {
@@ -49,9 +55,10 @@ export default function PublicationExplorer({ items, labels, self = 'Shuai Wang'
     if (query) params.set('q', query);
     if (topic !== 'all') params.set('topic', topic);
     if (year !== 'all') params.set('year', year);
+    if (leading) params.set('lead', '1');
     const search = params.toString();
     window.history.replaceState(null, '', search ? `?${search}` : window.location.pathname);
-  }, [query, topic, year]);
+  }, [query, topic, year, leading]);
 
   const haystacks = useMemo(
     () => items.map((item) => normalise([item.title, item.authors.join(' '), item.venue, item.abstract, labels.topics[item.topic] ?? ''].join(' '))),
@@ -68,9 +75,10 @@ export default function PublicationExplorer({ items, labels, self = 'Shuai Wang'
   const visible = items.filter((item, i) =>
     (topic === 'all' || item.topic === topic) &&
     (year === 'all' || String(item.year) === year) &&
+    (!leading || Boolean(item.role)) &&
     terms.every((term) => haystacks[i].includes(term)),
   );
-  const filtered = terms.length > 0 || topic !== 'all' || year !== 'all';
+  const filtered = terms.length > 0 || topic !== 'all' || year !== 'all' || leading;
   const groups = years
     .map((y) => ({ year: y, items: visible.filter((item) => item.year === y) }))
     .filter((group) => group.items.length);
@@ -96,9 +104,10 @@ export default function PublicationExplorer({ items, labels, self = 'Shuai Wang'
             {label} <span className="mono text-[11px] opacity-60">{topicCounts[key] ?? 0}</span>
           </button>
         ))}
+        <button type="button" className="chip" aria-pressed={leading} onClick={() => setLeading((v) => !v)}>★ {labels.leading} <span className="mono text-[11px] opacity-60">{items.filter((i) => i.role).length}</span></button>
         <span className="label ml-auto" aria-live="polite">
           {(filtered ? labels.matching : labels.count).replace('{n}', String(visible.length))}
-          {filtered && <button type="button" className="ml-3 underline" onClick={() => { setQuery(''); setTopic('all'); setYear('all'); }}>{labels.reset}</button>}
+          {filtered && <button type="button" className="ml-3 underline" onClick={() => { setQuery(''); setTopic('all'); setYear('all'); setLeading(false); }}>{labels.reset}</button>}
         </span>
       </div>
 
@@ -115,11 +124,12 @@ export default function PublicationExplorer({ items, labels, self = 'Shuai Wang'
                   {item.type && <><span aria-hidden="true">·</span><span>{item.type}</span></>}
                   <span aria-hidden="true">·</span><span className="text-[var(--plum)]">{labels.topics[item.topic]}</span>
                   {item.cited ? <><span aria-hidden="true">·</span><span>{labels.cited.replace('{n}', String(item.cited))}</span></> : null}
+                  {item.role && <span className="rounded-full border border-[color-mix(in_srgb,var(--teal)_40%,transparent)] px-2 py-px text-[var(--teal)]">{item.role === 'first' ? labels.first : labels.cofirst}</span>}
                 </p>
                 <h3 className="serif mt-1 text-[21px] leading-snug"><a href={item.url} className="hover:text-[var(--teal)]">{item.title}</a></h3>
                 <p className="mt-1 text-sm text-[var(--muted)]">
                   {item.authors.map((name, i) => (
-                    <span key={i}>{i > 0 && ', '}{name.replace(/\*$/, '') === self ? <strong className="font-semibold text-[var(--ink)]">{name}</strong> : name}</span>
+                    <span key={i}>{i > 0 && ', '}{name.replace(/\*$/, '') === self ? <strong className="font-semibold text-[var(--ink)]">{name.replace(/\*$/, '')}</strong> : name.replace(/\*$/, '')}{name.endsWith('*') && <sup className="text-[var(--teal)]">*</sup>}</span>
                   ))}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">

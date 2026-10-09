@@ -4,7 +4,7 @@ export function parseAuthors(citation: string): string[] {
   if (!match) return [];
   return match[1]
     .split(/,\s*(?:and\s+)?|\s+and\s+/)
-    .map((name) => name.replace(/\*$/, '').trim())
+    .map((name) => name.trim())
     .filter(Boolean);
 }
 
@@ -27,7 +27,7 @@ export function buildBibtex({ slug, title, authors, venue, year, url }: BibtexIn
   const venueField = isPreprint ? 'howpublished' : isJournal ? 'journal' : 'booktitle';
   const fields: [string, string | undefined][] = [
     ['title', `{${title}}`],
-    ['author', authors.join(' and ')],
+    ['author', authors.map((name) => name.replace(/\*$/, '')).join(' and ')],
     [venueField, venue],
     ['year', String(year)],
     ['url', url],

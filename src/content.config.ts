@@ -2,7 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
-export const TOPICS = ['agents', 'evidence', 'rag', 'retrieval', 'security'] as const;
+export const TOPICS = ['agents', 'evidence', 'rag', 'memory', 'retrieval', 'security'] as const;
 
 const permalink = z.string().regex(/^\/[a-z]+\/[^/]+$/, 'permalink must look like /<section>/<slug>');
 

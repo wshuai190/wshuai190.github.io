@@ -71,10 +71,15 @@ const strings = {
   'pubs.matching': { en: '{n} matching', zh: '找到 {n} 篇' },
   'pubs.empty': { en: 'No publications match. Try fewer words.', zh: '没有匹配的论文，试试减少关键词。' },
   'pubs.reset': { en: 'Clear filters', zh: '清除筛选' },
+  'pubs.leading': { en: 'First & co-first', zh: '第一/共同一作' },
   'pubs.cited': { en: 'cited {n}×', zh: '被引 {n} 次' },
   'pub.abstract': { en: 'Abstract', zh: '摘要' },
   'pub.back': { en: 'All publications', zh: '全部论文' },
   'pub.cite': { en: 'Cite', zh: '引用' },
+  'pub.first': { en: 'First author', zh: '第一作者' },
+  'pub.cofirst': { en: 'Co-first author', zh: '共同一作' },
+  'pub.equal': { en: '* Equal contribution', zh: '* 同等贡献' },
+  'research.leading': { en: 'first or co-first author papers', zh: '篇第一或共同一作论文' },
   'pub.project': { en: 'Part of project', zh: '所属项目' },
 
   'teaching.title': { en: 'Teaching & supervision', zh: '教学与指导' },
@@ -133,6 +138,7 @@ export const TOPIC_LABELS: Record<string, Localized> = {
   agents: { en: 'Search agents', zh: '搜索 Agent' },
   evidence: { en: 'Biomedical evidence', zh: '生物医学证据' },
   rag: { en: 'Efficient RAG', zh: '高效 RAG' },
+  memory: { en: 'Agent memory', zh: 'Agent 记忆' },
   retrieval: { en: 'Retrieval & ranking', zh: '检索与排序' },
   security: { en: 'Robustness & security', zh: '鲁棒性与安全' },
 };
