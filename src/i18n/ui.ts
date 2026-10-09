@@ -136,10 +136,10 @@ export function alternatePath(lang: Lang, path: string): string {
 
 export const TOPIC_LABELS: Record<string, Localized> = {
   agents: { en: 'Search agents', zh: '搜索 Agent' },
-  evidence: { en: 'Biomedical evidence', zh: '生物医学证据' },
+  retrieval: { en: 'Retrievers & rerankers', zh: '检索与重排序' },
+  evidence: { en: 'Biomedical search', zh: '生物医学检索' },
   rag: { en: 'Efficient RAG', zh: '高效 RAG' },
   memory: { en: 'Agent memory', zh: 'Agent 记忆' },
-  retrieval: { en: 'Retrieval & ranking', zh: '检索与排序' },
   security: { en: 'Robustness & security', zh: '鲁棒性与安全' },
 };
 
