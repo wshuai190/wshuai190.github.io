@@ -59,6 +59,7 @@
   links:
     demo: https://huggingface.co/spaces/wshuai190/AutoBool-Demo
     paper: https://arxiv.org/html/2602.00005v1
+    code: https://github.com/ielab/AutoBool
   papers:
   - 2026-01-04-autobool
   featured: true
@@ -87,6 +88,7 @@
   figure_source: https://arxiv.org/html/2605.07210
   links:
     paper: https://arxiv.org/abs/2605.07210
+    code: https://github.com/ielab/diffretriever
   papers:
   - 2026-07-08-diffretriever
   featured: false
@@ -101,6 +103,7 @@
   figure_source: https://arxiv.org/html/2410.13230
   links:
     paper: https://arxiv.org/abs/2410.13230
+    code: https://github.com/ielab/Starbucks
   papers:
   - 2024-10-20-starbucks
   - 2025-05-14-2dmse-ir
@@ -116,6 +119,7 @@
   figure_source: https://arxiv.org/html/2407.01102
   links:
     paper: https://arxiv.org/abs/2407.01102
+    code: https://github.com/naver/bergen
   papers:
   - 2024-07-01-bergen
   featured: false
@@ -144,6 +148,7 @@
   figure_source: https://arxiv.org/html/2605.28017
   links:
     paper: https://arxiv.org/abs/2605.28017
+    code: https://github.com/ielab/geo_injection_rag_survival
   papers:
   - 2026-07-27-geo-injection-rag-survival
   featured: false
