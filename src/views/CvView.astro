@@ -21,7 +21,7 @@ const contact = [
 ---
 <Base lang={lang} title={t(lang, 'cv.title')} description={profile.cv_profile[lang]}>
   <article class="wrap max-w-[960px]">
-    <header class="grid items-end gap-8 pb-10 pt-10 md:grid-cols-[1fr_180px] md:pt-16">
+    <header class="pb-10 pt-10 md:pt-16">
       <div>
         <p class="eyebrow">{t(lang, 'cv.title')}</p>
         <h1 class="page-title mt-4">{profile.name[lang]} <span class="text-muted">({profile.nickname})</span></h1>
@@ -31,7 +31,6 @@ const contact = [
         </ul>
         <button type="button" onclick="window.print()" class="btn no-print mt-6">{t(lang, 'cv.print')}</button>
       </div>
-      <img src={profile.cv_portrait} alt="" width="180" height="240" class="hidden rounded-[18px] border border-line md:block" />
     </header>
 
     <section class="cv-section">
