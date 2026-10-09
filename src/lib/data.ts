@@ -96,11 +96,18 @@ export function projectsForPaper(slug: string): Project[] {
   return projects.filter((p) => p.papers.includes(slug));
 }
 
-/** Short venue label for chips, e.g. "SIGIR 2026" or "arXiv". */
-export function venueLabel(venue: string): string {
+const VENUE_NAMES: [RegExp, string][] = [
+  [/web search and data mining/i, 'WSDM'],
+  [/intelligent systems with applications/i, 'ISWA'],
+];
+
+/** Short venue label for chips, e.g. "SIGIR 2026" or "arXiv". Falls back to the publication year. */
+export function venueLabel(venue: string, fallbackYear?: number): string {
   if (/arxiv/i.test(venue)) return 'arXiv';
-  const match = venue.match(/\b(SIGIR-AP|SIGIR|WSDM|WWW|ECIR|EMNLP|EACL|ACL|CIKM|ICTIR|ADCS|TOIS|TREC|JASIST|IPM)\b/i);
-  const year = venue.match(/(20\d{2})/);
-  if (match) return `${match[1].toUpperCase()}${year ? ` ${year[1]}` : ''}`;
-  return venue.replace(/^Accepted\s+/i, '').replace(/^(Proceedings of the )/i, '').slice(0, 40);
+  const year = venue.match(/(20\d{2})/)?.[1] ?? fallbackYear;
+  // Also matches "SIGIR-2026", "ECIR2026" and "SIGIR-AP-2023".
+  const acronym = venue.match(/\b(SIGIR-AP|SIGIR|WSDM|WWW|ECIR|EMNLP|EACL|ACL|CIKM|ICTIR|ADCS|TOIS|TREC|JASIST|IPM)(?=\b|-?\d)/i)?.[1]
+    ?? VENUE_NAMES.find(([pattern]) => pattern.test(venue))?.[1];
+  if (acronym) return `${acronym.toUpperCase()}${year ? ` ${year}` : ''}`;
+  return venue.replace(/^Accepted\s+/i, '').replace(/^Proceedings of the /i, '').slice(0, 40);
 }

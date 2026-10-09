@@ -10,7 +10,7 @@ const cited = citationsOf(pub);
 ---
 <article class="group grid gap-1 border-b border-line py-5 last:border-b-0">
   <p class="label flex flex-wrap items-center gap-x-2">
-    <span>{pub.data.date.getUTCFullYear()}</span><span aria-hidden="true">·</span><span class="text-ink">{venueLabel(pub.data.venue)}</span>
+    <span>{pub.data.date.getUTCFullYear()}</span><span aria-hidden="true">·</span><span class="text-ink">{venueLabel(pub.data.venue, pub.data.date.getUTCFullYear())}</span>
     {showTopic && <><span aria-hidden="true">·</span><span class="text-plum">{pick(TOPIC_LABELS[pub.data.topic], lang)}</span></>}
     {cited ? <><span aria-hidden="true">·</span><span>{t(lang, 'pubs.cited', { n: cited })}</span></> : null}
   </p>

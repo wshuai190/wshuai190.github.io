@@ -141,7 +141,9 @@ opportunities:
   zh: 欢迎就检索、RAG、可信评测与生物医学证据技术交流研究合作、学生项目，以及学术界或工业界的工作机会。
 
 service:
-  lead: { en: "Publicity Chair, SIGIR 2026 (Melbourne | Naarm)", zh: SIGIR 2026 宣传主席（Melbourne | Naarm） }
+  roles:
+    - { en: "Publicity Chair, SIGIR 2026 (Melbourne | Naarm)", zh: SIGIR 2026 宣传主席（Melbourne | Naarm） }
+    - { en: "Queensland Satellite Chair, SIGIR-AP 2025", zh: SIGIR-AP 2025 昆士兰分会场主席 }
   journals:
     - { en: "ACM Transactions on Information Systems (TOIS)", zh: ACM 信息系统学报（TOIS） }
     - { en: Journal of Data and Information Quality, zh: Journal of Data and Information Quality }

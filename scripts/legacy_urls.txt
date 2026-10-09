@@ -130,4 +130,3 @@
 /zh/teaching/2023-infs7410
 /zh/teaching/2024-infs7410
 /zh/teaching/2025-infs7410
-/zh/zh/news/

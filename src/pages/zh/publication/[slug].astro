@@ -1,0 +1,12 @@
+---
+import PublicationView from '@/views/PublicationView.astro';
+import { getPublications, pubSlug } from '@/lib/data';
+
+export async function getStaticPaths() {
+  const pubs = await getPublications();
+  return pubs.map((pub) => ({ params: { slug: pubSlug(pub) }, props: { pub } }));
+}
+
+const { pub } = Astro.props;
+---
+<PublicationView lang="zh" pub={pub} />

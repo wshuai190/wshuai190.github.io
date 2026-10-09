@@ -1,0 +1,72 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CopyButton from '../components/react/CopyButton';
+import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { authorsOf, bibtexOf, citationsOf, projectsForPaper, pubSlug, venueLabel, type Publication } from '../lib/data';
+
+interface Props { lang: Lang; pub: Publication }
+const { lang, pub } = Astro.props;
+const { Content } = await render(pub);
+const authors = authorsOf(pub);
+const cited = citationsOf(pub);
+const projects = projectsForPaper(pubSlug(pub));
+const links = [
+  ['link.paper', pub.data.paperurl],
+  ['link.code', pub.data.code],
+  ['link.demo', pub.data.demo],
+  ['link.site', pub.data.project],
+].filter(([, href]) => href) as [Parameters<typeof t>[1], string][];
+const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '').slice(0, 220);
+---
+<Base lang={lang} title={pub.data.title} description={description} image={pub.data.image} searchType="paper">
+  <Fragment slot="head">
+    <meta name="citation_title" content={pub.data.title} />
+    {authors.map((name) => <meta name="citation_author" content={name.replace(/\*$/, '')} />)}
+    <meta name="citation_publication_date" content={pub.data.date.toISOString().slice(0, 10).replace(/-/g, '/')} />
+    {pub.data.paperurl && <meta name="citation_pdf_url" content={pub.data.paperurl} />}
+  </Fragment>
+  <article class="wrap max-w-[920px]">
+    <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={localePath(lang, '/publications/')}>← {t(lang, 'pub.back')}</a></nav>
+    <header class="pt-8">
+      <p class="label flex flex-wrap gap-x-2">
+        <span>{pub.data.date.getUTCFullYear()}</span><span aria-hidden="true">·</span>
+        <span class="text-ink">{venueLabel(pub.data.venue, pub.data.date.getUTCFullYear())}</span>
+        {pub.data.page_type && <><span aria-hidden="true">·</span><span>{pub.data.page_type}</span></>}
+        <span aria-hidden="true">·</span><a class="text-plum" href={`${localePath(lang, '/publications/')}?topic=${pub.data.topic}`}>{pick(TOPIC_LABELS[pub.data.topic], lang)}</a>
+        {cited ? <><span aria-hidden="true">·</span><span>{t(lang, 'pubs.cited', { n: cited })}</span></> : null}
+      </p>
+      <h1 class="serif mt-4 text-[clamp(30px,4.4vw,46px)] leading-[1.12] tracking-[-0.01em]" data-pagefind-meta="title">{pub.data.title}</h1>
+      <p class="mt-4 text-[17px] text-muted">
+        {authors.map((name, i) => <>{i > 0 && ', '}{/^Shuai Wang\*?$/.test(name) ? <strong class="font-semibold text-ink">{name}</strong> : name}</>)}
+      </p>
+      <p class="mt-1 text-sm text-muted">{pub.data.venue}</p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {links.map(([key, href]) => <a class="link-pill" href={href} target="_blank" rel="noopener">{t(lang, key)} ↗</a>)}
+        {pub.data.citation && <CopyButton client:visible text={pub.data.citation} label={t(lang, 'link.citation')} done={t(lang, 'link.copied')} />}
+        <CopyButton client:visible text={bibtexOf(pub)} label={t(lang, 'link.bibtex')} done={t(lang, 'link.copied')} />
+      </div>
+    </header>
+
+    {pub.data.image && (
+      <figure class="glass mt-10 p-3"><div class="figure-frame p-4"><img src={pub.data.image} alt="" class="max-h-[440px]" /></div></figure>
+    )}
+
+    <section class="paper-body serif mt-10 text-[19px] leading-relaxed text-[var(--ink-soft)]">
+      <Content />
+    </section>
+
+    <details class="glass mt-10 p-5 text-sm">
+      <summary class="cursor-pointer font-semibold">{t(lang, 'pub.cite')} · BibTeX</summary>
+      <pre class="mono mt-4 overflow-x-auto whitespace-pre-wrap text-[12.5px] text-muted">{bibtexOf(pub)}</pre>
+    </details>
+
+    {projects.length > 0 && (
+      <section class="mt-16">
+        <h2 class="eyebrow">{t(lang, 'pub.project')}</h2>
+        <div class="mt-5 grid gap-5 sm:grid-cols-2">{projects.map((p) => <ProjectCard project={p} lang={lang} />)}</div>
+      </section>
+    )}
+  </article>
+</Base>

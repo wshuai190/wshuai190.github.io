@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import PublicationExplorer, { type ExplorerItem } from '../components/react/PublicationExplorer';
+import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { authorsOf, bibtexOf, citationsOf, getPublications, profile, projectsForPaper, pubSlug, venueLabel } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const pubs = await getPublications();
+const items: ExplorerItem[] = pubs.map((pub) => {
+  const project = projectsForPaper(pubSlug(pub))[0];
+  const links = [
+    pub.data.paperurl && { label: t(lang, 'link.paper'), href: pub.data.paperurl },
+    pub.data.code && { label: t(lang, 'link.code'), href: pub.data.code },
+    pub.data.demo && { label: t(lang, 'link.demo'), href: pub.data.demo },
+    pub.data.project && { label: t(lang, 'link.site'), href: pub.data.project },
+    project && { label: project.name, href: localePath(lang, `/research/${project.slug}/`) },
+  ].filter(Boolean) as { label: string; href: string }[];
+  return {
+    url: localePath(lang, pub.data.permalink),
+    title: pub.data.title,
+    authors: authorsOf(pub),
+    venue: pub.data.venue,
+    venueLabel: venueLabel(pub.data.venue, pub.data.date.getUTCFullYear()),
+    year: pub.data.date.getUTCFullYear(),
+    topic: pub.data.topic,
+    type: pub.data.page_type,
+    abstract: (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').slice(0, 1200),
+    links,
+    bibtex: bibtexOf(pub),
+    cited: citationsOf(pub),
+  };
+});
+const labels = {
+  search: t(lang, 'pubs.search'),
+  all: t(lang, 'pubs.all'),
+  allYears: t(lang, 'pubs.allyears'),
+  count: t(lang, 'pubs.count'),
+  matching: t(lang, 'pubs.matching'),
+  empty: t(lang, 'pubs.empty'),
+  reset: t(lang, 'pubs.reset'),
+  cited: t(lang, 'pubs.cited'),
+  bibtex: t(lang, 'link.bibtex'),
+  copied: t(lang, 'link.copied'),
+  topics: Object.fromEntries(Object.entries(TOPIC_LABELS).map(([key, value]) => [key, pick(value, lang)])),
+};
+---
+<Base lang={lang} title={t(lang, 'pubs.title')} glow>
+  <div class="wrap">
+    <header class="pb-10 pt-10 md:pt-16">
+      <p class="eyebrow">{pubs.length} · {pick(profile.eyebrow, lang)}</p>
+      <h1 class="page-title mt-4">{t(lang, 'pubs.title')}</h1>
+      <p class="lede mt-5">
+        {t(lang, 'pubs.lede')} <a class="text-link" href={profile.links.scholar}>Google Scholar</a> · <a class="text-link" href={profile.links.orcid}>ORCID</a>.
+      </p>
+    </header>
+    <PublicationExplorer client:load items={items} labels={labels} />
+  </div>
+</Base>
