@@ -1,12 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import { localePath, t, type Lang } from '../i18n/ui';
+import { profile } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
 <Base lang={lang} title={t(lang, 'notfound.title')} noindex glow>
-  <section class="wrap py-24 text-center md:py-36">
+  <section class="wrap py-24 text-center md:py-32">
+    <img src={profile.cv_portrait} alt="" width="120" height="160" class="mx-auto mb-8 w-[120px] -rotate-3 rounded-[14px] border border-line shadow-[var(--lift)]" />
     <p class="eyebrow">404</p>
     <h1 class="page-title mt-4">{t(lang, 'notfound.title')}</h1>
     <p class="lede mx-auto mt-5">{t(lang, 'notfound.body')}</p>

@@ -30,8 +30,13 @@ const examples = lang === 'zh'
 ---
 <Base lang={lang} glow>
   <div class="wrap">
-    <section class="grid items-center gap-12 pb-14 pt-10 md:grid-cols-[1fr_300px] md:gap-[72px] md:pt-20">
+    <section class="grid items-center gap-12 pb-14 pt-8 md:grid-cols-[1fr_220px] md:gap-20 md:pt-20">
       <div>
+        <!-- Mobile: small avatar instead of the large portrait. -->
+        <div class="mb-6 flex items-center gap-4 md:hidden">
+          <img src={profile.portrait} alt={profile.short_name[lang]} width="80" height="80" class="h-20 w-20 rounded-full border border-line object-cover object-top" />
+          <p class="text-[13px] leading-snug text-muted">{pick(profile.location, lang)}<br />{profile.pronouns}</p>
+        </div>
         <a href={latest.url ?? localePath(lang, '/news/')} class="pill rise">
           <span class="dot"></span><span class="truncate">{t(lang, 'home.new')} · {(lang === 'zh' && latest.title_zh) || latest.title}</span>
         </a>
@@ -46,9 +51,9 @@ const examples = lang === 'zh'
           <HeroSearch client:idle action={localePath(lang, '/publications/')} label={t(lang, 'home.search.label')} button={t(lang, 'home.search.go')} examples={examples} lang={lang} />
         </div>
       </div>
-      <figure class="rise rise-3 relative mx-auto w-full max-w-[300px]">
-        <div class="absolute -inset-3.5 rounded-[26px] bg-gradient-to-br from-[var(--glow-1)] to-[var(--glow-2)] blur-[18px]" aria-hidden="true"></div>
-        <img src={profile.portrait} alt={profile.short_name[lang]} width="300" height="375" fetchpriority="high" class="relative aspect-[4/5] w-full rounded-[18px] border border-line object-cover" />
+      <figure class="rise rise-3 relative hidden w-full max-w-[220px] justify-self-end md:block">
+        <div class="absolute -inset-2 rounded-[22px] bg-gradient-to-br from-[var(--glow-1)] to-[var(--glow-2)] opacity-60 blur-[14px]" aria-hidden="true"></div>
+        <img src={profile.portrait} alt={profile.short_name[lang]} width="220" height="275" fetchpriority="high" class="relative aspect-[4/5] w-full rounded-[16px] border border-line object-cover" />
         <figcaption class="relative mt-3 text-[13px] text-muted">{pick(profile.location, lang)} · {profile.pronouns}</figcaption>
       </figure>
     </section>
