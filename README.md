@@ -33,7 +33,7 @@ Secrets: `SERPAPI_KEY` (required). Optional repository variable `OPENALEX_MAILTO
 ## Site search
 
 ⌘K search, the home search box and the Publications search use **hybrid retrieval with score
-fusion**: `0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)` (per-query min-max over all passages),
+fusion**: `0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)` (per-query min-max over each signal's top-100 passages),
 where Starbucks is the dot product from a 2-layer, 32-dim cut of
 [ielabgroup/Starbucks-msmarco](https://huggingface.co/ielabgroup/Starbucks-msmarco)
 (`public/models/starbucks-2l-32`: first 2 layers, first 10k vocabulary rows, CLS[:32], int8,
@@ -45,8 +45,8 @@ where Starbucks is the dot product from a 2-layer, 32-dim cut of
   List pages that repeat other pages (home, Publications, CV) are not indexed.
 - **No re-encoding**: vectors are cached in `src/data/search-embeddings.json` by content hash;
   a build only encodes new or changed passages (new papers from the daily sync included).
-- **Pipeline**: min-max normalise BM25 and Starbucks per query → hybrid = 0.6·BM25 + 0.4·Starbucks
-  → show passages with hybrid ≥ 0.4 that pass a relevance gate on raw scores (keyword match
+- **Pipeline**: min-max normalise BM25 and Starbucks per query over each one's top 100 →
+  hybrid = 0.6·BM25 + 0.4·Starbucks → show passages with hybrid ≥ 0.3 that pass a relevance gate on raw scores (keyword match
   covering ≥ 40% of the query's idf weight, Starbucks ≥ 20, or a keyword hit plus Starbucks ≥ 16;
   needed because min-max is relative per query). Results show the normalised BM25, Starbucks and
   hybrid scores (raw scores in the tooltip). Settings were chosen by grid search on the query suite.
