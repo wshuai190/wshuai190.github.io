@@ -1,6 +1,0 @@
-{% if site.data.scholar_metrics %}
-{% assign m = site.data.scholar_metrics %}
-<p class="scholar-stats-line">
-  {% if site.author.googlescholar %}<a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener">{% endif %}{{ m.citations }} citations &middot; h-index {{ m.h_index }}{% if site.author.googlescholar %}</a>{% endif %}
-</p>
-{% endif %}

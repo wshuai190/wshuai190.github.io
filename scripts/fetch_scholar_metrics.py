@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Fetch Google Scholar metrics and save to _data/scholar_metrics.json.
+Fetch Google Scholar metrics and save to src/data/scholar_metrics.json.
 Run by GitHub Actions daily.
 
 Strategy (tries in order, returns first success):
@@ -142,7 +142,7 @@ def fetch_via_direct_html():
 
 def main():
     repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    data_file = os.path.join(repo_root, "_data", "scholar_metrics.json")
+    data_file = os.path.join(repo_root, "src", "data", "scholar_metrics.json")
 
     attempts = [
         ("SerpAPI",      fetch_via_serpapi),

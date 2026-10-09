@@ -1,15 +1,10 @@
-/.idea
-/vendor/bundle
-Screenshot 2026-03-21 at 9.40.08 PM.png
-/_site
-/AGENTS.md
-/
-assets/.DS_Store
-_includes/.DS_Store
-research_vision_decision_grade_information_systems.docx
-
-# Astro
+# Build output and dependencies
 /dist
 /node_modules
 /.astro
+
+# Local files
 .DS_Store
+.idea/
+*.docx
+/AGENTS.md

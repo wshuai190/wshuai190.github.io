@@ -1,4 +1,4 @@
-"""Check local navigation and assets on the site's primary generated pages."""
+"""Fail if any page in the build links to a missing internal page or asset."""
 
 import sys
 from html.parser import HTMLParser
@@ -19,33 +19,31 @@ class Links(HTMLParser):
 
 
 def main():
-    root = Path(sys.argv[1] if len(sys.argv) > 1 else "_site")
-    routes = ("", "research/", "publications/", "cv/", "awards/", "teaching/", "talks/", "news/")
+    root = Path(sys.argv[1] if len(sys.argv) > 1 else "dist")
+    pages = [p for p in root.rglob("*.html") if "pagefind" not in p.parts]
+    if not pages:
+        print(f"No HTML pages found under {root}")
+        return 1
     errors = []
-    checked = 0
-    for language in ("", "zh/"):
-        for route in routes:
-            path = root / language / route / "index.html"
-            if not path.exists():
-                errors.append(f"Missing page: {path}")
+    for path in pages:
+        parser = Links()
+        parser.feed(path.read_text(encoding="utf-8"))
+        page_url = "/" + path.relative_to(root).as_posix()
+        for target in parser.targets:
+            url = urlsplit(target)
+            if url.scheme or url.netloc or not url.path:
                 continue
-            parser = Links()
-            parser.feed(path.read_text(encoding="utf-8"))
-            checked += 1
-            for target in parser.targets:
-                url = urlsplit(target)
-                if url.scheme or url.netloc or not url.path:
-                    continue
-                resolved = urlsplit(urljoin("/" + language + route, target)).path
-                destination = root / unquote(resolved).lstrip("/")
-                if not any(candidate.is_file() for candidate in (
-                    destination, destination / "index.html", destination.with_suffix(".html")
-                )):
-                    errors.append(f"{path}: missing {target}")
+            resolved = urlsplit(urljoin(page_url, target)).path
+            destination = root / unquote(resolved).lstrip("/")
+            if not any(candidate.is_file() for candidate in (
+                destination, destination / "index.html", destination.with_name(destination.name + ".html")
+            )):
+                errors.append(f"{path.relative_to(root)}: missing {target}")
     if errors:
         print("\n".join(sorted(set(errors))))
+        print(f"{len(set(errors))} broken internal links or assets")
         return 1
-    print(f"Checked navigation and assets on {checked} primary pages.")
+    print(f"Checked internal links and assets on {len(pages)} pages.")
     return 0
 
 
