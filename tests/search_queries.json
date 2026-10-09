@@ -1,0 +1,70 @@
+{
+  "_comment": "Site-search regression queries. `relevant` lists publication slugs (or project slugs for type=project). Run: npm run build && node scripts/eval_search.mjs",
+  "known_item": [
+    { "q": "AutoBool", "relevant": ["2026-01-04-autobool"] },
+    { "q": "MeSH", "relevant": ["2021-12-29-shuai-meshsuggest", "2022-09-01-shuai-meshjournal", "2023-02-27-shuai-meshdemo"] },
+    { "q": "Rank-R1", "relevant": ["2026-07-01-rank-r1"] },
+    { "q": "BERGEN", "relevant": ["2024-07-01-bergen"] },
+    { "q": "FeB4RAG", "relevant": ["2024-03-26-shuai-feb4rag"] },
+    { "q": "ReSLLM", "relevant": ["2024-02-19-ResLLM"] },
+    { "q": "LightMem", "relevant": ["2026-07-31-lightmem-memory-management"] },
+    { "q": "DiffRetriever", "relevant": ["2026-07-08-diffretriever"] },
+    { "q": "Starbucks", "relevant": ["2024-10-20-starbucks"] },
+    { "q": "ITER agentic search", "relevant": ["2026-08-28-iter-interaction-aware"] },
+    { "q": "Evalugator", "relevant": ["2026-01-01-evalugator"] },
+    { "q": "TREC deep learning track", "relevant": ["2021-09-01-arvin-trecdl"] },
+    { "q": "seed studies", "relevant": ["2022-07-01-shuai-seedcollection", "2022-02-28-shuai-reproducesdr"] },
+    { "q": "stemming", "relevant": ["2024-03-28-llm-stemming"] },
+    { "q": "corpus subsampling", "relevant": ["2025-01-01-corpus_subsampling"] }
+  ],
+  "natural_language": [
+    { "q": "how can LLMs write Boolean queries for systematic reviews", "relevant": ["2023-07-23-sigirchatgpt", "2026-01-04-autobool", "2025-05-14-chatgpt-rebuttle"] },
+    { "q": "deep research agent that reads only the relevant sections of web pages", "relevant": ["2026-08-03-search-inspect-fetch"] },
+    { "q": "generating boolean search strings with reinforcement learning", "relevant": ["2026-01-04-autobool"] },
+    { "q": "zero-shot LLMs for screening abstracts in systematic reviews", "relevant": ["2023-12-19-llmscreening"] },
+    { "q": "neural rankers to prioritise studies for medical review screening", "relevant": ["2022-12-14-shuai-neuralsr", "2023-09-11-booleanscreening"] },
+    { "q": "do prompt injections survive retrieval and reranking in RAG", "relevant": ["2026-07-27-geo-injection-rag-survival"] },
+    { "q": "are LLM rankers vulnerable to prompt injection", "relevant": ["2026-07-01-vulnerability-llm-rankers"] },
+    { "q": "sensitivity of zero-shot LLM rankers to prompt wording", "relevant": ["2024-04-03-sunprompting"] },
+    { "q": "how should generative ad hoc retrieval be evaluated", "relevant": ["2024-03-27-eval-gen"] },
+    { "q": "pseudo relevance feedback with dense and sparse retrievers", "relevant": ["2022-07-02-hang-sigirprfi"] },
+    { "q": "topic aware sampling for training dense retrievers", "relevant": ["2023-07-23-sigirtasb"] },
+    { "q": "should dense retrievers be interpolated with BM25", "relevant": ["2021-07-01-shuai-InterpolateDR", "2022-07-02-hang-sigirprfi"] },
+    { "q": "embeddings that work at different layers and dimensions", "relevant": ["2024-10-20-starbucks", "2025-05-14-2dmse-ir"] },
+    { "q": "selecting resources for federated search with LLMs", "relevant": ["2024-02-19-ResLLM"] },
+    { "q": "benchmarking library for retrieval augmented generation", "relevant": ["2024-07-01-bergen"] },
+    { "q": "evaluating RAG systems without relevance labels", "relevant": ["2026-01-01-evalugator"] },
+    { "q": "diffusion language models for dense and sparse retrieval", "relevant": ["2026-07-08-diffretriever"] },
+    { "q": "comparing document chunking strategies for retrieval", "relevant": ["2026-07-01-beyond-chunk-then-embed"] },
+    { "q": "reranker that reasons before ranking, trained with RL", "relevant": ["2026-07-01-rank-r1"] },
+    { "q": "where dense retrievers get their knowledge from pre-training or fine-tuning", "relevant": ["2025-05-14-pretrain-fine-tune"] }
+  ],
+  "paraphrase": [
+    { "q": "long-term memory for chat assistants", "relevant": ["2026-07-31-lightmem-memory-management"] },
+    { "q": "compressing retrieved context to speed up answer generation", "relevant": ["2024-07-16-COCOM"] },
+    { "q": "retriever for agents trained on their interaction history", "relevant": ["2026-08-28-iter-interaction-aware"] },
+    { "q": "query term suggestions for medical literature search", "relevant": ["2021-12-29-shuai-meshsuggest", "2022-09-01-shuai-meshjournal", "2023-02-27-shuai-meshdemo"] },
+    { "q": "estimating retrieval effectiveness on huge collections cheaply", "relevant": ["2025-01-01-corpus_subsampling"] }
+  ],
+  "robustness": [
+    { "q": "Systematic Review BOOLEAN", "relevant": ["2023-07-23-sigirchatgpt", "2026-01-04-autobool", "2025-05-14-chatgpt-rebuttle", "2022-09-01-shuai-meshjournal", "2023-02-27-shuai-meshdemo"] },
+    { "q": "  RAG   evaluation  ", "relevant": ["2026-01-01-evalugator", "2024-07-01-bergen", "2024-03-26-shuai-feb4rag", "2024-03-27-eval-gen"] },
+    { "q": "dense retriever + BM25 interpolation", "relevant": ["2021-07-01-shuai-InterpolateDR", "2022-07-02-hang-sigirprfi"] },
+    { "q": "chatgpt", "relevant": ["2023-07-23-sigirchatgpt", "2025-05-14-chatgpt-rebuttle"] }
+  ],
+  "chinese_projects": [
+    { "q": "系统综述", "relevant": ["autobool", "screening"] },
+    { "q": "检索增强生成 评测", "relevant": ["bergen", "feb4rag"] },
+    { "q": "长期记忆", "relevant": ["lightmem"] },
+    { "q": "提示注入", "relevant": ["rag-injection", "ranker-injection"] }
+  ],
+  "off_topic": [
+    "banana bread recipe",
+    "football world cup results",
+    "best pizza in town",
+    "how to fix my car engine",
+    "weather tomorrow in brisbane",
+    "taylor swift concert tickets",
+    "cheap flights to tokyo"
+  ]
+}

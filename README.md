@@ -32,14 +32,26 @@ Secrets: `SERPAPI_KEY` (required). Optional repository variable `OPENALEX_MAILTO
 
 ## Site search
 
-⌘K search and the Publications search box use **hybrid retrieval**: BM25 fused 50/50 (after
-min-max normalisation) with dense scores from a 2-layer, 32-dim cut of
-[Starbucks](https://huggingface.co/ielabgroup/Starbucks-msmarco) (`public/models/starbucks-2l-32`,
-int8, 10k-token vocabulary, ~15 MB gzipped). Every build re-encodes all papers, projects and news
-into `/search-index.json` with the same onnxruntime-web kernels the browser uses, so new papers —
-added by hand or by the daily sync — are searchable after the next deploy. BM25 answers instantly;
-the model loads in the background on first search. Regenerate the model with
-`python3 scripts/export_starbucks.py` (needs torch, transformers, onnx, onnxruntime).
+⌘K search, the home search box and the Publications search use **hybrid retrieval with score
+fusion**: `0.5 · BM25/max(BM25) + 0.5 · clamp((Starbucks − 20) / (28 − 20))`, where Starbucks is
+the dot product from a 2-layer, 32-dim cut of
+[ielabgroup/Starbucks-msmarco](https://huggingface.co/ielabgroup/Starbucks-msmarco)
+(`public/models/starbucks-2l-32`: first 2 layers, first 10k vocabulary rows, CLS[:32], int8,
+~15 MB gzipped). Each result shows both raw scores.
+
+- **Index**: after `astro build`, `scripts/build_search_index.mjs` splits every content page
+  (papers incl. abstracts, projects, Research, Teaching, News, talks, awards) into ~120-word
+  passages per heading and links each result to its passage (`#anchor` + `#:~:text=`).
+  List pages that repeat other pages (home, Publications, CV) are not indexed.
+- **No re-encoding**: vectors are cached in `src/data/search-embeddings.json` by content hash;
+  a build only encodes new or changed passages (new papers from the daily sync included).
+- **Cutoffs**: a page is returned for a keyword match covering ≥ 40% of the query's idf weight,
+  a Starbucks score ≥ 20, or a keyword hit plus Starbucks ≥ 16 (tuned by grid search).
+- **Tests**: `node scripts/eval_search.mjs` runs `tests/search_queries.json` (known-item,
+  natural-language, paraphrase, robustness, Chinese and off-topic queries) on every deploy.
+
+Regenerate the model with `python3 scripts/export_starbucks.py` (needs torch, transformers,
+onnx, onnxruntime).
 
 ## Editing content
 

@@ -1,21 +1,36 @@
-import { Encoder, MODEL_FILE, VOCAB_FILE } from './encoder.ts';
+import { DENSE_CEILING, DENSE_THRESHOLD, Encoder, MODEL_FILE, VOCAB_FILE } from './encoder.ts';
 import { WordPiece } from './wordpiece.ts';
-import type { SearchDoc } from '../../pages/search-index.json';
 
 /**
- * Hybrid site search: BM25 over titles, metadata and text, fused with Starbucks 2L-32
- * dense scores (0.5 · min-max(BM25) + 0.5 · min-max(dense)). BM25 results are available
- * immediately; dense scores join once the ~15 MB model has loaded in the browser.
+ * Hybrid site search: BM25 over titles, metadata and text, fused with Starbucks 2L-32 dense
+ * scores: 0.5 · BM25/max(BM25) + 0.5 · clamp((dense − τ)/(ceiling − τ)), so dense scores below
+ * the threshold τ count as 0 and only strong semantic matches earn full credit. A result needs a BM25 match or a dense score ≥ τ. BM25 results
+ * are available immediately; dense scores join once the ~15 MB model has loaded.
  */
 
-export type { SearchDoc };
+/** One passage of /search-index.json (see scripts/build_search_index.mjs). */
+export interface SearchDoc {
+  url: string; // English path; the client adds /zh on Chinese pages
+  anchor?: string;
+  type: 'paper' | 'project' | 'page' | 'news' | 'teaching' | 'talk' | 'award';
+  lang: 'en' | 'zh';
+  title: string;
+  section?: string;
+  text: string;
+  vector: number[];
+}
 export type SearchMode = 'lexical' | 'hybrid';
 export interface SearchResult { doc: SearchDoc; score: number; lexical: number; dense: number }
+export interface LexicalScores { scores: number[]; coverage: number[] }
 
 const STOPWORDS = new Set('a an and are as at be by can do does for from how i in is it of on or that the to was what when which who why with my me you'.split(' '));
 const K1 = 1.2;
 const B = 0.75;
 const WEIGHT_DENSE = 0.5;
+/** A keyword match must cover at least this share of the query's total idf weight. */
+const MIN_COVERAGE = 0.4;
+/** A passage with any keyword hit also counts if its Starbucks score reaches this. */
+const DENSE_AGREEMENT = 16;
 
 /** Lowercased word tokens; CJK runs become character unigrams and bigrams. */
 export function lexicalTokens(text: string): string[] {
@@ -33,7 +48,7 @@ export function lexicalTokens(text: string): string[] {
   return out;
 }
 
-class Bm25 {
+export class Bm25 {
   private tf: Map<string, number>[];
   private lengths: number[];
   private avgLength: number;
@@ -50,30 +65,49 @@ class Bm25 {
     for (const counts of this.tf) for (const token of counts.keys()) this.df.set(token, (this.df.get(token) ?? 0) + 1);
   }
 
-  scores(query: string): number[] {
+  private idf(term: string): number {
     const n = this.tf.length;
+    const df = this.df.get(term) ?? 0;
+    return Math.log(1 + (n - df + 0.5) / (df + 0.5));
+  }
+
+  /** BM25 score per document, plus the share of the query's idf weight each document matches. */
+  scores(query: string): LexicalScores {
     const terms = [...new Set(lexicalTokens(query))];
-    return this.tf.map((counts, i) => terms.reduce((sum, term) => {
-      const tf = counts.get(term);
-      if (!tf) return sum;
-      const df = this.df.get(term)!;
-      const idf = Math.log(1 + (n - df + 0.5) / (df + 0.5));
-      return sum + idf * (tf * (K1 + 1)) / (tf + K1 * (1 - B + (B * this.lengths[i]) / this.avgLength));
-    }, 0));
+    const totalIdf = terms.reduce((sum, term) => sum + this.idf(term), 0);
+    const scores: number[] = [];
+    const coverage: number[] = [];
+    this.tf.forEach((counts, i) => {
+      let score = 0;
+      let matchedIdf = 0;
+      for (const term of terms) {
+        const tf = counts.get(term);
+        if (!tf) continue;
+        const idf = this.idf(term);
+        matchedIdf += idf;
+        score += idf * (tf * (K1 + 1)) / (tf + K1 * (1 - B + (B * this.lengths[i]) / this.avgLength));
+      }
+      scores.push(score);
+      coverage.push(totalIdf > 0 ? matchedIdf / totalIdf : 0);
+    });
+    return { scores, coverage };
   }
 }
 
-function minMax(values: number[]): number[] {
-  const min = Math.min(...values);
-  const range = Math.max(...values) - min;
-  return range > 0 ? values.map((v) => (v - min) / range) : values.map(() => 0);
+/** Scale to [0, 1] between `floor` and `ceiling` (default: the maximum value), clamped. */
+function scale(values: number[], floor: number, ceiling = Math.max(...values)): number[] {
+  const range = ceiling - floor;
+  return values.map((v) => (range > 0 ? Math.min(1, Math.max(0, (v - floor) / range)) : 0));
 }
+
+/** Text BM25 sees for a passage: page title (twice, as a field boost), section heading and passage. */
+export const bm25Text = (d: SearchDoc) => `${d.title} ${d.title} ${d.section ?? ''} ${d.text}`;
 
 let indexPromise: Promise<{ docs: SearchDoc[]; bm25: Bm25 }> | null = null;
 export function loadIndex() {
   indexPromise ??= fetch('/search-index.json')
     .then((r) => r.json())
-    .then(({ docs }: { docs: SearchDoc[] }) => ({ docs, bm25: new Bm25(docs.map((d) => `${d.title} ${d.title} ${d.titleZh ?? ''} ${d.meta} ${d.text} ${d.textZh ?? ''}`)) }));
+    .then(({ docs }: { docs: SearchDoc[] }) => ({ docs, bm25: new Bm25(docs.map(bm25Text)) }));
   return indexPromise;
 }
 
@@ -105,24 +139,57 @@ export function encoderLoaded(): boolean {
   return encoderReady !== null;
 }
 
-/** Rank documents for `query`. Uses dense scores only when the model is already loaded. */
-export async function search(query: string, options: { types?: SearchDoc['type'][]; limit?: number } = {}) {
+/**
+ * Rank passages for `query` and keep the best passage per page. Chinese passages are only
+ * searched on Chinese pages. Uses dense scores only once the model has loaded.
+ */
+export async function search(query: string, options: { types?: SearchDoc['type'][]; lang?: 'en' | 'zh'; limit?: number } = {}) {
   const { docs, bm25 } = await loadIndex();
-  const lexical = bm25.scores(query);
-  let dense = docs.map(() => 0);
-  let mode: SearchMode = 'lexical';
-  if (encoderReady && query.trim()) {
-    const q = await encoderReady.embed(query);
-    dense = docs.map((d) => d.vector.reduce((sum, v, i) => sum + v * q[i], 0));
-    mode = 'hybrid';
-  }
-  const nl = minMax(lexical);
-  const nd = minMax(dense);
-  const results: SearchResult[] = docs
-    .map((doc, i) => ({ doc, lexical: lexical[i], dense: dense[i], score: mode === 'hybrid' ? (1 - WEIGHT_DENSE) * nl[i] + WEIGHT_DENSE * nd[i] : nl[i] }))
-    .filter((r) => (!options.types || options.types.includes(r.doc.type)) && (mode === 'hybrid' || r.lexical > 0))
+  const queryVector = encoderReady && query.trim() ? await encoderReady.embed(query) : null;
+  const results = bestPerPage(rank(docs, bm25.scores(query), queryVector))
+    .filter((r) => (!options.types || options.types.includes(r.doc.type)) && (r.doc.lang === 'en' || options.lang === 'zh'));
+  return { mode: (queryVector ? 'hybrid' : 'lexical') as SearchMode, results: results.slice(0, options.limit ?? results.length) };
+}
+
+/** Keep the highest-scoring passage of each page (results must already be sorted). */
+export function bestPerPage(results: SearchResult[]): SearchResult[] {
+  const seen = new Set<string>();
+  return results.filter((r) => !seen.has(r.doc.url) && seen.add(r.doc.url));
+}
+
+/**
+ * Link to the page, scrolled to the passage: the section anchor plus a text fragment
+ * (#:~:text=) built from the first plain words of the passage, which browsers highlight.
+ */
+export function passageLink(doc: SearchDoc, lang: 'en' | 'zh'): string {
+  const base = lang === 'zh' ? `/zh${doc.url}` : doc.url;
+  const words = doc.text.split(' ');
+  const start = words.findIndex((_, i) => words.slice(i, i + 4).every((w) => /^[\p{L}\p{N}'’-]+$/u.test(w)));
+  const fragment = start >= 0 ? `:~:text=${encodeURIComponent(words.slice(start, start + 4).join(' ')).replace(/-/g, '%2D')}` : '';
+  return `${base}#${doc.anchor ?? ''}${fragment}`;
+}
+
+/**
+ * Fuse BM25 with Starbucks dot products (if a query vector is given) and sort. A document is
+ * returned if it is a keyword match (its matched terms cover ≥ MIN_COVERAGE of the query's idf
+ * weight, so one common word like "results" is not enough) or a semantic match (dense ≥ τ).
+ * The cutoff only decides inclusion; ranking always uses the full BM25 score.
+ */
+export function rank(
+  docs: SearchDoc[],
+  { scores: lexical, coverage }: LexicalScores,
+  queryVector: number[] | null,
+  { threshold = DENSE_THRESHOLD, ceiling = DENSE_CEILING, minCoverage = MIN_COVERAGE, weightDense = WEIGHT_DENSE, agreement = DENSE_AGREEMENT } = {},
+): SearchResult[] {
+  const dense = queryVector ? docs.map((d) => d.vector.reduce((sum, v, i) => sum + v * queryVector[i], 0)) : docs.map(() => 0);
+  const nl = scale(lexical, 0);
+  const nd = queryVector ? scale(dense, threshold, ceiling) : dense;
+  return docs
+    .map((doc, i) => ({ doc, lexical: lexical[i], dense: dense[i], keyword: lexical[i] > 0 && coverage[i] >= minCoverage, score: queryVector ? (1 - weightDense) * nl[i] + weightDense * nd[i] : nl[i] }))
+    // Strong keyword match, strong semantic match, or weaker evidence from both signals together.
+    .filter((r) => r.keyword || (queryVector !== null && (r.dense >= threshold || (r.lexical > 0 && r.dense >= agreement))))
+    .map(({ keyword, ...result }) => result)
     .sort((a, b) => b.score - a.score);
-  return { mode, results: results.slice(0, options.limit ?? results.length) };
 }
 
 /** A short excerpt around the first query term, with matches wrapped in <mark>. */

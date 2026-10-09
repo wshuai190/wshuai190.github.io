@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import CopyButton from './CopyButton';
 import SearchBadge from './SearchBadge';
+import ScoreChips from './ScoreChips';
 import { useHybridSearch } from './useHybridSearch';
 
 export interface ExplorerItem {
@@ -62,14 +63,12 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
     window.history.replaceState(null, '', search ? `?${search}` : window.location.pathname);
   }, [query, topic, year, leading]);
 
-  const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS);
-  // Relevance order for the current query: keep results scoring at least half the best one.
-  const relevance = useMemo(() => {
-    if (!ranked?.length) return null;
-    const top = ranked[0].score;
-    const kept = ranked.filter((r, i) => i < 3 || r.score >= top * 0.5).slice(0, 20);
-    return new Map(kept.map((r, i) => [r.doc.url, i]));
-  }, [ranked]);
+  const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS, lang);
+  // Relevance order for the current query (results already passed the BM25 / Starbucks cutoff).
+  const relevance = useMemo(
+    () => (ranked ? new Map(ranked.slice(0, 20).map((r, i) => [r.doc.url, { rank: i, lexical: r.lexical, dense: r.dense }])) : null),
+    [ranked],
+  );
   const years = useMemo(() => [...new Set(items.map((i) => i.year))].sort((a, b) => b - a), [items]);
   const topicCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -85,7 +84,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
       (year === 'all' || String(item.year) === year) &&
       (!leading || Boolean(item.role)) &&
       (!searching || (relevance?.has(enPath(item.url)) ?? false)))
-    .sort((a, b) => (searching && relevance ? relevance.get(enPath(a.url))! - relevance.get(enPath(b.url))! : 0));
+    .sort((a, b) => (searching && relevance ? relevance.get(enPath(a.url))!.rank - relevance.get(enPath(b.url))!.rank : 0));
   const filtered = searching || topic !== 'all' || year !== 'all' || leading;
   // While searching, show one list in relevance order; otherwise group by year.
   const groups = searching
@@ -135,6 +134,9 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
                   <span aria-hidden="true">·</span><span className="text-[var(--plum)]">{labels.topics[item.topic]}</span>
                   {item.cited ? <><span aria-hidden="true">·</span><span>{labels.cited.replace('{n}', String(item.cited))}</span></> : null}
                   {item.role && <span className="rounded-full border border-[color-mix(in_srgb,var(--teal)_40%,transparent)] px-2 py-px text-[var(--teal)]">{item.role === 'first' ? labels.first : labels.cofirst}</span>}
+                  {searching && relevance?.get(enPath(item.url)) && (
+                    <span className="ml-auto normal-case tracking-normal"><ScoreChips {...relevance.get(enPath(item.url))!} hybrid={mode === 'hybrid'} /></span>
+                  )}
                 </p>
                 <h3 className="serif mt-1 text-[21px] leading-snug"><a href={item.url} className="hover:text-[var(--teal)]">{item.title}</a></h3>
                 <p className="mt-1 text-sm text-[var(--muted)]">

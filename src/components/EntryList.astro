@@ -7,7 +7,7 @@ const { entries, lang } = Astro.props;
 const years = [...new Set(entries.map((e) => e.data.date.getUTCFullYear()))].sort((a, b) => b - a);
 ---
 {years.map((year) => (
-  <section class="mt-8 grid gap-4 md:grid-cols-[88px_1fr]">
+  <section class="mt-8 grid gap-4 md:grid-cols-[88px_1fr]" data-search-skip>
     <h2 class="serif text-3xl text-muted md:sticky md:top-8 md:self-start">{year}</h2>
     <ol class="glass px-6">
       {entries.filter((e) => e.data.date.getUTCFullYear() === year).map((entry) => (

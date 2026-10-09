@@ -10,6 +10,15 @@ export const MODEL_DIR = '/models/starbucks-2l-32';
 export const MODEL_FILE = `${MODEL_DIR}/model.int8.onnx`;
 export const VOCAB_FILE = `${MODEL_DIR}/vocab.txt`;
 export const EMBED_DIM = 32;
+/**
+ * Minimum Starbucks dot-product score for a passage to count as a semantic match on its own.
+ * Best-passage scores on tests/search_queries.json: relevant pages median 20.7, non-relevant
+ * median 16.0, off-topic queries p99 17.2. Chosen by grid search together with MIN_COVERAGE
+ * and DENSE_AGREEMENT (hybrid.ts) from a plateau where 19–21 perform the same.
+ */
+export const DENSE_THRESHOLD = 20;
+/** Starbucks score that earns full semantic credit (about the best relevant score observed). */
+export const DENSE_CEILING = 28;
 
 /** The subset of the onnxruntime API used here (shared by -node and -web). */
 export interface OrtLike {

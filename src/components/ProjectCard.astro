@@ -13,7 +13,7 @@ const href = localePath(lang, `/research/${project.slug}/`);
 const summary = lang === 'zh' ? project.summary_zh : project.summary;
 const stars = starsOf(project.links.code);
 ---
-<article class="glass lift group relative flex flex-col p-3.5">
+<article class="glass lift group relative flex flex-col p-3.5" data-search-skip>
   <a href={href} class="figure-frame aspect-[16/10] p-3" tabindex="-1" aria-hidden="true">
     <img src={project.image} alt="" loading="lazy" decoding="async" class="transition-transform duration-500 group-hover:scale-[1.03]" />
   </a>

@@ -36,13 +36,14 @@ jobs:
         with:
           python-version: "3.12"
       - run: npm ci
-      - name: Build site and search index
+      - name: Build site and search index (only new passages are encoded)
         run: npm run build
       - name: Check legacy URLs, links and scripts
         run: |
           python scripts/check_urls.py
           python scripts/check_site.py dist
           python -m unittest discover -s tests
+          node scripts/eval_search.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
