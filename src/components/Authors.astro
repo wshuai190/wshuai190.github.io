@@ -1,0 +1,16 @@
+---
+import { SELF } from '../lib/data';
+
+/** Author list with the site owner in bold and equal-contribution asterisks as superscripts. */
+interface Props { authors: string[]; class?: string }
+const { authors, class: className } = Astro.props;
+---
+<p class={className}>
+  {authors.map((raw, i) => {
+    const name = raw.replace(/\*$/, '');
+    const equal = raw.endsWith('*');
+    return (
+      <>{i > 0 && ', '}{name === SELF ? <strong class="font-semibold text-ink">{name}</strong> : name}{equal && <sup class="text-teal">*</sup>}</>
+    );
+  })}
+</p>

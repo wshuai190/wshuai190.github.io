@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { formatMonth, pick, t, type Lang } from '../i18n/ui';
+import { news, profile } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const years = [...new Set(news.map((n) => n.date.getUTCFullYear()))].sort((a, b) => b - a);
+const ICON: Record<string, string> = { celebrate: '✦', travel: '✈', home: '●' };
+---
+<Base lang={lang} title={t(lang, 'news.title')} glow searchType="page">
+  <div class="wrap">
+    <header class="pb-6 pt-10 md:pt-16">
+      <p class="eyebrow">{news.length} · {pick(profile.eyebrow, lang)}</p>
+      <h1 class="page-title mt-4">{t(lang, 'news.title')}</h1>
+    </header>
+    {years.map((year) => (
+      <section class="mt-8 grid gap-4 md:grid-cols-[88px_1fr]">
+        <h2 class="serif text-3xl text-muted md:sticky md:top-8 md:self-start">{year}</h2>
+        <ol class="relative border-l border-line pl-7">
+          {news.filter((n) => n.date.getUTCFullYear() === year).map((item) => (
+            <li class="relative pb-8 last:pb-2">
+              <span class="absolute -left-[37px] top-1 grid h-5 w-5 place-items-center rounded-full border border-line bg-[var(--bg)] text-[10px] text-teal" aria-hidden="true">{ICON[item.status ?? ''] ?? '●'}</span>
+              <time class="label">{formatMonth(item.date, lang)}</time>
+              <h3 class="serif mt-1 text-[21px] leading-snug">
+                {item.url ? <a class="hover:text-teal" href={item.url}>{(lang === 'zh' && item.title_zh) || item.title} ↗</a> : (lang === 'zh' && item.title_zh) || item.title}
+              </h3>
+              {item.description && <p class="mt-1 max-w-[720px] text-[15px] text-muted">{(lang === 'zh' && item.description_zh) || item.description}</p>}
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</Base>

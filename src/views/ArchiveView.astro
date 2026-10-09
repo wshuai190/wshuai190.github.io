@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import EntryList from '../components/EntryList.astro';
+import { pick, t, type Lang } from '../i18n/ui';
+import { getEntries, profile } from '../lib/data';
+
+interface Props { lang: Lang; collection: 'talks' | 'awards' }
+const { lang, collection } = Astro.props;
+const entries = await getEntries(collection);
+const title = t(lang, collection === 'talks' ? 'talks.title' : 'awards.title');
+---
+<Base lang={lang} title={title} glow>
+  <div class="wrap">
+    <header class="pb-6 pt-10 md:pt-16">
+      <p class="eyebrow">{entries.length} · {pick(profile.eyebrow, lang)}</p>
+      <h1 class="page-title mt-4">{title}</h1>
+    </header>
+    <EntryList entries={entries} lang={lang} />
+  </div>
+</Base>

@@ -1,0 +1,24 @@
+---
+import { localePath, type Lang } from '../i18n/ui';
+
+interface Entry { data: { title: string; date: Date; permalink: string; venue?: string; type?: string; location?: string; excerpt?: string | null } }
+interface Props { entries: Entry[]; lang: Lang }
+const { entries, lang } = Astro.props;
+const years = [...new Set(entries.map((e) => e.data.date.getUTCFullYear()))].sort((a, b) => b - a);
+---
+{years.map((year) => (
+  <section class="mt-8 grid gap-4 md:grid-cols-[88px_1fr]">
+    <h2 class="serif text-3xl text-muted md:sticky md:top-8 md:self-start">{year}</h2>
+    <ol class="glass px-6">
+      {entries.filter((e) => e.data.date.getUTCFullYear() === year).map((entry) => (
+        <li class="group border-b border-line py-5 last:border-b-0">
+          <a href={localePath(lang, entry.data.permalink)} class="grid gap-1">
+            <span class="serif text-[21px] leading-snug group-hover:text-teal transition-colors">{entry.data.title}</span>
+            <span class="text-sm text-muted">{[entry.data.venue, entry.data.type, entry.data.location].filter(Boolean).join(' · ')}</span>
+            {entry.data.excerpt && <span class="text-sm text-muted">{entry.data.excerpt}</span>}
+          </a>
+        </li>
+      ))}
+    </ol>
+  </section>
+))}

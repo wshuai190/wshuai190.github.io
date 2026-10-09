@@ -71,6 +71,16 @@ export function authorsOf(pub: Publication): string[] {
   return pub.data.authors ?? parseAuthors(pub.data.citation ?? '');
 }
 
+export const SELF = 'Shuai Wang';
+
+/** 'first' when listed first, 'cofirst' when marked with an equal-contribution asterisk. */
+export function authorship(authors: string[]): 'first' | 'cofirst' | undefined {
+  const index = authors.findIndex((name) => name.replace(/\*$/, '') === SELF);
+  if (index < 0) return undefined;
+  if (authors[index].endsWith('*')) return 'cofirst';
+  return index === 0 ? 'first' : undefined;
+}
+
 export function bibtexOf(pub: Publication): string {
   return pub.data.bibtex ?? buildBibtex({
     slug: pubSlug(pub),

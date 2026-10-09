@@ -177,7 +177,7 @@
   featured: false
 - slug: lightmem
   name: 'Reproducing LightMem'
-  topic: rag
+  topic: memory
   year: 2026
   summary: Comparing constructed long-term memories with retrieval over raw user turns under matched evaluation settings.
   summary_zh: 在一致的评测设置下比较构建的长期记忆与直接检索原始用户对话。

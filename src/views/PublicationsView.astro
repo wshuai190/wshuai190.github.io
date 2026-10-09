@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PublicationExplorer, { type ExplorerItem } from '../components/react/PublicationExplorer';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
-import { authorsOf, bibtexOf, citationsOf, getPublications, profile, projectsForPaper, pubSlug, venueLabel } from '../lib/data';
+import { authorship, authorsOf, bibtexOf, citationsOf, getPublications, profile, projectsForPaper, pubSlug, venueLabel } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -30,6 +30,7 @@ const items: ExplorerItem[] = pubs.map((pub) => {
     links,
     bibtex: bibtexOf(pub),
     cited: citationsOf(pub),
+    role: authorship(authorsOf(pub)),
   };
 });
 const labels = {
@@ -43,6 +44,9 @@ const labels = {
   cited: t(lang, 'pubs.cited'),
   bibtex: t(lang, 'link.bibtex'),
   copied: t(lang, 'link.copied'),
+  first: t(lang, 'pub.first'),
+  cofirst: t(lang, 'pub.cofirst'),
+  leading: t(lang, 'pubs.leading'),
   topics: Object.fromEntries(Object.entries(TOPIC_LABELS).map(([key, value]) => [key, pick(value, lang)])),
 };
 ---
