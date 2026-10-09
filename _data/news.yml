@@ -1,0 +1,168 @@
+- title: "Present Paper at ICTIR 2021, Online"
+  date: 2021-07-11
+  description: "Presented a paper online interpolation of DR and BM25 at the ICTIR 2021 conference."
+  status: home
+
+- title: "Started PhD program at The University of Queensland"
+  date: 2021-10-01
+  description: "Began a PhD program in information retrieval and natural language processing at The University of Queensland."
+  status: home
+
+- title: "Present Paper at ADCS 2021, Online, Received Best Student Paper Award"
+  date: 2021-12-09
+  url: http://adcs-conference.org/2021/
+  description: "Presented r on MeSH Term suggestion and received the Best Student Paper Award."
+  status: home
+
+- title: "Present Paper at ECIR 2022, Online"
+  date: 2022-04-10
+  url: https://ecir2022.org/
+  description: "Presented a paper on reproducibility of Seed-driven document ranking in systematic review at the ECIR 2022 conference."
+  status: home
+
+- title: "Poster Presentations at SIGIR 2022, Madrid, Spain"
+  date: 2022-07-11
+  url: https://sigir.org/sigir2022/
+  description: "Presented two posters at the SIGIR 2022 conference in Madrid, Spain."
+  status: travel
+
+- title: "Presentations at ADCS 2022, Adelaide, Australia"
+  date: 2022-12-15
+  url: http://adcs-conference.org/2022/
+  description: "Presented a paper on using neural ranker in systematic review screening at the ADCS 2022 conference in Adelaide, Australia."
+  status: travel
+
+- title: "Poster Presentations at WSDM 2023, Singapore"
+  date: 2023-02-27
+  url: https://www.wsdm-conference.org/2023/
+  description: "Presented a demo poster on MeSH Term suggestion at the WSDM 2023 conference in Singapore."
+  status: travel
+
+- title: "Research Visit at Leipzig University"
+  date: 2023-03-04
+  url: https://temir.org/people.html
+  description: "Visiting Leipzig University for two months to collaborate on research projects related to systematic review automation and complex medicine-based question-answering."
+  status: travel
+
+- title: "Two Papers Accepted at SIGIR 2023"
+  date: 2023-04-01
+  url: https://arxiv.org/abs/2302.03495
+  description: "[Full Paper]: Can ChatGPT Write a Good Boolean Query for Systematic Review Literature Search?; and [Reproducibility Paper]: Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study have been accepted to SIGIR 2023."
+  status: celebrate
+
+- title: "SIGIR 2023 Student Travel Grant"
+  date: 2023-05-05
+  description: "I am grateful to SIGIR for awarding me a student travel grant of USD 1125 and a complimentary conference registration to attend the SIGIR 2023 conference"
+  status: celebrate
+
+- title: "Presentations at SIGIR 2023"
+  date: 2023-07-22
+  description: "Due to my entry permit to Taiwan got rejected, my supervisor Professor Guido Zuccon will present our two papers instead at the SIGIR 2023 conference in person."
+  status: home
+
+- title: "Present Paper at SIGIR-AP, Melbourne Satelite"
+  date: 2023-11-28
+  description: "Presented a paper LLM-driven Boolean-based screening prioritisation at SIGIR-AP 2023."
+  status: travel
+
+- title: "One Full Paper (Findings) Accepted in ECIR2024"
+  date: 2023-12-19
+  description: "[Full Paper]: Zero-shot Generative Large Language Models for Systematic Review Screening Automation has been accepted to ECIR 2024."
+  status: celebrate
+
+- title: "Internship at Naver Labs Europe"
+  date: 2024-02-29
+  description: "From 29th of Feb, 2024, I will start my internship at Naver Labs Europe in Grenoble for 4 months, investigating on Large Language Models"
+  status: travel
+
+- title: "Paper Presentation at ECIR, Glasgow"
+  date: 2024-03-25
+  description: "Presented a paper Zero-shot  Zero-shot Generative Large Language Models for Systematic Review Screening Automation."
+  status: travel
+
+- title: "Three papers Accepted in SIGIR2024"
+  date: 2024-03-26
+  description: "[Resource Paper]: FeB4RAG;  [Short Paper]: LLM for stemming; [Perspective Paper]: Evaluating ad-hoc generative IR;"
+  status: celebrate
+
+- title: "Paper Presentation at SIGIR, Washington DC"
+  date: 2024-07-25
+  description: "Presented papers accepted at SIGIR 2024 in Washington DC."
+  status: travel
+
+- title: "Paper Accepted in WSDM 2025"
+  date: 2024-10-24
+  description: "[Full Paper]: Context Embeddings for Efficient Answer Generation in RAG"
+  status: celebrate
+
+- title: "Two Papers Accepted in ECIR 2025"
+  date: 2024-12-18
+  description: "[Full Paper]: Corpus Subsampling; [Full Paper]: Prompt Variations on Zero-shot LLM-based Rankers"
+  status: celebrate
+
+- title: "Present Encore-paper at SIGIR-AP, Melbourne Satelite"
+  date: 2024-12-20
+  description: "Encore Presentation: Training Adaptive BERT-based Dense Retrievers at Smaller Scales: Matryoshka, 2D Matryoshka, and Starbucks Approaches"
+  status: travel
+
+- title: "Paper Accepted in WWW 2025"
+  date: 2025-01-20
+  description: "[Short Paper]: ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search"
+  status: celebrate
+
+- title: "Started Postdoc at The University of Queensland"
+  date: 2025-02-01
+  description: "Started a postdoc position in information retrieval and natural language processing at The University of Queensland."
+  status: celebrate
+
+- title: "Three Papers Accepted in SIGIR 2025"
+  date: 2025-04-05
+  description: "[Reproducibility Paper]: 2D Matryoshka Training for Information Retrieval; Reassessing Large Language Model Boolean Query Generation for Systematic Reviews; Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition."
+  status: celebrate
+
+- title: "Started Teaching Role at The University of Queensland"
+  date: 2025-08-01
+  description: "At semester 2, 2025, I will begin as a lecturer and course coordinator for the course INFS7410 Information Retrieval and Web Search at The University of Queensland."
+  status: celebrate
+
+
+- title: "SIGIR-AP 2025 Queensland Satellite"
+  date: 2025-10-05
+  description: "I will be serving as a Queensland Satelite Chair for the SIGIR-AP 2025 Queensland Satellite Event."
+  status: celebrate
+
+- title: "Conferred PhD Degree"
+  date: 2025-11-14
+  description: "Successfully completed and defended my PhD thesis on information retrieval and systematic review automation at The University of Queensland, the degree has been conferred; I will attend the graduation ceremony in December 2025."
+  status: celebrate
+
+- title: "Reveived SeCAT Score of 4.83 (SD=0.37) for INFS7410"
+  date: 2025-12-08
+  description: "I have received a SeCAT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search that I coordinated and lectured in semester 2, 2025; based on 43 student responses out of 122."
+  status: celebrate
+
+- title: "Two Papers accepted in ECIR2026"
+  date: 2025-12-18
+  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper] Evaluator - Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels "
+  status: celebrate
+
+- title: "Paper accepted in EACL2026 Main Conference"
+  date: 2026-01-04
+  description: "[Full Paper]: AutoBool: Reinforcement-Learned LLM for Effective Automatic Systematic Reviews Boolean Query Generation. "
+  status: celebrate
+
+- title: "Publicity Chair for SIGIR 2026"
+  date: 2026-01-20
+  description: "Served as Publicity Chair for SIGIR 2026 in Melbourne | Naarm, Australia."
+  status: travel
+
+- title: "Three Papers Accepted in SIGIR 2026"
+  date: 2026-04-03
+  description: "[Reproducibility Paper]: Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval; [Reproducibility Paper]: The Vulnerability of LLM Rankers to Prompt Injection Attacks; [Short Paper]: Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning."
+  status: celebrate
+
+- title: "Paper Accepted in SIGIR-AP 2026"
+  date: 2026-09-25
+  url: https://arxiv.org/abs/2607.29104
+  description: "Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
+  status: celebrate

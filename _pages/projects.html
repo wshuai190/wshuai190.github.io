@@ -1,0 +1,20 @@
+---
+layout: archive
+title: "Research Projects"
+permalink: /projects/
+---
+{% assign zh = false %}{% assign prefix = '' %}{% if site.active_lang == 'zh' %}{% assign zh = true %}{% assign prefix = '/zh' %}{% endif %}
+<p class="muted">{% if zh %}搜索 Agent、生物医学证据检索与高效 RAG 的研究项目和开源工具。{% else %}Research projects and tools for search agents, biomedical evidence retrieval, and efficient RAG.{% endif %}</p>
+<div class="project-directory">
+{% for project in site.data.research_projects %}
+  <article class="project-entry">
+    <div class="project-entry-heading"><p class="eyebrow">{{ project.category }}</p><h2>{{ project.name }}</h2></div>
+    <div><p>{% if zh %}{{ project.description_zh }}{% else %}{{ project.description }}{% endif %}</p>
+    <div class="project-entry-links">{% if project.url %}<a href="{{ project.url }}">{% if zh %}项目主页{% else %}Project website{% endif %} ↗</a>{% endif %}{% if project.code %}<a href="{{ project.code }}">GitHub ↗</a>{% endif %}</div>
+    <ul class="project-papers">
+      {% if project.paper %}{% assign related = site.publications | where: 'url', project.paper | first %}<li><a href="{{ prefix }}{{ project.paper }}">{{ related.title | default: project.name }} ↗</a></li>{% endif %}
+      {% for path in project.papers %}{% assign related = site.publications | where: 'url', path | first %}<li><a href="{{ prefix }}{{ path }}">{{ related.title | default: path }} ↗</a></li>{% endfor %}
+    </ul></div>
+  </article>
+{% endfor %}
+</div>
