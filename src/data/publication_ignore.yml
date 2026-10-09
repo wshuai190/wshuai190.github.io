@@ -1,6 +1,6 @@
-# Works the weekly publication sync must never add.
+# Scholar entries the daily sync must never add as publications.
 # Match by exact title (case-insensitive), DOI, arXiv id or OpenAlex id, e.g.
 #   - title: "Some paper that is not mine"
 #   - doi: 10.1145/0000000.0000000
-#   - openalex: W1234567890
-[]
+#   - arxiv: 2601.00000
+- title: "AI-driven automated systematic reviews"   # PhD thesis, linked from Research and CV
