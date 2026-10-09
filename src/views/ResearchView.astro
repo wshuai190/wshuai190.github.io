@@ -83,7 +83,7 @@ const themes = profile.themes.map((theme: any) => ({
         </div>
         <div class="glass p-7 lg:col-span-2" id="service">
           <h3 class="eyebrow">{t(lang, 'research.service')}</h3>
-          <p class="serif mt-4 text-xl">{profile.service.lead[lang]}</p>
+          <ul class="mt-4 space-y-1">{profile.service.roles.map((role: any) => <li class="serif text-xl">{role[lang]}</li>)}</ul>
           <div class="mt-5 grid gap-6 md:grid-cols-2">
             <div>
               <p class="label">{t(lang, 'research.journals')}</p>
