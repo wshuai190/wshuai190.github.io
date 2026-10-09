@@ -3,8 +3,9 @@ import { WordPiece } from './wordpiece.ts';
 
 /**
  * Hybrid site search: BM25 over titles, metadata and text, interpolated with Starbucks 2L-32
- * dense scores after per-query min-max normalisation of both:
- *   score = 0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)
+ * dense scores after per-query min-max normalisation of each over its own top-100 passages
+ * (passages below a signal's 100th score get 0 for that signal):
+ *   score = 0.6 · minmax₁₀₀(BM25) + 0.4 · minmax₁₀₀(Starbucks)
  * Thresholds (see rank) only decide which passages are returned, not their scores. A result needs a BM25 match or a dense score ≥ τ. BM25 results
  * are available immediately; dense scores join once the ~15 MB model has loaded.
  */
@@ -36,8 +37,10 @@ const MIN_COVERAGE = 0.4;
 const DENSE_AGREEMENT = 16;
 /** How BM25 and Starbucks scores are normalised before interpolation. */
 const NORMALIZATION: 'minmax' | 'fixed' = 'minmax';
+/** Min-max is computed over each signal's top-k passages (scores below the k-th become 0). */
+const NORM_TOP_K = 100;
 /** Minimum hybrid score for a passage to be shown (after the relevance gate below). */
-const MIN_HYBRID = 0.4;
+const MIN_HYBRID = 0.3;
 
 /** Lowercased word tokens; CJK runs become character unigrams and bigrams. */
 export function lexicalTokens(text: string): string[] {
@@ -99,6 +102,12 @@ export class Bm25 {
     });
     return { scores, coverage };
   }
+}
+
+/** The k-th highest value (the minimum of the top-k list); with k = Infinity, the overall minimum. */
+function kthBest(values: number[], k: number): number {
+  if (!Number.isFinite(k) || k >= values.length) return Math.min(...values);
+  return [...values].sort((a, b) => b - a)[k - 1];
 }
 
 /** Scale to [0, 1] between `floor` and `ceiling` (default: the maximum value), clamped. */
@@ -180,7 +189,7 @@ export function passageLink(doc: SearchDoc, lang: 'en' | 'zh'): string {
 }
 
 /**
- * 1. Min-max normalise BM25 and Starbucks per query; 2. interpolate into the hybrid score
+ * 1. Min-max normalise BM25 and Starbucks per query over each signal's top-NORM_TOP_K; 2. interpolate into the hybrid score
  * (1 − α)·BM25 + α·Starbucks; 3. keep passages with hybrid ≥ MIN_HYBRID that also pass the
  * relevance gate on raw scores: a keyword match covering ≥ MIN_COVERAGE of the query's idf
  * weight, a Starbucks score ≥ τ, or a keyword hit plus Starbucks ≥ DENSE_AGREEMENT. The gate is
@@ -190,13 +199,13 @@ export function rank(
   docs: SearchDoc[],
   { scores: lexical, coverage }: LexicalScores,
   queryVector: number[] | null,
-  { threshold = DENSE_THRESHOLD, ceiling = DENSE_CEILING, minCoverage = MIN_COVERAGE, weightDense = WEIGHT_DENSE, agreement = DENSE_AGREEMENT, normalization = NORMALIZATION as 'minmax' | 'fixed', minHybrid = MIN_HYBRID, rawCutoffs = true } = {},
+  { threshold = DENSE_THRESHOLD, ceiling = DENSE_CEILING, minCoverage = MIN_COVERAGE, weightDense = WEIGHT_DENSE, agreement = DENSE_AGREEMENT, normalization = NORMALIZATION as 'minmax' | 'fixed', minHybrid = MIN_HYBRID, rawCutoffs = true, normK = NORM_TOP_K } = {},
 ): SearchResult[] {
   const dense = queryVector ? docs.map((d) => d.vector.reduce((sum, v, i) => sum + v * queryVector[i], 0)) : docs.map(() => 0);
   // minmax: per-query min-max on both signals over all passages. fixed: BM25/max and
   // Starbucks clamped to [threshold, ceiling].
-  const nl = normalization === 'minmax' ? scale(lexical, Math.min(...lexical)) : scale(lexical, 0);
-  const nd = !queryVector ? dense : normalization === 'minmax' ? scale(dense, Math.min(...dense)) : scale(dense, threshold, ceiling);
+  const nl = normalization === 'minmax' ? scale(lexical, kthBest(lexical, normK)) : scale(lexical, 0);
+  const nd = !queryVector ? dense : normalization === 'minmax' ? scale(dense, kthBest(dense, normK)) : scale(dense, threshold, ceiling);
   return docs
     .map((doc, i) => ({ doc, lexical: lexical[i], dense: dense[i], lexicalNorm: nl[i], denseNorm: queryVector ? nd[i] : 0, keyword: lexical[i] > 0 && coverage[i] >= minCoverage, score: queryVector ? (1 - weightDense) * nl[i] + weightDense * nd[i] : nl[i] }))
     // Strong keyword match, strong semantic match, or weaker evidence from both signals together.
