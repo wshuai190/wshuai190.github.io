@@ -1,0 +1,15 @@
+---
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  links: { site?: string; code?: string; demo?: string; paper?: string };
+  lang: Lang;
+}
+const { links, lang } = Astro.props;
+const order = ['site', 'paper', 'code', 'demo'] as const;
+---
+{order.filter((key) => links[key]).map((key) => (
+  <a class="link-pill" href={links[key]} target={links[key]!.startsWith('/') ? undefined : '_blank'} rel="noopener">
+    {t(lang, `link.${key}`)} <span aria-hidden="true">↗</span>
+  </a>
+))}

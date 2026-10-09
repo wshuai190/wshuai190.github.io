@@ -9,4 +9,5 @@ export default defineConfig({
   build: { format: 'preserve' },
   integrations: [react(), sitemap()],
   vite: { plugins: [tailwindcss()] },
+  devToolbar: { enabled: false },
 });

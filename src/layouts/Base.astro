@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SearchPalette from '../components/react/SearchPalette';
+import { alternatePath, t, type Lang } from '../i18n/ui';
+import { profile } from '../lib/data';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  image?: string;
+  /** Pagefind result type, e.g. "paper", "project". Omit to exclude the page from search. */
+  searchType?: string;
+  glow?: boolean;
+}
+
+const { lang, title, description, image, searchType, glow = false } = Astro.props;
+const siteName = lang === 'zh' ? '王率 Shuai Wang' : 'Dr. Shuai Wang';
+const fullTitle = title ? `${title} · ${siteName}` : `${siteName} — ${t(lang, 'footer.tagline')}`;
+const desc = description ?? profile.cv_profile[lang].replace(/\s+/g, ' ');
+const path = Astro.url.pathname.replace(/\.html$/, '');
+const canonical = new URL(path, Astro.site).href;
+const altHref = new URL(alternatePath(lang, path), Astro.site).href;
+const ogImage = new URL(image ?? '/images/og.png', Astro.site).href;
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Shuai Wang',
+  alternateName: ['王率', 'Dylan Wang'],
+  url: 'https://shuaiwang.io/',
+  image: new URL(profile.portrait, Astro.site).href,
+  jobTitle: 'Research Fellow',
+  affiliation: { '@type': 'Organization', name: 'The University of Queensland' },
+  email: `mailto:${profile.email}`,
+  sameAs: [profile.links.scholar, profile.links.orcid, profile.links.github, profile.links.linkedin],
+  knowsAbout: ['Information retrieval', 'Search agents', 'Retrieval-augmented generation', 'Systematic review automation'],
+};
+---
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={lang === 'zh' ? 'en' : 'zh'} href={altHref} />
+    <link rel="alternate" type="application/rss+xml" title="Shuai Wang" href="/feed.xml" />
+    <link rel="icon" type="image/png" href="/images/site-logo.png" />
+    <link rel="apple-touch-icon" href="/images/site-logo.png" />
+    <link rel="preload" href="/fonts/Manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#080a0e" media="(prefers-color-scheme: dark)" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Shuai Wang" />
+    <meta property="og:title" content={title ?? siteName} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_AU'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@dylan_wangs" />
+    <slot name="head" />
+    {path === '/' || path === '/zh/' ? <script type="application/ld+json" set:html={JSON.stringify(person)} /> : null}
+    <script is:inline>
+      (() => {
+        let theme = null;
+        try { theme = localStorage.getItem('theme'); } catch {}
+        if (!theme) theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      })();
+    </script>
+  </head>
+  <body>
+    {glow && <div class="glow-bg" aria-hidden="true" />}
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 btn btn-solid">Skip to content</a>
+    <Header lang={lang} path={path} />
+    <main id="main" class="relative z-[1]" data-pagefind-body={searchType ? '' : undefined}>
+      {searchType && <span hidden data-pagefind-meta={`type:${searchType}`} data-pagefind-filter={`lang:${lang}`} />}
+      <slot />
+    </main>
+    <Footer lang={lang} />
+    <SearchPalette client:idle lang={lang} />
+  </body>
+</html>

@@ -1,0 +1,9 @@
+---
+/** Renders text where [[words]] get the gradient italic emphasis. */
+interface Props { text: string; class?: string }
+const { text, class: className } = Astro.props;
+const parts = text.split(/(\[\[.*?\]\])/).filter(Boolean);
+---
+<h1 class={className}>
+  {parts.map((part) => part.startsWith('[[') ? <em class="em-gradient">{part.slice(2, -2)}</em> : part)}
+</h1>

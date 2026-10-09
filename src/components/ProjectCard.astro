@@ -1,0 +1,31 @@
+---
+import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { starsOf, type Project } from '../lib/data';
+import LinkPills from './LinkPills.astro';
+
+interface Props {
+  project: Project;
+  lang: Lang;
+  size?: 'md' | 'lg';
+}
+const { project, lang, size = 'md' } = Astro.props;
+const href = localePath(lang, `/research/${project.slug}/`);
+const summary = lang === 'zh' ? project.summary_zh : project.summary;
+const stars = starsOf(project.links.code);
+---
+<article class="glass lift group relative flex flex-col p-3.5">
+  <a href={href} class="figure-frame aspect-[16/10] p-3" tabindex="-1" aria-hidden="true">
+    <img src={project.image} alt="" loading="lazy" decoding="async" class="transition-transform duration-500 group-hover:scale-[1.03]" />
+  </a>
+  <div class="flex flex-1 flex-col px-1.5 pb-1.5">
+    <p class="tag mt-4">{pick(TOPIC_LABELS[project.topic], lang)} · {project.year}</p>
+    <h3 class:list={['serif mt-1 leading-tight', size === 'lg' ? 'text-[26px]' : 'text-[22px]']}>
+      <a href={href} class="after:absolute after:inset-0 after:content-['']">{project.name}</a>
+    </h3>
+    <p class="mt-2 text-sm text-muted">{summary}</p>
+    <div class="relative z-[1] mt-auto flex flex-wrap items-center gap-1.5 pt-4">
+      <LinkPills links={project.links} lang={lang} />
+      {stars !== undefined && <span class="mono ml-auto text-xs text-muted" title="GitHub stars">★ {stars}</span>}
+    </div>
+  </div>
+</article>
