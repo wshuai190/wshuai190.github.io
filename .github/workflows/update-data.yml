@@ -1,0 +1,59 @@
+name: Update papers and metrics
+
+# Daily: one SerpApi request for the Google Scholar profile updates citation metrics,
+# per-paper citation counts and adds new papers (with a news item); GitHub stars are
+# refreshed for linked repositories. ~30 SerpApi searches/month (free tier: 100).
+
+on:
+  schedule:
+    - cron: "0 6 * * *"  # 06:00 UTC, 16:00 Brisbane
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-data
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync papers, citations, metrics and stars
+        id: sync
+        continue-on-error: true
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENALEX_MAILTO: ${{ vars.OPENALEX_MAILTO }}
+        run: python scripts/sync_publications.py
+
+      - name: Fallback metrics fetch
+        if: steps.sync.outcome == 'failure'
+        continue-on-error: true
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
+        run: |
+          pip install "scholarly>=1.7.11" "free-proxy>=1.1.1" "httpx<0.28" requests
+          python scripts/fetch_scholar_metrics.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data src/content/publications
+          if git diff --cached --quiet; then
+            echo "No changes."
+            exit 0
+          fi
+          new=$(git diff --cached --name-only --diff-filter=A -- src/content/publications | wc -l | tr -d ' ')
+          if [ "$new" -gt 0 ]; then msg="content: add $new new paper(s) from Google Scholar"; else msg="chore: update Scholar metrics and stars $(date -u +%Y-%m-%d)"; fi
+          git commit -m "$msg"
+          git push
