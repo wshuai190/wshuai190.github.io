@@ -19,13 +19,13 @@ const stars = starsOf(project.links.code);
 const related = projects.filter((p) => p.topic === project.topic && p.slug !== project.slug).slice(0, 3);
 const bibtex = papers.map(bibtexOf).join('\n\n');
 ---
-<Base lang={lang} title={project.name} description={summary} image={project.image} searchType="project" glow>
+<Base lang={lang} title={project.name} description={summary} image={project.image} glow>
   <article class="wrap">
     <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={`${localePath(lang, '/research/')}#topic-${project.topic}`}>← {t(lang, 'project.back')}</a></nav>
     <header class="grid gap-10 pb-10 pt-8 lg:grid-cols-[1fr_1.15fr] lg:items-center">
       <div>
         <p class="tag">{pick(TOPIC_LABELS[project.topic], lang)} · {project.year}</p>
-        <h1 class="page-title mt-3" data-pagefind-meta="title">{project.name}</h1>
+        <h1 class="page-title mt-3">{project.name}</h1>
         <p class="lede mt-5">{summary}</p>
         <div class="mt-6 flex flex-wrap items-center gap-2">
           <LinkPills links={project.links} lang={lang} />

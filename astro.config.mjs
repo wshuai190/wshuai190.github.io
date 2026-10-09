@@ -8,6 +8,6 @@ export default defineConfig({
   trailingSlash: 'ignore',
   build: { format: 'preserve' },
   integrations: [react(), sitemap()],
-  vite: { plugins: [tailwindcss()] },
+  vite: { plugins: [tailwindcss()], ssr: { external: ['onnxruntime-web'] } },
   devToolbar: { enabled: false },
 });

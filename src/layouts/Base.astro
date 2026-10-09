@@ -11,12 +11,10 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
-  /** Pagefind result type, e.g. "paper", "project". Omit to exclude the page from search. */
-  searchType?: string;
   glow?: boolean;
 }
 
-const { lang, title, description, image, searchType, glow = false } = Astro.props;
+const { lang, title, description, image, glow = false } = Astro.props;
 const siteName = lang === 'zh' ? '王率 Shuai Wang' : 'Dr. Shuai Wang';
 const fullTitle = title ? `${title} · ${siteName}` : `${siteName} — ${t(lang, 'footer.tagline')}`;
 const desc = description ?? profile.cv_profile[lang].replace(/\s+/g, ' ');
@@ -77,8 +75,7 @@ const person = {
     {glow && <div class="glow-bg" aria-hidden="true" />}
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 btn btn-solid">Skip to content</a>
     <Header lang={lang} path={path} />
-    <main id="main" class="relative z-[1]" data-pagefind-body={searchType ? '' : undefined}>
-      {searchType && <span hidden data-pagefind-meta={`type:${searchType}`} data-pagefind-filter={`lang:${lang}`} />}
+    <main id="main" class="relative z-[1]">
       <slot />
     </main>
     <Footer lang={lang} />

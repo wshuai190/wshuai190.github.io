@@ -22,7 +22,7 @@ const links = [
 ].filter(([, href]) => href) as [Parameters<typeof t>[1], string][];
 const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '').slice(0, 220);
 ---
-<Base lang={lang} title={pub.data.title} description={description} image={pub.data.image} searchType="paper">
+<Base lang={lang} title={pub.data.title} description={description} image={pub.data.image}>
   <Fragment slot="head">
     <meta name="citation_title" content={pub.data.title} />
     {authors.map((name) => <meta name="citation_author" content={name.replace(/\*$/, '')} />)}
@@ -40,7 +40,7 @@ const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/
         {cited ? <><span aria-hidden="true">·</span><span>{t(lang, 'pubs.cited', { n: cited })}</span></> : null}
         {role && <span class="rounded-full border border-teal/40 px-2 py-px text-teal">{t(lang, role === 'first' ? 'pub.first' : 'pub.cofirst')}</span>}
       </p>
-      <h1 class="serif mt-4 text-[clamp(30px,4.4vw,46px)] leading-[1.12] tracking-[-0.01em]" data-pagefind-meta="title">{pub.data.title}</h1>
+      <h1 class="serif mt-4 text-[clamp(30px,4.4vw,46px)] leading-[1.12] tracking-[-0.01em]">{pub.data.title}</h1>
       <Authors authors={authors} class="mt-4 text-[17px] text-muted" />
       {authors.some((a) => a.endsWith('*')) && <p class="mt-1 text-xs text-muted">{t(lang, 'pub.equal')}</p>}
       <p class="mt-1 text-sm text-muted">{pub.data.venue}</p>

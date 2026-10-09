@@ -7,8 +7,8 @@ deployed to GitHub Pages at <https://shuaiwang.io>. English pages live at `/`, C
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321 (site search needs a build)
-npm run build      # static site + Pagefind search index in dist/
+npm run dev        # http://localhost:4321
+npm run build      # static site + hybrid search index in dist/
 npx astro preview  # serve dist/
 ```
 
@@ -29,6 +29,17 @@ named Shuai Wang). To stop a Scholar entry from being added, list it in
 `src/data/publication_ignore.yml`. Auto-added pages can be edited like any other.
 
 Secrets: `SERPAPI_KEY` (required). Optional repository variable `OPENALEX_MAILTO`.
+
+## Site search
+
+⌘K search and the Publications search box use **hybrid retrieval**: BM25 fused 50/50 (after
+min-max normalisation) with dense scores from a 2-layer, 32-dim cut of
+[Starbucks](https://huggingface.co/ielabgroup/Starbucks-msmarco) (`public/models/starbucks-2l-32`,
+int8, 10k-token vocabulary, ~15 MB gzipped). Every build re-encodes all papers, projects and news
+into `/search-index.json` with the same onnxruntime-web kernels the browser uses, so new papers —
+added by hand or by the daily sync — are searchable after the next deploy. BM25 answers instantly;
+the model loads in the background on first search. Regenerate the model with
+`python3 scripts/export_starbucks.py` (needs torch, transformers, onnx, onnxruntime).
 
 ## Editing content
 
