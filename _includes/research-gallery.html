@@ -1,0 +1,60 @@
+<section class="research-explorer" id="work" aria-labelledby="work-title">
+  <div class="explorer-heading">
+    <div><p class="eyebrow">{% if zh %}研究 / 论文与开源{% else %}RESEARCH / PAPERS & OPEN SOURCE{% endif %}</p><h2 id="work-title">{% if zh %}从检索到智能体{% else %}From retrieval to agents{% endif %}<span>.</span></h2></div>
+    <a href="{{ prefix }}/publications/">{% if zh %}完整论文列表{% else %}All publications{% endif %} ↗</a>
+  </div>
+  <div class="research-controls">
+    <div class="explorer-topics" role="group" aria-label="Research topics">
+      <button type="button" data-topic="all" aria-pressed="true">{% if zh %}全部{% else %}All{% endif %}</button>
+      <button type="button" data-topic="agents" aria-pressed="false">Search agents</button>
+      <button type="button" data-topic="evidence" aria-pressed="false">{% if zh %}医学证据{% else %}Biomedical evidence{% endif %}</button>
+      <button type="button" data-topic="rag" aria-pressed="false">RAG</button>
+      <button type="button" data-topic="retrieval" aria-pressed="false">{% if zh %}检索与排序{% else %}Retrieval{% endif %}</button>
+      <button type="button" data-topic="security" aria-pressed="false">{% if zh %}鲁棒性{% else %}Robustness{% endif %}</button>
+    </div>
+    <label class="archive-search"><span class="sr-only">{% if zh %}搜索论文{% else %}Search papers{% endif %}</span><input id="archive-search" type="search" placeholder="{% if zh %}搜索论文…{% else %}Search papers…{% endif %}"></label>
+  </div>
+  <p class="archive-count sr-only" role="status"></p>
+  {% assign papers = site.publications | sort: 'date' | reverse %}
+  <div class="research-grid">
+    {% for artwork in site.data.research_figures %}
+      {% assign paper = nil %}{% for entry in papers %}{% if entry.paperurl contains artwork.arxiv %}{% assign paper = entry %}{% break %}{% endif %}{% endfor %}
+      {% if paper %}
+      <article class="research-item {% if forloop.index <= 2 %}research-item--lead{% endif %}" data-topic="{{ artwork.topic }}" data-search="{{ paper.title | escape }} {{ paper.venue | escape }} {{ paper.date | date: '%Y' }}">
+        <button type="button" class="research-image" aria-label="{% if zh %}放大流程图{% else %}Enlarge figure{% endif %}: {{ paper.title | escape }}" data-source="{{ artwork.source }}" data-caption="{{ artwork.figure | escape }}" data-title="{{ paper.title | escape }}" data-paper="{{ paper.paperurl }}">
+          <img src="{{ artwork.image | relative_url }}" alt="{{ artwork.figure | escape }} — {{ paper.title | escape }}" width="1200" height="720" loading="lazy" decoding="async">
+          <span class="image-action" aria-hidden="true">↗</span>
+        </button>
+        <div class="research-item-meta"><span>{% case artwork.topic %}{% when 'agents' %}SEARCH AGENTS{% when 'evidence' %}BIOMEDICAL EVIDENCE{% when 'rag' %}RAG{% when 'security' %}ROBUSTNESS{% else %}RETRIEVAL{% endcase %}</span><span>{{ paper.date | date: '%Y' }}</span></div>
+        <h3><a href="{{ prefix }}{{ paper.url }}">{{ artwork.title | default: paper.title }}</a></h3>
+        <p class="research-description">{% if zh %}{{ artwork.description_zh }}{% else %}{{ artwork.description }}{% endif %}</p>
+        <div class="research-links"><a href="{{ paper.paperurl }}">{% if zh %}论文{% else %}Paper{% endif %} ↗</a>{% assign project = paper.project | default: artwork.project %}{% if project %}<a href="{{ project }}">Project ↗</a>{% endif %}<a href="{{ prefix }}{{ paper.url }}">{% if zh %}摘要与引用{% else %}Details{% endif %} ↗</a></div>
+      </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="further-research">
+    <h3>{% if zh %}更多论文{% else %}Further publications{% endif %}</h3>
+    {% for paper in papers %}
+      {% assign artwork = nil %}{% for item in site.data.research_figures %}{% if paper.paperurl contains item.arxiv %}{% assign artwork = item %}{% break %}{% endif %}{% endfor %}
+      {% unless artwork %}
+        {% assign topic = 'retrieval' %}{% assign lower = paper.title | downcase %}
+        {% if lower contains 'prompt injection' or lower contains 'prompt-injection' %}{% assign topic = 'security' %}
+        {% elsif lower contains 'systematic' or lower contains 'mesh' or lower contains 'medical' %}{% assign topic = 'evidence' %}
+        {% elsif lower contains 'agent' %}{% assign topic = 'agents' %}
+        {% elsif lower contains 'rag' or lower contains 'context embeddings' or lower contains 'memory' or lower contains 'generative ad hoc' or lower contains 'retrieval augmented' or lower contains 'retrieval-augmented' %}{% assign topic = 'rag' %}{% endif %}
+        <article class="research-item research-item--text" data-topic="{{ topic }}" data-search="{{ paper.title | escape }} {{ paper.venue | escape }} {{ paper.date | date: '%Y' }}">
+          <span class="publication-year">{{ paper.date | date: '%Y' }}</span>
+          <h3><a href="{{ prefix }}{{ paper.url }}">{{ paper.title }}</a></h3>
+          <a class="text-paper-link" href="{{ paper.paperurl }}" aria-label="Read {{ paper.title | escape }}">↗</a>
+        </article>
+      {% endunless %}
+    {% endfor %}
+  </div>
+  <p class="archive-empty" hidden>{% if zh %}没有匹配的论文。{% else %}No matching papers.{% endif %}</p>
+  <dialog class="figure-dialog" aria-labelledby="figure-dialog-title">
+    <div class="figure-dialog-toolbar"><span class="figure-position"></span><div class="figure-dialog-buttons"><button type="button" class="figure-zoom" aria-pressed="false">{% if zh %}缩放{% else %}Zoom{% endif %} +</button><button type="button" class="figure-close">{% if zh %}关闭{% else %}Close{% endif %} ×</button></div></div>
+    <div class="figure-dialog-image"><img alt=""></div>
+    <div class="figure-dialog-caption"><div><h2 id="figure-dialog-title"></h2><p class="figure-source"><a>Original figure ↗</a> · <a class="figure-paper-link">Read paper ↗</a></p></div></div>
+  </dialog>
+</section>

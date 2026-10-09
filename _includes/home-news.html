@@ -1,0 +1,13 @@
+<section class="news-carousel" aria-label="{% if zh %}最新动态{% else %}Latest news{% endif %}" aria-roledescription="carousel">
+  <div class="news-carousel-label"><span class="eyebrow">{% if zh %}最新动态{% else %}LATEST NEWS{% endif %}</span><a href="{{ prefix }}/news/">{% if zh %}全部动态{% else %}Archive{% endif %} ↗</a></div>
+  <div class="news-viewport" aria-live="off">
+    {% assign news = site.data.news | sort: 'date' | reverse %}
+    {% for item in news limit:5 %}
+    <article class="news-slide{% if forloop.first %} is-active{% endif %}" aria-roledescription="slide" aria-label="{{ forloop.index }} / 5" {% unless forloop.first %}aria-hidden="true" inert{% endunless %}>
+      <time datetime="{{ item.date | date: '%Y-%m-%d' }}">{{ item.date | date: '%d %b %Y' }}</time>
+      <p>{% if item.url %}<a href="{{ item.url }}">{{ item.title }}</a>{% else %}{{ item.title }}{% endif %}</p>
+    </article>
+    {% endfor %}
+  </div>
+  <div class="news-controls"><span class="news-position">1 / 5</span><button type="button" class="news-prev" aria-label="Previous news">←</button><button type="button" class="news-next" aria-label="Next news">→</button><button type="button" class="news-pause" aria-label="Pause news rotation">Pause</button></div>
+</section>

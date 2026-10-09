@@ -1,0 +1,151 @@
+- id: sieve
+  title: "Sieve: Search, Inspect, Fetch"
+  topic: agents
+  year: 2026
+  image: /images/research/sieve.webp
+  description: Boolean search narrows the candidates, inspection exposes document structure, and fetch reads only the selected sections.
+  description_zh: Boolean 检索缩小候选集，Inspect 展示文档结构，Fetch 只读取所选章节。
+  paper: https://arxiv.org/abs/2608.02751
+  arxiv: '2608.02751'
+  source: https://arxiv.org/html/2608.02751
+  figure: "Figure 2 · Workflow comparison"
+  project: https://ielab.io/skim-search-agent/sieve/
+- id: iter
+  title: "ITER: Interaction-Aware Retrieval"
+  topic: agents
+  year: 2026
+  image: /images/research/iter.webp
+  description: Agent search history conditions the query; document interactions provide the signals for training the retriever.
+  description_zh: 将 Agent 的检索历史融入查询，并利用文档交互轨迹训练检索模型。
+  paper: https://arxiv.org/abs/2608.27912
+  arxiv: '2608.27912'
+  source: https://github.com/ielab/ITER/blob/main/assets/flowchart.png
+  figure: "Figure 1 · Method overview"
+  project: https://ielab.io/skim-search-agent/iter/
+- id: autobool
+  title: AutoBool
+  topic: evidence
+  year: 2026
+  image: /images/research/autobool.webp
+  description: Dataset construction and reinforcement learning for Boolean queries in systematic review literature search.
+  description_zh: 构建训练数据并使用强化学习生成系统综述文献检索所需的 Boolean 查询。
+  paper: https://arxiv.org/abs/2602.00005
+  arxiv: '2602.00005'
+  source: https://arxiv.org/html/2602.00005v1
+  figure: "Figure 1 · Dataset and training"
+- id: cocom
+  title: COCOM
+  topic: rag
+  year: 2025
+  image: /images/research/cocom.webp
+  description: Retrieved contexts are compressed into embeddings before answer generation, connecting retrieval with efficient decoding.
+  description_zh: 将检索上下文压缩为嵌入后生成答案，连接检索与高效解码。
+  paper: https://arxiv.org/abs/2407.09252
+  arxiv: '2407.09252'
+  source: https://arxiv.org/html/2407.09252
+  figure: "Figure 2 · COCOM pipeline"
+- id: diffretriever
+  title: DiffRetriever
+  topic: retrieval
+  year: 2026
+  image: /images/research/diffretriever.webp
+  description: Parallel masked positions in a diffusion language model produce multiple representations for dense and sparse retrieval.
+  description_zh: 利用扩散语言模型中并行的掩码位置，生成用于稠密与稀疏检索的多重表示。
+  paper: https://arxiv.org/abs/2605.07210
+  arxiv: '2605.07210'
+  source: https://arxiv.org/html/2605.07210
+  figure: "Figure 2 · Retrieval architecture"
+- id: starbucks
+  title: Starbucks
+  topic: retrieval
+  year: 2026
+  image: /images/research/starbucks.webp
+  description: Flexible embedding dimensions and network depths in one retriever, building on Matryoshka and 2D Matryoshka training.
+  description_zh: 在同一个检索模型中灵活调整嵌入维度与网络深度，扩展 Matryoshka 和 2D Matryoshka 训练。
+  paper: https://arxiv.org/abs/2410.13230
+  arxiv: '2410.13230'
+  source: https://arxiv.org/html/2410.13230
+  figure: "Figure 2 · Training approaches"
+- id: bergen
+  title: BERGEN
+  topic: rag
+  year: 2024
+  image: /images/research/bergen.webp
+  description: A reproducible RAG benchmarking library connecting retrievers, rerankers, language models and evaluation.
+  description_zh: 可复现的 RAG 评测工具库，连接检索器、重排序器、语言模型与评测。
+  paper: https://arxiv.org/abs/2407.01102
+  arxiv: '2407.01102'
+  source: https://arxiv.org/html/2407.01102
+  figure: "Figure 1 · BERGEN components"
+- id: chunking
+  arxiv: '2602.16974'
+  topic: retrieval
+  image: /images/research/chunking.webp
+  source: https://arxiv.org/html/2602.16974
+  figure: "Figure 1 · Document chunking evaluation framework"
+  description: A unified framework for comparing document segmentation and embedding strategies across retrieval tasks.
+  description_zh: 在不同检索任务中统一比较文档分块与嵌入策略。
+- id: rag-injection
+  arxiv: '2605.28017'
+  topic: security
+  image: /images/research/rag-injection.webp
+  source: https://arxiv.org/html/2605.28017
+  figure: "Figure 1 · End-to-end evaluation pipeline"
+  description: Following prompt-injection attacks through retrieval, reranking and answer generation in realistic RAG settings.
+  description_zh: 在真实 RAG 设置中追踪提示注入攻击经过检索、重排序与答案生成的过程。
+- id: ranker-injection
+  arxiv: '2602.16752'
+  topic: security
+  image: /images/research/ranker-injection.webp
+  source: https://arxiv.org/html/2602.16752
+  figure: "Figure 1 · Prompt-injection method evaluated in the study"
+  description: A reproducibility study examining the vulnerability of LLM rankers to prompt-injection attacks.
+  description_zh: 对 LLM 排序器提示注入攻击脆弱性的可复现研究。
+- id: rank-r1
+  arxiv: '2503.06034'
+  topic: retrieval
+  image: /images/research/rank-r1.webp
+  source: https://arxiv.org/html/2503.06034
+  figure: "Figure 1 · Rank-R1 prompt"
+  description: Reinforcement learning for reasoning in LLM-based document reranking.
+  description_zh: 使用强化学习增强 LLM 文档重排序中的推理能力。
+- id: lightmem
+  arxiv: '2607.29104'
+  topic: rag
+  image: /images/research/lightmem.webp
+  source: https://arxiv.org/html/2607.29104
+  figure: "Figure 2 · Evaluation framework"
+  description: Comparing constructed long-term memories with retrieval over raw user turns under matched evaluation settings.
+  description_zh: 在一致的评测设置下比较构建的长期记忆与直接检索原始用户对话。
+- id: resllm
+  arxiv: '2401.17645'
+  topic: retrieval
+  image: /images/research/resllm.webp
+  source: https://arxiv.org/html/2401.17645
+  figure: "Figure 1 · Resource selection and fine-tuning"
+  description: Using language models to select resources for federated search, including the SLAT fine-tuning protocol.
+  description_zh: 利用语言模型为联邦检索选择资源，包括 SLAT 微调流程。
+- id: screening
+  arxiv: '2309.05238'
+  topic: evidence
+  image: /images/research/screening.webp
+  source: https://arxiv.org/html/2309.05238
+  figure: "Figure 1 · Screening prioritisation approach"
+  description: Generating natural-language queries from Boolean queries to improve systematic review screening prioritisation.
+  description_zh: 从 Boolean 查询生成自然语言查询，改善系统综述筛选优先级排序。
+- id: stemming
+  arxiv: '2402.11757'
+  topic: retrieval
+  image: /images/research/stemming.webp
+  source: https://arxiv.org/html/2402.11757
+  figure: "Figure 1 · Stemming pipeline"
+  description: Comparing stemming techniques and examining the promises and limitations of language models for stemming.
+  description_zh: 比较词干提取方法，并研究语言模型在词干提取中的能力与局限。
+- id: feb4rag
+  arxiv: '2402.11891'
+  topic: rag
+  image: /images/research/feb4rag.webp
+  source: https://arxiv.org/html/2402.11891
+  figure: "Figure 1 · Federated search within RAG"
+  description: Evaluating federated search across multiple resources within retrieval-augmented generation.
+  description_zh: 在检索增强生成中评测跨多个资源的联邦检索。

@@ -1,0 +1,55 @@
+.research-explorer { padding: 32px 0 64px; scroll-margin-top: 24px; }
+.explorer-heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 30px; }
+.explorer-heading .eyebrow { margin-bottom: 12px; color: var(--muted); }
+.explorer-heading h2 { margin: 0; font-size: 30px; font-weight: 600; }
+.explorer-heading h2 span { color: var(--accent); }
+.explorer-heading > a { font-size: 12px; white-space: nowrap; text-decoration: none; }
+.research-controls { display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 0 0 20px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+.explorer-topics { display: flex; gap: 20px; flex-wrap: wrap; }
+.explorer-topics button { border: 0; border-radius: 0; background: transparent; padding: 8px 0; font-size: 12px; color: var(--muted); border-bottom: 2px solid transparent; }
+.explorer-topics button:hover { color: var(--text); }
+.explorer-topics button[aria-pressed='true'] { color: var(--accent); border-bottom-color: var(--accent); }
+.archive-search { flex: 0 0 160px; }
+.archive-search input { width: 100%; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; font-size: 12px; padding: 8px 0; background: transparent; }
+.research-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 44px 28px; }
+.research-item { grid-column: span 2; min-width: 0; }
+.research-item--lead { grid-column: span 3; }
+.research-item--lead .research-image { aspect-ratio: 1.85; }
+.research-image { width: 100%; aspect-ratio: 1.55; display: block; position: relative; padding: 20px; overflow: hidden; border: 1px solid var(--line); border-radius: 4px; background: #fff; transition: border-color 180ms, box-shadow 180ms; }
+.research-image img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform 250ms ease; }
+.research-image:hover { border-color: #b6b6bc; box-shadow: 0 12px 32px -20px #26262e55; }
+.research-image:hover img { transform: scale(1.03); }
+.image-action { position: absolute; right: 12px; bottom: 10px; width: 25px; height: 25px; line-height: 25px; background: #fff; color: #77777f; font-size: 18px; }
+.research-item-meta { display: flex; justify-content: space-between; gap: 12px; margin: 18px 0 9px; color: var(--muted); font: 10px/1.5 'SFMono-Regular', Consolas, monospace; }
+.research-item--lead .research-item-meta > span:first-child { color: var(--accent); }
+.research-item h3 { font: 600 18px/1.4 'Helvetica Neue', Arial, sans-serif; margin: 0 0 10px; }
+.research-item--lead h3 { font-size: 23px; }
+.research-item h3 a { color: var(--text); text-decoration: none; }
+.research-item h3 a:hover { color: var(--accent); }
+.research-description { font-size: 13px; line-height: 1.75; color: var(--muted); margin-bottom: 14px; }
+.research-links { display: flex; gap: 22px; font-size: 11px; }
+.research-links a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 3px; }
+.research-links a:hover { color: var(--accent); border-color: var(--accent); }
+.further-research { margin-top: 56px; }
+.further-research > h3 { font-size: 20px; font-weight: 600; margin-bottom: 24px; }
+.research-item--text { display: grid; grid-template-columns: 50px minmax(0, 1fr) 24px; align-items: baseline; gap: 24px; padding: 18px 0; border-top: 1px solid var(--line); }
+.research-item--text h3 { font-size: 14px; font-weight: 400; margin: 0; }
+.publication-year { font: 11px/1.5 'SFMono-Regular', Consolas, monospace; color: var(--muted); }
+.text-paper-link { text-decoration: none; }
+.archive-empty { padding: 30px 0; }
+@media (max-width: 1000px) {
+  .research-controls { align-items: start; flex-direction: column; gap: 12px; }
+  .archive-search { flex: none; width: 180px; }
+  .research-item { grid-column: span 3; }
+}
+@media (max-width: 600px) {
+  .research-explorer { padding-top: 32px; }
+  .explorer-heading { align-items: start; flex-direction: column; gap: 16px; }
+  .explorer-heading h2 { font-size: 25px; }
+  .explorer-topics { gap: 6px 18px; }
+  .research-grid { grid-template-columns: minmax(0, 1fr); gap: 34px; }
+  .research-item, .research-item--lead { grid-column: auto; }
+  .research-item--lead h3 { font-size: 21px; }
+  .research-image { aspect-ratio: 1.55; padding: 12px; }
+  .research-item--text { grid-template-columns: 35px minmax(0, 1fr) 18px; gap: 12px; }
+}
