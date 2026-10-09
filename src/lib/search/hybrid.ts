@@ -113,6 +113,8 @@ export function loadIndex() {
 
 let encoderPromise: Promise<Encoder | null> | null = null;
 let encoderReady: Encoder | null = null;
+/** Why the encoder could not load, shown in the search badge. */
+export let encoderError = '';
 /** Load onnxruntime-web and the Starbucks model once; resolves to null if unavailable. */
 export function loadEncoder(): Promise<Encoder | null> {
   encoderPromise ??= (async () => {
@@ -128,7 +130,8 @@ export function loadEncoder(): Promise<Encoder | null> {
       encoderReady = new Encoder(ort, session, new WordPiece(vocab));
       return encoderReady;
     } catch (error) {
-      console.warn('Semantic search unavailable, using BM25 only.', error);
+      encoderError = error instanceof Error ? error.message : String(error);
+      console.warn('Starbucks could not load; search uses BM25 only.', error);
       return null;
     }
   })();
