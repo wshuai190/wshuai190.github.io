@@ -79,17 +79,17 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
       {value.trim() && results && (
         <div id="hero-results" className="glass absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden !bg-[var(--bg-raised)] shadow-2xl">
           <ul className="max-h-[50vh] overflow-y-auto p-2">
-            {shown.map(({ doc, lexical, dense }) => (
+            {shown.map((result) => { const { doc } = result; return (
               <li key={doc.url + (doc.section ?? '')}>
                 <a href={passageLink(doc, lang)} className="block rounded-xl px-4 py-2.5 hover:bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]">
                   <span className="flex items-baseline justify-between gap-3">
                     <span className="truncate text-[15px] font-semibold">{doc.title}{doc.section && <span className="font-normal text-[var(--muted)]"> › {doc.section}</span>}</span>
-                    <span className="shrink-0"><ScoreChips lexical={lexical} dense={dense} hybrid={mode === 'hybrid'} /></span>
+                    <span className="shrink-0"><ScoreChips result={result} hybrid={mode === 'hybrid'} /></span>
                   </span>
                   <span className="mt-0.5 line-clamp-2 block text-[13px] text-[var(--muted)] [&_mark]:bg-transparent [&_mark]:font-semibold [&_mark]:text-[var(--teal)]" dangerouslySetInnerHTML={{ __html: snippet(doc.text, value) }} />
                 </a>
               </li>
-            ))}
+            ); })}
             {shown.length === 0 && <li className="px-4 py-4 text-sm text-[var(--muted)]">{lang === 'zh' ? '没有结果' : 'No results'}</li>}
           </ul>
           <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-2">

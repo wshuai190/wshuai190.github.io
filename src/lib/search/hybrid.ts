@@ -2,9 +2,10 @@ import { DENSE_CEILING, DENSE_THRESHOLD, Encoder, MODEL_FILE, VOCAB_FILE } from 
 import { WordPiece } from './wordpiece.ts';
 
 /**
- * Hybrid site search: BM25 over titles, metadata and text, fused with Starbucks 2L-32 dense
- * scores: 0.5 · BM25/max(BM25) + 0.5 · clamp((dense − τ)/(ceiling − τ)), so dense scores below
- * the threshold τ count as 0 and only strong semantic matches earn full credit. A result needs a BM25 match or a dense score ≥ τ. BM25 results
+ * Hybrid site search: BM25 over titles, metadata and text, interpolated with Starbucks 2L-32
+ * dense scores after per-query min-max normalisation of both:
+ *   score = 0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)
+ * Thresholds (see rank) only decide which passages are returned, not their scores. A result needs a BM25 match or a dense score ≥ τ. BM25 results
  * are available immediately; dense scores join once the ~15 MB model has loaded.
  */
 
@@ -20,17 +21,23 @@ export interface SearchDoc {
   vector: number[];
 }
 export type SearchMode = 'lexical' | 'hybrid';
-export interface SearchResult { doc: SearchDoc; score: number; lexical: number; dense: number }
+/** score = hybrid score; lexicalNorm/denseNorm = min-max normalised BM25/Starbucks; lexical/dense = raw scores. */
+export interface SearchResult { doc: SearchDoc; score: number; lexical: number; dense: number; lexicalNorm: number; denseNorm: number }
 export interface LexicalScores { scores: number[]; coverage: number[] }
 
 const STOPWORDS = new Set('a an and are as at be by can do does for from how i in is it of on or that the to was what when which who why with my me you'.split(' '));
 const K1 = 1.2;
 const B = 0.75;
-const WEIGHT_DENSE = 0.5;
+/** Interpolation weight of the Starbucks score (BM25 gets 1 − this); 0.2–0.5 perform the same on tests/search_queries.json. */
+const WEIGHT_DENSE = 0.4;
 /** A keyword match must cover at least this share of the query's total idf weight. */
 const MIN_COVERAGE = 0.4;
 /** A passage with any keyword hit also counts if its Starbucks score reaches this. */
 const DENSE_AGREEMENT = 16;
+/** How BM25 and Starbucks scores are normalised before interpolation. */
+const NORMALIZATION: 'minmax' | 'fixed' = 'minmax';
+/** Minimum hybrid score for a passage to be shown (after the relevance gate below). */
+const MIN_HYBRID = 0.4;
 
 /** Lowercased word tokens; CJK runs become character unigrams and bigrams. */
 export function lexicalTokens(text: string): string[] {
@@ -173,24 +180,27 @@ export function passageLink(doc: SearchDoc, lang: 'en' | 'zh'): string {
 }
 
 /**
- * Fuse BM25 with Starbucks dot products (if a query vector is given) and sort. A document is
- * returned if it is a keyword match (its matched terms cover ≥ MIN_COVERAGE of the query's idf
- * weight, so one common word like "results" is not enough) or a semantic match (dense ≥ τ).
- * The cutoff only decides inclusion; ranking always uses the full BM25 score.
+ * 1. Min-max normalise BM25 and Starbucks per query; 2. interpolate into the hybrid score
+ * (1 − α)·BM25 + α·Starbucks; 3. keep passages with hybrid ≥ MIN_HYBRID that also pass the
+ * relevance gate on raw scores: a keyword match covering ≥ MIN_COVERAGE of the query's idf
+ * weight, a Starbucks score ≥ τ, or a keyword hit plus Starbucks ≥ DENSE_AGREEMENT. The gate is
+ * needed because min-max is relative: every query, even an off-topic one, has a passage at 1.
  */
 export function rank(
   docs: SearchDoc[],
   { scores: lexical, coverage }: LexicalScores,
   queryVector: number[] | null,
-  { threshold = DENSE_THRESHOLD, ceiling = DENSE_CEILING, minCoverage = MIN_COVERAGE, weightDense = WEIGHT_DENSE, agreement = DENSE_AGREEMENT } = {},
+  { threshold = DENSE_THRESHOLD, ceiling = DENSE_CEILING, minCoverage = MIN_COVERAGE, weightDense = WEIGHT_DENSE, agreement = DENSE_AGREEMENT, normalization = NORMALIZATION as 'minmax' | 'fixed', minHybrid = MIN_HYBRID, rawCutoffs = true } = {},
 ): SearchResult[] {
   const dense = queryVector ? docs.map((d) => d.vector.reduce((sum, v, i) => sum + v * queryVector[i], 0)) : docs.map(() => 0);
-  const nl = scale(lexical, 0);
-  const nd = queryVector ? scale(dense, threshold, ceiling) : dense;
+  // minmax: per-query min-max on both signals over all passages. fixed: BM25/max and
+  // Starbucks clamped to [threshold, ceiling].
+  const nl = normalization === 'minmax' ? scale(lexical, Math.min(...lexical)) : scale(lexical, 0);
+  const nd = !queryVector ? dense : normalization === 'minmax' ? scale(dense, Math.min(...dense)) : scale(dense, threshold, ceiling);
   return docs
-    .map((doc, i) => ({ doc, lexical: lexical[i], dense: dense[i], keyword: lexical[i] > 0 && coverage[i] >= minCoverage, score: queryVector ? (1 - weightDense) * nl[i] + weightDense * nd[i] : nl[i] }))
+    .map((doc, i) => ({ doc, lexical: lexical[i], dense: dense[i], lexicalNorm: nl[i], denseNorm: queryVector ? nd[i] : 0, keyword: lexical[i] > 0 && coverage[i] >= minCoverage, score: queryVector ? (1 - weightDense) * nl[i] + weightDense * nd[i] : nl[i] }))
     // Strong keyword match, strong semantic match, or weaker evidence from both signals together.
-    .filter((r) => r.keyword || (queryVector !== null && (r.dense >= threshold || (r.lexical > 0 && r.dense >= agreement))))
+    .filter((r) => r.score >= minHybrid && (!rawCutoffs || r.keyword || (queryVector !== null && (r.dense >= threshold || (r.lexical > 0 && r.dense >= agreement)))))
     .map(({ keyword, ...result }) => result)
     .sort((a, b) => b.score - a.score);
 }

@@ -51,7 +51,7 @@ for (const [category, bar] of Object.entries(BARS)) {
     mrr += reciprocal;
     r3 += slugs.slice(0, 3).filter((s) => relevant.includes(s)).length / Math.min(3, relevant.length);
     if (verbose || reciprocal < 0.5) {
-      console.log(`      ${reciprocal < 0.5 ? '!' : ' '} "${q}" → ${results.slice(0, 3).map((r) => `${slugOf(r.doc.url)} (${r.lexical.toFixed(1)}/${r.dense.toFixed(1)})`).join(', ') || 'no results'}`);
+      console.log(`      ${reciprocal < 0.5 ? '!' : ' '} "${q}" → ${results.slice(0, 3).map((r) => `${slugOf(r.doc.url)} (hybrid ${r.score.toFixed(2)}, raw ${r.lexical.toFixed(1)}/${r.dense.toFixed(1)})`).join(', ') || 'no results'}`);
     }
   }
   const n = suite[category].length;

@@ -66,7 +66,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
   const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS, lang);
   // Relevance order for the current query (results already passed the BM25 / Starbucks cutoff).
   const relevance = useMemo(
-    () => (ranked ? new Map(ranked.slice(0, 20).map((r, i) => [r.doc.url, { rank: i, lexical: r.lexical, dense: r.dense }])) : null),
+    () => (ranked ? new Map(ranked.slice(0, 20).map((r, i) => [r.doc.url, { rank: i, result: r }])) : null),
     [ranked],
   );
   const years = useMemo(() => [...new Set(items.map((i) => i.year))].sort((a, b) => b - a), [items]);
@@ -135,7 +135,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
                   {item.cited ? <><span aria-hidden="true">·</span><span>{labels.cited.replace('{n}', String(item.cited))}</span></> : null}
                   {item.role && <span className="rounded-full border border-[color-mix(in_srgb,var(--teal)_40%,transparent)] px-2 py-px text-[var(--teal)]">{item.role === 'first' ? labels.first : labels.cofirst}</span>}
                   {searching && relevance?.get(enPath(item.url)) && (
-                    <span className="ml-auto normal-case tracking-normal"><ScoreChips {...relevance.get(enPath(item.url))!} hybrid={mode === 'hybrid'} /></span>
+                    <span className="ml-auto normal-case tracking-normal"><ScoreChips result={relevance.get(enPath(item.url))!.result} hybrid={mode === 'hybrid'} /></span>
                   )}
                 </p>
                 <h3 className="serif mt-1 text-[21px] leading-snug"><a href={item.url} className="hover:text-[var(--teal)]">{item.title}</a></h3>
