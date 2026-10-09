@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Headline from '../components/Headline.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import NewsTicker from '../components/react/NewsTicker';
+import HeroSearch from '../components/react/HeroSearch';
+import { formatMonth, localePath, pick, t, type Lang } from '../i18n/ui';
+import { getPublications, news, profile, projects, scholar } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const pubs = await getPublications();
+const featured = projects.filter((p) => p.featured).slice(0, 3);
+const latest = news[0];
+const tickerItems = news.slice(0, 12).map((item) => ({
+  date: formatMonth(item.date, lang),
+  title: (lang === 'zh' && item.title_zh) || item.title,
+  url: item.url,
+}));
+const stats = [
+  { value: scholar.citations.toLocaleString('en'), label: t(lang, 'stat.citations') },
+  { value: String(scholar.h_index), label: t(lang, 'stat.hindex') },
+  { value: String(pubs.length), label: t(lang, 'stat.papers') },
+  { value: profile.highlight.value, label: pick(profile.highlight.label, lang) },
+];
+const examples = lang === 'zh'
+  ? ['Boolean query generation', 'LLM rerankers', 'efficient RAG', 'systematic review screening', 'deep-search agents']
+  : ['how can LLMs write Boolean queries?', 'deep-search agents', 'prompt injection in RAG', 'Matryoshka embeddings', 'systematic review screening'];
+---
+<Base lang={lang} glow searchType="page">
+  <div class="wrap">
+    <section class="grid items-center gap-12 pb-14 pt-10 md:grid-cols-[1fr_300px] md:gap-[72px] md:pt-20">
+      <div>
+        <a href={latest.url ?? localePath(lang, '/news/')} class="pill rise">
+          <span class="dot"></span><span class="truncate">{t(lang, 'home.new')} · {(lang === 'zh' && latest.title_zh) || latest.title}</span>
+        </a>
+        <Headline text={profile.headline[lang]} class="display rise rise-2 mt-6 text-[clamp(40px,6vw,62px)]" />
+        <p class="lede prose-links rise rise-3 mt-6" set:html={profile.bio[lang]} />
+        <div class="rise rise-4 mt-8 flex flex-wrap gap-3">
+          <a class="btn btn-solid" href={localePath(lang, '/research/')}>{t(lang, 'home.explore')} →</a>
+          <a class="btn" href={localePath(lang, '/cv/')}>{t(lang, 'home.cv')}</a>
+          <a class="btn" href={profile.links.scholar} rel="me noopener" target="_blank">{t(lang, 'home.scholar')} ↗</a>
+        </div>
+        <div class="rise rise-4 mt-8 max-w-[560px]">
+          <HeroSearch client:idle action={localePath(lang, '/publications/')} label={t(lang, 'home.search.label')} button={t(lang, 'home.search.go')} examples={examples} />
+        </div>
+      </div>
+      <figure class="rise rise-3 relative mx-auto w-full max-w-[300px]">
+        <div class="absolute -inset-3.5 rounded-[26px] bg-gradient-to-br from-[var(--glow-1)] to-[var(--glow-2)] blur-[18px]" aria-hidden="true"></div>
+        <img src={profile.portrait} alt={profile.short_name[lang]} width="300" height="375" fetchpriority="high" class="relative aspect-[4/5] w-full rounded-[18px] border border-line object-cover" />
+        <figcaption class="relative mt-3 text-[13px] text-muted">{pick(profile.location, lang)} · {profile.pronouns}</figcaption>
+      </figure>
+    </section>
+
+    <section class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4" aria-label="Metrics">
+      {stats.map((stat) => (
+        <div class="glass px-5 py-5 md:px-6">
+          <p class="serif text-[32px] leading-tight md:text-[40px]">{stat.value}</p>
+          <p class="label mt-1">{stat.label}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="mt-24">
+      <div class="mb-7 flex items-baseline justify-between gap-4">
+        <h2 class="section-title">{t(lang, 'home.selected')}</h2>
+        <a class="text-sm font-semibold text-teal" href={localePath(lang, '/publications/')}>{t(lang, 'home.allpubs')} →</a>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {featured.map((project) => <ProjectCard project={project} lang={lang} />)}
+      </div>
+    </section>
+
+    <section class="mt-24">
+      <div class="mb-7 flex items-baseline justify-between gap-4">
+        <h2 class="section-title">{t(lang, 'home.news')}</h2>
+        <a class="text-sm font-semibold text-teal" href={localePath(lang, '/news/')}>{t(lang, 'home.archive')} →</a>
+      </div>
+      <NewsTicker client:visible items={tickerItems} pauseLabel={t(lang, 'home.news.pause')} playLabel={t(lang, 'home.news.play')} />
+    </section>
+
+    <section class="mt-24 grid gap-5 md:grid-cols-2">
+      <div class="glass p-7 md:p-9">
+        <p class="eyebrow">{t(lang, 'home.teaching')}</p>
+        <h2 class="serif mt-3 text-3xl leading-tight">{profile.teaching.course} · {pick(profile.teaching.title, lang)}</h2>
+        <p class="mt-3 text-muted">{profile.teaching.body[lang]}</p>
+        <a class="text-link mt-5 inline-block text-sm font-semibold" href={localePath(lang, '/teaching/')}>{t(lang, 'home.courses')} →</a>
+      </div>
+      <div class="glass p-7 md:p-9">
+        <p class="eyebrow">{t(lang, 'research.opportunities')}</p>
+        <h2 class="serif mt-3 text-3xl leading-tight">{t(lang, 'home.together')}</h2>
+        <p class="mt-3 text-muted">{profile.opportunities[lang]}</p>
+        <a class="text-link mt-5 inline-block text-sm font-semibold" href={`mailto:${profile.email}`}>{profile.email} →</a>
+      </div>
+    </section>
+  </div>
+</Base>

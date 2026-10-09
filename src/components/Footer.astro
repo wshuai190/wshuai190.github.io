@@ -1,0 +1,41 @@
+---
+import { localePath, t, type Lang } from '../i18n/ui';
+import { profile, scholar } from '../lib/data';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const internal = [
+  ['nav.talks', '/talks/'],
+  ['nav.awards', '/awards/'],
+  ['nav.news', '/news/'],
+] as const;
+const external = [
+  ['Google Scholar', profile.links.scholar],
+  ['GitHub', profile.links.github],
+  ['ORCID', profile.links.orcid],
+  ['LinkedIn', profile.links.linkedin],
+];
+---
+<footer class="site-footer wrap relative z-[1] mt-28">
+  <div class="border-t border-line py-10 grid gap-8 md:grid-cols-[1.4fr_1fr_1fr] text-sm">
+    <div>
+      <p class="serif text-xl">{profile.short_name[lang]}</p>
+      <p class="mt-1 text-muted">{t(lang, 'footer.tagline')}</p>
+      <a class="text-link mt-3 inline-block" href={`mailto:${profile.email}`}>{profile.email}</a>
+    </div>
+    <ul class="space-y-1.5 text-muted">
+      {internal.map(([key, href]) => <li><a class="hover:text-ink" href={localePath(lang, href)}>{t(lang, key)}</a></li>)}
+      <li><a class="hover:text-ink" href="/feed.xml">RSS</a></li>
+    </ul>
+    <ul class="space-y-1.5 text-muted">
+      {external.map(([label, href]) => <li><a class="hover:text-ink" href={href} rel="me noopener">{label} ↗</a></li>)}
+    </ul>
+  </div>
+  <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line py-6 text-xs text-muted">
+    <span>© {new Date().getFullYear()} Shuai Wang · <span class="mono">{t(lang, 'stat.citations')} {scholar.citations.toLocaleString('en')} · {scholar.last_updated}</span></span>
+    <div class="no-print opacity-70" id="visitor-map">
+      <script is:inline type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=f4f0f0&w=160&t=n&d=a0w4y9gGYzmliuMuke0InKoBQ4tcUehmbZ2F1VOK2yw&co=385163&cmo=d82727&cmn=269626&ct=b53838"></script>
+    </div>
+  </div>
+</footer>

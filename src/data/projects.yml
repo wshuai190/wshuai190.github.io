@@ -46,7 +46,7 @@
     code: https://github.com/ielab/ITER
   papers:
   - 2026-08-28-iter-interaction-aware
-  featured: true
+  featured: false
 - slug: autobool
   name: AutoBool
   topic: evidence
