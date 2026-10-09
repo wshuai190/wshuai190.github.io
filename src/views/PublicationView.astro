@@ -5,6 +5,8 @@ import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/react/CopyButton';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import Authors from '../components/Authors.astro';
+import { articleSchema, breadcrumbs } from '../lib/seo';
+import { venueFull } from '../lib/data';
 import { authorship, authorsOf, bibtexOf, citationsOf, projectsForPaper, pubSlug, venueLabel, type Publication } from '../lib/data';
 
 interface Props { lang: Lang; pub: Publication }
@@ -20,14 +22,33 @@ const links = [
   ['link.demo', pub.data.demo],
   ['link.site', pub.data.project],
 ].filter(([, href]) => href) as [Parameters<typeof t>[1], string][];
-const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '').slice(0, 220);
+const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim().slice(0, 300);
+// Google Scholar (Highwire Press) tags: https://scholar.google.com/intl/en/scholar/inclusion.html#indexing
+const venue = venueFull(pub.data.venue, pub.data.date.getUTCFullYear());
+const isPreprint = /arxiv|preprint/i.test(venue);
+const isJournal = /journal|transactions|intelligent systems with applications/i.test(venue);
+const pdfUrl = pub.data.arxiv ? `https://arxiv.org/pdf/${pub.data.arxiv}` : pub.data.paperurl?.endsWith('.pdf') ? pub.data.paperurl : undefined;
+const schema = [
+  articleSchema(pub, lang),
+  breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'pubs.title'), '/publications/'], [pub.data.title, pub.data.permalink]]),
+];
 ---
-<Base lang={lang} title={pub.data.title} description={description} image={pub.data.image}>
+<Base lang={lang} title={pub.data.title} description={description} image={pub.data.image} type="article" published={pub.data.date} schema={schema}>
   <Fragment slot="head">
     <meta name="citation_title" content={pub.data.title} />
     {authors.map((name) => <meta name="citation_author" content={name.replace(/\*$/, '')} />)}
     <meta name="citation_publication_date" content={pub.data.date.toISOString().slice(0, 10).replace(/-/g, '/')} />
-    {pub.data.paperurl && <meta name="citation_pdf_url" content={pub.data.paperurl} />}
+    {isPreprint ? <meta name="citation_technical_report_institution" content="arXiv" />
+      : isJournal ? <meta name="citation_journal_title" content={venue} />
+      : <meta name="citation_conference_title" content={venue} />}
+    {pub.data.arxiv && <meta name="citation_arxiv_id" content={pub.data.arxiv} />}
+    {pub.data.doi && <meta name="citation_doi" content={pub.data.doi} />}
+    {pdfUrl && <meta name="citation_pdf_url" content={pdfUrl} />}
+    <meta name="citation_abstract_html_url" content={new URL(pub.data.permalink, Astro.site).href} />
+    <meta name="citation_language" content="en" />
+    <meta name="DC.title" content={pub.data.title} />
+    {authors.map((name) => <meta name="DC.creator" content={name.replace(/\*$/, '')} />)}
+    <meta name="DC.issued" content={pub.data.date.toISOString().slice(0, 10)} />
   </Fragment>
   <article class="wrap max-w-[920px]">
     <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={localePath(lang, '/publications/')}>← {t(lang, 'pub.back')}</a></nav>
