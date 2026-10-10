@@ -90,6 +90,7 @@ export async function GET() {
       strip((pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '')),
     );
   }
+  push('', '## About me (outside research)', strip(profile.about.intro.en), ...profile.about.hobbies.map((h: any) => `- **${h.en.title}**: ${h.en.body}`), `- 中文：${profile.about.hobbies.map((h: any) => `${h.zh.title}（${h.zh.body}）`).join('；')}`);
   push('', '## Awards', ...awards.map((e) => `- ${e.data.date.getUTCFullYear()}: ${e.data.title}`));
   push('', '## Talks', ...talks.map((e) => `- ${e.data.date.getUTCFullYear()}: ${e.data.title}${e.data.venue ? ` (${e.data.venue})` : ''}`));
   push('', '## Recent news', ...news.slice(0, 15).map((n) => `- ${n.date.toISOString().slice(0, 7)}: ${n.title}${n.description ? ` — ${strip(n.description)}` : ''}`), '');
