@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { t, type Lang } from '../../i18n/ui';
 import { passageLink, snippet } from '../../lib/search/hybrid.ts';
-import { useHybridSearch } from './useHybridSearch';
+import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
 import SearchBadge from './SearchBadge';
 import ScoreChips from './ScoreChips';
 
@@ -22,7 +22,8 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
   const [query, setQuery] = useState('');
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { results, mode, model } = useHybridSearch(query, open, undefined, lang);
+  const [semantic, setSemantic] = useSemanticPreference();
+  const { results, mode, model } = useHybridSearch(query, open, undefined, lang, semantic);
   const shown = (results ?? []).slice(0, 8);
 
   const close = useCallback(() => {
@@ -100,11 +101,20 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
               </a>
             </li>
           ); })}
-          {query.trim() && results && shown.length === 0 && <li className="px-4 py-6 text-center text-sm text-[var(--muted)]">{t(lang, 'search.empty')}</li>}
+          {query.trim() && results && shown.length === 0 && (
+            <li className="px-4 py-6 text-center text-sm text-[var(--muted)]">
+              {semantic ? t(lang, 'search.empty') : (
+                <>
+                  {t(lang, 'search.trySemantic')}
+                  <button type="button" className="link-pill mx-auto mt-3 flex" onClick={() => setSemantic(true)}>{t(lang, 'search.trySemanticButton')}</button>
+                </>
+              )}
+            </li>
+          )}
         </ul>
         <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-2.5">
           <span className="mono text-[11px] text-[var(--muted)]">↵ {t(lang, 'search.hint')}</span>
-          <SearchBadge mode={mode} model={model} lang={lang} />
+          <SearchBadge mode={mode} model={model} lang={lang} on={semantic} onToggle={setSemantic} />
         </div>
       </div>
     </div>

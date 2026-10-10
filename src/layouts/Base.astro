@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import newsreaderFont from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SearchPalette from '../components/react/SearchPalette';
@@ -57,6 +58,7 @@ const verification = profile.seo.verification ?? {};
     <link rel="icon" type="image/png" href="/images/site-logo.png" />
     <link rel="apple-touch-icon" href="/images/site-logo.png" />
     <link rel="preload" href="/fonts/Manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={newsreaderFont} as="font" type="font/woff2" crossorigin />
     <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#080a0e" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content={type} />

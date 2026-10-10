@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://shuaiwang.io',
   trailingSlash: 'ignore',
-  build: { format: 'preserve' },
+  build: { format: 'preserve', inlineStylesheets: 'always' },
   integrations: [
     react(),
     sitemap({

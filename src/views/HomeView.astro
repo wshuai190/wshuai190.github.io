@@ -34,7 +34,7 @@ const examples = lang === 'zh'
       <div>
         <!-- Mobile: small avatar instead of the large portrait. -->
         <div class="mb-6 flex items-center gap-4 md:hidden">
-          <img src={profile.portrait} alt={profile.short_name[lang]} width="80" height="80" class="h-20 w-20 rounded-full border border-line object-cover object-top" />
+          <img src={profile.avatar} alt={profile.short_name[lang]} width="80" height="80" class="h-20 w-20 rounded-full border border-line object-cover object-top" />
           <p class="text-[13px] leading-snug text-muted">{pick(profile.location, lang)}<br />{profile.pronouns}</p>
         </div>
         <a href={latest.url ?? localePath(lang, '/news/')} class="pill rise">
@@ -53,7 +53,7 @@ const examples = lang === 'zh'
       </div>
       <figure class="rise rise-3 relative hidden w-full max-w-[220px] justify-self-end md:block">
         <div class="absolute -inset-2 rounded-[22px] bg-gradient-to-br from-[var(--glow-1)] to-[var(--glow-2)] opacity-60 blur-[14px]" aria-hidden="true"></div>
-        <img src={profile.portrait} alt={profile.short_name[lang]} width="220" height="275" fetchpriority="high" class="relative aspect-[4/5] w-full rounded-[16px] border border-line object-cover" />
+        <img src={profile.portrait_web} alt={profile.short_name[lang]} width="220" height="275" loading="lazy" decoding="async" class="relative aspect-[4/5] w-full rounded-[16px] border border-line object-cover" />
         <figcaption class="relative mt-3 text-[13px] text-muted">{pick(profile.location, lang)} · {profile.pronouns}</figcaption>
       </figure>
     </section>

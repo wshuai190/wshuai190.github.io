@@ -32,7 +32,8 @@ Secrets: `SERPAPI_KEY` (required). Optional repository variable `OPENALEX_MAILTO
 
 ## Site search
 
-⌘K search, the home search box and the Publications search use **hybrid retrieval with score
+⌘K search, the home search box and the Publications search use BM25 by default. A **semantic search**
+switch (off by default, remembered per browser) downloads the model once and turns on **hybrid retrieval with score
 fusion**: `0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)` (per-query min-max over all passages),
 where Starbucks is the dot product from a 2-layer, 32-dim cut of
 [ielabgroup/Starbucks-msmarco](https://huggingface.co/ielabgroup/Starbucks-msmarco)

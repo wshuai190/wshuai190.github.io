@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import CopyButton from './CopyButton';
 import SearchBadge from './SearchBadge';
 import ScoreChips from './ScoreChips';
-import { useHybridSearch } from './useHybridSearch';
+import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
 
 export interface ExplorerItem {
   url: string;
@@ -35,6 +35,8 @@ export interface ExplorerLabels {
   cofirst: string;
   leading: string;
   closest: string;
+  trySemantic: string;
+  trySemanticButton: string;
   topics: Record<string, string>;
 }
 
@@ -64,7 +66,8 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
     window.history.replaceState(null, '', search ? `?${search}` : window.location.pathname);
   }, [query, topic, year, leading]);
 
-  const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS, lang);
+  const [semantic, setSemantic] = useSemanticPreference();
+  const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS, lang, semantic);
   // Relevance order for the current query (results already passed the BM25 / Starbucks cutoff).
   const relevance = useMemo(
     () => (ranked ? new Map(ranked.slice(0, 20).map((r, i) => [r.doc.url, { rank: i, result: r }])) : null),
@@ -100,7 +103,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
           <span className="sr-only">{labels.search}</span>
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={labels.search} className="h-10 w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]" type="search" />
         </label>
-        <div className="px-2 md:order-last"><SearchBadge mode={mode} model={model} lang={lang} /></div>
+        <div className="px-2 md:order-last"><SearchBadge mode={mode} model={model} lang={lang} on={semantic} onToggle={setSemantic} /></div>
         <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 rounded-full border border-line bg-[var(--bg)] px-4 text-sm" aria-label={labels.allYears}>
           <option value="all">{labels.allYears}</option>
           {years.map((y) => <option key={y} value={y}>{y}</option>)}
@@ -121,7 +124,16 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
         </span>
       </div>
 
-      {groups.length === 0 && <p className="glass mt-8 p-10 text-center text-[var(--muted)]">{labels.empty}</p>}
+      {groups.length === 0 && (
+        <div className="glass mt-8 p-10 text-center text-[var(--muted)]">
+          {searching && !semantic ? (
+            <>
+              <p>{labels.trySemantic}</p>
+              <button type="button" className="link-pill mx-auto mt-4 flex" onClick={() => setSemantic(true)}>{labels.trySemanticButton}</button>
+            </>
+          ) : <p>{labels.empty}</p>}
+        </div>
+      )}
       {searching && ranked?.[0]?.relaxed && groups.length > 0 && <p className="label mt-8">{labels.closest}</p>}
 
       {groups.map((group) => (

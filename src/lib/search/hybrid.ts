@@ -167,9 +167,10 @@ export function encoderLoaded(): boolean {
  * Rank passages for `query` and keep the best passage per page. Chinese passages are only
  * searched on Chinese pages. Uses dense scores only once the model has loaded.
  */
-export async function search(query: string, options: { types?: SearchDoc['type'][]; lang?: 'en' | 'zh'; limit?: number } = {}) {
+export async function search(query: string, options: { types?: SearchDoc['type'][]; lang?: 'en' | 'zh'; limit?: number; semantic?: boolean } = {}) {
   const { docs, bm25 } = await loadIndex();
-  const queryVector = encoderReady && query.trim() ? await encoderReady.embed(query) : null;
+  const useDense = options.semantic !== false && encoderReady && query.trim();
+  const queryVector = useDense ? await encoderReady!.embed(query) : null;
   const results = bestPerPage(rank(docs, bm25.scores(query), queryVector))
     .filter((r) => (!options.types || options.types.includes(r.doc.type)) && (r.doc.lang === 'en' || options.lang === 'zh'));
   return { mode: (queryVector ? 'hybrid' : 'lexical') as SearchMode, results: results.slice(0, options.limit ?? results.length) };
