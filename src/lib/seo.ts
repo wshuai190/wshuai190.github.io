@@ -109,6 +109,52 @@ export function projectSchema(project: Project, lang: Lang, pubs: Publication[])
   };
 }
 
+/** Home page: Google's ProfilePage type, with the Person as its main entity. */
+export function profilePageSchema(lang: Lang) {
+  return {
+    '@type': 'ProfilePage',
+    '@id': `${abs(localePath(lang, '/'))}#profile`,
+    url: abs(localePath(lang, '/')),
+    name: profile.seo.title[lang],
+    inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+    mainEntity: { '@id': PERSON_ID },
+    isPartOf: { '@id': `${SITE}/#website` },
+  };
+}
+
+/** A list page (publications, projects): CollectionPage with an ItemList of its entries. */
+export function collectionSchema(lang: Lang, path: string, name: string, items: { name: string; url: string; type: string }[]) {
+  return {
+    '@type': 'CollectionPage',
+    url: abs(localePath(lang, path)),
+    name,
+    about: { '@id': PERSON_ID },
+    isPartOf: { '@id': `${SITE}/#website` },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: items.length,
+      itemListElement: items.map((item, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(localePath(lang, item.url)), name: item.name })),
+    },
+  };
+}
+
+/** INFS7410 on the Teaching page (Google's Course type). */
+export function courseSchema(lang: Lang) {
+  const t = profile.teaching;
+  return {
+    '@type': 'Course',
+    name: `${t.course} ${t.title.en}`,
+    courseCode: t.course,
+    description: t.body.en.replace(/\s+/g, ' '),
+    url: t.link,
+    inLanguage: 'en',
+    provider: { '@type': 'CollegeOrUniversity', name: 'The University of Queensland', sameAs: 'https://www.uq.edu.au/' },
+    instructor: { '@id': PERSON_ID },
+    hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'onsite', location: 'Brisbane, Australia', instructor: { '@id': PERSON_ID } },
+    offers: { '@type': 'Offer', category: 'Paid' },
+  };
+}
+
 /** Wrap one or more schema.org nodes into a JSON-LD document. */
 export function jsonLd(...nodes: object[]) {
   return JSON.stringify({ '@context': 'https://schema.org', '@graph': nodes }, (_, v) => (v === undefined ? undefined : v));

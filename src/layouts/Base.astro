@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import SearchPalette from '../components/react/SearchPalette';
 import { alternatePath, t, type Lang } from '../i18n/ui';
 import { profile } from '../lib/data';
-import { jsonLd, personSchema, websiteSchema } from '../lib/seo';
+import { jsonLd, personSchema, profilePageSchema, websiteSchema } from '../lib/seo';
 
 interface Props {
   lang: Lang;
@@ -31,7 +31,7 @@ const canonical = new URL(path, Astro.site).href;
 const enHref = new URL(lang === 'en' ? path : alternatePath(lang, path), Astro.site).href;
 const zhHref = new URL(lang === 'zh' ? path : alternatePath(lang, path), Astro.site).href;
 const ogImage = new URL(image ?? '/images/og.png', Astro.site).href;
-const graph = [...(isHome ? [personSchema(), websiteSchema(lang)] : []), ...schema];
+const graph = [...(isHome ? [profilePageSchema(lang), personSchema(), websiteSchema(lang)] : []), ...schema];
 const verification = profile.seo.verification ?? {};
 ---
 <!doctype html>
@@ -46,7 +46,7 @@ const verification = profile.seo.verification ?? {};
     <link rel="alternate" hreflang="zh-CN" href={zhHref} />
     <link rel="alternate" hreflang="x-default" href={enHref} />
     <meta name="author" content="Shuai Wang" />
-    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="robots" content={noindex ? 'noindex' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
     {verification.google && <meta name="google-site-verification" content={verification.google} />}
     {verification.bing && <meta name="msvalidate.01" content={verification.bing} />}
     <link rel="alternate" type="application/rss+xml" title="Shuai Wang" href="/feed.xml" />

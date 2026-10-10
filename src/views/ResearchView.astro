@@ -3,12 +3,17 @@ import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import { authorship, authorsOf, getPublications, profile, projects } from '../lib/data';
+import { breadcrumbs, collectionSchema } from '../lib/seo';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 
 const pubs = await getPublications();
 const leading = pubs.filter((p) => authorship(authorsOf(p))).length;
+const schema = [
+  collectionSchema(lang, '/research/', t(lang, 'research.title'), projects.map((p) => ({ name: p.name, url: `/research/${p.slug}/`, type: 'CreativeWork' }))),
+  breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'research.title'), '/research/']]),
+];
 const themes = profile.themes.map((theme: any) => ({
   topic: theme.topic as string,
   ...theme[lang],
@@ -16,7 +21,7 @@ const themes = profile.themes.map((theme: any) => ({
   projects: projects.filter((p) => p.topic === theme.topic).sort((a, b) => b.year - a.year),
 }));
 ---
-<Base lang={lang} title={t(lang, 'research.title')} description={profile.summary[lang].replace(/<[^>]+>/g, '')} glow>
+<Base lang={lang} title={t(lang, 'research.title')} description={profile.summary[lang].replace(/<[^>]+>/g, '')} schema={schema} glow>
   <div class="wrap">
     <header class="pb-12 pt-10 md:pt-16">
       <p class="eyebrow">{pick(profile.eyebrow, lang)}</p>

@@ -6,7 +6,7 @@ import CopyButton from '../components/react/CopyButton';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import Authors from '../components/Authors.astro';
 import { articleSchema, breadcrumbs } from '../lib/seo';
-import { venueFull } from '../lib/data';
+import { profile, venueFull } from '../lib/data';
 import { authorship, authorsOf, bibtexOf, citationsOf, projectsForPaper, pubSlug, venueLabel, type Publication } from '../lib/data';
 
 interface Props { lang: Lang; pub: Publication }
@@ -36,7 +36,12 @@ const schema = [
 <Base lang={lang} title={pub.data.title} description={description} image={pub.data.image} type="article" published={pub.data.date} schema={schema}>
   <Fragment slot="head">
     <meta name="citation_title" content={pub.data.title} />
-    {authors.map((name) => <meta name="citation_author" content={name.replace(/\*$/, '')} />)}
+    {authors.map((name) => {
+      const clean = name.replace(/\*$/, '');
+      return clean === 'Shuai Wang'
+        ? <><meta name="citation_author" content={clean} /><meta name="citation_author_institution" content="The University of Queensland" /><meta name="citation_author_orcid" content={profile.links.orcid} /></>
+        : <meta name="citation_author" content={clean} />;
+    })}
     <meta name="citation_publication_date" content={pub.data.date.toISOString().slice(0, 10).replace(/-/g, '/')} />
     {isPreprint ? <meta name="citation_technical_report_institution" content="arXiv" />
       : isJournal ? <meta name="citation_journal_title" content={venue} />
