@@ -198,3 +198,27 @@ seo:
   keywords:
     en: "Shuai Wang, Dylan Wang, University of Queensland, ielab, information retrieval, search agents, retrievers, rerankers, RAG, biomedical search, systematic review"
     zh: "王率, Shuai Wang, 昆士兰大学, 信息检索, 搜索 Agent, 检索模型, 重排序, RAG, 检索增强生成, 生物医学检索, 系统综述"
+
+# About page (/about/): the person behind the papers. Add or edit hobbies freely.
+about:
+  hello:
+    en: "Hi, I'm Dylan 👋"
+    zh: "你好，我是王率（Dylan）👋"
+  intro:
+    en: "When I'm not building search agents or arguing with rerankers, you'll probably find me doing one of these."
+    zh: "不写搜索 Agent、不跟重排序模型较劲的时候，我大概在做下面这几件事。"
+  heading: { en: Off the clock, zh: 下班以后 }
+  hobbies:
+    - emoji: "🎮"
+      en: { title: Grand strategy games, body: "I play all four Paradox grand strategy games: Europa Universalis, Hearts of Iron, Crusader Kings and Stellaris. Also a brand-new Warhammer player: bad at it, love it anyway." }
+      zh: { title: 策略游戏, body: "p社四萌都打：欧陆风云、钢铁雄心、王国风云、群星。战锤纯新手，菜但爱玩。" }
+    - emoji: "📖"
+      en: { title: Xianxia novels, body: "Every morning starts with the latest chapter of a xianxia (cultivation) novel. Thousands of chapters long: the original long-context benchmark." }
+      zh: { title: 修仙小说, body: "每天早上固定追修仙小说。动辄几千章，堪称最早的超长上下文评测。" }
+    - emoji: "🏠"
+      en: { title: Renovation videos, body: "During short breaks at work, I watch house renovation videos. Strictly for research into before-and-after evaluation." }
+      zh: { title: 房屋改造视频, body: "上班摸鱼的时候会看房子改造类视频，纯属研究“改造前后对比评测”。" }
+  outro:
+    en: "Happy to chat about retrieval, RAG, grand strategy or a good cultivation novel."
+    zh: "欢迎来聊检索、RAG、策略游戏，或者推荐好看的修仙小说。"
+
