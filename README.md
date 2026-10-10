@@ -59,16 +59,19 @@ onnx, onnxruntime).
 
 ## Search engine optimisation
 
-- **Structured data** (`src/lib/seo.ts`): Person + WebSite on the home page (names incl. 王率 and
-  Dylan, ORCID, Scholar, Semantic Scholar, affiliations); ScholarlyArticle + breadcrumbs on paper
+- **Structured data** (`src/lib/seo.ts`): ProfilePage + Person + WebSite on the home page (names
+  incl. 王率 and Dylan, ORCID, Scholar, Semantic Scholar, affiliations); CollectionPage + ItemList on
+  Publications and Research; Course (INFS7410) on Teaching; ScholarlyArticle + breadcrumbs on paper
   pages; SoftwareSourceCode/CreativeWork + breadcrumbs on project pages.
 - **Google Scholar tags** on paper pages: `citation_*` (title, authors, date, full venue name,
-  arXiv id, PDF, DOI) and Dublin Core.
+  arXiv id, PDF, DOI, plus institution and ORCID for Shuai Wang) and Dublin Core.
 - **Head tags**: unique title/description per page, canonical URL, `hreflang` en / zh-CN /
   x-default, Open Graph and Twitter cards (`public/images/og.png`; project/paper figures).
 - **Discovery**: `robots.txt`, `sitemap-index.xml` with hreflang alternates, `/llms.txt` for AI
   assistants, and IndexNow (Bing, Yandex, …) notified after deploys that change content.
-- **Verification**: put Google Search Console / Bing codes in `src/data/profile.yml` → `seo.verification`.
+- **Verification**: Google Search Console uses a Domain property verified by a DNS TXT record at
+  Porkbun; meta-tag codes (e.g. Bing) go in `src/data/profile.yml` → `seo.verification`.
+- Robots meta allows large image previews and full snippets on every page except the 404.
 - `scripts/check_site.py` fails the build if a page lacks a title, description, canonical,
   `x-default`, og:image or valid JSON-LD, or a paper lacks Scholar tags.
 

@@ -3,12 +3,14 @@ import Base from '../layouts/Base.astro';
 import EntryList from '../components/EntryList.astro';
 import { pick, t, type Lang } from '../i18n/ui';
 import { getEntries, profile } from '../lib/data';
+import { breadcrumbs, courseSchema } from '../lib/seo';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const entries = await getEntries('teaching');
+const schema = [courseSchema(lang), breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'teaching.title'), '/teaching/']])];
 ---
-<Base lang={lang} title={t(lang, 'teaching.title')} description={profile.teaching.body[lang]} glow>
+<Base lang={lang} title={t(lang, 'teaching.title')} description={profile.teaching.body[lang]} schema={schema} glow>
   <div class="wrap">
     <header class="pb-10 pt-10 md:pt-16">
       <p class="eyebrow">The University of Queensland · {profile.teaching.course}</p>

@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PublicationExplorer, { type ExplorerItem } from '../components/react/PublicationExplorer';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { breadcrumbs, collectionSchema } from '../lib/seo';
 import { authorLinks, authorship, authorsOf, bibtexOf, citationsOf, getPublications, profile, projectsForPaper, pubSlug, venueLabel } from '../lib/data';
 
 interface Props { lang: Lang }
@@ -33,6 +34,10 @@ const items: ExplorerItem[] = pubs.map((pub) => {
     role: authorship(authorsOf(pub)),
   };
 });
+const schema = [
+  collectionSchema(lang, '/publications/', t(lang, 'pubs.title'), pubs.map((pub) => ({ name: pub.data.title, url: pub.data.permalink, type: 'ScholarlyArticle' }))),
+  breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'pubs.title'), '/publications/']]),
+];
 const labels = {
   search: t(lang, 'pubs.search'),
   all: t(lang, 'pubs.all'),
@@ -51,7 +56,7 @@ const labels = {
   topics: Object.fromEntries(Object.entries(TOPIC_LABELS).map(([key, value]) => [key, pick(value, lang)])),
 };
 ---
-<Base lang={lang} title={t(lang, 'pubs.title')} description={lang === 'zh' ? `王率的 ${pubs.length} 篇论文：搜索 Agent、检索与重排序、生物医学检索与高效 RAG，可按方向与年份筛选。` : `${pubs.length} papers by Shuai Wang on search agents, retrievers and rerankers, biomedical search and efficient RAG, searchable by topic and year.`} glow>
+<Base lang={lang} title={t(lang, 'pubs.title')} description={lang === 'zh' ? `王率的 ${pubs.length} 篇论文：搜索 Agent、检索与重排序、生物医学检索与高效 RAG，可按方向与年份筛选。` : `${pubs.length} papers by Shuai Wang on search agents, retrievers and rerankers, biomedical search and efficient RAG, searchable by topic and year.`} schema={schema} glow>
   <div class="wrap">
     <header class="pb-10 pt-10 md:pt-16">
       <p class="eyebrow">{pubs.length} · {pick(profile.eyebrow, lang)}</p>
