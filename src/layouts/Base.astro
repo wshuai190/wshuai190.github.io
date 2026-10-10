@@ -49,6 +49,10 @@ const verification = profile.seo.verification ?? {};
     <meta name="robots" content={noindex ? 'noindex' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
     {verification.google && <meta name="google-site-verification" content={verification.google} />}
     {verification.bing && <meta name="msvalidate.01" content={verification.bing} />}
+    {verification.baidu && <meta name="baidu-site-verification" content={verification.baidu} />}
+    <meta name="keywords" content={profile.seo.keywords[lang]} />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
     <link rel="alternate" type="application/rss+xml" title="Shuai Wang" href="/feed.xml" />
     <link rel="icon" type="image/png" href="/images/site-logo.png" />
     <link rel="apple-touch-icon" href="/images/site-logo.png" />

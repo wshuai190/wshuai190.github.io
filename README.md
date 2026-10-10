@@ -67,8 +67,11 @@ onnx, onnxruntime).
   arXiv id, PDF, DOI, plus institution and ORCID for Shuai Wang) and Dublin Core.
 - **Head tags**: unique title/description per page, canonical URL, `hreflang` en / zh-CN /
   x-default, Open Graph and Twitter cards (`public/images/og.png`; project/paper figures).
-- **Discovery**: `robots.txt`, `sitemap-index.xml` with hreflang alternates, `/llms.txt` for AI
-  assistants, and IndexNow (Bing, Yandex, …) notified after deploys that change content.
+- **Discovery**: `robots.txt` (AI crawlers explicitly allowed), `sitemap-index.xml` with hreflang
+  alternates, IndexNow (Bing, Yandex, …) and Baidu push (`BAIDU_PUSH_TOKEN` secret) after deploys
+  that change content. Baidu also gets `keywords` and `applicable-device` meta tags.
+- **GEO** (answer engines such as ChatGPT, Perplexity, Gemini, Kimi): `/llms.txt` overview and
+  `/llms-full.txt` with key facts, experience, every project and every paper with its abstract.
 - **Verification**: Google Search Console uses a Domain property verified by a DNS TXT record at
   Porkbun; meta-tag codes (e.g. Bing) go in `src/data/profile.yml` → `seo.verification`.
 - Robots meta allows large image previews and full snippets on every page except the 404.
