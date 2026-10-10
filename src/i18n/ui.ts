@@ -97,6 +97,8 @@ const strings = {
 
   'search.placeholder': { en: 'Search papers, projects, news…', zh: '搜索论文、项目、动态…' },
   'search.empty': { en: 'No results', zh: '没有结果' },
+  'search.trySemantic': { en: 'No keyword matches. Search by meaning instead?', zh: '没有关键词匹配的结果。试试按语义搜索？' },
+  'search.trySemanticButton': { en: 'Turn on semantic search (Starbucks)', zh: '开启语义搜索（Starbucks）' },
   'search.closest': { en: 'No strong matches — closest results', zh: '没有很匹配的结果 · 最接近的结果' },
   'search.hint': { en: 'to open · ↑↓ to move · esc to close', zh: '打开 · ↑↓ 选择 · esc 关闭' },
   'search.loading': { en: 'Searching…', zh: '搜索中…' },

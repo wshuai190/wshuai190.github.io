@@ -7,7 +7,9 @@ nickname: Dylan
 pronouns: he/him
 born: 1999
 location: { en: "Brisbane, Australia", zh: 澳大利亚布里斯班 }
-portrait: /images/ws.jpg
+portrait: /images/ws.jpg           # original, used in structured data
+portrait_web: /images/ws-440.webp  # 220px portrait at 2x
+avatar: /images/ws-160.webp        # 80px mobile avatar at 2x
 cv_portrait: /images/profile/animated-dylan.webp
 email: shuai.wang2@uq.edu.au
 orcid: "0000-0002-0726-5250"

@@ -60,7 +60,7 @@
   description: "Due to my entry permit to Taiwan got rejected, my supervisor Professor Guido Zuccon will present our two papers instead at the SIGIR 2023 conference in person."
   status: home
 
-- title: "Present Paper at SIGIR-AP, Melbourne Satelite"
+- title: "Present Paper at SIGIR-AP, Melbourne Satellite"
   date: 2023-11-28
   description: "Presented a paper LLM-driven Boolean-based screening prioritisation at SIGIR-AP 2023."
   status: travel
@@ -100,7 +100,7 @@
   description: "[Full Paper]: Corpus Subsampling; [Full Paper]: Prompt Variations on Zero-shot LLM-based Rankers"
   status: celebrate
 
-- title: "Present Encore-paper at SIGIR-AP, Melbourne Satelite"
+- title: "Present Encore-paper at SIGIR-AP, Melbourne Satellite"
   date: 2024-12-20
   description: "Encore Presentation: Training Adaptive BERT-based Dense Retrievers at Smaller Scales: Matryoshka, 2D Matryoshka, and Starbucks Approaches"
   status: travel
@@ -128,7 +128,7 @@
 
 - title: "SIGIR-AP 2025 Queensland Satellite"
   date: 2025-10-05
-  description: "I will be serving as a Queensland Satelite Chair for the SIGIR-AP 2025 Queensland Satellite Event."
+  description: "I will be serving as a Queensland Satellite Chair for the SIGIR-AP 2025 Queensland Satellite Event."
   status: celebrate
 
 - title: "Conferred PhD Degree"
@@ -136,7 +136,7 @@
   description: "Successfully completed and defended my PhD thesis on information retrieval and systematic review automation at The University of Queensland, the degree has been conferred; I will attend the graduation ceremony in December 2025."
   status: celebrate
 
-- title: "Reveived SeCAT Score of 4.83 (SD=0.37) for INFS7410"
+- title: "Received SeCAT Score of 4.83 (SD=0.37) for INFS7410"
   date: 2025-12-08
   description: "I have received a SeCAT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search that I coordinated and lectured in semester 2, 2025; based on 43 student responses out of 122."
   status: celebrate

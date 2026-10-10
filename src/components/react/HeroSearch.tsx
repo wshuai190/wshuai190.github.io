@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { passageLink, snippet } from '../../lib/search/hybrid.ts';
-import { useHybridSearch } from './useHybridSearch';
+import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
 import ScoreChips from './ScoreChips';
 import SearchBadge from './SearchBadge';
 
@@ -22,7 +22,8 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
   const [value, setValue] = useState('');
   const [active, setActive] = useState(false);
   const focused = useRef(false);
-  const { results, mode, model } = useHybridSearch(value, active, undefined, lang);
+  const [semantic, setSemantic] = useSemanticPreference();
+  const { results, mode, model } = useHybridSearch(value, active, undefined, lang, semantic);
   const shown = (results ?? []).slice(0, 5);
 
   useEffect(() => {
@@ -71,7 +72,8 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
           onKeyDown={(e) => { if (e.key === 'Escape') setValue(''); }}
           placeholder={placeholder}
           autoComplete="off"
-          aria-controls="hero-results"
+          aria-controls={value.trim() && results ? 'hero-results' : undefined}
+          aria-expanded={Boolean(value.trim() && results)}
           className="h-10 min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]"
         />
         <button type="submit" className="btn btn-solid !py-2">{button}</button>
@@ -91,11 +93,20 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
                 </a>
               </li>
             ); })}
-            {shown.length === 0 && <li className="px-4 py-4 text-sm text-[var(--muted)]">{lang === 'zh' ? '没有结果' : 'No results'}</li>}
+            {shown.length === 0 && (
+              <li className="px-4 py-4 text-sm text-[var(--muted)]">
+                {semantic ? (lang === 'zh' ? '没有结果' : 'No results') : (
+                  <>
+                    {lang === 'zh' ? '没有关键词匹配的结果。试试按语义搜索？' : 'No keyword matches. Search by meaning instead?'}
+                    <button type="button" className="link-pill ml-2" onMouseDown={(e) => e.preventDefault()} onClick={() => setSemantic(true)}>{lang === 'zh' ? '开启语义搜索' : 'Turn on semantic search'}</button>
+                  </>
+                )}
+              </li>
+            )}
           </ul>
           <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-2">
             <span className="mono text-[11px] text-[var(--muted)]">↵ {lang === 'zh' ? '查看全部论文结果' : 'all matching papers'}</span>
-            <SearchBadge mode={mode} model={model} lang={lang} />
+            <SearchBadge mode={mode} model={model} lang={lang} on={semantic} onToggle={setSemantic} />
           </div>
         </div>
       )}
