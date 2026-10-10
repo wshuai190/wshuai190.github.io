@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import { localePath, t, type Lang } from '../i18n/ui';
+import { profile } from '../lib/data';
+import { breadcrumbs } from '../lib/seo';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const about = profile.about;
+const schema = [
+  {
+    '@type': 'AboutPage',
+    url: new URL(localePath(lang, '/about/'), Astro.site).href,
+    name: t(lang, 'about.title'),
+    mainEntity: { '@id': 'https://shuaiwang.io/#person' },
+  },
+  breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'about.title'), '/about/']]),
+];
+---
+<Base lang={lang} title={t(lang, 'about.title')} description={`${about.intro[lang]} ${about.hobbies.map((h: any) => h[lang].title).join(' · ')}`} schema={schema} glow>
+  <div class="wrap max-w-[960px]">
+    <header class="grid items-center gap-10 pb-12 pt-10 md:grid-cols-[1fr_200px] md:pt-16">
+      <div>
+        <p class="eyebrow">{t(lang, 'about.title')}</p>
+        <h1 class="page-title mt-4">{about.hello[lang]}</h1>
+        <p class="lede mt-5">{about.intro[lang]}</p>
+      </div>
+      <img src={profile.cv_portrait} alt={lang === 'zh' ? '王率的卡通头像' : 'Illustrated portrait of Shuai Wang'} width="200" height="267"
+        class="mx-auto w-[160px] rotate-3 rounded-[16px] border border-line shadow-[var(--lift)] transition-transform duration-500 hover:rotate-0 md:w-[200px]" />
+    </header>
+
+    <section aria-labelledby="off-the-clock">
+      <h2 id="off-the-clock" class="section-title">{about.heading[lang]}</h2>
+      <div class="mt-6 grid gap-5 md:grid-cols-3">
+        {about.hobbies.map((hobby: any) => (
+          <article class="glass lift p-6">
+            <p class="text-4xl" aria-hidden="true">{hobby.emoji}</p>
+            <h3 class="serif mt-4 text-2xl">{hobby[lang].title}</h3>
+            <p class="mt-2 text-[15px] text-muted">{hobby[lang].body}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="glass mt-16 p-7 md:p-9">
+      <h2 class="eyebrow">{t(lang, 'about.sayhi')}</h2>
+      <p class="serif mt-3 text-2xl leading-snug">{about.outro[lang]}</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a class="btn btn-solid" href={`mailto:${profile.email}`}>{profile.email}</a>
+        <a class="btn" href={localePath(lang, '/research/')}>{t(lang, 'nav.research')} →</a>
+        <a class="btn" href={localePath(lang, '/cv/')}>{t(lang, 'nav.cv')} →</a>
+      </div>
+    </section>
+  </div>
+</Base>

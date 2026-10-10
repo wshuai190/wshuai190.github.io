@@ -23,7 +23,7 @@ function pageType(url) {
   const path = url.replace(/^\/zh(?=\/)/, '');
   if (path.startsWith('/publication/')) return 'paper';
   if (/^\/research\/[^/]+\/$/.test(path)) return 'project';
-  if (path === '/research/' || path === '/teaching/') return 'page';
+  if (path === '/research/' || path === '/teaching/' || path === '/about/') return 'page';
   if (path === '/news/') return 'news';
   if (/^\/teaching\/.+/.test(path)) return 'teaching';
   if (/^\/talks\/.+/.test(path)) return 'talk';
