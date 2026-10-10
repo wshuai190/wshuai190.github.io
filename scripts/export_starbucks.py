@@ -10,6 +10,7 @@ Needs torch, transformers, onnx and onnxruntime (not needed for the site build):
   python3 scripts/export_starbucks.py
 """
 
+import argparse
 import os
 from pathlib import Path
 
@@ -17,8 +18,16 @@ import torch
 from onnxruntime.quantization import QuantType, quantize_dynamic
 from transformers import AutoConfig, AutoModel, BertTokenizerFast
 
-NAME, LAYERS, DIM, VOCAB = "ielabgroup/Starbucks-msmarco", 2, 32, 10000
-OUT = Path(__file__).resolve().parent.parent / "public" / "models" / "starbucks-2l-32"
+NAME = "ielabgroup/Starbucks-msmarco"
+# Defaults produce the model the site uses; other layer/dim/bit settings are for experiments.
+parser = argparse.ArgumentParser()
+parser.add_argument("--layers", type=int, default=2)
+parser.add_argument("--dim", type=int, default=32)
+parser.add_argument("--vocab", type=int, default=10000)
+parser.add_argument("--bits", type=int, choices=(4, 8), default=8, help="weight bits for the transformer layers")
+parser.add_argument("--out", type=Path, default=Path(__file__).resolve().parent.parent / "public" / "models" / "starbucks-2l-32")
+ARGS = parser.parse_args()
+LAYERS, DIM, VOCAB, OUT = ARGS.layers, ARGS.dim, ARGS.vocab, ARGS.out
 
 
 class CLSEmbedding(torch.nn.Module):
@@ -53,9 +62,21 @@ def main():
         dynamic_axes={**{n: {0: "batch", 1: "seq"} for n in names}, "embedding": {0: "batch"}},
         opset_version=17, dynamo=False,
     )
-    quantize_dynamic(str(fp32), str(OUT / "model.int8.onnx"), op_types_to_quantize=["MatMul", "Gather"], weight_type=QuantType.QUInt8)
+    target = OUT / "model.int8.onnx"
+    if ARGS.bits == 8:
+        quantize_dynamic(str(fp32), str(target), op_types_to_quantize=["MatMul", "Gather"], weight_type=QuantType.QUInt8)
+    else:
+        # 4-bit block-quantised MatMul weights (MatMulNBits), then int8 for the embedding table.
+        import onnx
+        from onnxruntime.quantization.matmul_4bits_quantizer import MatMul4BitsQuantizer
+        quantizer = MatMul4BitsQuantizer(onnx.load(str(fp32)), block_size=32, is_symmetric=True)
+        quantizer.process()
+        nbits = OUT / "model.nbits.onnx"
+        quantizer.model.save_model_to_file(str(nbits))
+        quantize_dynamic(str(nbits), str(target), op_types_to_quantize=["Gather"], weight_type=QuantType.QUInt8)
+        os.remove(nbits)
     os.remove(fp32)
-    print(f"wrote {OUT} ({(OUT / 'model.int8.onnx').stat().st_size / 1e6:.1f} MB)")
+    print(f"wrote {target} ({target.stat().st_size / 1e6:.1f} MB)")
 
 
 if __name__ == "__main__":
