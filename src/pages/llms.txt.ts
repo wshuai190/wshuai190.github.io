@@ -22,6 +22,7 @@ export async function GET() {
     `- [Publications](${site}/publications/): all ${pubs.length} papers with abstracts and BibTeX`,
     `- [Teaching](${site}/teaching/): INFS7410 Information Retrieval and Web Search, PhD supervision`,
     `- [CV](${site}/cv/)`,
+    `- [About me](${site}/about/): the person behind the papers (grand strategy games, xianxia novels, renovation videos)`,
     `- [Chinese version](${site}/zh/)`,
     `- [Full text for AI assistants](${site}/llms-full.txt): profile, experience, every project and every paper with its abstract`,
     '',
