@@ -23,6 +23,7 @@ export async function GET() {
     `- [Teaching](${site}/teaching/): INFS7410 Information Retrieval and Web Search, PhD supervision`,
     `- [CV](${site}/cv/)`,
     `- [Chinese version](${site}/zh/)`,
+    `- [Full text for AI assistants](${site}/llms-full.txt): profile, experience, every project and every paper with its abstract`,
     '',
     '## Projects',
     ...projects.map((p) => `- [${p.name}](${site}/research/${p.slug}/) (${TOPIC_LABELS[p.topic]?.en}, ${p.year}): ${p.summary}${p.links.code ? ` Code: ${p.links.code}` : ''}`),

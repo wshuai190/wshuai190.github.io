@@ -58,7 +58,7 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
-  indexnow:
+  notify-search-engines:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
@@ -75,3 +75,11 @@ jobs:
           before="${{ github.event.before }}"
           if [ -z "$before" ] || ! git cat-file -e "$before" 2>/dev/null; then before="HEAD~1"; fi
           node scripts/indexnow.mjs $(git diff --name-only "$before" HEAD)
+      - name: Push changed pages to Baidu
+        continue-on-error: true
+        env:
+          BAIDU_PUSH_TOKEN: ${{ secrets.BAIDU_PUSH_TOKEN }}
+        run: |
+          before="${{ github.event.before }}"
+          if [ -z "$before" ] || ! git cat-file -e "$before" 2>/dev/null; then before="HEAD~1"; fi
+          node scripts/baidu_push.mjs $(git diff --name-only "$before" HEAD)

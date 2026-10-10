@@ -189,5 +189,10 @@ seo:
       成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。
   # Paste verification codes from Google Search Console / Bing Webmaster Tools here.
   verification:
-    google: ""
+    google: ""  # verified via DNS TXT record (Domain property)
     bing: ""
+    baidu: ""   # 百度搜索资源平台 → 添加网站 → HTML 标签验证 → content 的值
+  # Baidu still reads the keywords meta tag (Google ignores it).
+  keywords:
+    en: "Shuai Wang, Dylan Wang, University of Queensland, ielab, information retrieval, search agents, retrievers, rerankers, RAG, biomedical search, systematic review"
+    zh: "王率, Shuai Wang, 昆士兰大学, 信息检索, 搜索 Agent, 检索模型, 重排序, RAG, 检索增强生成, 生物医学检索, 系统综述"
