@@ -46,6 +46,7 @@ const examples = lang === 'zh'
           <a class="btn btn-solid" href={localePath(lang, '/research/')}>{t(lang, 'home.explore')} →</a>
           <a class="btn" href={localePath(lang, '/cv/')}>{t(lang, 'home.cv')}</a>
           <a class="btn" href={profile.links.scholar} rel="me noopener" target="_blank">{t(lang, 'home.scholar')} ↗</a>
+          <button type="button" class="btn" data-open-twin hidden><span aria-hidden="true">🧘</span> {lang === 'zh' ? '和我的数字分身聊聊' : 'Talk with my digital twin'}</button>
         </div>
         <div class="rise rise-4 mt-8 max-w-[560px]">
           <HeroSearch client:idle action={localePath(lang, '/publications/')} label={t(lang, 'home.search.label')} button={t(lang, 'home.search.go')} examples={examples} lang={lang} />

@@ -4,6 +4,7 @@ import newsreaderFont from '@fontsource-variable/newsreader/files/newsreader-lat
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SearchPalette from '../components/react/SearchPalette';
+import TwinChat from '../components/react/TwinChat';
 import { alternatePath, t, type Lang } from '../i18n/ui';
 import { profile } from '../lib/data';
 import { jsonLd, personSchema, profilePageSchema, websiteSchema } from '../lib/seo';
@@ -94,5 +95,6 @@ const verification = profile.seo.verification ?? {};
     </main>
     <Footer lang={lang} />
     <SearchPalette client:idle lang={lang} />
+    <TwinChat client:idle lang={lang} />
   </body>
 </html>
