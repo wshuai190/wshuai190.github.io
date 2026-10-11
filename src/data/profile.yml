@@ -101,7 +101,7 @@ experience:
   - years: { en: 2025–2026, zh: 2025–2026 }
     en: { title: Postdoctoral Research Fellow (Level A), org: "ielab, The University of Queensland", detail: "Supervisor: Prof. Guido Zuccon" }
     zh: { title: 博士后研究员（Level A）, org: 昆士兰大学 ielab, detail: "导师：Prof. Guido Zuccon" }
-  - years: { en: Feb–Jul 2024, zh: 2024年2月–7月 }
+  - years: { en: Feb–Jul 2024 (5 months), zh: 2024年2月–7月（5 个月） }
     en: { title: Research Intern, org: "Naver Labs Europe, Grenoble", detail: "Co-led COCOM from method design to the WSDM 2025 paper; 5.69× faster RAG inference at near-baseline quality." }
     zh: { title: 研究实习生, org: Naver Labs Europe（法国格勒诺布尔）, detail: "共同主导 COCOM，从方法设计到 WSDM 2025 论文发表；在接近基线质量下实现 5.69 倍 RAG 推理加速。" }
   - years: { en: 2022–2025, zh: 2022–2025 }

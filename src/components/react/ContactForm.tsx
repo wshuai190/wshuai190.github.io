@@ -5,7 +5,7 @@ import { useState } from 'react';
  * Web3Forms (https://web3forms.com), which emails them on. The access key only identifies the
  * destination inbox, so it is safe to publish.
  */
-export const WEB3FORMS_KEY = '';
+export const WEB3FORMS_KEY = 'cd616a61-db5d-481c-8ef9-594a2557bd91';
 
 const COPY = {
   en: {

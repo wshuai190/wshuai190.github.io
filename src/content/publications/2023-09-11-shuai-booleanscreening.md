@@ -7,7 +7,7 @@ date: 2023-11-26
 page_type: "Long"
 venue: 'Proceedings of the Annual International ACM SIGIR Conference on Research and Development in Information Retrieval in the Asia Pacific Region (SIGIR-AP 2023)'
 paperurl: 'https://arxiv.org/abs/2309.05238'
-citation: 'Shuai Wang, Harrisen Scells, Martin Potthast, Bevan Koopman and Guido Zuccon. 2023. Generating Natural Language Queries for More Effective Systematic Review Screening Prioritisation. In Proceedings of the Annual International ACM SIGIR Conference on Research and Development in Information Retrieval in the Asia Pacific Region (SIGIR-AP 2023).'
+citation: 'Shuai Wang, Harrisen Scells, Bevan Koopman, Martin Potthast and Guido Zuccon. 2023. Generating Natural Language Queries for More Effective Systematic Review Screening Prioritisation. In Proceedings of the Annual International ACM SIGIR Conference on Research and Development in Information Retrieval in the Asia Pacific Region (SIGIR-AP 2023).'
 topic: 'evidence'
 arxiv: '2309.05238'
 image: '/images/research/screening.webp'

@@ -89,8 +89,8 @@
   description_zh: "在 SIGIR-AP 2023 报告了利用 LLM 生成查询进行基于 Boolean 查询的筛选优先级排序的论文。"
   status: travel
 
-- title: "One Full Paper (Findings) Accepted at ECIR 2024"
-  title_zh: "一篇长文（Findings）被 ECIR 2024 录用"
+- title: "One Full Paper Accepted at ECIR 2024"
+  title_zh: "一篇长文被 ECIR 2024 录用"
   date: 2023-12-19
   description: "[Full Paper]: Zero-shot Generative Large Language Models for Systematic Review Screening Automation has been accepted to ECIR 2024."
   description_zh: "[长文]《Zero-shot Generative Large Language Models for Systematic Review Screening Automation》被 ECIR 2024 录用。"

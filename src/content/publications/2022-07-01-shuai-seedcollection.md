@@ -7,7 +7,7 @@ date: 2022-07-01
 page_type: "Resource"
 venue: 'Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022)'
 paperurl: 'https://ielab.io/publications/pdfs/shuai2022seedcollection.pdf'
-citation: 'Shuai Wang and Harry Scells and Justin Clark and Guido Zuccon and Bevan Koopman. 2022. From Little Things Big Things Grow: A Collection with Seed Studies for Medical Systematic Review Literature Search. In Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022).'
+citation: 'Shuai Wang and Harry Scells and Justin Clark and Bevan Koopman and Guido Zuccon. 2022. From Little Things Big Things Grow: A Collection with Seed Studies for Medical Systematic Review Literature Search. In Proceedings of the 45th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2022).'
 topic: 'evidence'
 doi: '10.1145/3477495.3531748'
 ---

@@ -3,11 +3,11 @@ title: "Evalugator🐊—Rapid, Agile Development and Evaluation of Retrieval Au
 collection: publications
 permalink: /publication/2026-01-01-evalugator
 excerpt: 
-date: 2026-01-01
-page_type: "Short"
+date: 2026-03-29
+page_type: "Industry"
 venue: 'Advances in Information Retrieval: European Conference on Information Retrieval (ECIR 2026)'
 paperurl: 'https://hangli.me/files/ecir2026-evalugator.pdf'
-citation: 'Bevan Koopman, Hang Li, Shuai Wang and Guido Zuccon. 2026. Evalugator🐊—Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels (Accepted ECIR-2026).'
+citation: 'Bevan Koopman, Hang Li, Shuai Wang and Guido Zuccon. 2026. Evalugator🐊—Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels. In Advances in Information Retrieval: European Conference on Information Retrieval (ECIR 2026), Industry Track.'
 topic: 'rag'
 ---
 ## Abstract

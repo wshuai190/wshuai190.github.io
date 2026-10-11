@@ -175,6 +175,7 @@ const PAGE_TYPE_LABELS: Record<string, Localized> = {
   Notebook: { en: 'Notebook', zh: '评测报告' },
   Perspective: { en: 'Perspective', zh: '观点论文' },
   Demo: { en: 'Demo', zh: '演示论文' },
+  Industry: { en: 'Industry Track', zh: '工业论文' },
 };
 
 /** Display label for a publication's `page_type` ("Reproduce" → "Reproducibility" / "可复现性论文"). */
