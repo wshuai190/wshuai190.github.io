@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import LinkPills from '../components/LinkPills.astro';
 import PubItem from '../components/PubItem.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import CopyButton from '../components/react/CopyButton';
+import CopyButton from '../components/CopyButton.astro';
 import { TWIN_ENDPOINT } from '../components/react/TwinChat';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import { breadcrumbs, projectSchema } from '../lib/seo';
@@ -70,7 +70,7 @@ const schema = [
       <section class="mt-14">
         <div class="flex flex-wrap items-baseline justify-between gap-3">
           <h2 class="section-title">{t(lang, 'project.papers')}</h2>
-          <CopyButton client:visible text={bibtex} label={`${t(lang, 'link.bibtex')}`} done={t(lang, 'link.copied')} />
+          <CopyButton text={bibtex} label={`${t(lang, 'link.bibtex')}`} done={t(lang, 'link.copied')} />
         </div>
         <div class="glass mt-5 px-6">{papers.map((pub) => <PubItem pub={pub} lang={lang} showTopic={false} />)}</div>
       </section>

@@ -96,7 +96,27 @@ const verification = profile.seo.verification ?? {};
       <slot />
     </main>
     <Footer lang={lang} />
-    <SearchPalette client:idle lang={lang} />
-    <TwinChat client:idle lang={lang} />
-  </body>
+    <SearchPalette client:interaction="search" lang={lang} />
+    <TwinChat client:interaction="twin" lang={lang} />
+      <script>
+      // Copy buttons ([data-copy], see CopyButton.astro): one delegated handler, no framework.
+      document.addEventListener('click', async (event) => {
+        const button = (event.target as Element | null)?.closest<HTMLButtonElement>('[data-copy]');
+        if (!button) return;
+        const text = button.dataset.copy ?? '';
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const area = document.createElement('textarea');
+          area.value = text;
+          document.body.append(area);
+          area.select();
+          document.execCommand('copy');
+          area.remove();
+        }
+        button.textContent = button.dataset.copyDone ?? '✓';
+        window.setTimeout(() => { button.textContent = button.dataset.copyLabel ?? ''; }, 1600);
+      });
+    </script>
+</body>
 </html>

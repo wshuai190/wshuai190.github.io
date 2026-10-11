@@ -4,12 +4,23 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
+/** client:interaction — hydrate an island on first use (see src/directives/interaction.ts). */
+const interactionDirective = {
+  name: 'client-interaction',
+  hooks: {
+    'astro:config:setup': ({ addClientDirective }) => {
+      addClientDirective({ name: 'interaction', entrypoint: './src/directives/interaction.ts' });
+    },
+  },
+};
+
 export default defineConfig({
   site: 'https://shuaiwang.io',
   trailingSlash: 'ignore',
   build: { format: 'preserve', inlineStylesheets: 'always' },
   integrations: [
     react(),
+    interactionDirective,
     sitemap({
       // hreflang alternates between English (/) and Chinese (/zh/) pages.
       i18n: { defaultLocale: 'en', locales: { en: 'en', zh: 'zh-CN' } },

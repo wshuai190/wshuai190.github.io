@@ -1,0 +1,6 @@
+---
+/** Copy-to-clipboard pill without React (the click handler lives in Base.astro). */
+interface Props { text: string; label: string; done: string; class?: string }
+const { text, label, done, class: className = 'link-pill' } = Astro.props;
+---
+<button type="button" class={className} data-copy={text} data-copy-label={`⧉ ${label}`} data-copy-done={`✓ ${done}`} aria-live="polite">⧉ {label}</button>
