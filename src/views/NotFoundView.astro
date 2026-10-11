@@ -14,8 +14,63 @@ const { lang } = Astro.props;
     <p class="lede mx-auto mt-5">{t(lang, 'notfound.body')}</p>
     <div class="mt-8 flex justify-center gap-3">
       <a class="btn btn-solid" href={localePath(lang, '/')}>{t(lang, 'nav.home')}</a>
-      <button type="button" data-open-search class="btn">{t(lang, 'nav.search')} ⌘K</button>
+      <button type="button" data-open-search class="btn">{t(lang, 'nav.search')} <span class="pointer-coarse:hidden">⌘K</span></button>
       <a class="btn" href={localePath(lang, '/publications/')}>{t(lang, 'nav.publications')}</a>
+    </div>
+    <div data-did-you-mean hidden class="mx-auto mt-12 max-w-xl text-left">
+      <p class="eyebrow">{lang === 'zh' ? '你是不是在找' : 'Did you mean'}</p>
+      <ul class="glass mt-3 px-5"></ul>
     </div>
   </section>
 </Base>
+
+<script>
+  import { passageLink, search } from '../lib/search/hybrid.ts';
+
+  // GitHub Pages serves the root (English) 404.html for every missing URL, so the smart parts run here.
+  const path = location.pathname;
+  const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+
+  async function exists(url: string) {
+    try { return (await fetch(url, { method: 'HEAD' })).ok; } catch { return false; }
+  }
+
+  async function recover() {
+    if (/\/404(\.html)?\/?$/.test(path)) return suggest(); // already on a 404 page: never redirect again
+    // 1. Same URL with/without the trailing slash (/publication/x/ vs /research/x).
+    const alternate = path.endsWith('/') ? path.replace(/\/+$/, '') : `${path}/`;
+    if (alternate && alternate !== path && (await exists(alternate))) {
+      location.replace(alternate + location.search + location.hash);
+      return;
+    }
+    // 2. A missing Chinese page gets the Chinese 404.
+    if (lang === 'en' && path.startsWith('/zh/')) {
+      location.replace(`/zh/404?from=${encodeURIComponent(path)}`);
+      return;
+    }
+    return suggest();
+  }
+
+  async function suggest() {
+    // 3. Turn the URL into a query and suggest the closest pages (keyword search, no model download).
+    const missing = new URLSearchParams(location.search).get('from') ?? path;
+    const query = decodeURIComponent(missing).replace(/^\/(zh\/)?/, '').replace(/\.html?$/, '').replace(/[-_/.]+/g, ' ').replace(/\b\d{4} \d{2} \d{2}\b/, '').trim();
+    if (!query || query === '404') return;
+    const { results } = await search(query, { lang, semantic: false, limit: 4, types: ['paper', 'project', 'teaching', 'talk', 'award'] });
+    const box = document.querySelector<HTMLElement>('[data-did-you-mean]');
+    const list = box?.querySelector('ul');
+    if (!box || !list || !results.length) return;
+    for (const { doc } of results) {
+      const item = document.createElement('li');
+      item.className = 'border-b border-line py-3 last:border-b-0';
+      const link = document.createElement('a');
+      link.href = passageLink(doc, lang);
+      link.className = 'serif text-lg hover:text-[var(--teal)]';
+      link.textContent = doc.title;
+      item.append(link);
+      list.append(item);
+    }
+    box.hidden = false;
+  }
+  recover();
+</script>

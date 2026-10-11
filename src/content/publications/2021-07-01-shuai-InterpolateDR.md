@@ -5,9 +5,9 @@ permalink: /publication/2021-07-01-shuai-InterpolateDR
 excerpt: 
 date: 2021-07-01
 page_type: "Short"
-venue: 'The Proceedings of the 2021 ACM SIGIR on International Conference on Theory of Information Retrieval (ICTIR 2021)'
+venue: 'Proceedings of the 2021 ACM SIGIR International Conference on Theory of Information Retrieval (ICTIR 2021)'
 paperurl: 'https://dl.acm.org/doi/abs/10.1145/3471158.3472233'
-citation: 'Shuai Wang and Shengyao Zhuang and Guido Zuccon. 2021. BERT-based Dense Retrievers Require Interpolation with BM25 for Effective Passage Retrieval. In The Proceedings of the 2021 ACM SIGIR on International Conference on Theory of Information Retrieval (ICTIR 2021).'
+citation: 'Shuai Wang and Shengyao Zhuang and Guido Zuccon. 2021. BERT-based Dense Retrievers Require Interpolation with BM25 for Effective Passage Retrieval. In Proceedings of the 2021 ACM SIGIR International Conference on Theory of Information Retrieval (ICTIR 2021).'
 topic: 'retrieval'
 doi: '10.1145/3471158.3472233'
 ---

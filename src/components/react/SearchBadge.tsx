@@ -43,7 +43,7 @@ export default function SearchBadge({ mode, model, lang, on, onToggle }: { mode:
         </span>
         {label}
       </button>
-      <a href={MODEL_URL} target="_blank" rel="noopener" className="mono text-[11px] text-[var(--muted)] hover:text-[var(--teal)]" title={text.model} aria-label={text.model}>↗</a>
+      <a href={MODEL_URL} target="_blank" rel="noopener" className="mono inline-grid h-6 w-6 place-items-center text-[11px] text-[var(--muted)] hover:text-[var(--teal)]" title={text.model} aria-label={text.model}>↗</a>
     </span>
   );
 }

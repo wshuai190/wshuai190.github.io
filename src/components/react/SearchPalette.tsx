@@ -40,7 +40,8 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
       const typing = event.target instanceof HTMLElement && /^(INPUT|TEXTAREA|SELECT)$/.test(event.target.tagName);
       if ((event.key === 'k' && (event.metaKey || event.ctrlKey)) || (event.key === '/' && !typing)) {
         event.preventDefault();
-        returnFocus.current = document.activeElement as HTMLElement;
+        // Pressing ⌘K again while open must not make the palette its own focus-return target.
+        if (!dialogRef.current?.contains(document.activeElement)) returnFocus.current = document.activeElement as HTMLElement;
         setOpen(true);
       }
     };
@@ -84,6 +85,8 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
   if (!open) return null;
 
   const onKeyDown = (event: React.KeyboardEvent) => {
+    // Arrow keys and Enter drive the result list only from the input, not from the switch or links.
+    if (event.target !== inputRef.current) return;
     if (event.key === 'ArrowDown') { event.preventDefault(); setActive((i) => Math.min(i + 1, shown.length - 1)); }
     else if (event.key === 'ArrowUp') { event.preventDefault(); setActive((i) => Math.max(i - 1, 0)); }
     else if (event.key === 'Enter' && shown[active]) window.location.href = passageLink(shown[active].doc, lang);

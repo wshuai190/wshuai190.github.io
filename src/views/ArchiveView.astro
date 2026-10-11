@@ -1,12 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import EntryList from '../components/EntryList.astro';
-import { pick, t, type Lang } from '../i18n/ui';
+import { localizeEntry, pick, t, type Lang } from '../i18n/ui';
 import { getEntries, profile } from '../lib/data';
 
 interface Props { lang: Lang; collection: 'talks' | 'awards' }
 const { lang, collection } = Astro.props;
-const entries = await getEntries(collection);
+const entries = (await getEntries(collection)).map((e) => ({ ...e, data: localizeEntry(e.data, lang) }));
 const title = t(lang, collection === 'talks' ? 'talks.title' : 'awards.title');
 ---
 <Base lang={lang} title={title} description={lang === 'zh' ? `王率（Shuai Wang）的${title}：${entries.length} 项，${entries.map((e) => e.data.title).slice(0, 3).join('；')}等。` : `${title} of Shuai Wang (${entries.length}): ${entries.map((e) => e.data.title).slice(0, 3).join('; ')} and more.`} glow>

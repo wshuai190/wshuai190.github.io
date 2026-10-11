@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PublicationExplorer, { type ExplorerItem } from '../components/react/PublicationExplorer';
-import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
+import { localePath, pageTypeLabel, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import { breadcrumbs, collectionSchema } from '../lib/seo';
 import { authorLinks, authorship, authorsOf, bibtexOf, citationsOf, getPublications, profile, projectsForPaper, pubSlug, venueLabel } from '../lib/data';
 
@@ -26,7 +26,7 @@ const items: ExplorerItem[] = pubs.map((pub) => {
     venueLabel: venueLabel(pub.data.venue, pub.data.date.getUTCFullYear()),
     year: pub.data.date.getUTCFullYear(),
     topic: pub.data.topic,
-    type: pub.data.page_type,
+    type: pageTypeLabel(pub.data.page_type, lang),
     abstract: (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').slice(0, 1200),
     links,
     bibtex: bibtexOf(pub),
@@ -63,7 +63,7 @@ const labels = {
 <Base lang={lang} title={t(lang, 'pubs.title')} description={lang === 'zh' ? `王率的 ${pubs.length} 篇论文：搜索 Agent、检索与重排序、生物医学检索与高效 RAG，可按方向与年份筛选。` : `${pubs.length} papers by Shuai Wang on search agents, retrievers and rerankers, biomedical search and efficient RAG, searchable by topic and year.`} schema={schema} glow>
   <div class="wrap">
     <header class="pb-10 pt-10 md:pt-16">
-      <p class="eyebrow">{pubs.length} · {pick(profile.eyebrow, lang)}</p>
+      <p class="eyebrow">{pick(profile.eyebrow, lang)}</p>
       <h1 class="page-title mt-4">{t(lang, 'pubs.title')}</h1>
       <p class="lede mt-5">
         {t(lang, 'pubs.lede')} <a class="text-link" href={profile.links.scholar}>Google Scholar</a> · <a class="text-link" href={profile.links.orcid}>ORCID</a>.

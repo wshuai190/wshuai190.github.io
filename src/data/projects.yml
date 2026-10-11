@@ -197,7 +197,7 @@
 - slug: resllm
   name: 'ReSLLM'
   topic: retrieval
-  year: 2024
+  year: 2025
   summary: Using language models to select resources for federated search, including the SLAT fine-tuning protocol.
   summary_zh: 利用语言模型为联邦检索选择资源，包括 SLAT 微调流程。
   image: /images/research/resllm.webp

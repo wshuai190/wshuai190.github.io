@@ -1,16 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import Authors from '../components/Authors.astro';
-import { localePath, pick, t, type Lang } from '../i18n/ui';
+import { localePath, localizeEntry, pick, t, type Lang } from '../i18n/ui';
 import { authorsOf, getEntries, getPublications, profile, venueLabel } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 
 const pubs = await getPublications();
-const talks = await getEntries('talks');
-const teaching = await getEntries('teaching');
-const awards = await getEntries('awards');
+const talks = (await getEntries('talks')).map((e) => ({ ...e, data: localizeEntry(e.data, lang) }));
+const teaching = (await getEntries('teaching')).map((e) => ({ ...e, data: localizeEntry(e.data, lang) }));
+const awards = (await getEntries('awards')).map((e) => ({ ...e, data: localizeEntry(e.data, lang) }));
 const contact = [
   [pick(profile.location, lang), null],
   [profile.email, `mailto:${profile.email}`],

@@ -1,19 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import EntryList from '../components/EntryList.astro';
-import { pick, t, type Lang } from '../i18n/ui';
+import { localizeEntry, pick, t, type Lang } from '../i18n/ui';
 import { getEntries, profile } from '../lib/data';
 import { breadcrumbs, courseSchema } from '../lib/seo';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const entries = await getEntries('teaching');
+const entries = (await getEntries('teaching')).map((e) => ({ ...e, data: localizeEntry(e.data, lang) }));
 const schema = [courseSchema(lang), breadcrumbs(lang, [[t(lang, 'nav.home'), '/'], [t(lang, 'teaching.title'), '/teaching/']])];
 ---
 <Base lang={lang} title={t(lang, 'teaching.title')} description={profile.teaching.body[lang]} schema={schema} glow>
   <div class="wrap">
     <header class="pb-10 pt-10 md:pt-16">
-      <p class="eyebrow">The University of Queensland · {profile.teaching.course}</p>
+      <p class="eyebrow">{lang === 'zh' ? '昆士兰大学' : 'The University of Queensland'} · {profile.teaching.course}</p>
       <h1 class="page-title mt-4">{t(lang, 'teaching.title')}</h1>
     </header>
     <div class="grid items-start gap-5 lg:grid-cols-[1.5fr_1fr]">

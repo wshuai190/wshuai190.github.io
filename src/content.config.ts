@@ -39,6 +39,13 @@ const entry = z.looseObject({
   location: z.string().optional(),
   type: z.string().optional(),
   excerpt: z.string().nullish(),
+  // Chinese variants for /zh/ pages. body_zh is inline HTML that replaces the English body.
+  title_zh: z.string().optional(),
+  excerpt_zh: z.string().optional(),
+  venue_zh: z.string().optional(),
+  location_zh: z.string().optional(),
+  type_zh: z.string().optional(),
+  body_zh: z.string().optional(),
 });
 
 const teaching = defineCollection({ loader: glob({ pattern: '*.md', base: './src/content/teaching' }), schema: entry });

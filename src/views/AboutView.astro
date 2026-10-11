@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import { localePath, t, type Lang } from '../i18n/ui';
 import { profile } from '../lib/data';
 import { breadcrumbs } from '../lib/seo';
+import CultivationRealm from '../components/CultivationRealm.astro';
+import ContactForm, { WEB3FORMS_KEY } from '../components/react/ContactForm';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -40,9 +42,10 @@ const schema = [
           </article>
         ))}
       </div>
+      <CultivationRealm lang={lang} />
     </section>
 
-    <section class="glass mt-16 p-7 md:p-9">
+    <section id="say-hi" class="glass mt-16 scroll-mt-6 p-7 md:p-9">
       <h2 class="eyebrow">{t(lang, 'about.sayhi')}</h2>
       <p class="serif mt-3 text-2xl leading-snug">{about.outro[lang]}</p>
       <div class="mt-5 flex flex-wrap gap-3">
@@ -50,6 +53,7 @@ const schema = [
         <a class="btn" href={localePath(lang, '/research/')}>{t(lang, 'nav.research')} →</a>
         <a class="btn" href={localePath(lang, '/cv/')}>{t(lang, 'nav.cv')} →</a>
       </div>
+      {WEB3FORMS_KEY && <ContactForm client:visible lang={lang} email={profile.email} />}
     </section>
   </div>
 </Base>

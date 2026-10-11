@@ -1,0 +1,62 @@
+---
+import type { Lang } from '../i18n/ui';
+import { scholar } from '../lib/data';
+
+/**
+ * A xianxia joke for the About page: Google Scholar citations as a cultivation realm.
+ * Updates by itself with the daily Scholar sync (src/data/scholar_metrics.json).
+ */
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+
+const REALMS = [
+  { at: 0, en: 'Qi Refining', zh: '练气' },
+  { at: 1000, en: 'Foundation Establishment', zh: '筑基' },
+  { at: 3000, en: 'Golden Core', zh: '金丹' },
+  { at: 6000, en: 'Nascent Soul', zh: '元婴' },
+  { at: 10000, en: 'Spirit Severing', zh: '化神' },
+  { at: 20000, en: 'Tribulation Transcendence', zh: '渡劫' },
+  { at: 50000, en: 'Great Ascension', zh: '大乘' },
+];
+const qi = scholar.citations;
+const level = REALMS.findLastIndex((realm) => qi >= realm.at);
+const realm = REALMS[level];
+const next = REALMS[level + 1];
+const progress = next ? Math.round(((qi - realm.at) / (next.at - realm.at)) * 100) : 100;
+const fmt = (n: number) => n.toLocaleString('en');
+const copy = {
+  en: {
+    eyebrow: 'Cultivation status',
+    realm: `${realm.en} realm`,
+    body: `Cultivation base: ${fmt(qi)} citations, h-index ${scholar.h_index}.`,
+    next: next ? `${fmt(next.at - qi)} citations until breaking through to ${next.en}.` : 'Ascended. Nothing left to cite.',
+    note: `Measured by Google Scholar, ${scholar.last_updated}. Each citation is one drop of spiritual qi.`,
+  },
+  zh: {
+    eyebrow: '修为',
+    realm: `${realm.zh}期`,
+    body: `当前修为：Google Scholar 引用 ${fmt(qi)}，h-index ${scholar.h_index}。`,
+    next: next ? `距突破${next.zh}期还差 ${fmt(next.at - qi)} 次引用。` : '已飞升，无需再引。',
+    note: `数据来自 Google Scholar（${scholar.last_updated}），每次引用折算一缕灵气。`,
+  },
+}[lang];
+---
+<section class="glass mt-5 p-6 md:p-7" aria-labelledby="cultivation">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+    <div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h3 id="cultivation" class="serif mt-2 text-2xl"><span aria-hidden="true">🧘 </span>{copy.realm}</h3>
+    </div>
+    <ol class="mono flex flex-wrap gap-1.5 text-[11px] text-muted" aria-hidden="true">
+      {REALMS.map((r, i) => (
+        <li class:list={['rounded-full border px-2 py-0.5', i === level ? 'border-[var(--teal)] text-[var(--teal)]' : i < level ? 'border-line opacity-60' : 'border-dashed border-line opacity-60']}>{r.zh}</li>
+      ))}
+    </ol>
+  </div>
+  <p class="mt-3 text-[15px]">{copy.body}</p>
+  <div class="mt-4 h-2 overflow-hidden rounded-full bg-[var(--line)]" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress} aria-label={copy.next}>
+    <div class="h-full rounded-full bg-gradient-to-r from-teal to-plum" style={`width:${progress}%`}></div>
+  </div>
+  <p class="mt-2 text-[14px] text-muted">{copy.next}</p>
+  <p class="mt-1 text-[12.5px] text-muted opacity-80">{copy.note}</p>
+</section>

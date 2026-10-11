@@ -4,11 +4,11 @@ collection: publications
 permalink: /publication/2023-02-27-shuai-meshdemo
 excerpt: 
 date: 2023-02-27
-page_type: "Short"
-venue: "The 16th ACM International Web Search and Data Mining Conference"
+page_type: "Demo"
+venue: "Proceedings of the Sixteenth ACM International Conference on Web Search and Data Mining (WSDM 2023)"
 paperurl: 'https://dl.acm.org/doi/abs/10.1145/3539597.3573025'
 demo: 'https://huggingface.co/spaces/ielabgroup/mesh-suggester'
-citation: 'Shuai Wang and Hang Li and Guido Zuccon. 2023. MeSH Suggester: A Library and System for MeSH Term Suggestion for Systematic Review Boolean Query Construction. In the 16th Web Search and Data Mining Conference WSDM 2023 (WSDM2023).'
+citation: 'Shuai Wang and Hang Li and Guido Zuccon. 2023. MeSH Suggester: A Library and System for MeSH Term Suggestion for Systematic Review Boolean Query Construction. In Proceedings of the Sixteenth ACM International Conference on Web Search and Data Mining (WSDM 2023).'
 topic: 'evidence'
 doi: '10.1145/3539597.3573025'
 arxiv: '2212.09018'

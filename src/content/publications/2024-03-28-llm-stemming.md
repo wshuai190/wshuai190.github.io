@@ -1,15 +1,16 @@
 ---
-title: "Large Language Models for Stemming: Promises, Pitfalls and Failures"
+title: "Large Language Models Based Stemming for Information Retrieval: Promises, Pitfalls and Failures"
 collection: publications
 permalink: /publication/2024-03-28-llm-stemming
 excerpt: 
-date: 2024-03-28
+date: 2024-07-10
 page_type: "Short"
-venue: 'SIGIR-2024'
+venue: 'Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2024)'
 paperurl: 'https://arxiv.org/abs/2402.11757'
-citation: 'Shuai Wang, Shengyao Zhuang and Guido Zuccon. 2024. Large Language Models for Stemming: Promises, Pitfalls and Failures. In Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2024).'
+citation: 'Shuai Wang, Shengyao Zhuang and Guido Zuccon. 2024. Large Language Models Based Stemming for Information Retrieval: Promises, Pitfalls and Failures. In Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2024).'
 topic: 'retrieval'
 arxiv: '2402.11757'
+doi: '10.1145/3626772.3657949'
 image: '/images/research/stemming.webp'
 ---
 ## Abstract

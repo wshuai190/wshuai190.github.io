@@ -48,13 +48,13 @@ function isActive(href: string) {
       </button>
       <a href={alternatePath(lang, path)} hreflang={lang === 'zh' ? 'en' : 'zh-CN'} lang={lang === 'zh' ? 'en' : 'zh-CN'} class="whitespace-nowrap rounded-full border border-line px-3 py-1.5 font-sans hover:text-ink transition-colors">{t(lang, 'nav.switch')}</a>
 
-      <details class="relative min-[960px]:hidden">
+      <details class="relative min-[960px]:hidden" data-mobile-menu>
         <summary class="list-none cursor-pointer rounded-full border border-line px-3 py-1.5 font-sans hover:text-ink" aria-label={t(lang, 'nav.menu')}>☰</summary>
         <nav class="absolute right-0 z-50 mt-2 flex w-52 flex-col rounded-[18px] border border-line bg-[var(--bg-raised)] p-2 font-sans text-sm text-ink shadow-2xl" aria-label="Mobile">
           {items.map((item) => (
             <a href={localePath(lang, item.href)} class:list={['rounded-xl px-3 py-2', isActive(item.href) && 'bg-ink text-bg font-semibold']}>{t(lang, item.key)}</a>
           ))}
-          <button type="button" data-open-search class="rounded-xl px-3 py-2 text-left">{t(lang, 'nav.search')} <span class="mono text-xs text-muted">⌘K</span></button>
+          <button type="button" data-open-search class="rounded-xl px-3 py-2 text-left">{t(lang, 'nav.search')} <span class="mono text-xs text-muted pointer-coarse:hidden">⌘K</span></button>
           <div class="mt-1 border-t border-line pt-1">
             {(['nav.news', 'nav.awards', 'nav.talks'] as const).map((key) => (
               <a href={localePath(lang, `/${key.slice(4)}/`)} class="block rounded-xl px-3 py-1.5 text-[13px] text-muted">{t(lang, key)}</a>
@@ -71,6 +71,20 @@ function isActive(href: string) {
     button.addEventListener('click', () => {
       const dark = document.documentElement.classList.toggle('dark');
       try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+    });
+  });
+
+  // Mobile menu: close on Escape or a tap outside, and expose its state to screen readers.
+  document.querySelectorAll<HTMLDetailsElement>('[data-mobile-menu]').forEach((menu) => {
+    const summary = menu.querySelector('summary')!;
+    const sync = () => summary.setAttribute('aria-expanded', String(menu.open));
+    sync();
+    menu.addEventListener('toggle', sync);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) { menu.open = false; summary.focus(); }
+    });
+    document.addEventListener('click', (event) => {
+      if (menu.open && !menu.contains(event.target as Node)) menu.open = false;
     });
   });
 </script>

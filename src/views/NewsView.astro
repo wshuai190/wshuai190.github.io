@@ -8,7 +8,7 @@ const { lang } = Astro.props;
 const years = [...new Set(news.map((n) => n.date.getUTCFullYear()))].sort((a, b) => b - a);
 const ICON: Record<string, string> = { celebrate: '✦', travel: '✈', home: '●' };
 ---
-<Base lang={lang} title={t(lang, 'news.title')} description={lang === 'zh' ? `王率的最新动态：${news.slice(0, 3).map((n) => n.title).join('；')}。` : `News from Shuai Wang: ${news.slice(0, 3).map((n) => n.title).join('; ')}.`} glow>
+<Base lang={lang} title={t(lang, 'news.title')} description={lang === 'zh' ? `王率的最新动态：${news.slice(0, 3).map((n) => n.title_zh || n.title).join('；')}。` : `News from Shuai Wang: ${news.slice(0, 3).map((n) => n.title).join('; ')}.`} glow>
   <div class="wrap">
     <header class="pb-6 pt-10 md:pt-16">
       <p class="eyebrow">{t(lang, 'news.title')} · {news.length}</p>

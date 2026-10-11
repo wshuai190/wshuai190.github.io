@@ -57,6 +57,8 @@ const strings = {
   'project.figure': { en: 'Figure', zh: '图' },
   'project.more': { en: 'Details', zh: '详情' },
   'project.stars': { en: 'stars', zh: '星标' },
+  'project.githubStars': { en: 'GitHub stars', zh: 'GitHub 星标数' },
+  'home.metrics': { en: 'Metrics', zh: '学术指标' },
 
   'link.site': { en: 'Project site', zh: '项目网站' },
   'link.code': { en: 'Code', zh: '代码' },
@@ -73,7 +75,7 @@ const strings = {
   'pubs.allyears': { en: 'All years', zh: '全部年份' },
   'pubs.count': { en: '{n} publications', zh: '{n} 篇论文' },
   'pubs.matching': { en: '{n} matching', zh: '找到 {n} 篇' },
-  'pubs.empty': { en: 'No publications match. Try fewer words.', zh: '没有匹配的论文，试试减少关键词。' },
+  'pubs.empty': { en: 'No publications for these filters.', zh: '当前筛选条件下没有论文。' },
   'pubs.best': { en: 'Best matches', zh: '最相关' },
   'pubs.noMatch': { en: 'No matching publications.', zh: '没有匹配的论文。' },
   'pubs.reset': { en: 'Clear filters', zh: '清除筛选' },
@@ -145,9 +147,45 @@ export function alternatePath(lang: Lang, path: string): string {
   return localePath('zh', path);
 }
 
+type EntryData = {
+  title: string; excerpt?: string | null; venue?: string; type?: string; location?: string;
+  title_zh?: string; excerpt_zh?: string; venue_zh?: string; type_zh?: string; location_zh?: string;
+};
+
+/** Teaching/talk/award frontmatter with the Chinese variants swapped in on /zh/ pages. */
+export function localizeEntry<D extends EntryData>(data: D, lang: Lang): D {
+  if (lang !== 'zh') return data;
+  return {
+    ...data,
+    title: data.title_zh || data.title,
+    // Only replace an excerpt that exists in English, so both languages list the same fields.
+    excerpt: data.excerpt ? data.excerpt_zh || data.excerpt : data.excerpt,
+    venue: data.venue_zh || data.venue,
+    type: data.type_zh || data.type,
+    location: data.location_zh || data.location,
+  };
+}
+
+const PAGE_TYPE_LABELS: Record<string, Localized> = {
+  Long: { en: 'Long', zh: '长文' },
+  Short: { en: 'Short', zh: '短文' },
+  Reproduce: { en: 'Reproducibility', zh: '可复现性论文' },
+  Resource: { en: 'Resource', zh: '资源论文' },
+  Journal: { en: 'Journal', zh: '期刊论文' },
+  Notebook: { en: 'Notebook', zh: '评测报告' },
+  Perspective: { en: 'Perspective', zh: '观点论文' },
+  Demo: { en: 'Demo', zh: '演示论文' },
+};
+
+/** Display label for a publication's `page_type` ("Reproduce" → "Reproducibility" / "可复现性论文"). */
+export function pageTypeLabel(type: string | undefined, lang: Lang): string | undefined {
+  if (!type) return type;
+  return PAGE_TYPE_LABELS[type]?.[lang] ?? type;
+}
+
 export const TOPIC_LABELS: Record<string, Localized> = {
   agents: { en: 'Search agents', zh: '搜索 Agent' },
-  retrieval: { en: 'Retrievers & rerankers', zh: '检索与重排序' },
+  retrieval: { en: 'Retrievers and rerankers', zh: '检索与重排序' },
   evidence: { en: 'Biomedical search', zh: '生物医学检索' },
   rag: { en: 'Efficient RAG', zh: '高效 RAG' },
   memory: { en: 'Agent memory', zh: 'Agent 记忆' },

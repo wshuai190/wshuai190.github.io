@@ -3,7 +3,7 @@ title: "Corpus Subsampling: Estimating the Effectiveness of Neural Retrieval Mod
 collection: publications
 permalink: /publication/2025-01-01-corpus_subsampling
 excerpt: 
-date: 2025-01-01
+date: 2025-04-06
 page_type: "Long"
 venue: 'Advances in Information Retrieval: European Conference on Information Retrieval (ECIR 2025)'
 paperurl: 'https://link.springer.com/chapter/10.1007/978-3-031-88708-6_29'

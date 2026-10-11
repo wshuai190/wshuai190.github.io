@@ -76,21 +76,21 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
     [ranked],
   );
   const years = useMemo(() => [...new Set(items.map((i) => i.year))].sort((a, b) => b - a), [items]);
-  const topicCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    for (const item of items) counts[item.topic] = (counts[item.topic] ?? 0) + 1;
-    return counts;
-  }, [items]);
-
   const searching = query.trim().length > 0;
+  // The index is English only, so on /zh/ a query naming a topic (e.g. 重排序) matches that topic's papers.
+  const zhTopicHit = lang === 'zh' && searching
+    ? Object.entries(labels.topics).find(([, label]) => label.includes(query.trim()) || query.includes(label))?.[0]
+    : undefined;
   const enPath = (url: string) => url.replace(/^\/zh(?=\/)/, '');
-  const visible = items
-    .filter((item) =>
-      (topic === 'all' || item.topic === topic) &&
-      (year === 'all' || String(item.year) === year) &&
-      (!leading || Boolean(item.role)) &&
-      (!searching || (relevance?.has(enPath(item.url)) ?? false)))
-    .sort((a, b) => (searching && relevance ? relevance.get(enPath(a.url))!.rank - relevance.get(enPath(b.url))!.rank : 0));
+  // Everything except the topic filter, so the topic chips can show live counts.
+  const pool = items.filter((item) =>
+    (year === 'all' || String(item.year) === year) &&
+    (!searching || (relevance?.has(enPath(item.url)) ?? false) || (zhTopicHit && zhTopicHit === item.topic)));
+  const topicCounts: Record<string, number> = {};
+  for (const item of pool) if (!leading || item.role) topicCounts[item.topic] = (topicCounts[item.topic] ?? 0) + 1;
+  const visible = pool
+    .filter((item) => (topic === 'all' || item.topic === topic) && (!leading || Boolean(item.role)))
+    .sort((a, b) => (searching && relevance ? (relevance.get(enPath(a.url))?.rank ?? 99) - (relevance.get(enPath(b.url))?.rank ?? 99) : 0));
   const filtered = searching || topic !== 'all' || year !== 'all' || leading;
   // While searching, show one list in relevance order; otherwise group by year.
   const groups = searching
@@ -100,7 +100,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
   return (
     <div>
       <div className="z-10 flex flex-col gap-3 rounded-[18px] border border-line bg-[var(--bg-raised)] p-3 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.35)] md:sticky md:top-3 md:flex-row md:items-center">
-        <label className="flex flex-1 items-center gap-3 rounded-full border border-line bg-[var(--bg)] px-4">
+        <label className="flex flex-1 items-center gap-3 rounded-full border border-line bg-[var(--bg)] px-4 focus-within:ring-2 focus-within:ring-[var(--teal)]">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-[var(--muted)]" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <span className="sr-only">{labels.search}</span>
           <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={labels.search} className="h-10 w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]" type="search" />
@@ -112,15 +112,15 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
         </select>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2" role="group">
-        <button type="button" className="chip" aria-pressed={topic === 'all'} onClick={() => setTopic('all')}>{labels.all} <span className="mono text-[11px] opacity-60">{items.length}</span></button>
+      <div className="-mx-4 mt-4 flex items-center gap-2 overflow-x-auto px-4 pb-1 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0 [&>*]:shrink-0" role="group">
+        <button type="button" className="chip" aria-pressed={topic === 'all'} onClick={() => setTopic('all')}>{labels.all} <span className="mono text-[11px] opacity-60">{pool.filter((i) => !leading || i.role).length}</span></button>
         {Object.entries(labels.topics).map(([key, label]) => (
           <button key={key} type="button" className="chip" aria-pressed={topic === key} onClick={() => setTopic(topic === key ? 'all' : key)}>
             {label} <span className="mono text-[11px] opacity-60">{topicCounts[key] ?? 0}</span>
           </button>
         ))}
-        <button type="button" className="chip" aria-pressed={leading} onClick={() => setLeading((v) => !v)}>★ {labels.leading} <span className="mono text-[11px] opacity-60">{items.filter((i) => i.role).length}</span></button>
-        <span className="label ml-auto" aria-live="polite">
+        <button type="button" className="chip" aria-pressed={leading} onClick={() => setLeading((v) => !v)}>★ {labels.leading} <span className="mono text-[11px] opacity-60">{pool.filter((i) => (topic === 'all' || i.topic === topic) && i.role).length}</span></button>
+        <span className="label ml-auto whitespace-nowrap pl-2" aria-live="polite">
           {(filtered ? labels.matching : labels.count).replace('{n}', String(visible.length))}
           {filtered && <button type="button" className="ml-3 underline" onClick={() => { setQuery(''); setTopic('all'); setYear('all'); setLeading(false); }}>{labels.reset}</button>}
         </span>
@@ -133,7 +133,12 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
               <p>{labels.trySemantic}</p>
               <button type="button" className="link-pill mx-auto mt-4 flex" onClick={() => setSemantic(true)}>{labels.trySemanticButton}</button>
             </>
-          ) : <p>{searching ? labels.noMatch : labels.empty}</p>}
+          ) : searching ? <p>{labels.noMatch}</p> : (
+            <>
+              <p>{labels.empty}</p>
+              <button type="button" className="link-pill mx-auto mt-4 flex" onClick={() => { setTopic('all'); setYear('all'); setLeading(false); }}>{labels.reset}</button>
+            </>
+          )}
         </div>
       )}
       {searching && ranked?.[0]?.relaxed && groups.length > 0 && <p className="label mt-8">{labels.closest}</p>}

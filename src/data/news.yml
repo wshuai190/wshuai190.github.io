@@ -2,12 +2,14 @@
   title_zh: "在 ICTIR 2021（线上）报告论文"
   date: 2021-07-11
   description: "Presented our paper on interpolating dense retrievers with BM25 at ICTIR 2021 (online)."
+  description_zh: "在 ICTIR 2021（线上）报告了关于将稠密检索模型与 BM25 插值融合的论文。"
   status: home
 
-- title: "Started PhD program at The University of Queensland"
+- title: "Started PhD Programme at The University of Queensland"
   title_zh: "在昆士兰大学开始攻读博士"
   date: 2021-10-01
-  description: "Began a PhD program in information retrieval and natural language processing at The University of Queensland."
+  description: "Began a PhD programme in information retrieval and natural language processing at The University of Queensland."
+  description_zh: "在昆士兰大学开始攻读信息检索与自然语言处理方向的博士学位。"
   status: home
 
 - title: "Presented Paper at ADCS 2021 (Online) and Received the Best Student Paper Award"
@@ -15,6 +17,7 @@
   date: 2021-12-09
   url: http://adcs-conference.org/2021/
   description: "Presented our paper on MeSH term suggestion and received the Best Student Paper Award."
+  description_zh: "报告了关于 MeSH 主题词推荐的论文，并获最佳学生论文奖。"
   status: home
 
 - title: "Presented Paper at ECIR 2022 (Online)"
@@ -22,6 +25,7 @@
   date: 2022-04-10
   url: https://ecir2022.org/
   description: "Presented our reproducibility study of seed-driven document ranking for systematic reviews at ECIR 2022."
+  description_zh: "在 ECIR 2022 报告了面向系统综述的种子文献驱动文档排序可复现性研究。"
   status: home
 
 - title: "Poster Presentations at SIGIR 2022, Madrid, Spain"
@@ -29,20 +33,23 @@
   date: 2022-07-11
   url: https://sigir.org/sigir2022/
   description: "Presented two posters at the SIGIR 2022 conference in Madrid, Spain."
+  description_zh: "在西班牙马德里举行的 SIGIR 2022 上展示了两篇海报论文。"
   status: travel
 
 - title: "Presentations at ADCS 2022, Adelaide, Australia"
   title_zh: "在 ADCS 2022（澳大利亚阿德莱德）报告论文"
   date: 2022-12-15
   url: http://adcs-conference.org/2022/
-  description: "Presented a paper on using neural ranker in systematic review screening at the ADCS 2022 conference in Adelaide, Australia."
+  description: "Presented a paper on using neural rankers for systematic review screening at the ADCS 2022 conference in Adelaide, Australia."
+  description_zh: "在澳大利亚阿德莱德举行的 ADCS 2022 上报告了关于将神经排序模型用于系统综述筛选的论文。"
   status: travel
 
 - title: "Poster Presentations at WSDM 2023, Singapore"
   title_zh: "在 WSDM 2023（新加坡）展示海报"
   date: 2023-02-27
   url: https://www.wsdm-conference.org/2023/
-  description: "Presented a demo poster on MeSH Term suggestion at the WSDM 2023 conference in Singapore."
+  description: "Presented a demo poster on MeSH term suggestion at the WSDM 2023 conference in Singapore."
+  description_zh: "在新加坡举行的 WSDM 2023 上展示了关于 MeSH 主题词推荐的演示海报。"
   status: travel
 
 - title: "Research Visit at Leipzig University"
@@ -50,6 +57,7 @@
   date: 2023-03-04
   url: https://temir.org/people.html
   description: "Visiting Leipzig University for two months to collaborate on research projects related to systematic review automation and complex medicine-based question-answering."
+  description_zh: "赴莱比锡大学进行为期两个月的访问，合作开展系统综述自动化与复杂医学问答相关研究。"
   status: travel
 
 - title: "Two Papers Accepted at SIGIR 2023"
@@ -57,144 +65,167 @@
   date: 2023-04-01
   url: https://arxiv.org/abs/2302.03495
   description: "[Full Paper]: Can ChatGPT Write a Good Boolean Query for Systematic Review Literature Search?; and [Reproducibility Paper]: Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study have been accepted to SIGIR 2023."
+  description_zh: "[长文]《Can ChatGPT Write a Good Boolean Query for Systematic Review Literature Search?》与 [可复现性论文]《Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study》被 SIGIR 2023 录用。"
   status: celebrate
 
 - title: "SIGIR 2023 Student Travel Grant"
   title_zh: "获 SIGIR 2023 学生旅行资助"
   date: 2023-05-05
-  description: "I am grateful to SIGIR for awarding me a student travel grant of USD 1125 and a complimentary conference registration to attend the SIGIR 2023 conference"
+  description: "I am grateful to SIGIR for awarding me a student travel grant of US$1,125 and a complimentary conference registration to attend the SIGIR 2023 conference."
+  description_zh: "感谢 SIGIR 授予 1,125 美元学生旅行资助及免费会议注册，支持我参加 SIGIR 2023。"
   status: celebrate
 
 - title: "Presentations at SIGIR 2023"
   title_zh: "SIGIR 2023 论文报告"
   date: 2023-07-22
   description: "As my entry permit for Taiwan was not granted, my supervisor Professor Guido Zuccon presented our two papers at SIGIR 2023 in person."
+  description_zh: "由于赴台入境许可未获批准，由导师 Guido Zuccon 教授代为现场报告我们的两篇论文。"
   status: home
 
 - title: "Presented Paper at SIGIR-AP 2023, Melbourne Satellite"
   title_zh: "在 SIGIR-AP 2023 墨尔本分会场报告论文"
   date: 2023-11-28
   description: "Presented our paper on LLM-generated queries for Boolean-based screening prioritisation at SIGIR-AP 2023."
+  description_zh: "在 SIGIR-AP 2023 报告了利用 LLM 生成查询进行基于 Boolean 查询的筛选优先级排序的论文。"
   status: travel
 
-- title: "One Full Paper (Findings) Accepted in ECIR2024"
+- title: "One Full Paper (Findings) Accepted at ECIR 2024"
   title_zh: "一篇长文（Findings）被 ECIR 2024 录用"
   date: 2023-12-19
   description: "[Full Paper]: Zero-shot Generative Large Language Models for Systematic Review Screening Automation has been accepted to ECIR 2024."
+  description_zh: "[长文]《Zero-shot Generative Large Language Models for Systematic Review Screening Automation》被 ECIR 2024 录用。"
   status: celebrate
 
 - title: "Internship at Naver Labs Europe"
   title_zh: "加入 Naver Labs Europe 实习"
   date: 2024-02-29
   description: "Started my research internship at Naver Labs Europe in Grenoble on 29 February 2024, working on large language models for retrieval-augmented generation."
+  description_zh: "2024 年 2 月 29 日起在位于格勒诺布尔的 Naver Labs Europe 开展研究实习，研究面向检索增强生成的大语言模型。"
   status: travel
 
 - title: "Paper Presentation at ECIR, Glasgow"
   title_zh: "在 ECIR 2024（格拉斯哥）报告论文"
   date: 2024-03-25
   description: "Presented our paper “Zero-shot Generative Large Language Models for Systematic Review Screening Automation”."
+  description_zh: "报告了论文《Zero-shot Generative Large Language Models for Systematic Review Screening Automation》。"
   status: travel
 
 - title: "Three Papers Accepted at SIGIR 2024"
   title_zh: "三篇论文被 SIGIR 2024 录用"
   date: 2024-03-26
-  description: "[Resource Paper]: FeB4RAG; [Short Paper]: Large Language Models for Stemming; [Perspective Paper]: Evaluating Generative Ad Hoc Information Retrieval."
+  description: "[Resource Paper]: FeB4RAG; [Short Paper]: Large Language Models Based Stemming for Information Retrieval; [Perspective Paper]: Evaluating Generative Ad Hoc Information Retrieval."
+  description_zh: "[资源论文]《FeB4RAG》；[短文]《Large Language Models Based Stemming for Information Retrieval》；[观点论文]《Evaluating Generative Ad Hoc Information Retrieval》。"
   status: celebrate
 
 - title: "Paper Presentation at SIGIR, Washington DC"
   title_zh: "在 SIGIR 2024（华盛顿）报告论文"
   date: 2024-07-25
   description: "Presented papers accepted at SIGIR 2024 in Washington DC."
+  description_zh: "在华盛顿举行的 SIGIR 2024 上报告了已录用的论文。"
   status: travel
 
-- title: "Paper Accepted in WSDM 2025"
+- title: "Paper Accepted at WSDM 2025"
   title_zh: "一篇论文被 WSDM 2025 录用"
   date: 2024-10-24
-  description: "[Full Paper]: Context Embeddings for Efficient Answer Generation in RAG"
+  description: "[Full Paper]: Context Embeddings for Efficient Answer Generation in RAG."
+  description_zh: "[长文]《Context Embeddings for Efficient Answer Generation in RAG》。"
   status: celebrate
 
-- title: "Two Papers Accepted in ECIR 2025"
+- title: "Two Papers Accepted at ECIR 2025"
   title_zh: "两篇论文被 ECIR 2025 录用"
   date: 2024-12-18
-  description: "[Full Paper]: Corpus Subsampling; [Full Paper]: Prompt Variations on Zero-shot LLM-based Rankers"
+  description: "[Full Paper]: Corpus Subsampling; [Full Paper]: Prompt Variations on Zero-shot LLM-based Rankers."
+  description_zh: "[长文]《Corpus Subsampling》；[长文]《Prompt Variations on Zero-shot LLM-based Rankers》。"
   status: celebrate
 
 - title: "Presented Encore Paper at SIGIR-AP 2024, Melbourne Satellite"
   title_zh: "在 SIGIR-AP 2024 墨尔本分会场报告 Encore 论文"
   date: 2024-12-20
-  description: "Encore Presentation: Training Adaptive BERT-based Dense Retrievers at Smaller Scales: Matryoshka, 2D Matryoshka, and Starbucks Approaches"
+  description: "Encore Presentation: Training Adaptive BERT-based Dense Retrievers at Smaller Scales: Matryoshka, 2D Matryoshka, and Starbucks Approaches."
+  description_zh: "Encore 报告：《Training Adaptive BERT-based Dense Retrievers at Smaller Scales: Matryoshka, 2D Matryoshka, and Starbucks Approaches》。"
   status: travel
 
-- title: "Paper Accepted in WWW 2025"
+- title: "Paper Accepted at WWW 2025"
   title_zh: "一篇论文被 WWW 2025 录用"
   date: 2025-01-20
-  description: "[Short Paper]: ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search"
+  description: "[Short Paper]: ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search."
+  description_zh: "[短文]《ReSLLM: Large Language Models are Strong Resource Selectors for Federated Search》。"
   status: celebrate
 
 - title: "Started Postdoc at The University of Queensland"
   title_zh: "在昆士兰大学开始博士后工作"
   date: 2025-02-01
   description: "Started a postdoc position in information retrieval and natural language processing at The University of Queensland."
+  description_zh: "在昆士兰大学开始从事信息检索与自然语言处理方向的博士后研究。"
   status: celebrate
 
-- title: "Three Papers Accepted in SIGIR 2025"
+- title: "Three Papers Accepted at SIGIR 2025"
   title_zh: "三篇论文被 SIGIR 2025 录用"
   date: 2025-04-05
   description: "[Reproducibility Paper]: 2D Matryoshka Training for Information Retrieval; Reassessing Large Language Model Boolean Query Generation for Systematic Reviews; Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition."
+  description_zh: "[可复现性论文]《2D Matryoshka Training for Information Retrieval》；《Reassessing Large Language Model Boolean Query Generation for Systematic Reviews》；《Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition》。"
   status: celebrate
 
 - title: "Started Teaching Role at The University of Queensland"
   title_zh: "在昆士兰大学开始承担教学"
   date: 2025-08-01
-  description: "In Semester 2, 2025, I began as Lecturer and Course Coordinator for INFS7410 Information Retrieval and Web Search at The University of Queensland."
+  description: "In Semester 2, 2025, I began as Course Coordinator and Lecturer for INFS7410 Information Retrieval and Web Search at The University of Queensland."
+  description_zh: "自 2025 年第二学期起，担任昆士兰大学 INFS7410 Information Retrieval and Web Search 课程协调员与主讲教师。"
   status: celebrate
-
 
 - title: "SIGIR-AP 2025 Queensland Satellite"
   title_zh: "SIGIR-AP 2025 昆士兰分会场"
   date: 2025-10-05
   description: "Served as Queensland Satellite Chair for the SIGIR-AP 2025 Queensland Satellite Event."
+  description_zh: "担任 SIGIR-AP 2025 昆士兰分会场主席。"
   status: celebrate
 
 - title: "Conferred PhD Degree"
   title_zh: "获授博士学位"
   date: 2025-11-14
   description: "Completed my PhD thesis on information retrieval and systematic review automation at The University of Queensland; the degree was conferred in November 2025."
+  description_zh: "在昆士兰大学完成关于信息检索与系统综述自动化的博士论文，并于 2025 年 11 月获授博士学位。"
   status: celebrate
 
 - title: "Received SECaT Score of 4.83 (SD=0.37) for INFS7410"
   title_zh: "INFS7410 获 SECaT 评教 4.83 分（SD=0.37）"
   date: 2025-12-08
-  description: "I received a SECaT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search that I coordinated and lectured in semester 2, 2025; based on 43 student responses out of 122."
+  description: "I received a SECaT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search which I coordinated and lectured in Semester 2, 2025, based on 43 student responses out of 122."
+  description_zh: "我在 2025 年第二学期协调并主讲的 INFS7410 Information Retrieval and Web Search 课程获 SECaT 评教 4.83 分（满分 5 分），基于 122 名学生中的 43 份反馈。"
   status: celebrate
 
 - title: "Two Papers Accepted at ECIR 2026"
   title_zh: "两篇论文被 ECIR 2026 录用"
   date: 2025-12-18
-  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper] Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels "
+  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper]: Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels."
+  description_zh: "[长文]《Starbucks: Improved Training for 2D Matryoshka Embeddings》；[工业论文]《Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels》。"
   status: celebrate
 
 - title: "Paper Accepted at the EACL 2026 Main Conference"
   title_zh: "一篇论文被 EACL 2026 主会录用"
   date: 2026-01-04
-  description: "[Full Paper]: AutoBool: Reinforcement-Learned LLM for Effective Automatic Systematic Reviews Boolean Query Generation. "
+  description: "[Full Paper]: AutoBool: Reinforcement-Learned LLM for Effective Automatic Systematic Reviews Boolean Query Generation."
+  description_zh: "[长文]《AutoBool: Reinforcement-Learned LLM for Effective Automatic Systematic Reviews Boolean Query Generation》。"
   status: celebrate
 
 - title: "Publicity Chair for SIGIR 2026"
   title_zh: "担任 SIGIR 2026 宣传主席"
   date: 2026-01-20
   description: "Served as Publicity Chair for SIGIR 2026 in Melbourne | Naarm, Australia."
+  description_zh: "担任在澳大利亚墨尔本（Naarm）举办的 SIGIR 2026 宣传主席。"
   status: travel
 
-- title: "Three Papers Accepted in SIGIR 2026"
+- title: "Three Papers Accepted at SIGIR 2026"
   title_zh: "三篇论文被 SIGIR 2026 录用"
   date: 2026-04-03
   description: "[Reproducibility Paper]: Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval; [Reproducibility Paper]: The Vulnerability of LLM Rankers to Prompt Injection Attacks; [Short Paper]: Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning."
+  description_zh: "[可复现性论文]《Beyond Chunk-Then-Embed: A Comprehensive Taxonomy and Evaluation of Document Segmentation Strategies for Information Retrieval》；[可复现性论文]《The Vulnerability of LLM Rankers to Prompt Injection Attacks》；[短文]《Rank-R1: Enhancing Reasoning in LLM-based Document Rerankers via Reinforcement Learning》。"
   status: celebrate
 
-- title: "Paper Accepted in SIGIR-AP 2026"
+- title: "Paper Accepted at SIGIR-AP 2026"
   title_zh: "一篇论文被 SIGIR-AP 2026 录用"
   date: 2026-09-25
   url: https://arxiv.org/abs/2607.29104
   description: "Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
+  description_zh: "论文《Reproducing LightMem: Naive RAG Is Just as Good for Memory Management》被第三届 ACM SIGIR 亚太会议（SIGIR-AP 2026）录用。"
   status: celebrate
