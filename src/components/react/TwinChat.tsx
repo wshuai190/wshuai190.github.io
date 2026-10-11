@@ -6,7 +6,57 @@ import { WEB3FORMS_KEY } from './ContactForm';
  * (Gemini, grounded in the site's llms-full.txt). Opened by any element with `data-open-twin`.
  * Hidden until TWIN_ENDPOINT is set.
  */
-export const TWIN_ENDPOINT = '';
+export const TWIN_ENDPOINT = 'https://shuaiwang-twin.shuaiwang-io.workers.dev';
+/** Cloudflare Turnstile (invisible) site key: the worker only answers browsers that pass it. */
+const TURNSTILE_SITEKEY = '0x4AAAAAAFTlAg-4M1DHF17K';
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render(el: HTMLElement, options: Record<string, unknown>): string;
+      execute(id: string): void;
+      reset(id: string): void;
+    };
+  }
+}
+
+let turnstileScript: Promise<void> | null = null;
+function loadTurnstile(): Promise<void> {
+  turnstileScript ??= new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => { turnstileScript = null; reject(new Error('turnstile')); };
+    document.head.append(script);
+  });
+  return turnstileScript;
+}
+
+/** Run the invisible Turnstile check and swap its token for a short-lived worker session. */
+let session: { token: string; expires: number } | null = null;
+async function getSession(host: HTMLElement): Promise<string> {
+  if (session && session.expires > Date.now()) return session.token;
+  await loadTurnstile();
+  const token = await new Promise<string>((resolve, reject) => {
+    host.replaceChildren();
+    window.turnstile!.render(host, {
+      sitekey: TURNSTILE_SITEKEY,
+      callback: resolve,
+      'error-callback': () => reject(new Error('turnstile')),
+      'timeout-callback': () => reject(new Error('turnstile')),
+    });
+  });
+  const response = await fetch(`${TWIN_ENDPOINT}/session`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token }),
+  });
+  if (!response.ok) throw new Error(String(response.status));
+  const { session: value, ttl } = (await response.json()) as { session: string; ttl: number };
+  session = { token: value, expires: Date.now() + (ttl - 60) * 1000 };
+  return value;
+}
 
 interface Message { role: 'user' | 'assistant'; content: string }
 
@@ -73,6 +123,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
   const text = COPY[lang];
 
   useEffect(() => {
@@ -116,11 +167,13 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
     setBusy(true);
     setError(false);
     try {
-      const response = await fetch(`${TWIN_ENDPOINT}/chat`, {
+      const send = async () => fetch(`${TWIN_ENDPOINT}/chat`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${await getSession(turnstileRef.current!)}` },
         body: JSON.stringify({ messages: history }),
       });
+      let response = await send();
+      if (response.status === 401) { session = null; response = await send(); } // session expired: re-check once
       if (!response.ok || !response.body) throw new Error(String(response.status));
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -198,6 +251,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
           </div>
         ) : null}
 
+        <div ref={turnstileRef} className="sr-only" aria-hidden="true" />
         <form className="flex items-end gap-2 border-t border-line p-3" onSubmit={(e) => { e.preventDefault(); ask(input); }}>
           <textarea
             ref={inputRef}
