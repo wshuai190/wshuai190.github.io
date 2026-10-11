@@ -3,6 +3,7 @@ import { passageLink, snippet } from '../../lib/search/hybrid.ts';
 import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
 import ScoreChips from './ScoreChips';
 import SearchBadge from './SearchBadge';
+import { askTwin, TWIN_ENDPOINT } from './TwinChat';
 
 interface Props {
   action: string;
@@ -126,6 +127,10 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
               </li>
             )}
           </ul>
+          {TWIN_ENDPOINT && <button type="button" onClick={() => askTwin(value.trim())} className="flex w-full items-center gap-2 border-t border-line px-5 py-2.5 text-left text-sm hover:bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]">
+            <span aria-hidden="true">🧘</span>
+            <span className="min-w-0 truncate">{lang === 'zh' ? '问问我的数字分身：' : 'Ask my digital twin: '}<strong className="font-semibold">“{value.trim()}”</strong></span>
+          </button>}
           <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-2">
             <span className="mono text-[11px] text-[var(--muted)]">↵ {lang === 'zh' ? '查看全部论文结果' : 'all matching papers'}</span>
             <SearchBadge mode={mode} model={model} lang={lang} on={semantic} onToggle={setSemantic} />

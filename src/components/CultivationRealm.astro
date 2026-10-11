@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../i18n/ui';
 import { scholar } from '../lib/data';
+import { REALMS, realmOf } from '../lib/cultivation';
 
 /**
  * A xianxia joke for the About page: Google Scholar citations as a cultivation realm.
@@ -9,20 +10,8 @@ import { scholar } from '../lib/data';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 
-const REALMS = [
-  { at: 0, en: 'Qi Refining', zh: '练气' },
-  { at: 1000, en: 'Foundation Establishment', zh: '筑基' },
-  { at: 3000, en: 'Golden Core', zh: '金丹' },
-  { at: 6000, en: 'Nascent Soul', zh: '元婴' },
-  { at: 10000, en: 'Spirit Severing', zh: '化神' },
-  { at: 20000, en: 'Tribulation Transcendence', zh: '渡劫' },
-  { at: 50000, en: 'Great Ascension', zh: '大乘' },
-];
 const qi = scholar.citations;
-const level = REALMS.findLastIndex((realm) => qi >= realm.at);
-const realm = REALMS[level];
-const next = REALMS[level + 1];
-const progress = next ? Math.round(((qi - realm.at) / (next.at - realm.at)) * 100) : 100;
+const { level, realm, next, progress } = realmOf(qi);
 const fmt = (n: number) => n.toLocaleString('en');
 const copy = {
   en: {

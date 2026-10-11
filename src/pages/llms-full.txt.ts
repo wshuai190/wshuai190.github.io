@@ -1,5 +1,6 @@
 import { authorsOf, citationsOf, getEntries, getPublications, news, profile, projects, scholar, venueFull } from '@/lib/data';
 import { TOPIC_LABELS } from '@/i18n/ui';
+import { realmOf } from '@/lib/cultivation';
 
 /**
  * /llms-full.txt — the whole site as one Markdown document (profile, experience, every paper with
@@ -90,7 +91,9 @@ export async function GET() {
       strip((pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '')),
     );
   }
-  push('', '## About me (outside research)', strip(profile.about.intro.en), ...profile.about.hobbies.map((h: any) => `- **${h.en.title}**: ${h.en.body}`), `- 中文：${profile.about.hobbies.map((h: any) => `${h.zh.title}（${h.zh.body}）`).join('；')}`);
+  const cultivation = realmOf(scholar.citations);
+  push('', '## About me (outside research)', strip(profile.about.intro.en), ...profile.about.hobbies.map((h: any) => `- **${h.en.title}**: ${h.en.body}`),
+    `- **Cultivation realm** (a joke on the About page: Google Scholar citations as xianxia cultivation): ${cultivation.realm.en} (${cultivation.realm.zh}期) with ${scholar.citations.toLocaleString('en')} citations; ${cultivation.next ? `${cultivation.toNext.toLocaleString('en')} more citations to break through to ${cultivation.next.en} (${cultivation.next.zh}期)` : 'fully ascended'}.`, `- 中文：${profile.about.hobbies.map((h: any) => `${h.zh.title}（${h.zh.body}）`).join('；')}`);
   push('', '## Awards', ...awards.map((e) => `- ${e.data.date.getUTCFullYear()}: ${e.data.title}`));
   push('', '## Talks', ...talks.map((e) => `- ${e.data.date.getUTCFullYear()}: ${e.data.title}${e.data.venue ? ` (${e.data.venue})` : ''}`));
   push('', '## Recent news', ...news.slice(0, 15).map((n) => `- ${n.date.toISOString().slice(0, 7)}: ${n.title}${n.description ? ` — ${strip(n.description)}` : ''}`), '');

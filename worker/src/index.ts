@@ -143,7 +143,10 @@ async function firstAvailableModel(env: Env, request: Record<string, unknown>): 
           },
         );
         clearTimeout(timer);
-        if (response.ok && response.body) return response;
+        if (response.ok && response.body) {
+          console.log('gemini ok', model);
+          return response;
+        }
         const detail = (await response.text()).slice(0, 200);
         console.error('gemini', model, response.status, detail);
         if (response.status === 400 && /thinking/i.test(detail)) continue; // retry this model without thinking settings

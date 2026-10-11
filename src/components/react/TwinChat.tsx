@@ -35,8 +35,15 @@ function loadTurnstile(): Promise<void> {
 
 /** Run the invisible Turnstile check and swap its token for a short-lived worker session. */
 let session: { token: string; expires: number } | null = null;
-async function getSession(host: HTMLElement): Promise<string> {
-  if (session && session.expires > Date.now()) return session.token;
+let pending: Promise<string> | null = null;
+function getSession(host: HTMLElement): Promise<string> {
+  if (session && session.expires > Date.now()) return Promise.resolve(session.token);
+  // One check at a time: the warm-up on open and the first message share it.
+  pending ??= newSession(host).finally(() => { pending = null; });
+  return pending;
+}
+
+async function newSession(host: HTMLElement): Promise<string> {
   await loadTurnstile();
   const token = await new Promise<string>((resolve, reject) => {
     host.replaceChildren();
@@ -60,6 +67,14 @@ async function getSession(host: HTMLElement): Promise<string> {
 
 interface Message { role: 'user' | 'assistant'; content: string }
 
+const STORAGE_KEY = 'twin-chat';
+const ASK_EVENT = 'twin:ask';
+
+/** Open the twin and send it a question (used by the home search and the ⌘K palette). */
+export function askTwin(question: string) {
+  window.dispatchEvent(new CustomEvent(ASK_EVENT, { detail: question }));
+}
+
 const COPY = {
   en: {
     title: "Dylan's digital twin",
@@ -72,7 +87,7 @@ const COPY = {
     handoffEmail: 'Your email (so I can reply)',
     handoffSend: 'Send',
     handoffDone: 'Sent! The real Dylan will read it.',
-    starters: ['What do you work on?', 'Which paper should I read first?', 'Tell me about Starbucks embeddings', 'What do you do outside research?'],
+    starters: ['What do you work on?', 'Which paper should I read first?', 'What is your cultivation realm?', 'Starbucks embeddings in one minute?', 'What do you do outside research?'],
   },
   zh: {
     title: '王率的数字分身',
@@ -85,7 +100,7 @@ const COPY = {
     handoffEmail: '你的邮箱（方便我回复）',
     handoffSend: '发送',
     handoffDone: '已发送！真正的王率会看到。',
-    starters: ['你主要研究什么？', '我应该先读你哪篇论文？', '介绍一下 Starbucks', '你下班以后都做什么？'],
+    starters: ['你主要研究什么？', '我应该先读你哪篇论文？', '你现在修为到哪一层了？', '一分钟讲讲 Starbucks', '你下班以后都做什么？'],
   },
 };
 
@@ -116,6 +131,7 @@ function renderMarkdown(text: string): string {
 export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
+  const restored = useRef(false);
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
@@ -140,6 +156,30 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
     return () => document.removeEventListener('click', onClick);
   }, []);
 
+  // Keep the conversation for this browser session, so following a link in an answer doesn't lose it.
+  useEffect(() => {
+    try { setMessages(JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? '[]')); } catch { /* ignore */ }
+    restored.current = true;
+  }, []);
+  useEffect(() => {
+    if (!restored.current || busy) return;
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-20))); } catch { /* ignore */ }
+  }, [messages, busy]);
+
+  // Questions from the home search / palette.
+  const askRef = useRef<(q: string) => void>(() => {});
+  useEffect(() => {
+    if (!TWIN_ENDPOINT) return;
+    const onAsk = (event: Event) => {
+      returnFocus.current = document.activeElement as HTMLElement;
+      setOpen(true);
+      const question = (event as CustomEvent<string>).detail;
+      if (question) window.setTimeout(() => askRef.current(question), 0);
+    };
+    window.addEventListener(ASK_EVENT, onAsk);
+    return () => window.removeEventListener(ASK_EVENT, onAsk);
+  }, []);
+
   const close = useCallback(() => {
     setOpen(false);
     window.setTimeout(() => returnFocus.current?.focus(), 0);
@@ -148,6 +188,8 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
   useEffect(() => {
     if (!open) return;
     inputRef.current?.focus();
+    // Start the invisible human check now, so the first answer isn't waiting for it.
+    if (turnstileRef.current) getSession(turnstileRef.current).catch(() => { /* retried on send */ });
     document.body.style.overflow = 'hidden';
     const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') close(); };
     window.addEventListener('keydown', onKey);
@@ -194,6 +236,8 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
     }
   }
 
+  askRef.current = ask;
+
   async function sendHandoff(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const email = new FormData(event.currentTarget).get('email');
@@ -234,7 +278,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
             m.role === 'user'
               ? <p key={i} className="ml-auto w-fit max-w-[85%] whitespace-pre-wrap rounded-[16px] rounded-br-[4px] bg-[var(--ink)] px-4 py-2.5 text-[15px] text-[var(--bg)]">{m.content}</p>
               : <div key={i} className="max-w-[92%] space-y-2 text-[15px] leading-relaxed [&_a]:break-words">
-                  {m.content ? <div className="space-y-2" dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }} /> : <span className="mono text-[var(--muted)]">…</span>}
+                  {m.content ? <div className="space-y-2" dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }} /> : <span className="inline-flex gap-1 py-2" aria-label="…">{[0, 1, 2].map((d) => <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--muted)]" style={{ animationDelay: `${d * 0.15}s` }} />)}</span>}
                 </div>
           ))}
           {error && <p className="text-[14px] text-[var(--muted)]" role="alert">{text.unavailable}</p>}
