@@ -1,3 +1,4 @@
+import { DurableObject } from 'cloudflare:workers';
 import { systemPrompt } from './prompt';
 
 interface RateLimiter { limit(options: { key: string }): Promise<{ success: boolean }> }
@@ -15,7 +16,7 @@ interface Env {
   IP_DAILY_LIMIT: string; // messages per day, per visitor IP
   IP_LIMITER?: RateLimiter;
   GLOBAL_LIMITER?: RateLimiter;
-  USAGE: KVNamespace;
+  USAGE?: DurableObjectNamespace<UsageCounter>; // always bound in production; absent in wrangler.test.toml
 }
 
 interface ChatMessage { role: 'user' | 'assistant'; content: string }
@@ -85,15 +86,12 @@ export default {
     const messages = cleanMessages(body.messages);
     if (!messages) return fail(400, 'Bad request');
 
-    // Daily caps (approximate: KV is eventually consistent, which is fine for a budget guard).
+    // Daily caps, counted exactly in one Durable Object (free plan; no KV write limits).
     const day = new Date().toISOString().slice(0, 10);
-    const [total, mine] = await Promise.all([env.USAGE.get(`day:${day}`), env.USAGE.get(`ip:${day}:${ip}`)]);
-    if (Number(total ?? 0) >= Number(env.DAILY_LIMIT)) return fail(429, 'Daily limit reached');
-    if (Number(mine ?? 0) >= Number(env.IP_DAILY_LIMIT)) return fail(429, 'Daily limit reached');
-    ctx.waitUntil(Promise.all([
-      env.USAGE.put(`day:${day}`, String(Number(total ?? 0) + 1), { expirationTtl: 2 * 86400 }),
-      env.USAGE.put(`ip:${day}:${ip}`, String(Number(mine ?? 0) + 1), { expirationTtl: 2 * 86400 }),
-    ]));
+    if (env.USAGE) {
+      const counter = env.USAGE.get(env.USAGE.idFromName('usage'));
+      if (!(await counter.hit(day, ip, Number(env.DAILY_LIMIT), Number(env.IP_DAILY_LIMIT)))) return fail(429, 'Daily limit reached');
+    }
 
     try {
       const profile = await loadProfile(env.SITE, ctx);
@@ -117,6 +115,31 @@ export default {
     }
   },
 };
+
+/** Daily message counters (whole site and per IP); yesterday's counts are dropped on the first hit of a new day. */
+export class UsageCounter extends DurableObject {
+  async hit(day: string, ip: string, dailyLimit: number, ipLimit: number): Promise<boolean> {
+    const storage = this.ctx.storage;
+    if ((await storage.get<string>('day')) !== day) {
+      await storage.deleteAll();
+      await storage.put('day', day);
+    }
+    const total = (await storage.get<number>('total')) ?? 0;
+    const mine = (await storage.get<number>(`ip:${ip}`)) ?? 0;
+    if (total >= dailyLimit || mine >= ipLimit) return false;
+    await storage.put({ total: total + 1, [`ip:${ip}`]: mine + 1 });
+    return true;
+  }
+
+  async stats(): Promise<{ day?: string; total: number; visitors: number }> {
+    const all = await this.ctx.storage.list();
+    return {
+      day: all.get('day') as string | undefined,
+      total: (all.get('total') as number) ?? 0,
+      visitors: [...all.keys()].filter((k) => k.startsWith('ip:')).length,
+    };
+  }
+}
 
 /**
  * Try each model in GEMINI_MODELS until one starts answering. A model that is overloaded (503),

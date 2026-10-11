@@ -1,6 +1,6 @@
 // Digital-twin regression checks. Run against a worker started with Turnstile's test secret:
-//   cd worker && npx wrangler dev --remote --port 8787 --var TURNSTILE_SECRET:1x0000000000000000000000000000000AA --var SESSION_SECRET:test --var IP_DAILY_LIMIT:1000
-// (dev uses the preview KV namespace, so test runs don't count against the real daily caps)
+//   cd worker && npx wrangler dev --remote -c wrangler.test.toml --port 8787 --var TURNSTILE_SECRET:1x0000000000000000000000000000000AA --var SESSION_SECRET:test
+// (the test config has no daily counter, so test runs never use up real visitors' quota)
 //   node tests/twin_eval.mjs [http://localhost:8787]
 // Requests are paced to stay under the worker's per-IP limit (8/min).
 const ENDPOINT = process.argv[2] ?? 'http://localhost:8787';
