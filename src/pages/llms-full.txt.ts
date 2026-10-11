@@ -30,6 +30,7 @@ export async function GET() {
     `- Research: search agents, retrievers and rerankers, biomedical evidence search, efficient retrieval-augmented generation (RAG)`,
     `- Publications: ${pubs.length} papers at venues including SIGIR, WSDM, WWW, ECIR, EMNLP, EACL and SIGIR-AP`,
     `- Google Scholar: ${scholar.citations.toLocaleString('en')} citations, h-index ${scholar.h_index}, i10-index ${scholar.i10_index} (updated ${scholar.last_updated})`,
+    `- Cultivation realm (About-page joke, citations as xianxia cultivation): ${realmOf(scholar.citations).realm.en} / ${realmOf(scholar.citations).realm.zh}期; next: ${realmOf(scholar.citations).next?.en ?? '—'} / ${realmOf(scholar.citations).next?.zh ?? '—'}期 in ${realmOf(scholar.citations).toNext.toLocaleString('en')} citations`,
     `- Teaching: Course Coordinator and Lecturer, INFS7410 Information Retrieval and Web Search, UQ`,
     `- Location: Brisbane, Australia`,
     `- Contact: ${profile.email}`,
