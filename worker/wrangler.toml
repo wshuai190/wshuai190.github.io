@@ -25,6 +25,7 @@ IP_DAILY_LIMIT = "30"   # messages per day per visitor
 [[kv_namespaces]]
 binding = "USAGE"
 id = "e6861753f5824453aa722f5318736079"
+preview_id = "70aecee4dbc049a197e2b2b2a94e7e3f"  # used by `wrangler dev`, so tests never touch real counters
 
 # Per-minute limits (Workers rate limiting, free plan).
 [[ratelimits]]

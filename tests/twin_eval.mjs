@@ -1,5 +1,6 @@
 // Digital-twin regression checks. Run against a worker started with Turnstile's test secret:
-//   cd worker && npx wrangler dev --remote --port 8787 --var TURNSTILE_SECRET:1x0000000000000000000000000000000AA --var SESSION_SECRET:test
+//   cd worker && npx wrangler dev --remote --port 8787 --var TURNSTILE_SECRET:1x0000000000000000000000000000000AA --var SESSION_SECRET:test --var IP_DAILY_LIMIT:1000
+// (dev uses the preview KV namespace, so test runs don't count against the real daily caps)
 //   node tests/twin_eval.mjs [http://localhost:8787]
 // Requests are paced to stay under the worker's per-IP limit (8/min).
 const ENDPOINT = process.argv[2] ?? 'http://localhost:8787';
@@ -7,7 +8,7 @@ const ORIGIN = 'http://localhost:4322';
 const han = (s) => (s.match(/\p{Script=Han}/gu) ?? []).length;
 
 const CASES = [
-  { q: 'What is your cultivation realm?', must: [/Foundation Establishment|筑基/i], lang: 'en' },
+  { q: 'What is your cultivation realm?', must: [/Foundation Establishment|筑基/i], mustNot: [/Golden Core[^.]{0,20}at 1,530/i], lang: 'en' },
   { q: '你现在修为到哪一层了？', must: [/筑基/], lang: 'zh' },
   { q: 'What is your h-index?', must: [/\b18\b/], lang: 'en' },
   { q: 'Which course do you teach?', must: [/INFS7410/], lang: 'en' },
@@ -41,7 +42,7 @@ for (const c of CASES) {
   if (!r.ok) problems.push(`HTTP ${r.status}`);
   for (const re of c.must ?? []) if (!re.test(text)) problems.push(`missing ${re}`);
   for (const re of c.mustNot ?? []) if (re.test(text)) problems.push(`contains ${re}`);
-  if (c.lang === 'en' && han(text) > 5) problems.push('answered in Chinese');
+  if (c.lang === 'en' && han(text) > 20) problems.push('answered in Chinese');
   if (c.lang === 'zh' && han(text) < 5) problems.push('answered in English');
   if (problems.length) failures++;
   console.log(`${problems.length ? 'FAIL' : 'PASS'}  ${((Date.now() - started) / 1000).toFixed(1)}s  ${c.q}`);

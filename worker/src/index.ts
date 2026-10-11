@@ -24,7 +24,7 @@ const MAX_BODY_BYTES = 32_000;
 const MAX_MESSAGES = 12; // conversation turns sent to the model
 const MAX_CHARS = 1500; // per visitor message
 const MAX_ASSISTANT_CHARS = 4000; // per (client-supplied) earlier reply
-const PROFILE_TTL = 3600; // seconds to cache llms-full.txt
+const PROFILE_TTL = 600; // seconds to cache llms-full.txt (site updates reach the twin within 10 min)
 const SESSION_TTL = 30 * 60; // seconds a Turnstile-verified session lasts
 const MODEL_TIMEOUT_MS = 25_000; // give up on a model that hasn't started answering
 
@@ -216,7 +216,7 @@ async function verifySession(token: string, secret: string): Promise<boolean> {
 }
 
 /**
- * The site's full Markdown profile (llms-full.txt). Kept in isolate memory for an hour (the Cache
+ * The site's full Markdown profile (llms-full.txt). Kept in isolate memory for 10 minutes (the Cache
  * API is a no-op on *.workers.dev), with the edge cache as a second layer on custom domains.
  */
 let memo: { text: string; at: number } | null = null;
@@ -224,7 +224,8 @@ let memo: { text: string; at: number } | null = null;
 async function loadProfile(site: string, ctx: ExecutionContext): Promise<string> {
   if (memo && Date.now() - memo.at < PROFILE_TTL * 1000) return memo.text;
   const cache = caches.default;
-  const key = new Request(`${site}/llms-full.txt`);
+  // A per-10-minute query string keeps the edge cache from serving an older copy past the TTL.
+  const key = new Request(`${site}/llms-full.txt?v=${Math.floor(Date.now() / (PROFILE_TTL * 1000))}`);
   const hit = await cache.match(key);
   if (hit) {
     memo = { text: await hit.text(), at: Date.now() };
