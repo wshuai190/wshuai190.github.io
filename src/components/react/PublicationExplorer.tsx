@@ -37,6 +37,8 @@ export interface ExplorerLabels {
   closest: string;
   trySemantic: string;
   trySemanticButton: string;
+  best: string;
+  noMatch: string;
   topics: Record<string, string>;
 }
 
@@ -97,7 +99,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
 
   return (
     <div>
-      <div className="glass sticky top-3 z-10 flex flex-col gap-3 p-3 md:flex-row md:items-center">
+      <div className="z-10 flex flex-col gap-3 rounded-[18px] border border-line bg-[var(--bg-raised)] p-3 shadow-[0_10px_30px_-18px_rgb(0_0_0/0.35)] md:sticky md:top-3 md:flex-row md:items-center">
         <label className="flex flex-1 items-center gap-3 rounded-full border border-line bg-[var(--bg)] px-4">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-[var(--muted)]" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <span className="sr-only">{labels.search}</span>
@@ -131,14 +133,14 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
               <p>{labels.trySemantic}</p>
               <button type="button" className="link-pill mx-auto mt-4 flex" onClick={() => setSemantic(true)}>{labels.trySemanticButton}</button>
             </>
-          ) : <p>{labels.empty}</p>}
+          ) : <p>{searching ? labels.noMatch : labels.empty}</p>}
         </div>
       )}
       {searching && ranked?.[0]?.relaxed && groups.length > 0 && <p className="label mt-8">{labels.closest}</p>}
 
       {groups.map((group) => (
         <section key={group.year} className="mt-10 grid gap-4 md:grid-cols-[88px_1fr]">
-          <h2 className="serif text-3xl text-[var(--muted)] md:sticky md:top-24 md:self-start">{group.year || '↓'}</h2>
+          <h2 className="serif text-3xl text-[var(--muted)] md:sticky md:top-24 md:self-start">{group.year || <span className="label block pt-3">{labels.best}</span>}</h2>
           <ol className="glass px-6">
             {group.items.map((item) => (
               <li key={item.url} className="border-b border-line py-5 last:border-b-0">

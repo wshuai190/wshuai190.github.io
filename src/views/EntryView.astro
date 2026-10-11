@@ -8,7 +8,7 @@ interface Props { lang: Lang; entry: Entry; section: 'teaching' | 'talks' | 'awa
 const { lang, entry, section } = Astro.props;
 const { Content } = await render(entry);
 const sectionTitle = t(lang, section === 'teaching' ? 'teaching.title' : section === 'talks' ? 'talks.title' : 'awards.title');
-const meta = [entry.data.venue, /^(awards?|talks?)$/i.test(entry.data.type ?? '') ? undefined : entry.data.type, entry.data.location].filter(Boolean).join(' · ');
+const meta = [entry.data.venue, /^(awards?|talks?)$/i.test(entry.data.type ?? '') ? undefined : entry.data.type, entry.data.venue?.includes(entry.data.location ?? '\u0000') ? undefined : entry.data.location].filter(Boolean).join(' · ');
 const date = entry.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-AU', { year: 'numeric', month: 'long', timeZone: 'UTC' });
 ---
 <Base lang={lang} title={entry.data.title} description={entry.data.excerpt || `${entry.data.title}${meta ? ` — ${meta}` : ''}. ${sectionTitle} · ${lang === 'zh' ? '王率 Shuai Wang，昆士兰大学' : 'Shuai Wang, The University of Queensland'}.`}>

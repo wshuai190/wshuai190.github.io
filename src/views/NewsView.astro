@@ -11,7 +11,7 @@ const ICON: Record<string, string> = { celebrate: '✦', travel: '✈', home: '�
 <Base lang={lang} title={t(lang, 'news.title')} description={lang === 'zh' ? `王率的最新动态：${news.slice(0, 3).map((n) => n.title).join('；')}。` : `News from Shuai Wang: ${news.slice(0, 3).map((n) => n.title).join('; ')}.`} glow>
   <div class="wrap">
     <header class="pb-6 pt-10 md:pt-16">
-      <p class="eyebrow">{news.length} · {pick(profile.eyebrow, lang)}</p>
+      <p class="eyebrow">{t(lang, 'news.title')} · {news.length}</p>
       <h1 class="page-title mt-4">{t(lang, 'news.title')}</h1>
     </header>
     {years.map((year) => (

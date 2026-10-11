@@ -12,7 +12,7 @@ const title = t(lang, collection === 'talks' ? 'talks.title' : 'awards.title');
 <Base lang={lang} title={title} description={lang === 'zh' ? `王率（Shuai Wang）的${title}：${entries.length} 项，${entries.map((e) => e.data.title).slice(0, 3).join('；')}等。` : `${title} of Shuai Wang (${entries.length}): ${entries.map((e) => e.data.title).slice(0, 3).join('; ')} and more.`} glow>
   <div class="wrap">
     <header class="pb-6 pt-10 md:pt-16">
-      <p class="eyebrow">{entries.length} · {pick(profile.eyebrow, lang)}</p>
+      <p class="eyebrow">{title} · {entries.length}</p>
       <h1 class="page-title mt-4">{title}</h1>
     </header>
     <EntryList entries={entries} lang={lang} />

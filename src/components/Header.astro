@@ -54,7 +54,12 @@ function isActive(href: string) {
           {items.map((item) => (
             <a href={localePath(lang, item.href)} class:list={['rounded-xl px-3 py-2', isActive(item.href) && 'bg-ink text-bg font-semibold']}>{t(lang, item.key)}</a>
           ))}
-          <button type="button" data-open-search class="rounded-xl px-3 py-2 text-left text-muted">{t(lang, 'nav.search')}</button>
+          <button type="button" data-open-search class="rounded-xl px-3 py-2 text-left">{t(lang, 'nav.search')} <span class="mono text-xs text-muted">⌘K</span></button>
+          <div class="mt-1 border-t border-line pt-1">
+            {(['nav.news', 'nav.awards', 'nav.talks'] as const).map((key) => (
+              <a href={localePath(lang, `/${key.slice(4)}/`)} class="block rounded-xl px-3 py-1.5 text-[13px] text-muted">{t(lang, key)}</a>
+            ))}
+          </div>
         </nav>
       </details>
     </div>

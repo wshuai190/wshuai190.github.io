@@ -35,8 +35,8 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
   return (
     <div className="glass relative overflow-hidden">
       <div
-        className="group relative overflow-hidden px-7"
-        style={{ height: animate ? ROW * visible : undefined, maskImage: animate ? 'linear-gradient(transparent, #000 14%, #000 86%, transparent)' : undefined }}
+        className="group relative overflow-hidden px-5 pr-12 sm:px-7 sm:pr-14"
+        style={{ height: animate ? ROW * visible : undefined, maskImage: animate ? 'linear-gradient(transparent, #000 22%, #000 78%, transparent)' : undefined }}
       >
         <ul
           className="group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
@@ -51,9 +51,9 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
             >
               <time className="mono text-[12.5px] text-muted">{item.date}</time>
               {item.url ? (
-                <a href={item.url} tabIndex={animate && i >= items.length ? -1 : undefined} className="serif line-clamp-2 text-[17px] leading-snug hover:text-[var(--teal)] sm:text-[19px]">{item.title}</a>
+                <a href={item.url} tabIndex={animate && i >= items.length ? -1 : undefined} className="serif line-clamp-1 text-[16px] leading-snug hover:text-[var(--teal)] sm:line-clamp-2 sm:text-[19px]">{item.title}</a>
               ) : (
-                <span className="serif line-clamp-2 text-[17px] leading-snug sm:text-[19px]">{item.title}</span>
+                <span className="serif line-clamp-1 text-[16px] leading-snug sm:line-clamp-2 sm:text-[19px]">{item.title}</span>
               )}
             </li>
           ))}

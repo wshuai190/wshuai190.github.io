@@ -8,7 +8,7 @@ export default function ScoreChips({ result, hybrid }: { result: SearchResult; h
     <span className="mono inline-flex items-center gap-2 text-[10.5px] tabular-nums text-[var(--muted)]" title={title}>
       <span>BM25 {lexicalNorm.toFixed(2)}</span>
       {hybrid && <span>Starbucks {denseNorm.toFixed(2)}</span>}
-      <span className="font-semibold text-[var(--teal)]">{hybrid ? 'hybrid' : 'score'} {score.toFixed(2)}</span>
+      {hybrid && <span className="font-semibold text-[var(--teal)]">hybrid {score.toFixed(2)}</span>}
     </span>
   );
 }

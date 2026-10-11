@@ -23,9 +23,9 @@ const stars = starsOf(project.links.code);
       <a href={href} class="after:absolute after:inset-0 after:content-['']">{project.name}</a>
     </h3>
     <p class="mt-2 text-sm text-muted">{summary}</p>
-    <div class="relative z-[1] mt-auto flex flex-wrap items-center gap-1.5 pt-4">
-      <LinkPills links={project.links} lang={lang} />
-      {stars !== undefined && <span class="mono ml-auto text-xs text-muted" title="GitHub stars">★ {stars}</span>}
+    <div class="relative z-[1] mt-auto flex items-end justify-between gap-2 pt-4">
+      <div class="flex flex-wrap gap-1.5"><LinkPills links={project.links} lang={lang} /></div>
+      {stars !== undefined && <span class="mono shrink-0 pb-1 text-xs text-muted" title="GitHub stars">★ {stars}</span>}
     </div>
   </div>
 </article>

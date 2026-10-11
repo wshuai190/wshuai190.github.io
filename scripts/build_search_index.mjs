@@ -107,7 +107,7 @@ for (const file of htmlFiles(DIST)) {
   const pageTitle = (main.querySelector('h1')?.text ?? root.querySelector('title')?.text ?? '').replace(/\s+/g, ' ').trim();
   for (const section of sections(main)) {
     for (const words of chunks(section.words)) {
-      const text = words.join(' ');
+      const text = words.join(' ').replace(/ ([,.;:!?%)\]])/g, '$1').replace(/([(\[]) /g, '$1');
       // Chinese pages repeat the English content; keep only their Chinese passages.
       if (lang === 'zh' ? !isChinese(text) : words.length < MIN_WORDS && !hasHan(text)) continue;
       passages.push({
