@@ -1,19 +1,36 @@
 # "Talk with my digital twin" backend: a Cloudflare Worker (free plan) that answers questions about
-# Shuai Wang from the site's own llms-full.txt, using the Gemini API free tier.
+# Shuai Wang from the site's own llms-full.txt, using the Gemini API free tier (no billing attached).
 #
-# Deploy:  cd worker && npx wrangler login && npx wrangler secret put GEMINI_API_KEY && npx wrangler deploy
+# Secrets (npx wrangler secret put <NAME>): GEMINI_API_KEY, TURNSTILE_SECRET, SESSION_SECRET.
+# Deploy: cd worker && npx wrangler deploy
+# Emergency off switch: set ENABLED = "false" below and deploy (or edit the variable in the dashboard).
 name = "shuaiwang-twin"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
 [vars]
+ENABLED = "true"
 SITE = "https://shuaiwang.io"
-# Any Gemini model id from https://ai.google.dev/gemini-api/docs/models ("-latest" follows new releases).
-GEMINI_MODEL = "gemini-flash-latest"
+# Gemini models tried in order; if one is overloaded, retired or slow the next is used. Edit any time
+# (here + deploy, or in the Cloudflare dashboard → Workers → shuaiwang-twin → Settings → Variables).
+GEMINI_MODELS = "gemini-3.8-flash,gemini-flash-latest,gemini-flash-lite-latest,gemini-3.5-flash-lite"
+GEMINI_THINKING = "low"
 ALLOWED_ORIGINS = "https://shuaiwang.io,https://www.shuaiwang.io,http://localhost:4321,http://localhost:4322"
+DAILY_LIMIT = "300"     # messages per day for the whole site (keeps KV writes within the free tier)
+IP_DAILY_LIMIT = "30"   # messages per day per visitor
 
-# Per-visitor limit (Workers rate limiting binding, free plan): 8 messages per minute per IP.
+# Daily usage counters.
+[[kv_namespaces]]
+binding = "USAGE"
+id = "e6861753f5824453aa722f5318736079"
+
+# Per-minute limits (Workers rate limiting, free plan).
 [[ratelimits]]
-name = "LIMITER"
+name = "IP_LIMITER"
 namespace_id = "1001"
 simple = { limit = 8, period = 60 }
+
+[[ratelimits]]
+name = "GLOBAL_LIMITER"
+namespace_id = "1002"
+simple = { limit = 40, period = 60 }

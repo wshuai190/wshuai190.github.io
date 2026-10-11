@@ -1,23 +1,42 @@
 import { systemPrompt } from './prompt';
 
+interface RateLimiter { limit(options: { key: string }): Promise<{ success: boolean }> }
+
 interface Env {
   GEMINI_API_KEY: string;
-  GEMINI_MODEL: string;
+  TURNSTILE_SECRET: string;
+  SESSION_SECRET: string;
+  GEMINI_MODELS: string; // comma-separated, tried in order (overloaded/removed models fall through)
+  GEMINI_THINKING: string; // thinking level for models that support it ("low" = faster replies)
   SITE: string;
   ALLOWED_ORIGINS: string;
-  LIMITER?: { limit(options: { key: string }): Promise<{ success: boolean }> };
+  ENABLED: string; // "false" switches the twin off (kill switch)
+  DAILY_LIMIT: string; // messages per day, whole site
+  IP_DAILY_LIMIT: string; // messages per day, per visitor IP
+  IP_LIMITER?: RateLimiter;
+  GLOBAL_LIMITER?: RateLimiter;
+  USAGE: KVNamespace;
 }
 
 interface ChatMessage { role: 'user' | 'assistant'; content: string }
 
+const MAX_BODY_BYTES = 32_000;
 const MAX_MESSAGES = 12; // conversation turns sent to the model
 const MAX_CHARS = 1500; // per visitor message
+const MAX_ASSISTANT_CHARS = 4000; // per (client-supplied) earlier reply
 const PROFILE_TTL = 3600; // seconds to cache llms-full.txt
+const SESSION_TTL = 30 * 60; // seconds a Turnstile-verified session lasts
+const MODEL_TIMEOUT_MS = 25_000; // give up on a model that hasn't started answering
 
 /**
- * POST /chat {messages: [{role, content}]} → text/plain stream of the twin's reply.
- * Any failure (quota, network, bad input) is a non-200 status; the site then shows
- * "Service not available".
+ * Digital twin backend.
+ *   POST /session {token}      Turnstile token → short-lived signed session (proves a real browser)
+ *   POST /chat {messages}      with "Authorization: Bearer <session>" → text/plain stream of the reply
+ * Any failure (quota, limits, bad input) is a non-200 status; the site then shows "Service not available".
+ *
+ * Abuse protection: allowed origins only, Turnstile human check, per-IP and global per-minute
+ * limits, per-IP and global daily caps (KV), request/message size caps, Gemini safety filters, and
+ * the ENABLED kill switch. The Gemini key has no billing attached, so the worst case is a paused twin.
  */
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -26,54 +45,172 @@ export default {
     const cors: Record<string, string> = {
       'Access-Control-Allow-Origin': allowed.includes(origin) ? origin : allowed[0],
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400',
       Vary: 'Origin',
     };
-    const fail = (status: number, message: string) => new Response(message, { status, headers: cors });
+    const fail = (status: number, message = 'Service not available') => new Response(message, { status, headers: cors });
 
     if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
-    const url = new URL(request.url);
-    if (request.method !== 'POST' || url.pathname !== '/chat') return fail(404, 'Not found');
+    const { pathname } = new URL(request.url);
+    if (request.method !== 'POST' || (pathname !== '/chat' && pathname !== '/session')) return fail(404, 'Not found');
+    if (env.ENABLED === 'false') return fail(503);
     if (!allowed.includes(origin)) return fail(403, 'Forbidden');
+    if (Number(request.headers.get('Content-Length') ?? 0) > MAX_BODY_BYTES) return fail(413, 'Too large');
 
     const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
-    if (env.LIMITER && !(await env.LIMITER.limit({ key: ip })).success) return fail(429, 'Too many messages');
+    if (env.IP_LIMITER && !(await env.IP_LIMITER.limit({ key: ip })).success) return fail(429, 'Too many messages');
 
-    let messages: ChatMessage[];
+    let body: Record<string, unknown>;
     try {
-      const body = (await request.json()) as { messages?: ChatMessage[] };
-      messages = (body.messages ?? [])
-        .filter((m) => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && m.content.trim())
-        .slice(-MAX_MESSAGES)
-        .map((m) => ({ role: m.role, content: m.content.slice(0, MAX_CHARS) }));
+      const raw = await request.text();
+      if (raw.length > MAX_BODY_BYTES) return fail(413, 'Too large');
+      body = JSON.parse(raw);
     } catch {
       return fail(400, 'Bad request');
     }
-    if (!messages.length || messages[messages.length - 1].role !== 'user') return fail(400, 'Bad request');
+
+    if (pathname === '/session') {
+      const ok = typeof body.token === 'string' && (await verifyTurnstile(body.token, ip, env.TURNSTILE_SECRET));
+      if (!ok) return fail(403, 'Forbidden');
+      const session = await sign({ exp: Math.floor(Date.now() / 1000) + SESSION_TTL }, env.SESSION_SECRET);
+      return new Response(JSON.stringify({ session, ttl: SESSION_TTL }), { headers: { ...cors, 'Content-Type': 'application/json' } });
+    }
+
+    // /chat
+    const bearer = request.headers.get('Authorization')?.replace(/^Bearer\s+/i, '') ?? '';
+    if (!(await verifySession(bearer, env.SESSION_SECRET))) return fail(401, 'Session expired');
+    if (env.GLOBAL_LIMITER && !(await env.GLOBAL_LIMITER.limit({ key: 'all' })).success) return fail(429, 'Busy');
+
+    const messages = cleanMessages(body.messages);
+    if (!messages) return fail(400, 'Bad request');
+
+    // Daily caps (approximate: KV is eventually consistent, which is fine for a budget guard).
+    const day = new Date().toISOString().slice(0, 10);
+    const [total, mine] = await Promise.all([env.USAGE.get(`day:${day}`), env.USAGE.get(`ip:${day}:${ip}`)]);
+    if (Number(total ?? 0) >= Number(env.DAILY_LIMIT)) return fail(429, 'Daily limit reached');
+    if (Number(mine ?? 0) >= Number(env.IP_DAILY_LIMIT)) return fail(429, 'Daily limit reached');
+    ctx.waitUntil(Promise.all([
+      env.USAGE.put(`day:${day}`, String(Number(total ?? 0) + 1), { expirationTtl: 2 * 86400 }),
+      env.USAGE.put(`ip:${day}:${ip}`, String(Number(mine ?? 0) + 1), { expirationTtl: 2 * 86400 }),
+    ]));
 
     try {
       const profile = await loadProfile(env.SITE, ctx);
-      const upstream = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${env.GEMINI_MODEL}:streamGenerateContent?alt=sse`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-          body: JSON.stringify({
-            systemInstruction: { parts: [{ text: systemPrompt(env.SITE, profile, new Date().toISOString().slice(0, 10)) }] },
-            contents: messages.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
-            generationConfig: { temperature: 0.4, maxOutputTokens: 800 },
-          }),
-        },
-      );
-      if (!upstream.ok || !upstream.body) return fail(503, 'Service not available');
+      const request = {
+        systemInstruction: { parts: [{ text: systemPrompt(env.SITE, profile, day) }] },
+        contents: messages.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
+        generationConfig: { temperature: 0.4, maxOutputTokens: 800 },
+        safetySettings: ['HARASSMENT', 'HATE_SPEECH', 'SEXUALLY_EXPLICIT', 'DANGEROUS_CONTENT'].map((category) => ({
+          category: `HARM_CATEGORY_${category}`,
+          threshold: 'BLOCK_MEDIUM_AND_ABOVE',
+        })),
+      };
+      const upstream = await firstAvailableModel(env, request);
+      if (!upstream) return fail(503);
       return new Response(upstream.body.pipeThrough(geminiText()), {
-        headers: { ...cors, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store' },
+        headers: { ...cors, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' },
       });
-    } catch {
-      return fail(503, 'Service not available');
+    } catch (error) {
+      console.error('chat', String(error));
+      return fail(503);
     }
   },
 };
+
+/**
+ * Try each model in GEMINI_MODELS until one starts answering. A model that is overloaded (503),
+ * rate-limited (429), retired (404) or slow is skipped; thinking settings are dropped for models
+ * that reject them.
+ */
+async function firstAvailableModel(env: Env, request: Record<string, unknown>): Promise<Response | null> {
+  const models = env.GEMINI_MODELS.split(',').map((m) => m.trim()).filter(Boolean);
+  for (const model of models) {
+    const configs = env.GEMINI_THINKING ? [{ thinkingConfig: { thinkingLevel: env.GEMINI_THINKING } }, {}] : [{}];
+    for (const extra of configs) {
+      const body = { ...request, generationConfig: { ...(request.generationConfig as object), ...extra } };
+      // The timeout only covers waiting for the model to start; a long streamed reply is not cut off.
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), MODEL_TIMEOUT_MS);
+      try {
+        const response = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+            body: JSON.stringify(body),
+            signal: controller.signal,
+          },
+        );
+        clearTimeout(timer);
+        if (response.ok && response.body) return response;
+        const detail = (await response.text()).slice(0, 200);
+        console.error('gemini', model, response.status, detail);
+        if (response.status === 400 && /thinking/i.test(detail)) continue; // retry this model without thinking settings
+      } catch (error) {
+        clearTimeout(timer);
+        console.error('gemini', model, String(error));
+      }
+      break; // next model
+    }
+  }
+  return null;
+}
+
+/** Validate and trim the conversation: alternating roles, last one from the visitor, size-capped. */
+function cleanMessages(input: unknown): ChatMessage[] | null {
+  if (!Array.isArray(input)) return null;
+  const strip = (s: string) => s.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '').trim();
+  const messages = input
+    .filter((m): m is ChatMessage => (m?.role === 'user' || m?.role === 'assistant') && typeof m?.content === 'string')
+    .map((m) => ({ role: m.role, content: strip(m.content).slice(0, m.role === 'user' ? MAX_CHARS : MAX_ASSISTANT_CHARS) }))
+    .filter((m) => m.content)
+    .slice(-MAX_MESSAGES);
+  while (messages.length && messages[0].role !== 'user') messages.shift();
+  if (!messages.length || messages[messages.length - 1].role !== 'user') return null;
+  return messages;
+}
+
+async function verifyTurnstile(token: string, ip: string, secret: string): Promise<boolean> {
+  const form = new FormData();
+  form.append('secret', secret);
+  form.append('response', token.slice(0, 4096));
+  form.append('remoteip', ip);
+  try {
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', { method: 'POST', body: form });
+    const result = (await response.json()) as { success: boolean };
+    return result.success === true;
+  } catch {
+    return false;
+  }
+}
+
+// Sessions: base64url(JSON payload) + "." + base64url(HMAC-SHA256(payload)).
+const b64url = (bytes: Uint8Array) => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const fromB64url = (s: string) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), (c) => c.charCodeAt(0));
+
+async function hmacKey(secret: string) {
+  return crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']);
+}
+
+async function sign(payload: { exp: number }, secret: string): Promise<string> {
+  const data = b64url(new TextEncoder().encode(JSON.stringify(payload)));
+  const signature = await crypto.subtle.sign('HMAC', await hmacKey(secret), new TextEncoder().encode(data));
+  return `${data}.${b64url(new Uint8Array(signature))}`;
+}
+
+async function verifySession(token: string, secret: string): Promise<boolean> {
+  const [data, signature] = token.split('.');
+  if (!data || !signature || token.length > 512) return false;
+  try {
+    const valid = await crypto.subtle.verify('HMAC', await hmacKey(secret), fromB64url(signature), new TextEncoder().encode(data));
+    if (!valid) return false;
+    const { exp } = JSON.parse(new TextDecoder().decode(fromB64url(data))) as { exp: number };
+    return typeof exp === 'number' && exp > Date.now() / 1000;
+  } catch {
+    return false;
+  }
+}
 
 /**
  * The site's full Markdown profile (llms-full.txt). Kept in isolate memory for an hour (the Cache
