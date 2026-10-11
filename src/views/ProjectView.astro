@@ -4,6 +4,7 @@ import LinkPills from '../components/LinkPills.astro';
 import PubItem from '../components/PubItem.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/react/CopyButton';
+import { TWIN_ENDPOINT } from '../components/react/TwinChat';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import { breadcrumbs, projectSchema } from '../lib/seo';
 import { bibtexOf, getPublications, projects, pubSlug, starsOf, type Project } from '../lib/data';
@@ -37,6 +38,7 @@ const schema = [
         <p class="lede mt-5">{summary}</p>
         <div class="mt-6 flex flex-wrap items-center gap-2" data-search-skip>
           <LinkPills links={project.links} lang={lang} />
+          {TWIN_ENDPOINT && <button type="button" class="link-pill" data-open-twin data-twin-question={lang === 'zh' ? `用几句话介绍一下《${project.name}》` : `Tell me about "${project.name}" in a few sentences`}><span aria-hidden="true">🧘</span> {lang === 'zh' ? '问问分身' : 'Ask my twin'}</button>}
           {stars !== undefined && <span class="mono text-sm text-muted">★ {stars} {t(lang, 'project.stars')}</span>}
         </div>
       </div>

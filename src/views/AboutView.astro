@@ -5,6 +5,7 @@ import { profile } from '../lib/data';
 import { breadcrumbs } from '../lib/seo';
 import CultivationRealm from '../components/CultivationRealm.astro';
 import ContactForm, { WEB3FORMS_KEY } from '../components/react/ContactForm';
+import { TWIN_ENDPOINT } from '../components/react/TwinChat';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -52,7 +53,7 @@ const schema = [
         <a class="btn btn-solid" href={`mailto:${profile.email}`}>{profile.email}</a>
         <a class="btn" href={localePath(lang, '/research/')}>{t(lang, 'nav.research')} →</a>
         <a class="btn" href={localePath(lang, '/cv/')}>{t(lang, 'nav.cv')} →</a>
-        <button type="button" class="btn" data-open-twin hidden><span aria-hidden="true">🧘</span> {lang === 'zh' ? '和我的数字分身聊聊' : 'Talk with my digital twin'}</button>
+        {TWIN_ENDPOINT && <button type="button" class="btn" data-open-twin><span aria-hidden="true">🧘</span> {lang === 'zh' ? '和我的数字分身聊聊' : 'Talk with my digital twin'}</button>}
       </div>
       {WEB3FORMS_KEY && <ContactForm client:visible lang={lang} email={profile.email} />}
     </section>

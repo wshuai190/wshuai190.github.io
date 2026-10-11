@@ -79,7 +79,7 @@ const COPY = {
   en: {
     title: "Dylan's digital twin",
     notice: 'An AI twin that answers from this website. It is not me and can be wrong; it cannot make commitments for me.',
-    placeholder: 'Ask about my research, papers, teaching…',
+    placeholder: 'Ask me anything…',
     send: 'Send',
     close: 'Close',
     unavailable: 'Service not available.',
@@ -92,7 +92,7 @@ const COPY = {
   zh: {
     title: '王率的数字分身',
     notice: '这是根据本网站内容回答问题的 AI 分身，不是我本人，可能会出错，也不能替我做任何承诺。',
-    placeholder: '问问我的研究、论文、教学……',
+    placeholder: '随便问我……',
     send: '发送',
     close: '关闭',
     unavailable: 'Service not available.',
@@ -140,17 +140,19 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
   const listRef = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const turnstileRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const text = COPY[lang];
 
   useEffect(() => {
     if (!TWIN_ENDPOINT) return;
-    document.querySelectorAll<HTMLElement>('[data-open-twin]').forEach((el) => { el.hidden = false; });
     const onClick = (event: MouseEvent) => {
       const trigger = (event.target as HTMLElement).closest<HTMLElement>('[data-open-twin]');
       if (!trigger) return;
       event.preventDefault();
       returnFocus.current = trigger;
       setOpen(true);
+      const question = trigger.dataset.twinQuestion;
+      if (question) window.setTimeout(() => askRef.current(question), 0);
     };
     document.addEventListener('click', onClick);
     return () => document.removeEventListener('click', onClick);
@@ -191,7 +193,18 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
     // Start the invisible human check now, so the first answer isn't waiting for it.
     if (turnstileRef.current) getSession(turnstileRef.current).catch(() => { /* retried on send */ });
     document.body.style.overflow = 'hidden';
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') close(); };
+    // Escape closes; Tab cycles within the dialog (focus trap).
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { close(); return; }
+      if (event.key !== 'Tab' || !dialogRef.current) return;
+      const focusable = [...dialogRef.current.querySelectorAll<HTMLElement>('button:not([disabled]), textarea, input, a[href]')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      else if (!dialogRef.current.contains(document.activeElement)) { event.preventDefault(); first.focus(); }
+    };
     window.addEventListener('keydown', onKey);
     return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey); };
   }, [open, close]);
@@ -259,7 +272,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/30 backdrop-blur-sm sm:items-center sm:px-4" onMouseDown={(e) => e.target === e.currentTarget && close()}>
-      <div role="dialog" aria-modal="true" aria-label={text.title} className="glass flex h-[min(680px,92vh)] w-full max-w-xl flex-col overflow-hidden !rounded-b-none !bg-[var(--bg-raised)] shadow-2xl sm:!rounded-[22px]">
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={text.title} className="glass flex h-[min(680px,92vh)] w-full max-w-xl flex-col overflow-hidden !rounded-b-none !bg-[var(--bg-raised)] shadow-2xl sm:!rounded-[22px]">
         <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4">
           <div>
             <p className="serif text-xl"><span aria-hidden="true">🧘 </span>{text.title}</p>
@@ -288,7 +301,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
           <div className="border-t border-line px-5 py-3 text-sm">
             {handoff === 'sent' ? <p role="status">{text.handoffDone}</p> : (
               <form onSubmit={sendHandoff} className="flex gap-2">
-                <input name="email" type="email" required placeholder={text.handoffEmail} className="h-9 min-w-0 flex-1 rounded-full border border-line bg-[var(--bg)] px-4 outline-none focus:ring-2 focus:ring-[var(--teal)]" />
+                <input name="email" type="email" required placeholder={text.handoffEmail} className="h-9 min-w-0 flex-1 rounded-full border border-line bg-[var(--bg)] px-4 text-base outline-none sm:text-sm focus:ring-2 focus:ring-[var(--teal)]" />
                 <button type="submit" className="btn btn-solid !py-1.5" disabled={handoff === 'sending'}>{text.handoffSend}</button>
               </form>
             )}
@@ -306,7 +319,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
             maxLength={1500}
             placeholder={text.placeholder}
             aria-label={text.placeholder}
-            className="max-h-32 min-h-10 flex-1 resize-none rounded-[14px] border border-line bg-[var(--bg)] px-4 py-2.5 text-[15px] outline-none focus:ring-2 focus:ring-[var(--teal)]"
+            className="max-h-32 min-h-10 min-w-0 flex-1 resize-none rounded-[14px] border border-line bg-[var(--bg)] px-4 py-2.5 text-base outline-none placeholder:truncate sm:text-[15px] focus:ring-2 focus:ring-[var(--teal)]"
           />
           <button type="submit" className="btn btn-solid" disabled={busy || !input.trim()}>{text.send}</button>
         </form>

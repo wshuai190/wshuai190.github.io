@@ -28,6 +28,8 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
   const [semantic, setSemantic] = useSemanticPreference();
   const { results, mode, model } = useHybridSearch(query, open, undefined, lang, semantic);
   const shown = (results ?? []).slice(0, 8);
+  // Questions ("what is…", "…?", "…吗") go to the twin first; keywords stay search-first.
+  const looksLikeQuestion = /^\s*(what|how|why|who|which|where|when|can|could|do|does|is|are|tell)\b|[?？]\s*$|[吗呢么]\s*$|什么|怎么|为什么|哪/i.test(query);
 
   const close = useCallback(() => {
     setOpen(false);
@@ -113,6 +115,10 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
           />
           <kbd className="mono rounded border border-line px-1.5 py-0.5 text-[11px] text-[var(--muted)]">esc</kbd>
         </div>
+        {TWIN_ENDPOINT && query.trim() && looksLikeQuestion && <button type="button" onClick={() => { const q = query.trim(); close(); askTwin(q); }} className="flex w-full items-center gap-2 border-b border-line px-5 py-2.5 text-left text-sm hover:bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]">
+            <span aria-hidden="true">🧘</span>
+            <span className="min-w-0 truncate">{lang === 'zh' ? '问问我的数字分身：' : 'Ask my digital twin: '}<strong className="font-semibold">“{query.trim()}”</strong></span>
+          </button>}
         <ul id="search-results" role="listbox" className="max-h-[55vh] overflow-y-auto p-2">
           {shown[0]?.relaxed && <li className="label px-4 pb-1 pt-2" role="presentation">{t(lang, 'search.closest')}</li>}
           {shown.map((result, i) => { const { doc } = result; return (
@@ -141,10 +147,11 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
             </li>
           )}
         </ul>
-        {TWIN_ENDPOINT && query.trim() && <button type="button" onClick={() => { const q = query.trim(); close(); askTwin(q); }} className="flex w-full items-center gap-2 border-t border-line px-5 py-2.5 text-left text-sm hover:bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]">
+        {TWIN_ENDPOINT && query.trim() && !looksLikeQuestion && <button type="button" onClick={() => { const q = query.trim(); close(); askTwin(q); }} className="flex w-full items-center gap-2 border-t border-line px-5 py-2.5 text-left text-sm hover:bg-[color-mix(in_srgb,var(--teal)_10%,transparent)]">
             <span aria-hidden="true">🧘</span>
             <span className="min-w-0 truncate">{lang === 'zh' ? '问问我的数字分身：' : 'Ask my digital twin: '}<strong className="font-semibold">“{query.trim()}”</strong></span>
           </button>}
+
         <div className="flex items-center justify-between gap-3 border-t border-line px-5 py-2.5">
           <span className="mono text-[11px] text-[var(--muted)]">↵ {t(lang, 'search.hint')}</span>
           <SearchBadge mode={mode} model={model} lang={lang} on={semantic} onToggle={setSemantic} />

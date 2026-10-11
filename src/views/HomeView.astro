@@ -27,6 +27,7 @@ const stats = [
 const examples = lang === 'zh'
   ? ['深度检索 Agent', 'LLM 重排序', '系统综述', '高效 RAG', 'Boolean query generation']
   : ['deep-search agents that read only what matters', 'reasoning rerankers trained with RL', 'how can LLMs write Boolean queries?', 'compressing context for faster RAG', 'embeddings with flexible layers and dimensions'];
+import { TWIN_ENDPOINT } from '../components/react/TwinChat';
 ---
 <Base lang={lang} glow>
   <div class="wrap">
@@ -42,11 +43,11 @@ const examples = lang === 'zh'
         </a>
         <Headline text={profile.headline[lang]} class="display rise rise-2 mt-6 text-[clamp(40px,6vw,62px)]" />
         <p class="lede prose-links rise rise-3 mt-6" set:html={profile.bio[lang]} />
-        <div class="rise rise-4 mt-8 flex flex-wrap gap-3">
-          <a class="btn btn-solid" href={localePath(lang, '/research/')}>{t(lang, 'home.explore')} →</a>
-          <a class="btn" href={localePath(lang, '/cv/')}>{t(lang, 'home.cv')}</a>
-          <a class="btn" href={profile.links.scholar} rel="me noopener" target="_blank">{t(lang, 'home.scholar')} ↗</a>
-          <button type="button" class="btn" data-open-twin hidden><span aria-hidden="true">🧘</span> {lang === 'zh' ? '和我的数字分身聊聊' : 'Talk with my digital twin'}</button>
+        <div class="rise rise-4 mt-8 grid grid-cols-2 gap-3 sm:flex sm:flex-wrap">
+          <a class="btn btn-solid justify-center whitespace-nowrap max-sm:!px-3" href={localePath(lang, '/research/')}><span class="sm:hidden">{t(lang, 'nav.research')}</span><span class="hidden sm:inline">{t(lang, 'home.explore')}</span> →</a>
+          <a class="btn justify-center whitespace-nowrap max-sm:!px-3" href={localePath(lang, '/cv/')}>{t(lang, 'home.cv')}</a>
+          <a class="btn justify-center whitespace-nowrap max-sm:!px-3" href={profile.links.scholar} rel="me noopener" target="_blank">{t(lang, 'home.scholar')} ↗</a>
+          {TWIN_ENDPOINT && <button type="button" class="btn justify-center whitespace-nowrap max-sm:!px-3" data-open-twin><span aria-hidden="true">🧘</span> <span class="sm:hidden">{lang === 'zh' ? '问问分身' : 'Ask my twin'}</span><span class="hidden sm:inline">{lang === 'zh' ? '和我的数字分身聊聊' : 'Talk with my digital twin'}</span></button>}
         </div>
         <div class="rise rise-4 mt-8 max-w-[560px]">
           <HeroSearch client:idle action={localePath(lang, '/publications/')} label={t(lang, 'home.search.label')} button={t(lang, 'home.search.go')} examples={examples} lang={lang} />

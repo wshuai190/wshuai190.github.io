@@ -63,7 +63,7 @@ export default function ContactForm({ lang, email }: { lang: 'en' | 'zh'; email:
 
   if (status === 'sent') return <p className="mt-6 rounded-[14px] border border-line p-5 text-[15px]" role="status">{text.sent}</p>;
 
-  const field = 'mt-1.5 w-full rounded-[12px] border border-line bg-[var(--bg)] px-4 py-2.5 text-[15px] outline-none focus:ring-2 focus:ring-[var(--teal)]';
+  const field = 'mt-1.5 w-full rounded-[12px] border border-line bg-[var(--bg)] px-4 py-2.5 text-base outline-none sm:text-[15px] focus:ring-2 focus:ring-[var(--teal)]';
   return (
     <form id="contact" onSubmit={onSubmit} className="mt-6 grid gap-4 sm:grid-cols-2">
       <label className="text-sm text-[var(--muted)]">

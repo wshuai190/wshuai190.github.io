@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/react/CopyButton';
+import { TWIN_ENDPOINT } from '../components/react/TwinChat';
 import { localePath, pageTypeLabel, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import Authors from '../components/Authors.astro';
 import { articleSchema, breadcrumbs } from '../lib/seo';
@@ -76,6 +77,7 @@ const schema = [
         {links.map(([key, href]) => <a class="link-pill" href={href} target="_blank" rel="noopener">{t(lang, key)} ↗</a>)}
         {pub.data.citation && <CopyButton client:visible text={pub.data.citation} label={t(lang, 'link.citation')} done={t(lang, 'link.copied')} />}
         <CopyButton client:visible text={bibtexOf(pub)} label={t(lang, 'link.bibtex')} done={t(lang, 'link.copied')} />
+        {TWIN_ENDPOINT && <button type="button" class="link-pill" data-open-twin data-twin-question={lang === 'zh' ? `用几句话介绍一下《${pub.data.title}》` : `Tell me about "${pub.data.title}" in a few sentences`}><span aria-hidden="true">🧘</span> {lang === 'zh' ? '问问分身' : 'Ask my twin'}</button>}
       </div>
     </header>
 
