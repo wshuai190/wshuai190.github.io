@@ -3,12 +3,13 @@ title: "Neural Rankers for Effective Screening Prioritization in Medical Systema
 collection: publications
 permalink: /publication/2022-12-14-shuai-neuralsr
 excerpt: 
-date: 2022-12-14
+date: 2022-12-15
 page_type: "Long"
-venue: "Australasian Document Computing Symposium (ADCS 2022)"
+venue: 'Proceedings of the 26th Australasian Document Computing Symposium (ADCS 2022)'
 paperurl: 'https://ielab.io/publications/pdfs/shuai2022neuralsr.pdf'
-citation: 'Shuai Wang and Harry Scells and Bevan Koopman and Guido Zuccon. 2022. Neural Rankers for Effective Screening Prioritization in Medical Systematic Review Literature Search. In Australasian Document Computing Symposium (ADCS 2022).'
+citation: 'Shuai Wang and Harry Scells and Bevan Koopman and Guido Zuccon. 2022. Neural Rankers for Effective Screening Prioritization in Medical Systematic Review Literature Search. In Proceedings of the 26th Australasian Document Computing Symposium (ADCS 2022).'
 topic: 'evidence'
+doi: '10.1145/3572960.3572980'
 ---
 
 ## Abstract

@@ -48,6 +48,12 @@ export const news: NewsItem[] = (parseYaml(newsRaw) as NewsItem[])
   .map((item) => ({ ...item, date: new Date(item.date) }))
   .sort((a, b) => b.date.getTime() - a.date.getTime());
 
+/** Stable anchor for a news item on /news/, e.g. "2026-09-paper-accepted-in-sigir-ap-2026". */
+export function newsAnchor(item: NewsItem): string {
+  const slug = item.title.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 48);
+  return `${item.date.toISOString().slice(0, 10)}-${slug}`;
+}
+
 export const projects: Project[] = parseYaml(projectsRaw) as Project[];
 
 export function pubSlug(pub: Publication): string {
@@ -125,7 +131,7 @@ export function venueLabel(venue: string, fallbackYear?: number): string {
   // Also matches "SIGIR-2026", "ECIR2026" and "SIGIR-AP-2023".
   const acronym = VENUE_NAMES.find(([pattern]) => pattern.test(venue))?.[1]
     ?? venue.match(/\b(SIGIR|WSDM|WWW|ECIR|EMNLP|EACL|ACL|CIKM|ICTIR|ADCS|TOIS|TREC|JASIST|IPM)(?=\b|-?\d)/i)?.[1];
-  if (acronym) return `${acronym.toUpperCase()}${year ? ` ${year}` : ''}`;
+  if (acronym) return `${acronym.toUpperCase()}${year ? ` ${year}` : ''}${/Findings/i.test(venue) ? ' Findings' : ''}`;
   return venue.replace(/^Accepted\s+/i, '').replace(/^Proceedings of the /i, '').slice(0, 40);
 }
 

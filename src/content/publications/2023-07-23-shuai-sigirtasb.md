@@ -9,7 +9,7 @@ venue: 'Proceedings of the 46th International ACM SIGIR Conference on Research a
 paperurl: 'https://dl.acm.org/doi/abs/10.1145/3539618.3591915'
 citation: 'Shuai Wang, and Guido Zuccon. 2023. Balanced Topic Aware Sampling for Effective Dense Retriever: A Reproducibility Study. In Proceedings of the 46th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2023).'
 topic: 'retrieval'
-arxiv: '9618.35919'
+doi: '10.1145/3539618.3591915'
 ---
 ## Abstract
 Knowledge distillation plays a key role in boosting the effectiveness of rankers based on pre-trained language models (PLMs); this is achieved using an effective but inefficient large model to teach a more efficient student model. 
@@ -17,4 +17,4 @@ In the context of knowledge distillation for a student dense passage retriever, 
 In this paper we reproduce the balanced topic-aware sampling method; we do so for both the dataset used for evaluation in the original work (MS MARCO) and for a dataset in a different domain, that of product search (Amazon shopping queries dataset) to study whether the original results generalize to a different context.
 We show that while we could not replicate the exact results from the original paper, we do confirm the original findings in terms of trends: balanced topic-aware sampling indeed leads to highly effective dense retrievers. 
 These results partially generalize to the other search task we investigate, product search: although we observe the improvements are less significant compared to MS MARCO.
-In addition to reproducing the original results and study how the method generalizes to a different dataset, we also investigate a key aspect that influences the effectiveness of the method: the use of a hard margin threshold for negative sampling. This aspect was not studied in the original paper. With respect to hard margins, we find that while setting different hard margin values significantly influences the effectiveness of the student model, this impact is dataset-dependent -- and indeed it does depend on the score distributions exhibited by retrieval models on the dataset at hand. Our reproducibility code is available anonymously, and will be published later on.
+In addition to reproducing the original results and study how the method generalizes to a different dataset, we also investigate a key aspect that influences the effectiveness of the method: the use of a hard margin threshold for negative sampling. This aspect was not studied in the original paper. With respect to hard margins, we find that while setting different hard margin values significantly influences the effectiveness of the student model, this impact is dataset-dependent -- and indeed it does depend on the score distributions exhibited by retrieval models on the dataset at hand.

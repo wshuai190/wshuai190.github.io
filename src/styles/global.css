@@ -141,7 +141,8 @@ img { max-width: 100%; }
 }
 
 /* ---------- Motion ---------- */
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+/* Transform-only entrance so text is painted immediately (opacity animations delay LCP). */
+@keyframes rise { from { transform: translateY(14px); } to { transform: none; } }
 .rise { animation: rise 0.7s cubic-bezier(.2,.7,.2,1) both; }
 .rise-2 { animation-delay: 0.08s; } .rise-3 { animation-delay: 0.16s; } .rise-4 { animation-delay: 0.24s; }
 

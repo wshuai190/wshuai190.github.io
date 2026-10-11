@@ -34,7 +34,7 @@ const schema = [
 ];
 ---
 <Base lang={lang} title={pub.data.title} description={description} image={pub.data.image} type="article" published={pub.data.date} schema={schema}>
-  <Fragment slot="head">
+  {lang === 'en' && <Fragment slot="head">
     <meta name="citation_title" content={pub.data.title} />
     {authors.map((name) => {
       const clean = name.replace(/\*$/, '');
@@ -54,7 +54,7 @@ const schema = [
     <meta name="DC.title" content={pub.data.title} />
     {authors.map((name) => <meta name="DC.creator" content={name.replace(/\*$/, '')} />)}
     <meta name="DC.issued" content={pub.data.date.toISOString().slice(0, 10)} />
-  </Fragment>
+  </Fragment>}
   <article class="wrap max-w-[920px]">
     <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={localePath(lang, '/publications/')}>← {t(lang, 'pub.back')}</a></nav>
     <header class="pt-8">
@@ -66,7 +66,7 @@ const schema = [
         {cited ? <><span aria-hidden="true">·</span><span>{t(lang, 'pubs.cited', { n: cited })}</span></> : null}
         {role && <span class="rounded-full border border-teal/40 px-2 py-px text-teal">{t(lang, role === 'first' ? 'pub.first' : 'pub.cofirst')}</span>}
       </p>
-      <h1 class="serif mt-4 text-[clamp(30px,4.4vw,46px)] leading-[1.12] tracking-[-0.01em]">{pub.data.title}</h1>
+      <h1 class="serif mt-4 text-[clamp(30px,4.4vw,46px)] leading-[1.12] tracking-[-0.01em]" lang="en">{pub.data.title}</h1>
       <Authors authors={authors} class="mt-4 text-[17px] text-muted" />
       {authors.some((a) => a.endsWith('*')) && <p class="mt-1 text-xs text-muted">{t(lang, 'pub.equal')}</p>}
       <p class="mt-1 text-sm text-muted">{pub.data.venue}</p>
@@ -81,7 +81,7 @@ const schema = [
       <figure class="glass mt-10 p-3"><div class="figure-frame p-4"><img src={pub.data.image} alt="" class="max-h-[440px]" /></div></figure>
     )}
 
-    <section class="paper-body serif mt-10 text-[19px] leading-relaxed text-[var(--ink-soft)]">
+    <section lang="en" class="paper-body serif mt-10 text-[19px] leading-relaxed text-[var(--ink-soft)]">
       <Content />
     </section>
 

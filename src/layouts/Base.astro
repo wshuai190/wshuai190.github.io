@@ -42,7 +42,7 @@ const verification = profile.seo.verification ?? {};
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
     <link rel="alternate" hreflang="en" href={enHref} />
     <link rel="alternate" hreflang="zh-CN" href={zhHref} />
     <link rel="alternate" hreflang="x-default" href={enHref} />
@@ -87,7 +87,7 @@ const verification = profile.seo.verification ?? {};
   </head>
   <body>
     {glow && <div class="glow-bg" aria-hidden="true" />}
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 btn btn-solid">Skip to content</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 btn btn-solid">{t(lang, 'nav.skip')}</a>
     <Header lang={lang} path={path} />
     <main id="main" class="relative z-[1]">
       <slot />

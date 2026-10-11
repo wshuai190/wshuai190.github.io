@@ -1,14 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import { formatMonth, pick, t, type Lang } from '../i18n/ui';
-import { news, profile } from '../lib/data';
+import { news, newsAnchor, profile } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const years = [...new Set(news.map((n) => n.date.getUTCFullYear()))].sort((a, b) => b - a);
 const ICON: Record<string, string> = { celebrate: '✦', travel: '✈', home: '●' };
 ---
-<Base lang={lang} title={t(lang, 'news.title')} glow>
+<Base lang={lang} title={t(lang, 'news.title')} description={lang === 'zh' ? `王率的最新动态：${news.slice(0, 3).map((n) => n.title).join('；')}。` : `News from Shuai Wang: ${news.slice(0, 3).map((n) => n.title).join('; ')}.`} glow>
   <div class="wrap">
     <header class="pb-6 pt-10 md:pt-16">
       <p class="eyebrow">{news.length} · {pick(profile.eyebrow, lang)}</p>
@@ -19,7 +19,7 @@ const ICON: Record<string, string> = { celebrate: '✦', travel: '✈', home: '�
         <h2 class="serif text-3xl text-muted md:sticky md:top-8 md:self-start">{year}</h2>
         <ol class="relative border-l border-line pl-7">
           {news.filter((n) => n.date.getUTCFullYear() === year).map((item) => (
-            <li class="relative pb-8 last:pb-2">
+            <li class="relative scroll-mt-8 pb-8 last:pb-2" id={newsAnchor(item)}>
               <span class="absolute -left-[37px] top-1 grid h-5 w-5 place-items-center rounded-full border border-line bg-[var(--bg)] text-[10px] text-teal" aria-hidden="true">{ICON[item.status ?? ''] ?? '●'}</span>
               <time class="label">{formatMonth(item.date, lang)}</time>
               <h3 class="serif mt-1 text-[21px] leading-snug">

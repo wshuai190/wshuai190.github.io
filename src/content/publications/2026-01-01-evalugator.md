@@ -5,9 +5,9 @@ permalink: /publication/2026-01-01-evalugator
 excerpt: 
 date: 2026-01-01
 page_type: "Short"
-venue: 'Accepted ECIR-2026'
+venue: 'Advances in Information Retrieval: European Conference on Information Retrieval (ECIR 2026)'
 paperurl: 'https://hangli.me/files/ecir2026-evalugator.pdf'
-citation: 'Bevan Koopman, Hang Li, Shuai Wang and Guido Zuccon. 2025. Evalugator🐊—Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels (Accepted ECIR-2026).'
+citation: 'Bevan Koopman, Hang Li, Shuai Wang and Guido Zuccon. 2026. Evalugator🐊—Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels (Accepted ECIR-2026).'
 topic: 'rag'
 ---
 ## Abstract

@@ -42,12 +42,30 @@ def main():
             )):
                 errors.append(f"{path.relative_to(root)}: missing {target}")
     errors += seo_errors(root, pages)
+    errors += feed_errors(root)
     if errors:
         print("\n".join(sorted(set(errors))))
         print(f"{len(set(errors))} problems")
         return 1
     print(f"Checked internal links, assets and SEO tags on {len(pages)} pages.")
     return 0
+
+
+def feed_errors(root):
+    """Every on-site link in feed.xml must resolve, and items must not share a link (GUID)."""
+    feed = root / "feed.xml"
+    if not feed.exists():
+        return ["feed.xml missing"]
+    links = re.findall(r"<link>https://shuaiwang\.io([^<]*)</link>", feed.read_text(encoding="utf-8"))
+    errors = []
+    for link in links:
+        path = link.split("#")[0]
+        target = root / (path.lstrip("/") + "index.html" if path.endswith("/") or not path else path.lstrip("/") + ".html")
+        if not target.is_file():
+            errors.append(f"feed.xml: broken link {link}")
+    duplicates = {link for link in links if links.count(link) > 1}
+    errors += [f"feed.xml: duplicate item link {link}" for link in duplicates if link not in ("", "/")]
+    return errors
 
 
 def seo_errors(root, pages):
@@ -58,12 +76,15 @@ def seo_errors(root, pages):
         rel = path.relative_to(root).as_posix()
         if 'http-equiv="refresh"' in html:  # legacy redirect stubs
             continue
+        noindex = 'content="noindex"' in html
         for label, pattern in [
             ("title", r"<title>[^<]{10,}</title>"),
             ("canonical", r'<link rel="canonical" href="https://shuaiwang\.io/[^"]*"'),
             ("hreflang x-default", r'hreflang="x-default"'),
             ("og:image", r'<meta property="og:image" content="https://'),
         ]:
+            if label == "canonical" and noindex:
+                continue  # noindex pages (404) intentionally have no canonical
             if not re.search(pattern, html):
                 errors.append(f"{rel}: missing {label}")
         description = re.search(r'<meta name="description" content="([^"]*)"', html)
@@ -76,10 +97,13 @@ def seo_errors(root, pages):
                 json.loads(block)
             except json.JSONDecodeError as exc:
                 errors.append(f"{rel}: invalid JSON-LD ({exc})")
-        if rel.startswith(("publication/", "zh/publication/")):
+        if rel.startswith("publication/"):
             for tag in ("citation_title", "citation_author", "citation_publication_date", "ScholarlyArticle"):
                 if tag not in html:
                     errors.append(f"{rel}: missing {tag}")
+        if rel.startswith("zh/publication/") and "citation_title" in html:
+            # Scholar tags only on the English (canonical) page, to avoid duplicate Scholar versions.
+            errors.append(f"{rel}: has citation_* tags (English page only)")
     return errors
 
 

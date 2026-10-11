@@ -14,7 +14,7 @@ const years = [...new Set(entries.map((e) => e.data.date.getUTCFullYear()))].sor
         <li class="group border-b border-line py-5 last:border-b-0">
           <a href={localePath(lang, entry.data.permalink)} class="grid gap-1">
             <span class="serif text-[21px] leading-snug group-hover:text-teal transition-colors">{entry.data.title}</span>
-            <span class="text-sm text-muted">{[entry.data.venue, entry.data.type, entry.data.location].filter(Boolean).join(' · ')}</span>
+            <span class="text-sm text-muted">{[entry.data.venue, /^(awards?|talks?)$/i.test(entry.data.type ?? '') ? undefined : entry.data.type, entry.data.location].filter(Boolean).join(' · ')}</span>
             {entry.data.excerpt && <span class="text-sm text-muted">{entry.data.excerpt}</span>}
           </a>
         </li>

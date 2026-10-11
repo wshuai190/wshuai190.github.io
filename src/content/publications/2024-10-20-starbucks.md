@@ -3,11 +3,11 @@ title: "Starbucks: Improved Training for 2D Matryoshka Embeddings"
 collection: publications
 permalink: /publication/2024-10-20-starbucks
 excerpt: 
-date: 2024-10-20
+date: 2026-03-29
 page_type: "Long"
-venue: 'ECIR2026'
+venue: 'Advances in Information Retrieval: European Conference on Information Retrieval (ECIR 2026)'
 paperurl: 'https://arxiv.org/abs/2410.13230'
-citation: 'Shengyao Zhuang*, Shuai Wang*, Bevan Koopman and Guido Zuccon. 2024. Starbucks: Improved Training for 2D Matryoshka Embeddings. (Accepted in ECIR2026).'
+citation: 'Shengyao Zhuang*, Shuai Wang*, Bevan Koopman and Guido Zuccon. 2026. Starbucks: Improved Training for 2D Matryoshka Embeddings. In Advances in Information Retrieval: European Conference on Information Retrieval (ECIR 2026).'
 topic: 'retrieval'
 arxiv: '2410.13230'
 image: '/images/research/starbucks.webp'

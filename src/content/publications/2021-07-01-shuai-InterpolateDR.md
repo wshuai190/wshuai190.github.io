@@ -9,7 +9,7 @@ venue: 'The Proceedings of the 2021 ACM SIGIR on International Conference on The
 paperurl: 'https://dl.acm.org/doi/abs/10.1145/3471158.3472233'
 citation: 'Shuai Wang and Shengyao Zhuang and Guido Zuccon. 2021. BERT-based Dense Retrievers Require Interpolation with BM25 for Effective Passage Retrieval. In The Proceedings of the 2021 ACM SIGIR on International Conference on Theory of Information Retrieval (ICTIR 2021).'
 topic: 'retrieval'
-arxiv: '1158.34722'
+doi: '10.1145/3471158.3472233'
 ---
 ## Abstract
 The integration of deep, pre-trained language models, such as BERT, into retrieval and ranking pipelines has shown to provide large effectiveness gains over traditional bag-of-words models in the passage retrieval task. However, the best setup for integrating such deep language models is still unclear.

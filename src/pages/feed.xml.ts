@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { getPublications, news } from '@/lib/data';
+import { getPublications, news, newsAnchor } from '@/lib/data';
 
 /** /feed.xml — new publications and news, newest first (replaces jekyll-feed). */
 export async function GET(context: APIContext) {
@@ -15,7 +15,8 @@ export async function GET(context: APIContext) {
     })),
     ...news.map((item) => ({
       title: item.title,
-      link: item.url ?? '/news/',
+      // Each news item gets its own link (and therefore GUID) so feed readers keep them apart.
+      link: item.url?.startsWith('/') ? item.url : `/news/#${newsAnchor(item)}`,
       pubDate: item.date,
       description: item.description ?? item.title,
       categories: ['news'],
@@ -26,6 +27,9 @@ export async function GET(context: APIContext) {
     title: 'Dr. Shuai Wang',
     description: 'Publications and news from Shuai Wang, Research Fellow at The University of Queensland.',
     site: context.site!,
+    trailingSlash: false, // publication pages live at /publication/<slug> (no trailing slash)
+    xmlns: { atom: 'http://www.w3.org/2005/Atom' },
+    customData: '<language>en</language><atom:link href="https://shuaiwang.io/feed.xml" rel="self" type="application/rss+xml" />',
     items: items.slice(0, 50),
   });
 }

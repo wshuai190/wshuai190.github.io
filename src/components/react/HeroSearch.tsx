@@ -72,6 +72,8 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
           onKeyDown={(e) => { if (e.key === 'Escape') setValue(''); }}
           placeholder={placeholder}
           autoComplete="off"
+          role="combobox"
+          aria-autocomplete="list"
           aria-controls={value.trim() && results ? 'hero-results' : undefined}
           aria-expanded={Boolean(value.trim() && results)}
           className="h-10 min-w-0 flex-1 bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]"

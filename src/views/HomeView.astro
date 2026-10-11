@@ -34,7 +34,7 @@ const examples = lang === 'zh'
       <div>
         <!-- Mobile: small avatar instead of the large portrait. -->
         <div class="mb-6 flex items-center gap-4 md:hidden">
-          <img src={profile.avatar} alt={profile.short_name[lang]} width="80" height="80" class="h-20 w-20 rounded-full border border-line object-cover object-top" />
+          <img src={profile.avatar} alt={profile.short_name[lang]} width="80" height="80" fetchpriority="high" class="h-20 w-20 rounded-full border border-line object-cover object-top" />
           <p class="text-[13px] leading-snug text-muted">{pick(profile.location, lang)}<br />{profile.pronouns}</p>
         </div>
         <a href={latest.url ?? localePath(lang, '/news/')} class="pill rise">
@@ -53,7 +53,7 @@ const examples = lang === 'zh'
       </div>
       <figure class="rise rise-3 relative hidden w-full max-w-[220px] justify-self-end md:block">
         <div class="absolute -inset-2 rounded-[22px] bg-gradient-to-br from-[var(--glow-1)] to-[var(--glow-2)] opacity-60 blur-[14px]" aria-hidden="true"></div>
-        <img src={profile.portrait_web} alt={profile.short_name[lang]} width="220" height="275" loading="lazy" decoding="async" class="relative aspect-[4/5] w-full rounded-[16px] border border-line object-cover" />
+        <img src={profile.portrait_web} alt={profile.short_name[lang]} width="220" height="275" decoding="async" class="relative aspect-[4/5] w-full rounded-[16px] border border-line object-cover" />
         <figcaption class="relative mt-3 text-[13px] text-muted">{pick(profile.location, lang)} · {profile.pronouns}</figcaption>
       </figure>
     </section>
@@ -70,7 +70,7 @@ const examples = lang === 'zh'
     <section class="mt-24">
       <div class="mb-7 flex items-baseline justify-between gap-4">
         <h2 class="section-title">{t(lang, 'home.selected')}</h2>
-        <a class="text-sm font-semibold text-teal" href={localePath(lang, '/publications/')}>{t(lang, 'home.allpubs')} →</a>
+        <a class="inline-block py-2 text-sm font-semibold text-teal" href={localePath(lang, '/publications/')}>{t(lang, 'home.allpubs')} →</a>
       </div>
       <div class="grid gap-5 md:grid-cols-3">
         {featured.map((project) => <ProjectCard project={project} lang={lang} />)}
@@ -80,7 +80,7 @@ const examples = lang === 'zh'
     <section class="mt-24">
       <div class="mb-7 flex items-baseline justify-between gap-4">
         <h2 class="section-title">{t(lang, 'home.news')}</h2>
-        <a class="text-sm font-semibold text-teal" href={localePath(lang, '/news/')}>{t(lang, 'home.archive')} →</a>
+        <a class="inline-block py-2 text-sm font-semibold text-teal" href={localePath(lang, '/news/')}>{t(lang, 'home.archive')} →</a>
       </div>
       <NewsTicker client:visible items={tickerItems} pauseLabel={t(lang, 'home.news.pause')} playLabel={t(lang, 'home.news.play')} />
     </section>

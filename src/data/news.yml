@@ -1,6 +1,6 @@
-- title: "Present Paper at ICTIR 2021, Online"
+- title: "Presented Paper at ICTIR 2021 (Online)"
   date: 2021-07-11
-  description: "Presented a paper online interpolation of DR and BM25 at the ICTIR 2021 conference."
+  description: "Presented our paper on interpolating dense retrievers with BM25 at ICTIR 2021 (online)."
   status: home
 
 - title: "Started PhD program at The University of Queensland"
@@ -8,16 +8,16 @@
   description: "Began a PhD program in information retrieval and natural language processing at The University of Queensland."
   status: home
 
-- title: "Present Paper at ADCS 2021, Online, Received Best Student Paper Award"
+- title: "Presented Paper at ADCS 2021 (Online) and Received the Best Student Paper Award"
   date: 2021-12-09
   url: http://adcs-conference.org/2021/
-  description: "Presented r on MeSH Term suggestion and received the Best Student Paper Award."
+  description: "Presented our paper on MeSH term suggestion and received the Best Student Paper Award."
   status: home
 
-- title: "Present Paper at ECIR 2022, Online"
+- title: "Presented Paper at ECIR 2022 (Online)"
   date: 2022-04-10
   url: https://ecir2022.org/
-  description: "Presented a paper on reproducibility of Seed-driven document ranking in systematic review at the ECIR 2022 conference."
+  description: "Presented our reproducibility study of seed-driven document ranking for systematic reviews at ECIR 2022."
   status: home
 
 - title: "Poster Presentations at SIGIR 2022, Madrid, Spain"
@@ -57,12 +57,12 @@
 
 - title: "Presentations at SIGIR 2023"
   date: 2023-07-22
-  description: "Due to my entry permit to Taiwan got rejected, my supervisor Professor Guido Zuccon will present our two papers instead at the SIGIR 2023 conference in person."
+  description: "As my entry permit for Taiwan was not granted, my supervisor Professor Guido Zuccon presented our two papers at SIGIR 2023 in person."
   status: home
 
-- title: "Present Paper at SIGIR-AP, Melbourne Satellite"
+- title: "Presented Paper at SIGIR-AP 2023, Melbourne Satellite"
   date: 2023-11-28
-  description: "Presented a paper LLM-driven Boolean-based screening prioritisation at SIGIR-AP 2023."
+  description: "Presented our paper on LLM-generated queries for Boolean-based screening prioritisation at SIGIR-AP 2023."
   status: travel
 
 - title: "One Full Paper (Findings) Accepted in ECIR2024"
@@ -72,17 +72,17 @@
 
 - title: "Internship at Naver Labs Europe"
   date: 2024-02-29
-  description: "From 29th of Feb, 2024, I will start my internship at Naver Labs Europe in Grenoble for 4 months, investigating on Large Language Models"
+  description: "Started my research internship at Naver Labs Europe in Grenoble on 29 February 2024, working on large language models for retrieval-augmented generation."
   status: travel
 
 - title: "Paper Presentation at ECIR, Glasgow"
   date: 2024-03-25
-  description: "Presented a paper Zero-shot  Zero-shot Generative Large Language Models for Systematic Review Screening Automation."
+  description: "Presented our paper “Zero-shot Generative Large Language Models for Systematic Review Screening Automation”."
   status: travel
 
-- title: "Three papers Accepted in SIGIR2024"
+- title: "Three Papers Accepted at SIGIR 2024"
   date: 2024-03-26
-  description: "[Resource Paper]: FeB4RAG;  [Short Paper]: LLM for stemming; [Perspective Paper]: Evaluating ad-hoc generative IR;"
+  description: "[Resource Paper]: FeB4RAG; [Short Paper]: Large Language Models for Stemming; [Perspective Paper]: Evaluating Generative Ad Hoc Information Retrieval."
   status: celebrate
 
 - title: "Paper Presentation at SIGIR, Washington DC"
@@ -122,31 +122,31 @@
 
 - title: "Started Teaching Role at The University of Queensland"
   date: 2025-08-01
-  description: "At semester 2, 2025, I will begin as a lecturer and course coordinator for the course INFS7410 Information Retrieval and Web Search at The University of Queensland."
+  description: "In Semester 2, 2025, I began as Lecturer and Course Coordinator for INFS7410 Information Retrieval and Web Search at The University of Queensland."
   status: celebrate
 
 
 - title: "SIGIR-AP 2025 Queensland Satellite"
   date: 2025-10-05
-  description: "I will be serving as a Queensland Satellite Chair for the SIGIR-AP 2025 Queensland Satellite Event."
+  description: "Served as Queensland Satellite Chair for the SIGIR-AP 2025 Queensland Satellite Event."
   status: celebrate
 
 - title: "Conferred PhD Degree"
   date: 2025-11-14
-  description: "Successfully completed and defended my PhD thesis on information retrieval and systematic review automation at The University of Queensland, the degree has been conferred; I will attend the graduation ceremony in December 2025."
+  description: "Completed my PhD thesis on information retrieval and systematic review automation at The University of Queensland; the degree was conferred in November 2025."
   status: celebrate
 
-- title: "Received SeCAT Score of 4.83 (SD=0.37) for INFS7410"
+- title: "Received SECaT Score of 4.83 (SD=0.37) for INFS7410"
   date: 2025-12-08
-  description: "I have received a SeCAT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search that I coordinated and lectured in semester 2, 2025; based on 43 student responses out of 122."
+  description: "I received a SECaT score of 4.83 out of 5 for INFS7410 Information Retrieval and Web Search that I coordinated and lectured in semester 2, 2025; based on 43 student responses out of 122."
   status: celebrate
 
-- title: "Two Papers accepted in ECIR2026"
+- title: "Two Papers Accepted at ECIR 2026"
   date: 2025-12-18
-  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper] Evaluator - Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels "
+  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper] Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels "
   status: celebrate
 
-- title: "Paper accepted in EACL2026 Main Conference"
+- title: "Paper Accepted at the EACL 2026 Main Conference"
   date: 2026-01-04
   description: "[Full Paper]: AutoBool: Reinforcement-Learned LLM for Effective Automatic Systematic Reviews Boolean Query Generation. "
   status: celebrate

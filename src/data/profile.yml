@@ -38,7 +38,7 @@ bio:
   en: >-
     Research Fellow at <a href="https://ielab.io/">ielab</a>, The University of Queensland.
     I coordinate and teach INFS7410 Information Retrieval and Web Search. PhD (2025) with
-    <a href="https://ielab.io/people/guido-zuccon">Guido Zuccon</a>,
+    <a href="https://researchers.uq.edu.au/researcher/22857">Guido Zuccon</a>,
     <a href="https://bevankoopman.github.io/">Bevan Koopman</a> and
     <a href="https://scells.me/">Harrisen Scells</a>.
   zh: >-
@@ -69,7 +69,7 @@ cv_profile:
     I build search and LLM systems that are effective, efficient, and inspectable for expert
     workflows, with a focus on deep-research agents, systematic review search, and
     evidence-grounded generation.
-  zh: 专注于构建高效、可检视、可落地的检索与生成系统，尤其面向深度研究流程、系统综述检索与高风险信息场景。
+  zh: 我致力于为专家工作流构建有效、高效且可检视的检索与 LLM 系统，重点关注深度研究 Agent、系统综述检索与基于证据的生成。
 
 themes:
   - topic: agents
@@ -143,14 +143,14 @@ opportunities:
     I welcome research collaborations, student projects, and academic or industry roles where
     search agents, retrieval systems, efficient RAG, trustworthy evaluation or biomedical evidence
     technologies are central.
-  zh: 欢迎就检索、RAG、可信评测与生物医学证据技术交流研究合作、学生项目，以及学术界或工业界的工作机会。
+  zh: 欢迎围绕搜索 Agent、检索系统、高效 RAG、可信评测与生物医学证据技术开展研究合作、学生项目，或洽谈学术界与工业界职位。
 
 service:
   roles:
     - { en: "Publicity Chair, SIGIR 2026 (Melbourne | Naarm)", zh: SIGIR 2026 宣传主席（Melbourne | Naarm） }
     - { en: "Queensland Satellite Chair, SIGIR-AP 2025", zh: SIGIR-AP 2025 昆士兰分会场主席 }
   journals:
-    - { en: "ACM Transactions on Information Systems (TOIS)", zh: ACM 信息系统学报（TOIS） }
+    - { en: "ACM Transactions on Information Systems (TOIS)", zh: ACM Transactions on Information Systems（TOIS） }
     - { en: Journal of Data and Information Quality, zh: Journal of Data and Information Quality }
   conferences:
     - "SIGIR 2024, 2025, 2026"
