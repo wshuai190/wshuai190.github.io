@@ -31,6 +31,7 @@ export interface Project {
   summary_zh: string;
   image: string;
   figure_caption?: string;
+  figure_caption_zh?: string;
   figure_source?: string;
   links: { site?: string; code?: string; demo?: string; paper?: string };
   papers: string[];

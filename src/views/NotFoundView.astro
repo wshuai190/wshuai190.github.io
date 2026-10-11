@@ -51,26 +51,58 @@ const { lang } = Astro.props;
     return suggest();
   }
 
-  async function suggest() {
-    // 3. Turn the URL into a query and suggest the closest pages (keyword search, no model download).
-    const missing = new URLSearchParams(location.search).get('from') ?? path;
-    const query = decodeURIComponent(missing).replace(/^\/(zh\/)?/, '').replace(/\.html?$/, '').replace(/[-_/.]+/g, ' ').replace(/\b\d{4} \d{2} \d{2}\b/, '').trim();
-    if (!query || query === '404') return;
-    const { results } = await search(query, { lang, semantic: false, limit: 4, types: ['paper', 'project', 'teaching', 'talk', 'award'] });
+  const SECTIONS = ['research', 'publications', 'teaching', 'cv', 'about', 'news', 'awards', 'talks'];
+
+  function distance(a: string, b: string) {
+    const row = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      let previous = row[0];
+      row[0] = i;
+      for (let j = 1; j <= b.length; j++) {
+        const current = row[j];
+        row[j] = Math.min(row[j] + 1, row[j - 1] + 1, previous + (a[i - 1] === b[j - 1] ? 0 : 1));
+        previous = current;
+      }
+    }
+    return row[b.length];
+  }
+
+  function show(links: { href: string; title: string }[]) {
     const box = document.querySelector<HTMLElement>('[data-did-you-mean]');
     const list = box?.querySelector('ul');
-    if (!box || !list || !results.length) return;
-    for (const { doc } of results) {
+    if (!box || !list || !links.length) return;
+    for (const { href, title } of links) {
       const item = document.createElement('li');
       item.className = 'border-b border-line py-3 last:border-b-0';
       const link = document.createElement('a');
-      link.href = passageLink(doc, lang);
+      link.href = href;
       link.className = 'serif text-lg hover:text-[var(--teal)]';
-      link.textContent = doc.title;
+      link.textContent = title;
       item.append(link);
       list.append(item);
     }
     box.hidden = false;
+  }
+
+  async function suggest() {
+    const missing = new URLSearchParams(location.search).get('from') ?? path;
+    // 3. A mistyped section (/teching/, /cv.html, /zh/publicatons/) → that section.
+    // An exact section with a bad slug after it (/research/typo) falls through to the search below.
+    const [first, ...rest] = missing.replace(/^\/(zh\/)?/, '').replace(/\.html?$/, '').toLowerCase().split('/').filter(Boolean);
+    const section = first && first !== 'publication' && SECTIONS.find((name) => {
+      const d = distance(first, name);
+      return d <= (name.length > 4 ? 2 : 1) && (d > 0 || rest.length === 0);
+    });
+    if (section) {
+      const label = document.querySelector<HTMLAnchorElement>(`header nav a[href$="/${section}/"]`)?.textContent ?? section;
+      show([{ href: `${lang === 'zh' ? '/zh' : ''}/${section}/`, title: label }]);
+      return;
+    }
+    // 4. Otherwise turn the URL into a query and suggest the closest pages (keyword search, no model download).
+    const query = decodeURIComponent(missing).replace(/^\/(zh\/)?/, '').replace(/\.html?$/, '').replace(/[-_/.]+/g, ' ').replace(/\b\d{4} \d{2} \d{2}\b/, '').trim();
+    if (!query || query === '404') return;
+    const { results } = await search(query, { lang, semantic: false, limit: 4, types: ['paper', 'project', 'teaching', 'talk', 'award'] });
+    show(results.map(({ doc }) => ({ href: passageLink(doc, lang), title: doc.title })));
   }
   recover();
 </script>

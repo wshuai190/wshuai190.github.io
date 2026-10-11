@@ -86,22 +86,35 @@ export class Bm25 {
     return Math.log(1 + (n - df + 0.5) / (df + 0.5));
   }
 
-  /** BM25 score per document, plus the share of the query's idf weight each document matches. */
+  /**
+   * BM25 score per document, plus the share of the query's idf weight each document matches.
+   * A last word still being typed ("rerank") also matches the index words it starts ("reranker").
+   */
   scores(query: string): LexicalScores {
     const terms = [...new Set(lexicalTokens(query))];
-    const totalIdf = terms.reduce((sum, term) => sum + this.idf(term), 0);
+    const groups = terms.map((term) => [term]);
+    const last = terms[terms.length - 1];
+    if (last && /^[a-z]{3,}$/.test(last) && !/\s$/.test(query) && !this.df.has(last)) {
+      const expansions = [...this.df.keys()].filter((t) => t.startsWith(last));
+      if (expansions.length) groups[groups.length - 1] = expansions;
+    }
+    // A group's weight is its most common member's idf, so a prefix never outweighs a full word.
+    const groupIdf = groups.map((group) => Math.min(...group.map((t) => this.idf(t))));
+    const totalIdf = groupIdf.reduce((a, b) => a + b, 0);
     const scores: number[] = [];
     const coverage: number[] = [];
     this.tf.forEach((counts, i) => {
       let score = 0;
       let matchedIdf = 0;
-      for (const term of terms) {
-        const tf = counts.get(term);
-        if (!tf) continue;
-        const idf = this.idf(term);
-        matchedIdf += idf;
-        score += idf * (tf * (K1 + 1)) / (tf + K1 * (1 - B + (B * this.lengths[i]) / this.avgLength));
-      }
+      groups.forEach((group, g) => {
+        let best = 0;
+        for (const term of group) {
+          const tf = counts.get(term);
+          if (!tf) continue;
+          best = Math.max(best, this.idf(term) * (tf * (K1 + 1)) / (tf + K1 * (1 - B + (B * this.lengths[i]) / this.avgLength)));
+        }
+        if (best > 0) { score += best; matchedIdf += groupIdf[g]; }
+      });
       scores.push(score);
       coverage.push(totalIdf > 0 ? matchedIdf / totalIdf : 0);
     });
@@ -169,11 +182,56 @@ export function encoderLoaded(): boolean {
  */
 export async function search(query: string, options: { types?: SearchDoc['type'][]; lang?: 'en' | 'zh'; limit?: number; semantic?: boolean } = {}) {
   const { docs, bm25 } = await loadIndex();
+  const lexical = lexicalFor(bm25, query, docs);
   const useDense = options.semantic !== false && encoderReady && query.trim();
-  const queryVector = useDense ? await encoderReady!.embed(query) : null;
-  const results = bestPerPage(rank(docs, bm25.scores(query), queryVector))
+  const queryVector = useDense ? await encoderReady!.embed(translateZh(query)) : null;
+  const results = bestPerPage(rank(docs, lexical, queryVector))
     .filter((r) => (!options.types || options.types.includes(r.doc.type)) && (r.doc.lang === 'en' || options.lang === 'zh'));
   return { mode: (queryVector ? 'hybrid' : 'lexical') as SearchMode, results: results.slice(0, options.limit ?? results.length) };
+}
+
+/** Common Chinese research terms → the English words used in the papers (longest first). */
+const ZH_TERMS: [string, string][] = Object.entries({
+  检索增强生成: 'retrieval augmented generation', 系统综述: 'systematic review', 系统评价: 'systematic review',
+  布尔查询: 'boolean query', 查询生成: 'query generation', 查询扩展: 'query expansion', 稠密检索: 'dense retrieval',
+  稀疏检索: 'sparse retrieval', 重排序: 'rerank reranker', 排序器: 'ranker', 大语言模型: 'large language model llm',
+  大模型: 'llm', 语言模型: 'language model', 搜索智能体: 'search agent', 智能体: 'agent', 深度研究: 'deep research',
+  提示注入: 'prompt injection', 生物医学: 'biomedical', 医学: 'medical', 筛选: 'screening', 文献: 'literature',
+  嵌入: 'embedding', 向量: 'embedding', 压缩: 'compression', 上下文: 'context', 分块: 'chunking', 切分: 'segmentation',
+  记忆: 'memory', 复现: 'reproducibility', 可复现: 'reproducibility', 评测: 'evaluation', 评估: 'evaluation',
+  强化学习: 'reinforcement learning', 推理: 'reasoning', 词干: 'stemming', 主题词: 'mesh term', 种子研究: 'seed studies',
+  信息检索: 'information retrieval', 检索: 'retrieval', 搜索: 'search', 排序: 'ranking', 生成: 'generation', 查询: 'query',
+  套娃: 'matryoshka', 高效: 'efficient', 教学: 'teaching', 课程: 'course',
+}).sort((a, b) => b[0].length - a[0].length);
+
+export function translateZh(query: string): string {
+  if (!/\p{Script=Han}/u.test(query)) return query;
+  let out = query;
+  for (const [zh, en] of ZH_TERMS) out = out.split(zh).join(` ${en} `);
+  return out.replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * BM25 for a query. Papers are indexed in English, so for a Chinese query each passage is scored
+ * in its own language: Chinese passages with the query as typed, English ones with its English
+ * rendering (raw Chinese character matches would otherwise swamp the English scores).
+ */
+export function lexicalFor(bm25: Bm25, query: string, docs: SearchDoc[]): LexicalScores {
+  const english = translateZh(query);
+  if (english === query) return bm25.scores(query);
+  const zh = bm25.scores(query);
+  const en = bm25.scores(english);
+  const pick = (i: number) => (docs[i].lang === 'zh' ? zh : en);
+  // Rare Chinese character bigrams get far higher idf than common English words; give both groups
+  // the same top score so min-max normalisation treats them alike.
+  const top = (lang: string) => Math.max(0, ...docs.map((d, i) => (d.lang === lang ? pick(i).scores[i] : 0)));
+  const [topZh, topEn] = [top('zh'), top('en')];
+  const target = Math.max(topZh, topEn);
+  const factor = (i: number) => {
+    const groupTop = docs[i].lang === 'zh' ? topZh : topEn;
+    return groupTop > 0 ? target / groupTop : 1;
+  };
+  return { scores: docs.map((_, i) => pick(i).scores[i] * factor(i)), coverage: docs.map((_, i) => pick(i).coverage[i]) };
 }
 
 type RankOptions = Parameters<typeof rankWith>[3];
@@ -203,8 +261,11 @@ export function passageLink(doc: SearchDoc, lang: 'en' | 'zh'): string {
   const base = lang === 'zh' ? `/zh${doc.url}` : doc.url;
   const words = doc.text.split(' ');
   const start = words.findIndex((_, i) => words.slice(i, i + 4).every((w) => /^[\p{L}\p{N}'’-]+$/u.test(w)));
-  const fragment = start >= 0 ? `:~:text=${encodeURIComponent(words.slice(start, start + 4).join(' ')).replace(/-/g, '%2D')}` : '';
-  return `${base}#${doc.anchor ?? ''}${fragment}`;
+  const cjk = doc.text.match(/\p{Script=Han}[\p{Script=Han}\p{L}\p{N}]{3,9}/u)?.[0];
+  const phrase = start >= 0 ? words.slice(start, start + 4).join(' ') : cjk;
+  const fragment = phrase ? `:~:text=${encodeURIComponent(phrase).replace(/-/g, '%2D')}` : '';
+  const hash = `${doc.anchor ?? ''}${fragment}`;
+  return hash ? `${base}#${hash}` : base;
 }
 
 /**

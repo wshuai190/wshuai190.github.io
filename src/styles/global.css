@@ -174,7 +174,7 @@ img { max-width: 100%; }
 @layer components {
   /* Chinese fonts have no italic: keep the gradient emphasis upright and unbroken. */
   :lang(zh) .em-gradient { font-style: normal; padding-right: 0; }
-  :lang(zh) .em-gradient { white-space: nowrap; }
+  @media (min-width: 420px) { :lang(zh) .em-gradient { white-space: nowrap; } }
   /* Letter-spaced mono labels suit Latin text only. */
   :lang(zh) .eyebrow, :lang(zh) .label, :lang(zh) .tag { letter-spacing: 0; }
   input[type='search']::-webkit-search-cancel-button { -webkit-appearance: none; height: 14px; width: 14px; cursor: pointer;

@@ -44,8 +44,8 @@ const schema = [
         <div class="figure-frame p-4"><img src={project.image} alt={`${project.name} — ${project.figure_caption ?? ''}`} class="max-h-[420px]" /></div>
         {project.figure_caption && (
           <figcaption class="label px-2 pb-1 pt-3" data-search-skip>
-            {project.figure_caption}
-            {project.figure_source && <> · <a class="hover:text-ink" href={project.figure_source}>source ↗</a></>}
+            {(lang === 'zh' && project.figure_caption_zh) || project.figure_caption}
+            {project.figure_source && <> · <a class="hover:text-ink" href={project.figure_source}>{lang === 'zh' ? '来源' : 'source'} ↗</a></>}
           </figcaption>
         )}
       </figure>

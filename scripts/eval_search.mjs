@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import * as ort from 'onnxruntime-web';
 import { WordPiece } from '../src/lib/search/wordpiece.ts';
 import { Encoder, MODEL_FILE, VOCAB_FILE } from '../src/lib/search/encoder.ts';
-import { Bm25, bestPerPage, bm25Text, rank, RELAXED_LIMIT } from '../src/lib/search/hybrid.ts';
+import { Bm25, bestPerPage, bm25Text, lexicalFor, rank, RELAXED_LIMIT, translateZh } from '../src/lib/search/hybrid.ts';
 
 const verbose = process.argv.includes('--verbose');
 const BARS = {
@@ -44,7 +44,7 @@ for (const [category, bar] of Object.entries(BARS)) {
   let mrr = 0;
   let r3 = 0;
   for (const { q, relevant } of suite[category]) {
-    const results = bestPerPage(rank(subset, bm25.scores(q), await encoder.embed(q)));
+    const results = bestPerPage(rank(subset, lexicalFor(bm25, q, subset), await encoder.embed(translateZh(q))));
     const slugs = results.map((r) => slugOf(r.doc.url));
     const first = slugs.slice(0, 10).findIndex((s) => relevant.includes(s));
     const reciprocal = first < 0 ? 0 : 1 / (first + 1);
@@ -63,7 +63,7 @@ for (const [category, bar] of Object.entries(BARS)) {
 const offTopic = [];
 const allBm25 = new Bm25(docs.map(bm25Text));
 for (const q of suite.off_topic) {
-  const results = bestPerPage(rank(docs, allBm25.scores(q), await encoder.embed(q)));
+  const results = bestPerPage(rank(docs, lexicalFor(allBm25, q, docs), await encoder.embed(translateZh(q))));
   offTopic.push([q, results.filter((r) => !r.relaxed).length, results.filter((r) => r.relaxed).length]);
 }
 const worst = Math.max(...offTopic.map(([, strong]) => strong));
