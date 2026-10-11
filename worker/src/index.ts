@@ -75,15 +75,28 @@ export default {
   },
 };
 
-/** The site's full Markdown profile (llms-full.txt), cached at the edge for an hour. */
+/**
+ * The site's full Markdown profile (llms-full.txt). Kept in isolate memory for an hour (the Cache
+ * API is a no-op on *.workers.dev), with the edge cache as a second layer on custom domains.
+ */
+let memo: { text: string; at: number } | null = null;
+
 async function loadProfile(site: string, ctx: ExecutionContext): Promise<string> {
+  if (memo && Date.now() - memo.at < PROFILE_TTL * 1000) return memo.text;
   const cache = caches.default;
   const key = new Request(`${site}/llms-full.txt`);
   const hit = await cache.match(key);
-  if (hit) return hit.text();
-  const response = await fetch(key);
-  if (!response.ok) throw new Error(`profile ${response.status}`);
+  if (hit) {
+    memo = { text: await hit.text(), at: Date.now() };
+    return memo.text;
+  }
+  const response = await fetch(key, { cf: { cacheTtl: PROFILE_TTL, cacheEverything: true } });
+  if (!response.ok) {
+    if (memo) return memo.text; // serve the last good copy if the site is briefly down
+    throw new Error(`profile ${response.status}`);
+  }
   const text = await response.text();
+  memo = { text, at: Date.now() };
   ctx.waitUntil(cache.put(key, new Response(text, { headers: { 'Cache-Control': `max-age=${PROFILE_TTL}` } })));
   return text;
 }
