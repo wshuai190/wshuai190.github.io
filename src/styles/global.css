@@ -146,7 +146,6 @@ img { max-width: 100%; }
 .rise { animation: rise 0.7s cubic-bezier(.2,.7,.2,1) both; }
 .rise-2 { animation-delay: 0.08s; } .rise-3 { animation-delay: 0.16s; } .rise-4 { animation-delay: 0.24s; }
 
-@keyframes ticker { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
