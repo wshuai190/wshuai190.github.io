@@ -63,7 +63,7 @@ const contact = [
           <li>
             <span class="cv-when">{pub.data.date.getUTCFullYear()}</span>
             <span>
-              <a class="font-semibold hover:text-teal" href={localePath(lang, pub.data.permalink)}>{pub.data.title}</a>
+              <a class="inline-block min-h-6 font-semibold hover:text-teal" href={localePath(lang, pub.data.permalink)}>{pub.data.title}</a>
               <Authors authors={authorsOf(pub)} class="text-sm text-muted" />
               <span class="text-sm text-muted">{venueLabel(pub.data.venue, pub.data.date.getUTCFullYear())}</span>
             </span>

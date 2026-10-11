@@ -21,7 +21,7 @@ function small(src: string) {
 ---
 <article class="glass lift group relative flex flex-col p-3.5" data-search-skip>
   <a href={href} class="figure-frame aspect-[16/10] p-3" tabindex="-1" aria-hidden="true">
-    <img src={project.image} srcset={small(project.image)} sizes="(min-width: 768px) 400px, 100vw" alt="" loading="lazy" decoding="async" class="transition-transform duration-500 group-hover:scale-[1.03]" />
+    <img src={project.image} srcset={small(project.image)} sizes="(min-width: 768px) 400px, calc(100vw - 64px)" alt="" loading="lazy" decoding="async" class="transition-transform duration-500 group-hover:scale-[1.03]" />
   </a>
   <div class="flex flex-1 flex-col px-1.5 pb-1.5">
     <p class="tag mt-4">{pick(TOPIC_LABELS[project.topic], lang)} · {project.year}</p>
