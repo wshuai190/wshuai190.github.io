@@ -46,6 +46,7 @@ function getSession(host: HTMLElement): Promise<string> {
 async function newSession(host: HTMLElement): Promise<string> {
   await loadTurnstile();
   const token = await new Promise<string>((resolve, reject) => {
+    window.setTimeout(() => reject(new Error('turnstile timeout')), 20_000);
     host.replaceChildren();
     window.turnstile!.render(host, {
       sitekey: TURNSTILE_SITEKEY,
@@ -58,6 +59,7 @@ async function newSession(host: HTMLElement): Promise<string> {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token }),
+    signal: AbortSignal.timeout(20_000),
   });
   if (!response.ok) throw new Error(String(response.status));
   const { session: value, ttl } = (await response.json()) as { session: string; ttl: number };
@@ -82,6 +84,8 @@ const COPY = {
     placeholder: 'Ask me anything…',
     send: 'Send',
     close: 'Close',
+    newChat: 'New chat',
+    retry: 'Retry',
     unavailable: 'Service not available.',
     handoff: 'Send this chat to the real Dylan',
     handoffEmail: 'Your email (so I can reply)',
@@ -95,6 +99,8 @@ const COPY = {
     placeholder: '随便问我……',
     send: '发送',
     close: '关闭',
+    newChat: '新对话',
+    retry: '重试',
     unavailable: 'Service not available.',
     handoff: '把这段对话发给真正的王率',
     handoffEmail: '你的邮箱（方便我回复）',
@@ -104,13 +110,22 @@ const COPY = {
   },
 };
 
-/** Minimal, safe Markdown: escape everything, then allow links (site paths or http/s), **bold**, `code` and "- " lists. */
+/**
+ * Minimal, safe Markdown: escape everything, then allow links to site paths or http(s) URLs,
+ * **bold**, *italic*, `code` and "- " lists. Images become plain links; protocol-relative
+ * ("//host", "/\\host") hrefs are never links.
+ */
 function renderMarkdown(text: string): string {
   const escape = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   const inline = (s: string) => escape(s)
-    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^\s)]+)\)/g, (_, label, href) =>
-      `<a href="${href}"${href.startsWith('/') ? '' : ' target="_blank" rel="noopener"'} class="text-link">${label}</a>`)
+    .replace(/!\[/g, '[')
+    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/(?![\/\\]))[^\s)`]+)\)/g, (_, label, href) => {
+      // Paper pages live at /publication/<slug> (no trailing slash); models often add one.
+      const url = href.replace(/^(\/publication\/[^/?#]+)\/$/, '$1');
+      return `<a href="${url}"${url.startsWith('/') ? '' : ' target="_blank" rel="noopener"'} class="text-link">${label}</a>`;
+    })
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?![*\w])/g, '$1<em>$2</em>')
     .replace(/`([^`]+)`/g, '<code class="mono text-[0.9em]">$1</code>');
   const html: string[] = [];
   let list = false;
@@ -135,6 +150,7 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
   const [input, setInput] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  const [announcement, setAnnouncement] = useState('');
   const [handoff, setHandoff] = useState<'closed' | 'open' | 'sending' | 'sent'>('closed');
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -216,11 +232,17 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
   async function ask(question: string) {
     const q = question.trim();
     if (!q || busy) return;
-    const history: Message[] = [...messages, { role: 'user', content: q }];
-    setMessages([...history, { role: 'assistant', content: '' }]);
     setInput('');
+    if (inputRef.current) inputRef.current.style.height = '';
+    await run([...messages, { role: 'user', content: q }]);
+  }
+
+  /** Send the conversation (ending with the visitor's question) and stream the reply in. */
+  async function run(history: Message[]) {
+    setMessages([...history, { role: 'assistant', content: '' }]);
     setBusy(true);
     setError(false);
+    setAnnouncement('');
     try {
       const send = async () => fetch(`${TWIN_ENDPOINT}/chat`, {
         method: 'POST',
@@ -240,13 +262,23 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
         setMessages([...history, { role: 'assistant', content: reply }]);
       }
       if (!reply.trim()) throw new Error('empty');
+      setAnnouncement(reply);
     } catch {
       setMessages(history);
       setError(true);
     } finally {
       setBusy(false);
-      inputRef.current?.focus();
+      // Refocus only with a keyboard/mouse; on phones it would pop the keyboard over the reply.
+      if (matchMedia('(pointer: fine)').matches) inputRef.current?.focus();
     }
+  }
+
+  function newChat() {
+    setMessages([]);
+    setError(false);
+    setHandoff('closed');
+    setAnnouncement('');
+    inputRef.current?.focus();
   }
 
   askRef.current = ask;
@@ -272,16 +304,22 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/30 backdrop-blur-sm sm:items-center sm:px-4" onMouseDown={(e) => e.target === e.currentTarget && close()}>
-      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={text.title} className="glass flex h-[min(680px,92vh)] w-full max-w-xl flex-col overflow-hidden !rounded-b-none !bg-[var(--bg-raised)] shadow-2xl sm:!rounded-[22px]">
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label={text.title} className="glass flex h-[min(680px,92dvh)] w-full max-w-xl flex-col overflow-hidden !rounded-b-none !bg-[var(--bg-raised)] pb-[env(safe-area-inset-bottom)] shadow-2xl sm:!rounded-[22px] sm:pb-0">
         <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4">
           <div>
             <p className="serif text-xl"><span aria-hidden="true">🧘 </span>{text.title}</p>
             <p className="mt-1 text-[12.5px] leading-snug text-[var(--muted)]">{text.notice}</p>
           </div>
-          <button type="button" onClick={close} aria-label={text.close} className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-[var(--muted)] hover:text-[var(--ink)]">✕</button>
+          <div className="flex shrink-0 gap-2">
+            {messages.length > 0 && !busy && (
+              <button type="button" onClick={newChat} aria-label={text.newChat} title={text.newChat} className="grid h-8 w-8 place-items-center rounded-full border border-line text-[var(--muted)] hover:text-[var(--ink)]">↺</button>
+            )}
+            <button type="button" onClick={close} aria-label={text.close} className="grid h-8 w-8 place-items-center rounded-full border border-line text-[var(--muted)] hover:text-[var(--ink)]">✕</button>
+          </div>
         </div>
 
-        <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-5 py-5" aria-live="polite">
+        <p className="sr-only" aria-live="polite">{announcement}</p>
+        <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-5 py-5">
           {messages.length === 0 && (
             <div className="flex flex-wrap gap-2">
               {text.starters.map((s) => <button key={s} type="button" className="chip" onClick={() => ask(s)}>{s}</button>)}
@@ -294,14 +332,19 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
                   {m.content ? <div className="space-y-2" dangerouslySetInnerHTML={{ __html: renderMarkdown(m.content) }} /> : <span className="inline-flex gap-1 py-2" aria-label="…">{[0, 1, 2].map((d) => <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-[var(--muted)]" style={{ animationDelay: `${d * 0.15}s` }} />)}</span>}
                 </div>
           ))}
-          {error && <p className="text-[14px] text-[var(--muted)]" role="alert">{text.unavailable}</p>}
+          {error && (
+            <p className="flex items-center gap-3 text-[14px] text-[var(--muted)]" role="alert">
+              {text.unavailable}
+              {messages[messages.length - 1]?.role === 'user' && <button type="button" className="link-pill" onClick={() => run(messages)}>{text.retry}</button>}
+            </p>
+          )}
         </div>
 
         {messages.length > 1 && WEB3FORMS_KEY && handoff !== 'closed' ? (
           <div className="border-t border-line px-5 py-3 text-sm">
             {handoff === 'sent' ? <p role="status">{text.handoffDone}</p> : (
               <form onSubmit={sendHandoff} className="flex gap-2">
-                <input name="email" type="email" required placeholder={text.handoffEmail} className="h-9 min-w-0 flex-1 rounded-full border border-line bg-[var(--bg)] px-4 text-base outline-none sm:text-sm focus:ring-2 focus:ring-[var(--teal)]" />
+                <input name="email" type="email" required placeholder={text.handoffEmail} aria-label={text.handoffEmail} className="h-9 min-w-0 flex-1 rounded-full border border-line bg-[var(--bg)] px-4 text-base outline-none sm:text-sm focus:ring-2 focus:ring-[var(--teal)]" />
                 <button type="submit" className="btn btn-solid !py-1.5" disabled={handoff === 'sending'}>{text.handoffSend}</button>
               </form>
             )}
@@ -313,7 +356,11 @@ export default function TwinChat({ lang }: { lang: 'en' | 'zh' }) {
           <textarea
             ref={inputRef}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={(e) => {
+              setInput(e.target.value);
+              e.target.style.height = '';
+              e.target.style.height = `${Math.min(e.target.scrollHeight, 128)}px`;
+            }}
             onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) { e.preventDefault(); ask(input); } }}
             rows={1}
             maxLength={1500}

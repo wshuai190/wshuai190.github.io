@@ -6,7 +6,7 @@
 # Secrets (npx wrangler secret put <NAME>): GEMINI_API_KEY, TURNSTILE_SECRET, SESSION_SECRET.
 # Deploy: cd worker && npx wrangler deploy
 # Emergency off switch: set ENABLED = "false" below and deploy (or edit the variable in the dashboard).
-name = "shuaiwang-twin"
+name = "shuaiwang-twin-test"  # separate name: remote dev must never inherit production bindings
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 

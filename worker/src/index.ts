@@ -89,7 +89,8 @@ export default {
     // Daily caps, counted exactly in one Durable Object (free plan; no KV write limits).
     const day = new Date().toISOString().slice(0, 10);
     if (env.USAGE) {
-      const counter = env.USAGE.get(env.USAGE.idFromName('usage'));
+      // Bump the name to start fresh counters (e.g. after test traffic hit production).
+      const counter = env.USAGE.get(env.USAGE.idFromName('usage-v2'));
       if (!(await counter.hit(day, ip, Number(env.DAILY_LIMIT), Number(env.IP_DAILY_LIMIT)))) return fail(429, 'Daily limit reached');
     }
 
@@ -98,7 +99,8 @@ export default {
       const request = {
         systemInstruction: { parts: [{ text: systemPrompt(env.SITE, profile, day) }] },
         contents: messages.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
-        generationConfig: { temperature: 0.4, maxOutputTokens: 800 },
+        // Thinking tokens count against maxOutputTokens, so leave room for both (replies stay short via the prompt).
+        generationConfig: { temperature: 0.4, maxOutputTokens: 2048 },
         safetySettings: ['HARASSMENT', 'HATE_SPEECH', 'SEXUALLY_EXPLICIT', 'DANGEROUS_CONTENT'].map((category) => ({
           category: `HARM_CATEGORY_${category}`,
           threshold: 'BLOCK_MEDIUM_AND_ABOVE',
@@ -274,8 +276,11 @@ function geminiText(): TransformStream<Uint8Array, Uint8Array> {
     if (!line.startsWith('data:')) return;
     try {
       const data = JSON.parse(line.slice(5));
-      const text = (data.candidates?.[0]?.content?.parts ?? []).map((p: { text?: string }) => p.text ?? '').join('');
+      const candidate = data.candidates?.[0];
+      // Skip thought parts; only the visible answer goes to the visitor.
+      const text = (candidate?.content?.parts ?? []).filter((p: { thought?: boolean }) => !p.thought).map((p: { text?: string }) => p.text ?? '').join('');
       if (text) controller.enqueue(encoder.encode(text));
+      if (candidate?.finishReason === 'MAX_TOKENS') controller.enqueue(encoder.encode(' …'));
     } catch { /* ignore keep-alives and partial lines */ }
   };
   return new TransformStream({
