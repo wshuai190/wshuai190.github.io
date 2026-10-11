@@ -1,5 +1,5 @@
 {
-  "2021-07-01-shuai-InterpolateDR": 149,
+  "2021-07-01-shuai-InterpolateDR": 151,
   "2021-09-01-arvin-trecdl": 0,
   "2021-12-29-shuai-meshsuggest": 28,
   "2022-02-28-shuai-reproducesdr": 26,
@@ -27,7 +27,7 @@
   "2026-01-01-evalugator": 0,
   "2026-01-04-autobool": 6,
   "2026-07-01-beyond-chunk-then-embed": 6,
-  "2026-07-01-rank-r1": 105,
+  "2026-07-01-rank-r1": 106,
   "2026-07-01-vulnerability-llm-rankers": 3,
   "2026-07-08-diffretriever": 1,
   "2026-07-27-geo-injection-rag-survival": 1,
