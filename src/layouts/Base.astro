@@ -1,6 +1,5 @@
 ---
 import '../styles/global.css';
-import newsreaderFont from '@fontsource-variable/newsreader/files/newsreader-latin-opsz-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import SearchPalette from '../components/react/SearchPalette';
@@ -15,6 +14,8 @@ interface Props {
   description?: string;
   image?: string;
   glow?: boolean;
+  /** Preload the italic serif (only pages whose first screen uses it, i.e. the home headline). */
+  preloadItalic?: boolean;
   /** 'article' for papers (adds published time); 'profile' for the home page. */
   type?: 'website' | 'article' | 'profile';
   published?: Date;
@@ -23,7 +24,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { lang, title, description, image, glow = false, type = 'website', published, schema = [], noindex = false } = Astro.props;
+const { lang, title, description, image, glow = false, preloadItalic = false, type = 'website', published, schema = [], noindex = false } = Astro.props;
 const siteName = lang === 'zh' ? '王率 Shuai Wang' : 'Dr. Shuai Wang';
 const path = Astro.url.pathname.replace(/\.html$/, '');
 const isHome = path === '/' || path === '/zh/';
@@ -58,8 +59,9 @@ const verification = profile.seo.verification ?? {};
     <link rel="alternate" type="application/rss+xml" title="Shuai Wang" href="/feed.xml" />
     <link rel="icon" type="image/png" href="/images/site-logo.png" />
     <link rel="apple-touch-icon" href="/images/site-logo.png" />
-    <link rel="preload" href="/fonts/Manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={newsreaderFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/manrope.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/newsreader-normal.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadItalic && <link rel="preload" href="/fonts/newsreader-italic.woff2" as="font" type="font/woff2" crossorigin />}
     <meta name="theme-color" content="#faf8f4" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#080a0e" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content={type} />

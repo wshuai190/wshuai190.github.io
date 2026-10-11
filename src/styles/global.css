@@ -1,16 +1,33 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/newsreader/opsz.css';
-@import '@fontsource-variable/newsreader/opsz-italic.css';
 @import '@fontsource/jetbrains-mono/400.css';
 @import '@fontsource/jetbrains-mono/500.css';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Self-hosted fonts, trimmed with fontTools to what the site uses (scripts/trim_fonts.sh):
+   Latin only, weights 400–600, and for the italic a single weight at display sizes. */
 @font-face {
   font-family: 'Manrope';
-  src: url('/fonts/Manrope-variable.woff2') format('woff2');
-  font-weight: 200 800;
+  src: url('/fonts/manrope.woff2') format('woff2');
+  font-weight: 400 600;
   font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+2215, U+FEFF, U+FFFD, U+2318, U+21B5, U+2190-21FF, U+2600-26FF;
+}
+@font-face {
+  font-family: 'Newsreader Variable';
+  src: url('/fonts/newsreader-normal.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader Variable';
+  src: url('/fonts/newsreader-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2190-2199, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 /* ---------- Tokens (approved hybrid mockup) ---------- */
