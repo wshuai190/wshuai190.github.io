@@ -6,9 +6,10 @@
   year: 2026
   summary: A research library for deep-search agents, connecting retrieval, tools, agent workflows and reproducible evaluation.
   summary_zh: 面向深度检索 Agent 的研究工具库，连接检索、工具调用、Agent 工作流与可复现评测。
-  image: /images/research/sieve.webp
-  figure_caption: Sieve workflow, one of the agents built on SkimSearchAgent
-  figure_caption_zh: "Sieve 工作流：基于 SkimSearchAgent 构建的 Agent 之一"
+  image: /images/research/skim-search-agent.webp
+  figure_caption: Overview · Corpora, models, strategies, retrievers and evaluators around one agent loop
+  figure_caption_zh: "概览 · 围绕同一个 Agent 循环的语料、模型、策略、检索器与评测器"
+  figure_source: https://github.com/ielab/skim-search-agent
   links:
     site: https://ielab.io/skim-search-agent/
     code: https://github.com/ielab/skim-search-agent
