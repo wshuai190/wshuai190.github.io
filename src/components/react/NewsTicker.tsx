@@ -20,7 +20,7 @@ const TOUCH_RESUME_MS = 4000;
 /**
  * Vertically scrolling news list. It drifts on its own (a seamless loop over a doubled list) and
  * stops while hovered, focused or touched, so visitors can scroll through it by hand; the pause
- * button stops it for good.
+ * button stops it for good. The newest item is a hard top: only scrolling down wraps around.
  */
 export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }: Props) {
   const [paused, setPaused] = useState(false);
@@ -46,11 +46,10 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
   useEffect(() => {
     const box = boxRef.current;
     if (!box || !loop) return;
-    // The list is doubled, so shifting by one copy (`half`) is invisible. Before each wheel or touch
-    // gesture, move into the middle band so the visitor can keep scrolling either way.
-    const recentre = () => {
-      if (box.scrollTop < half / 2) box.scrollTop += half;
-      else if (box.scrollTop >= half * 1.5) box.scrollTop -= half;
+    // The list is doubled, so shifting back by one copy (`half`) is invisible. Keeping scrollTop in
+    // [0, half) means scrolling up always ends at the real top (the newest item).
+    const wrap = () => {
+      if (box.scrollTop >= half) box.scrollTop -= half;
     };
     let frame = 0;
     let last = performance.now();
@@ -63,18 +62,16 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
       } else {
         // Track the position as a float: scrollTop may round to whole pixels and stall a slow drift.
         position += PX_PER_SECOND * dt;
-        if (position >= half * 1.5) position -= half;
+        if (position >= half) position -= half;
         box.scrollTop = position;
       }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
-    box.addEventListener('wheel', recentre, { passive: true });
-    box.addEventListener('touchstart', recentre, { passive: true });
+    box.addEventListener('scroll', wrap, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
-      box.removeEventListener('wheel', recentre);
-      box.removeEventListener('touchstart', recentre);
+      box.removeEventListener('scroll', wrap);
     };
   }, [loop, half]);
 
