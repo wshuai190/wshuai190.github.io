@@ -36,7 +36,7 @@
   description_zh: "在西班牙马德里举行的 SIGIR 2022 上展示了两篇海报论文。"
   status: travel
 
-- title: "Presentations at ADCS 2022, Adelaide, Australia"
+- title: "Presented Paper at ADCS 2022, Adelaide, Australia"
   title_zh: "在 ADCS 2022（澳大利亚阿德莱德）报告论文"
   date: 2022-12-15
   url: http://adcs-conference.org/2022/
@@ -103,7 +103,7 @@
   description_zh: "2024 年 2 月 29 日起在位于格勒诺布尔的 Naver Labs Europe 开展研究实习，研究面向检索增强生成的大语言模型。"
   status: travel
 
-- title: "Paper Presentation at ECIR, Glasgow"
+- title: "Paper Presentation at ECIR 2024, Glasgow"
   title_zh: "在 ECIR 2024（格拉斯哥）报告论文"
   date: 2024-03-25
   description: "Presented our paper “Zero-shot Generative Large Language Models for Systematic Review Screening Automation”."
@@ -117,7 +117,7 @@
   description_zh: "[资源论文]《FeB4RAG》；[短文]《Large Language Models Based Stemming for Information Retrieval》；[观点论文]《Evaluating Generative Ad Hoc Information Retrieval》。"
   status: celebrate
 
-- title: "Paper Presentation at SIGIR, Washington DC"
+- title: "Paper Presentation at SIGIR 2024, Washington DC"
   title_zh: "在 SIGIR 2024（华盛顿）报告论文"
   date: 2024-07-25
   description: "Presented papers accepted at SIGIR 2024 in Washington DC."
@@ -162,7 +162,7 @@
 - title: "Three Papers Accepted at SIGIR 2025"
   title_zh: "三篇论文被 SIGIR 2025 录用"
   date: 2025-04-05
-  description: "[Reproducibility Paper]: 2D Matryoshka Training for Information Retrieval; Reassessing Large Language Model Boolean Query Generation for Systematic Reviews; Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition."
+  description: "[Reproducibility Papers]: 2D Matryoshka Training for Information Retrieval; Reassessing Large Language Model Boolean Query Generation for Systematic Reviews; Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition."
   description_zh: "[可复现性论文]《2D Matryoshka Training for Information Retrieval》；《Reassessing Large Language Model Boolean Query Generation for Systematic Reviews》；《Pre-training vs. Fine-tuning: A Reproducibility Study on Dense Retrieval Knowledge Acquisition》。"
   status: celebrate
 
@@ -197,7 +197,7 @@
 - title: "Two Papers Accepted at ECIR 2026"
   title_zh: "两篇论文被 ECIR 2026 录用"
   date: 2025-12-18
-  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industrial Track Paper]: Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels."
+  description: "[Full Paper]: Starbucks: Improved Training for 2D Matryoshka Embeddings; [Industry Track Paper]: Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels."
   description_zh: "[长文]《Starbucks: Improved Training for 2D Matryoshka Embeddings》；[工业论文]《Evalugator: Rapid, Agile Development and Evaluation of Retrieval Augmented Generation Systems Without Labels》。"
   status: celebrate
 
