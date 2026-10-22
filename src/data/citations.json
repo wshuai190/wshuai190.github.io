@@ -1,5 +1,5 @@
 {
-  "2021-07-01-shuai-InterpolateDR": 152,
+  "2021-07-01-shuai-InterpolateDR": 153,
   "2021-09-01-arvin-trecdl": 0,
   "2021-12-29-shuai-meshsuggest": 28,
   "2022-02-28-shuai-reproducesdr": 26,
@@ -8,7 +8,7 @@
   "2022-09-01-shuai-meshjournal": 43,
   "2022-12-14-shuai-neuralsr": 34,
   "2023-02-27-shuai-meshdemo": 17,
-  "2023-07-23-sigirchatgpt": 410,
+  "2023-07-23-sigirchatgpt": 412,
   "2023-07-23-sigirtasb": 13,
   "2023-09-11-booleanscreening": 22,
   "2023-12-19-llmscreening": 62,
@@ -29,8 +29,8 @@
   "2026-07-01-beyond-chunk-then-embed": 9,
   "2026-07-01-rank-r1": 108,
   "2026-07-01-vulnerability-llm-rankers": 3,
-  "2026-07-08-diffretriever": 1,
-  "2026-07-27-geo-injection-rag-survival": 1,
+  "2026-07-08-diffretriever": 2,
+  "2026-07-27-geo-injection-rag-survival": 2,
   "2026-07-31-lightmem-memory-management": 0,
   "2026-08-03-search-inspect-fetch": 3,
   "2026-08-28-iter-interaction-aware": 1
