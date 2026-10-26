@@ -229,3 +229,10 @@
   description: "Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
   description_zh: "论文《Reproducing LightMem: Naive RAG Is Just as Good for Memory Management》被第三届 ACM SIGIR 亚太会议（SIGIR-AP 2026）录用。"
   status: celebrate
+
+- title: 'New paper: Do Conversational Agents Need Explicit Memory? A Controlled Comparison with Raw-History Retrieval'
+  date: 2026-01-01
+  url: /publication/2026-01-01-do-conversational-agents-need-explicit
+  description: 'arXiv preprint arXiv:2610.24671, 2026'
+  status: celebrate
+  auto: true
