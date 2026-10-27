@@ -226,8 +226,8 @@
   title_zh: "一篇论文被 SIGIR-AP 2026 录用"
   date: 2026-09-25
   url: https://arxiv.org/abs/2607.29104
-  description: "Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 3rd ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
-  description_zh: "论文《Reproducing LightMem: Naive RAG Is Just as Good for Memory Management》被第三届 ACM SIGIR 亚太会议（SIGIR-AP 2026）录用。"
+  description: "Reproducing LightMem: Naive RAG Is Just as Good for Memory Management has been accepted to the 4th ACM SIGIR Asia-Pacific Conference (SIGIR-AP 2026)."
+  description_zh: "论文《Reproducing LightMem: Naive RAG Is Just as Good for Memory Management》被第四届 ACM SIGIR 亚太会议（SIGIR-AP 2026）录用。"
   status: celebrate
 
 - title: 'New paper: Do Conversational Agents Need Explicit Memory? A Controlled Comparison with Raw-History Retrieval'
