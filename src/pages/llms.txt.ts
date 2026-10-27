@@ -11,7 +11,7 @@ export async function GET() {
     '',
     `> ${strip(profile.seo.description.en)}`,
     '',
-    `Research Fellow at ielab, The University of Queensland (Brisbane, Australia). ${scholar.citations.toLocaleString('en')} citations, h-index ${scholar.h_index} on Google Scholar. ORCID ${profile.orcid}. Contact: ${profile.email}.`,
+    `${profile.role.en} (Brisbane, Australia); previously Research Fellow at ielab, The University of Queensland. ${scholar.citations.toLocaleString('en')} citations, h-index ${scholar.h_index} on Google Scholar. ORCID ${profile.orcid}. Contact: ${profile.email}.`,
     '',
     '## Research areas',
     ...profile.themes.map((theme: any) => `- **${theme.en.title}**: ${theme.en.body}`),

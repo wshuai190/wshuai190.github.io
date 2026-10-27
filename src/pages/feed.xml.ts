@@ -15,8 +15,8 @@ export async function GET(context: APIContext) {
     })),
     ...news.map((item) => ({
       title: item.title,
-      // Each news item gets its own link (and therefore GUID) so feed readers keep them apart.
-      link: item.url?.startsWith('/') ? item.url : `/news/#${newsAnchor(item)}`,
+      // Always the news anchor: a news item about a paper must not share the paper's link (GUID).
+      link: `/news/#${newsAnchor(item)}`,
       pubDate: item.date,
       description: item.description ?? item.title,
       categories: ['news'],
@@ -25,7 +25,7 @@ export async function GET(context: APIContext) {
 
   return rss({
     title: 'Dr. Shuai Wang',
-    description: 'Publications and news from Shuai Wang, Research Fellow at The University of Queensland.',
+    description: 'Publications and news from Shuai Wang, Member of Technical Staff at Keenable.ai.',
     site: context.site!,
     trailingSlash: false, // publication pages live at /publication/<slug> (no trailing slash)
     xmlns: { atom: 'http://www.w3.org/2005/Atom' },

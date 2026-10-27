@@ -11,7 +11,7 @@ portrait: /images/ws.jpg           # original, used in structured data
 portrait_web: /images/ws-440.webp  # 220px portrait at 2x
 avatar: /images/ws-160.webp        # 80px mobile avatar at 2x
 cv_portrait: /images/profile/animated-dylan.webp
-email: shuai.wang2@uq.edu.au
+email: wshuai190@gmail.com
 orcid: "0000-0002-0726-5250"
 links:
   scholar: https://scholar.google.com/citations?user=JDKYomkAAAAJ&hl=en
@@ -22,39 +22,42 @@ links:
   twitter: https://twitter.com/dylan_wangs
   semanticscholar: https://www.semanticscholar.org/author/2146514461
   ielab: https://ielab.io/
+  keenable: https://keenable.ai/
   thesis: /files/thesis.pdf
 
 role:
-  en: Research Fellow, ielab, The University of Queensland
-  zh: 昆士兰大学 ielab 研究员（Research Fellow）
+  en: Member of Technical Staff, Keenable.ai
+  zh: Keenable.ai 技术团队成员（Member of Technical Staff）
 eyebrow:
-  en: Information Retrieval · The University of Queensland
-  zh: 信息检索 · 昆士兰大学
+  en: Information Retrieval · Keenable.ai
+  zh: 信息检索 · Keenable.ai
 headline:
   # [[...]] marks words rendered with the gradient emphasis.
   en: "I build [[search agents]], [[retrievers and rerankers]], biomedical search, and [[efficient RAG]]."
   zh: "我研究[[搜索 Agent]]、[[检索与重排序模型]]、生物医学检索与[[高效 RAG]]。"
 bio:
   en: >-
-    Research Fellow at <a href="https://ielab.io/">ielab</a>, The University of Queensland.
-    I coordinate and teach INFS7410 Information Retrieval and Web Search. PhD (2025) with
+    Member of Technical Staff at <a href="https://keenable.ai/">Keenable.ai</a>, building web search for AI agents.
+    Previously Research Fellow at <a href="https://ielab.io/">ielab</a>, The University of Queensland,
+    where I coordinated and taught INFS7410 Information Retrieval and Web Search. PhD (2025) with
     <a href="https://researchers.uq.edu.au/researcher/22857">Guido Zuccon</a>,
     <a href="https://bevankoopman.github.io/">Bevan Koopman</a> and
     <a href="https://scells.me/">Harrisen Scells</a>.
-  zh: '我在昆士兰大学 <a href="https://ielab.io/">ielab</a> 担任研究员，并担任 INFS7410（信息检索与网络搜索）课程协调员与主讲教师。2025 年在 <a href="https://researchers.uq.edu.au/researcher/22857">Guido Zuccon</a>、<a href="https://bevankoopman.github.io/">Bevan Koopman</a> 与 <a href="https://scells.me/">Harrisen Scells</a> 指导下完成博士学位。'
+  zh: '我在 <a href="https://keenable.ai/">Keenable.ai</a> 担任 Member of Technical Staff，构建面向 AI Agent 的网络搜索。此前在昆士兰大学 <a href="https://ielab.io/">ielab</a> 担任研究员，并担任 INFS7410（信息检索与网络搜索）课程协调员与主讲教师。2025 年在 <a href="https://researchers.uq.edu.au/researcher/22857">Guido Zuccon</a>、<a href="https://bevankoopman.github.io/">Bevan Koopman</a> 与 <a href="https://scells.me/">Harrisen Scells</a> 指导下完成博士学位。'
 
 summary:
   en: >-
-    <strong>Dr. Shuai Wang</strong> is a Research Fellow at <a href="https://ielab.io/">ielab</a>,
-    The University of Queensland. He works on <strong>information retrieval</strong>,
+    <strong>Dr. Shuai Wang</strong> is a Member of Technical Staff at <a href="https://keenable.ai/">Keenable.ai</a>, building web search
+    for AI agents. He works on <strong>information retrieval</strong>,
     <strong>search agents</strong>, <strong>retrievers and rerankers</strong>,
     <strong>biomedical evidence search</strong> and <strong>efficient RAG systems</strong>, with papers at SIGIR, WSDM, WWW, ECIR, EMNLP and EACL.
     He completed his PhD at UQ in 2025 under the supervision of
     <a href="https://researchers.uq.edu.au/researcher/22857">Prof. Guido Zuccon</a>,
     <a href="https://bevankoopman.github.io/">A/Prof. Bevan Koopman</a> and
-    <a href="https://scells.me/">Dr. Harrisen Scells</a>, and is Course Coordinator and Lecturer
-    for INFS7410.
-  zh: '<strong>王率博士</strong>现任昆士兰大学 <a href="https://ielab.io/">ielab</a> 研究员，研究方向为<strong>信息检索</strong>、<strong>搜索 Agent</strong>、<strong>检索与重排序模型</strong>、<strong>生物医学证据检索</strong>与<strong>高效 RAG 系统</strong>，成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。他于 2025 年在 <a href="https://researchers.uq.edu.au/researcher/22857">Prof. Guido Zuccon</a>、<a href="https://bevankoopman.github.io/">A/Prof. Bevan Koopman</a> 与 <a href="https://scells.me/">Dr. Harrisen Scells</a> 指导下获得昆士兰大学博士学位，现任 INFS7410 课程协调员与主讲教师。'
+    <a href="https://scells.me/">Dr. Harrisen Scells</a>, and was a Research Fellow at
+    <a href="https://ielab.io/">ielab</a> and Course Coordinator and Lecturer for INFS7410 before
+    joining Keenable.ai in October 2026.
+  zh: '<strong>王率博士</strong>现任 <a href="https://keenable.ai/">Keenable.ai</a> Member of Technical Staff，构建面向 AI Agent 的网络搜索，研究方向为<strong>信息检索</strong>、<strong>搜索 Agent</strong>、<strong>检索与重排序模型</strong>、<strong>生物医学证据检索</strong>与<strong>高效 RAG 系统</strong>，成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。他于 2025 年在 <a href="https://researchers.uq.edu.au/researcher/22857">Prof. Guido Zuccon</a>、<a href="https://bevankoopman.github.io/">A/Prof. Bevan Koopman</a> 与 <a href="https://scells.me/">Dr. Harrisen Scells</a> 指导下获得昆士兰大学博士学位，2026 年 10 月加入 Keenable.ai 之前担任昆士兰大学 <a href="https://ielab.io/">ielab</a> 研究员及 INFS7410 课程协调员与主讲教师。'
 
 cv_profile:
   en: >-
@@ -95,7 +98,10 @@ education:
     zh: { title: 理学学士, org: 西澳大利亚大学 }
 
 experience:
-  - years: { en: 2026–present, zh: 2026–至今 }
+  - years: { en: Oct 2026–present, zh: 2026年10月–至今 }
+    en: { title: Member of Technical Staff, org: Keenable.ai, detail: "Web search for AI agents." }
+    zh: { title: 技术团队成员（Member of Technical Staff）, org: Keenable.ai, detail: "面向 AI Agent 的网络搜索。" }
+  - years: { en: 2026, zh: 2026 }
     en: { title: Research Fellow (Level B), org: "ielab, The University of Queensland", detail: "Supervisor: Prof. Guido Zuccon" }
     zh: { title: 研究员（Research Fellow, Level B）, org: 昆士兰大学 ielab, detail: "导师：Prof. Guido Zuccon" }
   - years: { en: 2025–2026, zh: 2025–2026 }
@@ -122,18 +128,18 @@ teaching:
   title: { en: Information Retrieval and Web Search, zh: 信息检索与网络搜索 }
   body:
     en: >-
-      I coordinate and lecture INFS7410 at UQ, teaching 120+ Master's students across classical
-      IR, dense retrieval, LLMs for search, RAG and evaluation. I mentor students on retrieval,
+      I coordinated and lectured INFS7410 at UQ, teaching 120+ Master's students across classical
+      IR, dense retrieval, LLMs for search, RAG and evaluation. I mentored students on retrieval,
       RAG and biomedical NLP projects; several have progressed to PhD scholarships and SIGIR/ECIR papers.
-    zh: 我担任昆士兰大学 INFS7410 课程协调员与主讲教师，面向 120+ 名硕士生讲授传统信息检索、稠密检索、用于搜索的大语言模型、RAG 与评测。我也指导学生开展检索、RAG 与生物医学 NLP 研究，已有学生获得博士奖学金并发表 SIGIR/ECIR 论文。
+    zh: 我曾担任昆士兰大学 INFS7410 课程协调员与主讲教师，面向 120+ 名硕士生讲授传统信息检索、稠密检索、用于搜索的大语言模型、RAG 与评测，并指导学生开展检索、RAG 与生物医学 NLP 研究，已有学生获得博士奖学金并发表 SIGIR/ECIR 论文。
   link: https://my.uq.edu.au/programs-courses/course.html?course_code=INFS7410
 
 opportunities:
   en: >-
-    I welcome research collaborations, student projects, and academic or industry roles where
-    search agents, retrieval systems, efficient RAG, trustworthy evaluation or biomedical evidence
-    technologies are central.
-  zh: 欢迎围绕搜索 Agent、检索系统、高效 RAG、可信评测与生物医学证据技术开展研究合作、学生项目，或洽谈学术界与工业界职位。
+    I welcome research collaborations and conversations about web search for AI agents, search
+    agents, retrieval systems, efficient RAG, trustworthy evaluation and biomedical evidence
+    technologies.
+  zh: 欢迎围绕面向 AI Agent 的网络搜索、搜索 Agent、检索系统、高效 RAG、可信评测与生物医学证据技术开展研究合作与交流。
 
 service:
   roles:
@@ -155,7 +161,6 @@ seo:
   family_name: Wang
   honorific: Dr.
   alternate_names: ["Dylan Wang", "Shuai (Dylan) Wang", "Dr. Shuai Wang", "王率"]
-  department: "ielab, School of Electrical Engineering and Computer Science"
   alumni_of: ["The University of Queensland", "The University of Western Australia"]
   knows_about:
     - Information Retrieval
@@ -169,14 +174,14 @@ seo:
     - Systematic Review Automation
     - Boolean Query Generation
   title:
-    en: "Dr. Shuai Wang (王率) — Search Agents, Retrieval and RAG · The University of Queensland"
-    zh: "王率博士 (Shuai Wang) — 搜索 Agent、检索与 RAG · 昆士兰大学"
+    en: "Dr. Shuai Wang (王率) — Search Agents, Retrieval and RAG · Keenable.ai"
+    zh: "王率博士 (Shuai Wang) — 搜索 Agent、检索与 RAG · Keenable.ai"
   description:
     en: >-
-      Dr. Shuai Wang (Dylan, 王率) is a Research Fellow at ielab, The University of Queensland,
-      working on search agents, retrievers and rerankers, biomedical evidence search and efficient
+      Dr. Shuai Wang (Dylan, 王率) is a Member of Technical Staff at Keenable.ai, building web search
+      for AI agents, and works on search agents, retrievers and rerankers, biomedical evidence search and efficient
       retrieval-augmented generation (RAG), with papers at SIGIR, WSDM, WWW, ECIR, EMNLP and EACL.
-    zh: 王率博士（Shuai Wang, Dylan）是昆士兰大学 ielab 研究员，研究搜索 Agent、检索与重排序模型、生物医学证据检索与高效检索增强生成（RAG），成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。
+    zh: 王率博士（Shuai Wang, Dylan）现任 Keenable.ai Member of Technical Staff，构建面向 AI Agent 的网络搜索，研究搜索 Agent、检索与重排序模型、生物医学证据检索与高效检索增强生成（RAG），成果发表于 SIGIR、WSDM、WWW、ECIR、EMNLP、EACL 等会议。
   # Paste verification codes from Google Search Console / Bing Webmaster Tools here.
   verification:
     google: ""  # verified via DNS TXT record (Domain property)
@@ -184,8 +189,8 @@ seo:
     baidu: ""   # 百度搜索资源平台 → 添加网站 → HTML 标签验证 → content 的值
   # Baidu still reads the keywords meta tag (Google ignores it).
   keywords:
-    en: "Shuai Wang, Dylan Wang, University of Queensland, ielab, information retrieval, search agents, retrievers, rerankers, RAG, biomedical search, systematic review"
-    zh: "王率, Shuai Wang, 昆士兰大学, 信息检索, 搜索 Agent, 检索模型, 重排序, RAG, 检索增强生成, 生物医学检索, 系统综述"
+    en: "Shuai Wang, Dylan Wang, Keenable.ai, web search for AI agents, University of Queensland, ielab, information retrieval, search agents, retrievers, rerankers, RAG, biomedical search, systematic review"
+    zh: "王率, Shuai Wang, Keenable.ai, 面向 AI Agent 的网络搜索, 昆士兰大学, 信息检索, 搜索 Agent, 检索模型, 重排序, RAG, 检索增强生成, 生物医学检索, 系统综述"
 
 # About page (/about/): the person behind the papers. Add or edit hobbies freely.
 about:

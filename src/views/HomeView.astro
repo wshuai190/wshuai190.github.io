@@ -38,8 +38,8 @@ import { TWIN_ENDPOINT } from '../components/react/TwinChat';
           <img src={profile.avatar} alt={profile.short_name[lang]} width="80" height="80" fetchpriority="high" class="h-20 w-20 rounded-full border border-line object-cover object-top" />
           <p class="text-[13px] leading-snug text-muted">{pick(profile.location, lang)}<br />{profile.pronouns}</p>
         </div>
-        <a href={latest.url ?? localePath(lang, '/news/')} class="pill rise">
-          <span class="dot"></span><span class="truncate">{t(lang, 'home.new')} · {(lang === 'zh' && latest.title_zh) || latest.title}</span>
+        <a href={latest.url ?? localePath(lang, '/news/')} class="pill rise max-w-full">
+          <span class="dot shrink-0"></span><span class="min-w-0 truncate">{t(lang, 'home.new')} · {(lang === 'zh' && latest.title_zh) || latest.title}</span>
         </a>
         <Headline text={profile.headline[lang]} class="display rise rise-2 mt-6 text-[clamp(40px,6vw,62px)]" />
         <p class="lede prose-links rise rise-3 mt-6" set:html={profile.bio[lang]} />

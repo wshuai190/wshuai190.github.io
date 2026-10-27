@@ -14,7 +14,7 @@ const bodyZh = lang === 'zh' ? entry.data.body_zh : undefined;
 const meta = [data.venue, /^(awards?|talks?)$/i.test(entry.data.type ?? '') ? undefined : data.type, data.venue?.includes(data.location ?? '\u0000') ? undefined : data.location].filter(Boolean).join(' · ');
 const date = entry.data.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-AU', { year: 'numeric', month: 'long', timeZone: 'UTC' });
 ---
-<Base lang={lang} title={data.title} description={excerpt || `${data.title}${meta ? ` — ${meta}` : ''}. ${sectionTitle} · ${lang === 'zh' ? '王率 Shuai Wang，昆士兰大学' : 'Shuai Wang, The University of Queensland'}.`}>
+<Base lang={lang} title={data.title} description={excerpt || `${data.title}${meta ? ` — ${meta}` : ''}. ${sectionTitle} · ${lang === 'zh' ? '王率 Shuai Wang' : 'Shuai Wang'}.`}>
   <article class="wrap max-w-[860px]">
     <nav class="pt-8 text-sm"><a class="text-muted hover:text-ink" href={localePath(lang, `/${section}/`)}>← {sectionTitle}</a></nav>
     <header class="pt-8">

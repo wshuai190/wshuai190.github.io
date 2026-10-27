@@ -114,7 +114,7 @@ const strings = {
   'search.loading': { en: 'Searching…', zh: '搜索中…' },
   'search.dev': { en: 'Search index is built by `npm run build`.', zh: '搜索索引在 `npm run build` 时生成。' },
 
-  'footer.tagline': { en: 'Information retrieval · The University of Queensland', zh: '信息检索 · 昆士兰大学' },
+  'footer.tagline': { en: 'Information retrieval · Keenable.ai', zh: '信息检索 · Keenable.ai' },
   'notfound.title': { en: 'Page not found', zh: '页面不存在' },
   'notfound.body': { en: 'The page may have moved. Try search or head home.', zh: '页面可能已移动，试试搜索或返回首页。' },
 } satisfies Record<string, Localized>;

@@ -181,9 +181,11 @@ def render_markdown(paper, slug):
 def append_news(news_text, paper, slug):
     block = (
         f"\n- title: {yaml_quote('New paper: ' + paper['title'])}\n"
+        f"  title_zh: {yaml_quote('新论文：' + paper['title'])}\n"
         f"  date: {paper['date']}\n"
         f"  url: /publication/{slug}\n"
         f"  description: {yaml_quote(paper['venue'])}\n"
+        f"  description_zh: {yaml_quote(paper['venue'])}\n"
         f"  status: celebrate\n"
         f"  auto: true\n"
     )
@@ -273,8 +275,9 @@ def enrich_openalex(title):
     return None
 
 
-def enrich_arxiv(title):
-    query = urllib.parse.urlencode({"search_query": f'ti:"{norm_title(title)}"', "max_results": 5})
+def enrich_arxiv(title, known_id=None):
+    # Scholar often names the arXiv id in its venue string; a lookup by id works before title search indexes it.
+    query = urllib.parse.urlencode({"id_list": known_id} if known_id else {"search_query": f'ti:"{norm_title(title)}"', "max_results": 5})
     feed = ET.fromstring(get(f"https://export.arxiv.org/api/query?{query}", raw=True))
     ns = {"a": "http://www.w3.org/2005/Atom"}
     for entry in feed.findall("a:entry", ns):
@@ -294,17 +297,18 @@ def enrich_arxiv(title):
 def build_paper(article):
     """Combine Scholar data with OpenAlex/arXiv metadata for a new publication."""
     extra = {}
-    for enrich in (enrich_arxiv, enrich_openalex):
+    known_id = arxiv_id(article.get("publication"))
+    for enrich in (lambda title: enrich_arxiv(title, known_id), enrich_openalex):
         try:
             found = enrich(article["title"]) or {}
         except Exception as exc:  # enrichment is best effort
-            print(f"  {enrich.__name__} failed: {exc}", file=sys.stderr)
+            print(f"  enrichment failed: {exc}", file=sys.stderr)
             found = {}
         for key, value in found.items():
             if value and not extra.get(key):
                 extra[key] = value
     year = str(article.get("year") or dt.date.today().year)
-    date = extra.get("date") or f"{year}-01-01"
+    date = extra.get("date") or (dt.date.today().isoformat() if year == str(dt.date.today().year) else f"{year}-01-01")
     authors = extra.get("authors") or [n.strip() for n in article.get("authors_short", "").split(",") if n.strip() and n.strip() != "..."]
     venue = extra.get("venue") or article.get("publication") or (f"arXiv preprint ({year})" if extra.get("arxiv") else year)
     url = f"https://arxiv.org/abs/{extra['arxiv']}" if extra.get("arxiv") else (f"https://doi.org/{extra['doi']}" if extra.get("doi") else article.get("link"))

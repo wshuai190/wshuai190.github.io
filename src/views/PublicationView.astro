@@ -25,7 +25,9 @@ const links = [
   ['link.demo', pub.data.demo],
   ['link.site', pub.data.project],
 ].filter(([, href]) => href) as [Parameters<typeof t>[1], string][];
-const description = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim().slice(0, 300);
+const abstract = (pub.body ?? '').replace(/^##\s*Abstract\s*/i, '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim().slice(0, 300);
+// Auto-added papers can lack an abstract ("Abstract coming soon."); fall back to title and venue.
+const description = abstract.length >= 80 ? abstract : `${pub.data.title}. ${pub.data.venue}.`;
 // Google Scholar (Highwire Press) tags: https://scholar.google.com/intl/en/scholar/inclusion.html#indexing
 const venue = venueFull(pub.data.venue, pub.data.date.getUTCFullYear());
 const isPreprint = /arxiv|preprint/i.test(venue);

@@ -231,8 +231,18 @@
   status: celebrate
 
 - title: 'New paper: Do Conversational Agents Need Explicit Memory? A Controlled Comparison with Raw-History Retrieval'
-  date: 2026-01-01
-  url: /publication/2026-01-01-do-conversational-agents-need-explicit
-  description: 'arXiv preprint arXiv:2610.24671, 2026'
+  title_zh: '新论文：Do Conversational Agents Need Explicit Memory? A Controlled Comparison with Raw-History Retrieval'
+  date: 2026-10-17
+  url: /publication/2026-10-17-do-conversational-agents-need-explicit
+  description: 'A controlled comparison of six explicit memory systems with raw-history RAG on LongMemEval-S and BEAM-100K (arXiv preprint).'
+  description_zh: '在 LongMemEval-S 与 BEAM-100K 上，将六种显式记忆系统与直接检索原始对话历史的 RAG 进行受控对比（arXiv 预印本）。'
   status: celebrate
   auto: true
+
+- title: "Joined Keenable.ai as Member of Technical Staff"
+  title_zh: "加入 Keenable.ai，担任 Member of Technical Staff"
+  date: 2026-10-27
+  url: https://keenable.ai/
+  description: "Left The University of Queensland and joined Keenable.ai as a Member of Technical Staff, building web search for AI agents."
+  description_zh: "离开昆士兰大学，加入 Keenable.ai 担任 Member of Technical Staff，构建面向 AI Agent 的网络搜索。"
+  status: celebrate
