@@ -246,3 +246,11 @@
   description: "Left The University of Queensland and joined Keenable.ai as a Member of Technical Staff, building web search for AI agents."
   description_zh: "离开昆士兰大学，加入 Keenable.ai 担任技术团队成员（Member of Technical Staff），构建面向 AI Agent 的网络搜索。"
   status: celebrate
+
+- title: "ITER Accepted at WSDM 2027 Findings"
+  title_zh: "ITER 被 WSDM 2027 Findings 录用"
+  date: 2026-11-03
+  url: /publication/2026-08-28-iter-interaction-aware
+  description: "Our paper, ITER: Interaction-Aware Retrieval for Agentic Search, has been accepted to WSDM 2027 Findings."
+  description_zh: "我们的论文《ITER: Interaction-Aware Retrieval for Agentic Search》被 WSDM 2027 Findings 录用。"
+  status: celebrate

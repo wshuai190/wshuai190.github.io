@@ -5,9 +5,9 @@ permalink: /publication/2026-08-28-iter-interaction-aware
 excerpt:
 date: 2026-08-28
 page_type: "Long"
-venue: 'arXiv preprint (2026)'
+venue: 'arXiv preprint (2026) (accepted to WSDM 2027 Findings)'
 paperurl: 'https://arxiv.org/abs/2608.27912'
-citation: 'Haodong Chen*, Shuai Wang*, Yu Yin, Shengyao Zhuang, Guido Zuccon and Teerapong Leelanupab. 2026. ITER: Interaction-Aware Retrieval for Agentic Search. arXiv preprint arXiv:2608.27912.'
+citation: 'Haodong Chen*, Shuai Wang*, Yu Yin, Shengyao Zhuang, Guido Zuccon and Teerapong Leelanupab. 2026. ITER: Interaction-Aware Retrieval for Agentic Search. arXiv preprint arXiv:2608.27912 (accepted to WSDM 2027 Findings).'
 topic: 'agents'
 arxiv: '2608.27912'
 image: '/images/research/iter.webp'

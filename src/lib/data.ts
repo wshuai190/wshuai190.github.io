@@ -127,7 +127,10 @@ const VENUE_NAMES: [RegExp, string][] = [
 
 /** Short venue label for chips, e.g. "SIGIR 2026" or "arXiv". Falls back to the publication year. */
 export function venueLabel(venue: string, fallbackYear?: number): string {
-  if (/arxiv/i.test(venue)) return 'arXiv';
+  if (/arxiv/i.test(venue)) {
+    const acceptance = venue.match(/\((accepted[^)]*)\)/i)?.[1];
+    return acceptance ? `arXiv (${acceptance})` : 'arXiv';
+  }
   const year = venue.match(/(20\d{2})/)?.[1] ?? fallbackYear;
   // Also matches "SIGIR-2026", "ECIR2026" and "SIGIR-AP-2023".
   const acronym = VENUE_NAMES.find(([pattern]) => pattern.test(venue))?.[1]
