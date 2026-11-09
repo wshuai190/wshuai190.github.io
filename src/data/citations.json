@@ -1,5 +1,5 @@
 {
-  "2021-07-01-shuai-InterpolateDR": 153,
+  "2021-07-01-shuai-InterpolateDR": 154,
   "2021-09-01-arvin-trecdl": 0,
   "2021-12-29-shuai-meshsuggest": 29,
   "2022-02-28-shuai-reproducesdr": 26,
@@ -13,12 +13,12 @@
   "2023-09-11-booleanscreening": 22,
   "2023-12-19-llmscreening": 66,
   "2024-02-19-ResLLM": 23,
-  "2024-03-26-shuai-feb4rag": 77,
+  "2024-03-26-shuai-feb4rag": 78,
   "2024-03-27-eval-gen": 70,
   "2024-03-28-llm-stemming": 13,
   "2024-04-03-sunprompting": 43,
   "2024-07-01-bergen": 96,
-  "2024-07-16-COCOM": 94,
+  "2024-07-16-COCOM": 96,
   "2024-10-20-starbucks": 15,
   "2025-01-01-corpus_subsampling": 21,
   "2025-05-14-2dmse-ir": 14,
@@ -32,7 +32,7 @@
   "2026-07-08-diffretriever": 3,
   "2026-07-27-geo-injection-rag-survival": 3,
   "2026-07-31-lightmem-memory-management": 0,
-  "2026-08-03-search-inspect-fetch": 3,
+  "2026-08-03-search-inspect-fetch": 4,
   "2026-08-28-iter-interaction-aware": 3,
   "2026-10-17-do-conversational-agents-need-explicit": 0
 }
