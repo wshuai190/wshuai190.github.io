@@ -254,3 +254,11 @@
   description: "Our paper, ITER: Interaction-Aware Retrieval for Agentic Search, has been accepted to WSDM 2027 Findings."
   description_zh: "我们的论文《ITER: Interaction-Aware Retrieval for Agentic Search》被 WSDM 2027 Findings 录用。"
   status: celebrate
+
+- title: "Search, Inspect, Fetch Accepted at the EACL 2027 Main Conference"
+  title_zh: "Search, Inspect, Fetch 被 EACL 2027 主会录用"
+  date: 2026-11-13
+  url: /publication/2026-08-03-search-inspect-fetch
+  description: "Our paper, Search, Inspect, Fetch: Exploiting Structure-Aware Boolean Retrieval for Deep-Search Agents, has been accepted to the EACL 2027 main conference."
+  description_zh: "我们的论文《Search, Inspect, Fetch: Exploiting Structure-Aware Boolean Retrieval for Deep-Search Agents》被 EACL 2027 主会录用。"
+  status: celebrate
