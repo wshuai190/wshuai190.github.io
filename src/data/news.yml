@@ -262,3 +262,12 @@
   description: "Our paper, Search, Inspect, Fetch: Exploiting Structure-Aware Boolean Retrieval for Deep-Search Agents, has been accepted to the EACL 2027 main conference."
   description_zh: "我们的论文《Search, Inspect, Fetch: Exploiting Structure-Aware Boolean Retrieval for Deep-Search Agents》被 EACL 2027 主会录用。"
   status: celebrate
+
+- title: 'New paper: RMIT-ADM+ S at TREC RAG 2026: Research Agents, Retriever Ablations, and Open-Weight Replication'
+  title_zh: '新论文：RMIT-ADM+ S at TREC RAG 2026: Research Agents, Retriever Ablations, and Open-Weight Replication'
+  date: 2026-11-12
+  url: /publication/2026-11-12-rmit-adm-s-at-trec
+  description: 'arXiv preprint arXiv:2611.16425, 2026'
+  description_zh: 'arXiv preprint arXiv:2611.16425, 2026'
+  status: celebrate
+  auto: true
