@@ -12,13 +12,13 @@
   "2023-07-23-sigirtasb": 13,
   "2023-09-11-booleanscreening": 22,
   "2023-12-19-llmscreening": 66,
-  "2024-02-19-ResLLM": 24,
-  "2024-03-26-shuai-feb4rag": 80,
+  "2024-02-19-ResLLM": 25,
+  "2024-03-26-shuai-feb4rag": 81,
   "2024-03-27-eval-gen": 71,
   "2024-03-28-llm-stemming": 13,
   "2024-04-03-sunprompting": 43,
   "2024-07-01-bergen": 98,
-  "2024-07-16-COCOM": 98,
+  "2024-07-16-COCOM": 99,
   "2024-10-20-starbucks": 15,
   "2025-01-01-corpus_subsampling": 21,
   "2025-05-14-2dmse-ir": 14,
@@ -34,5 +34,6 @@
   "2026-07-31-lightmem-memory-management": 1,
   "2026-08-03-search-inspect-fetch": 5,
   "2026-08-28-iter-interaction-aware": 4,
-  "2026-10-17-do-conversational-agents-need-explicit": 0
+  "2026-10-17-do-conversational-agents-need-explicit": 0,
+  "2026-11-12-rmit-adm-s-at-trec": 0
 }
