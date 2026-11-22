@@ -70,8 +70,6 @@ import { TWIN_ENDPOINT } from '../components/react/TwinChat';
       ))}
     </section>
 
-    <DiscoveryLabPromo lang={lang} />
-
     <section class="mt-24">
       <div class="mb-7 flex items-baseline justify-between gap-4">
         <h2 class="section-title">{t(lang, 'home.selected')}</h2>
@@ -104,5 +102,7 @@ import { TWIN_ENDPOINT } from '../components/react/TwinChat';
         <a class="text-link mt-5 inline-block text-sm font-semibold" href={`mailto:${profile.email}`}>{profile.email} →</a>
       </div>
     </section>
+
+    <DiscoveryLabPromo lang={lang} />
   </div>
 </Base>
