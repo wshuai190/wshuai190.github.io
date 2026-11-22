@@ -1,0 +1,33 @@
+---
+import type { Lang } from '../i18n/ui';
+import LinkPills from './LinkPills.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const url = `https://shuaiwang.io/keenable-discovery-lab/?lang=${lang}`;
+const items = lang === 'zh'
+  ? [['游戏雷达', 'radar'], ['时间切片', 'time'], ['灵感碰撞', 'collision'], ['兔子洞', 'rabbit']]
+  : [['Game Radar', 'radar'], ['Time Slices', 'time'], ['Idea Collision', 'collision'], ['Rabbit Hole', 'rabbit']];
+---
+<section class="mt-16" aria-labelledby="discovery-lab-title">
+  <div class="mb-7 flex items-baseline justify-between gap-4">
+    <h2 class="section-title">{lang === 'zh' ? '交互实验' : 'Interactive experiments'}</h2>
+  </div>
+  <article class="glass lift group relative grid gap-4 p-3.5 md:grid-cols-2" data-search-skip>
+    <a href={`${url}#home`} class="figure-frame aspect-[16/10] p-3" tabindex="-1" aria-hidden="true">
+      <img src="/images/projects/discovery-lab.webp" width="800" height="500" alt="" loading="lazy" decoding="async" class="transition-transform duration-500 group-hover:scale-[1.03]" />
+    </a>
+    <div class="flex flex-col px-1.5 pb-1.5 md:px-3 md:py-4">
+      <p class="tag mt-2">{lang === 'zh' ? '搜索与发现 · 2026' : 'Search & discovery · 2026'}</p>
+      <h3 id="discovery-lab-title" class="serif mt-2 text-[28px] leading-tight">
+        <a href={`${url}#home`} class="after:absolute after:inset-0 after:content-['']">Keenable Discovery Lab</a>
+      </h3>
+      <p class="mt-3 text-sm text-muted">{lang === 'zh' ? '一个双语搜索门户，四个可交互的小实验。找一款游戏，对照不同时间的网页，让两个想法碰撞，或沿着线索继续探索。' : 'A bilingual search portal with four hands-on experiments. Find a game, compare sources across time, connect two ideas, or follow a thread.'}</p>
+      <div class="relative z-[1] mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[13px] text-teal">
+        {items.map(([label, hash]) => <a class="hover:underline underline-offset-4" href={`${url}#${hash}`}>{label}</a>)}
+      </div>
+      <div class="relative z-[1] mt-auto flex flex-wrap gap-1.5 pt-5">
+        <LinkPills links={{ site: `${url}#home`, demo: `${url}#radar` }} lang={lang} />
+      </div>
+    </div>
+  </article>
+</section>

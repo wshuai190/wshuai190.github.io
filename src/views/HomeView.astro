@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Headline from '../components/Headline.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import DiscoveryLabPromo from '../components/DiscoveryLabPromo.astro';
 import NewsTicker from '../components/react/NewsTicker';
 import HeroSearch from '../components/react/HeroSearch';
 import { formatMonth, localePath, pick, t, type Lang } from '../i18n/ui';
@@ -68,6 +69,8 @@ import { TWIN_ENDPOINT } from '../components/react/TwinChat';
         </div>
       ))}
     </section>
+
+    <DiscoveryLabPromo lang={lang} />
 
     <section class="mt-24">
       <div class="mb-7 flex items-baseline justify-between gap-4">
