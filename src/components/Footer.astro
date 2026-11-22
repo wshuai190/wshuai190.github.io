@@ -27,7 +27,7 @@ const external = [
     <ul class="space-y-1.5 text-muted">
       {internal.map(([key, href]) => <li><a class="hover:text-ink" href={localePath(lang, href)}>{t(lang, key)}</a></li>)}
       <li><a class="hover:text-ink" href="/feed.xml">RSS</a></li>
-      <li><a class="hover:text-ink" href={`https://shuaiwang.io/keenable-discovery-lab/?lang=${lang}#home`}>{lang === 'zh' ? '搜索实验室' : 'Discovery Lab'}</a></li>
+      <li><a class="hover:text-ink" href={`https://shuaiwang.io/keenable-discovery-lab/?lang=${lang}#home`}>{lang === 'zh' ? '搜索轨迹' : 'Search Trails'}</a></li>
     </ul>
     <ul class="space-y-1.5 text-muted">
       {external.map(([label, href]) => <li><a class="hover:text-ink" href={href} rel="me noopener">{label} ↗</a></li>)}
