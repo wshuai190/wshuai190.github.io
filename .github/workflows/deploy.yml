@@ -44,6 +44,7 @@ jobs:
           python scripts/check_site.py dist
           python -m unittest discover -s tests
           node scripts/eval_search.mjs
+          npm run test:search-runtime
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
