@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "postbuild": "node scripts/build_search_index.mjs",
-    "test:search": "node scripts/eval_search.mjs"
+    "test:search": "node scripts/eval_search.mjs",
+    "test:search-runtime": "node --test tests/search_runtime.test.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",

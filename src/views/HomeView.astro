@@ -28,11 +28,11 @@ const stats = [
 const examples = lang === 'zh'
   ? ['深度检索 Agent', 'LLM 重排序', '系统综述', '高效 RAG', 'Boolean query generation']
   : ['deep-search agents that read only what matters', 'reasoning rerankers trained with RL', 'how can LLMs write Boolean queries?', 'compressing context for faster RAG', 'embeddings with flexible layers and dimensions'];
-import { TWIN_ENDPOINT } from '../components/react/TwinChat';
+import { TWIN_ENDPOINT } from '../lib/twin';
 ---
 <Base lang={lang} glow preloadItalic>
   <div class="wrap">
-    <section class="grid items-center gap-12 pb-14 pt-8 md:grid-cols-[1fr_220px] md:gap-20 md:pt-20">
+    <section class="relative z-10 grid items-center gap-12 pb-14 pt-8 md:grid-cols-[1fr_220px] md:gap-20 md:pt-20">
       <div class="min-w-0">
         <!-- Mobile: small avatar instead of the large portrait. -->
         <div class="mb-6 flex items-center gap-4 md:hidden">

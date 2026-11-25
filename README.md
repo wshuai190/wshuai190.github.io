@@ -33,7 +33,7 @@ Secrets: `SERPAPI_KEY` (required). Optional repository variable `OPENALEX_MAILTO
 ## Site search
 
 ⌘K search, the home search box and the Publications search use BM25 by default. A **semantic search**
-switch (off by default, remembered per browser) downloads the model once and turns on **hybrid retrieval with score
+switch (off by default, remembered per browser) caches the model locally and turns on **hybrid retrieval with score
 fusion**: `0.6 · minmax(BM25) + 0.4 · minmax(Starbucks)` (per-query min-max over all passages),
 where Starbucks is the dot product from a 2-layer, 32-dim cut of
 [ielabgroup/Starbucks-msmarco](https://huggingface.co/ielabgroup/Starbucks-msmarco)
@@ -44,6 +44,14 @@ where Starbucks is the dot product from a 2-layer, 32-dim cut of
   (papers incl. abstracts, projects, Research, Teaching, News, talks, awards) into ~120-word
   passages per heading and links each result to its passage (`#anchor` + `#:~:text=`).
   List pages that repeat other pages (home, Publications, CV) are not indexed.
+- **Loading**: `/search-index.json` contains text only. The content-hashed
+  `/search-vectors.<hash>.json`, ONNX runtime and model load only when semantic search is enabled.
+  Focusing a search field preloads the text index; keyword results arrive before semantic reranking.
+- **Responsiveness**: inference runs in an ONNX proxy worker, with up to 32 recent query vectors
+  reused across search boxes. Cleared or superseded searches cannot overwrite newer results.
+  The model and vocabulary use versioned Cache API entries, so navigating or returning after
+  GitHub Pages' 10-minute HTTP cache lifetime does not redownload them. Content changes invalidate
+  these entries; blocked/full browser storage falls back to ordinary network loading.
 - **No re-encoding**: vectors are cached in `src/data/search-embeddings.json` by content hash;
   a build only encodes new or changed passages (new papers from the daily sync included).
 - **Pipeline**: min-max normalise BM25 and Starbucks per query →
@@ -54,6 +62,13 @@ where Starbucks is the dot product from a 2-layer, 32-dim cut of
   hybrid scores (raw scores in the tooltip). Settings were chosen by grid search on the query suite.
 - **Tests**: `node scripts/eval_search.mjs` runs `tests/search_queries.json` (known-item,
   natural-language, paraphrase, robustness, Chinese and off-topic queries) on every deploy.
+  `npm run test:search-runtime` checks cache reuse/invalidation, storage failures and index retries.
+
+The shared stylesheet is emitted as a cacheable asset rather than embedded in every page.
+Tailwind scans `src/` only, the mono font loads Latin subsets, and the Chinese home page skips
+the unused italic font preload. Search does not import the chat UI; the news ticker stops its
+animation outside the viewport and in background tabs. Publication hydration excludes unused
+abstract and full-venue fields; those remain available through the search index and paper pages.
 
 Regenerate the model with `python3 scripts/export_starbucks.py` (needs torch, transformers,
 onnx, onnxruntime).

@@ -1,5 +1,6 @@
 import { DENSE_CEILING, DENSE_THRESHOLD, Encoder, MODEL_FILE, VOCAB_FILE } from './encoder.ts';
 import { WordPiece } from './wordpiece.ts';
+import { modelAsset } from './model-cache.ts';
 
 /**
  * Hybrid site search: BM25 over titles, metadata and text, interpolated with Starbucks 2L-32
@@ -137,11 +138,22 @@ function scale(values: number[], floor: number, ceiling = Math.max(...values)): 
 /** Text BM25 sees for a passage: page title (twice, as a field boost), section heading and passage. */
 export const bm25Text = (d: SearchDoc) => `${d.title} ${d.title} ${d.section ?? ''} ${d.text}`;
 
-let indexPromise: Promise<{ docs: SearchDoc[]; bm25: Bm25 }> | null = null;
+interface SearchIndex {
+  docs: SearchDoc[];
+  vectors: string;
+  modelRevision: string;
+  vocabRevision: string;
+}
+
+let indexPromise: Promise<SearchIndex & { bm25: Bm25 }> | null = null;
 export function loadIndex() {
   indexPromise ??= fetch('/search-index.json')
-    .then((r) => r.json())
-    .then(({ docs }: { docs: SearchDoc[] }) => ({ docs, bm25: new Bm25(docs.map(bm25Text)) }));
+    .then((r) => {
+      if (!r.ok) throw new Error(`Search index: HTTP ${r.status}`);
+      return r.json() as Promise<SearchIndex>;
+    })
+    .then((index) => ({ ...index, bm25: new Bm25(index.docs.map(bm25Text)) }))
+    .catch((error) => { indexPromise = null; throw error; });
   return indexPromise;
 }
 
@@ -157,10 +169,20 @@ export function loadEncoder(): Promise<Encoder | null> {
       const ort = await import(/* @vite-ignore */ runtime);
       ort.env.wasm.wasmPaths = '/ort/';
       ort.env.wasm.numThreads = 1; // GitHub Pages cannot enable cross-origin isolation for threads
-      const [vocab, session] = await Promise.all([
-        fetch(VOCAB_FILE).then((r) => r.text()),
-        ort.InferenceSession.create(MODEL_FILE),
+      ort.env.wasm.proxy = true; // Run inference in a worker so typing and scrolling stay responsive.
+      const index = await loadIndex();
+      const [vocab, session, vectors] = await Promise.all([
+        modelAsset(VOCAB_FILE, index.vocabRevision).then((r) => r.text()),
+        modelAsset(MODEL_FILE, index.modelRevision)
+          .then((r) => r.arrayBuffer())
+          .then((bytes) => ort.InferenceSession.create(bytes)),
+        fetch(index.vectors).then((r) => {
+          if (!r.ok) throw new Error(`Search vectors: HTTP ${r.status}`);
+          return r.json() as Promise<number[][]>;
+        }),
       ]);
+      if (vectors.length !== index.docs.length) throw new Error('Search vectors do not match the index');
+      index.docs.forEach((doc, i) => { doc.vector = vectors[i]; });
       encoderReady = new Encoder(ort, session, new WordPiece(vocab));
       return encoderReady;
     } catch (error) {
@@ -176,6 +198,22 @@ export function encoderLoaded(): boolean {
   return encoderReady !== null;
 }
 
+// Repeated queries (backspacing, filters, or another search box) share the same inference.
+const queryVectors = new Map<string, Promise<number[]>>();
+let inferenceQueue: Promise<unknown> = Promise.resolve();
+function embedQuery(query: string): Promise<number[]> {
+  const key = translateZh(query).trim().toLowerCase();
+  let pending = queryVectors.get(key);
+  if (!pending) {
+    pending = inferenceQueue.then(() => encoderReady!.embed(key));
+    inferenceQueue = pending.catch(() => {});
+    queryVectors.set(key, pending);
+    if (queryVectors.size > 32) queryVectors.delete(queryVectors.keys().next().value!);
+    pending.catch(() => { if (queryVectors.get(key) === pending) queryVectors.delete(key); });
+  }
+  return pending;
+}
+
 /**
  * Rank passages for `query` and keep the best passage per page. Chinese passages are only
  * searched on Chinese pages. Uses dense scores only once the model has loaded.
@@ -184,7 +222,7 @@ export async function search(query: string, options: { types?: SearchDoc['type']
   const { docs, bm25 } = await loadIndex();
   const lexical = lexicalFor(bm25, query, docs);
   const useDense = options.semantic !== false && encoderReady && query.trim();
-  const queryVector = useDense ? await encoderReady!.embed(translateZh(query)) : null;
+  const queryVector = useDense ? await embedQuery(query) : null;
   const results = bestPerPage(rank(docs, lexical, queryVector))
     .filter((r) => (!options.types || options.types.includes(r.doc.type)) && (r.doc.lang === 'en' || options.lang === 'zh'));
   return { mode: (queryVector ? 'hybrid' : 'lexical') as SearchMode, results: results.slice(0, options.limit ?? results.length) };

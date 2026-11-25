@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { passageLink, snippet } from '../../lib/search/hybrid.ts';
+import { loadIndex, passageLink, snippet } from '../../lib/search/hybrid.ts';
 import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
 import ScoreChips from './ScoreChips';
 import SearchBadge from './SearchBadge';
-import { askTwin, TWIN_ENDPOINT } from './TwinChat';
+import { askTwin, TWIN_ENDPOINT } from '../../lib/twin';
 
 interface Props {
   action: string;
@@ -15,19 +15,21 @@ interface Props {
 
 /**
  * Home-page search: typewriter placeholder, live hybrid results (BM25 + Starbucks) in a
- * dropdown, Enter opens the full ranked list on the Publications page. Focusing the box
- * starts loading the Starbucks model so semantic ranking is ready by the time you type.
+ * dropdown, Enter opens the full ranked list on the Publications page. Semantic ranking
+ * is loaded only when explicitly enabled.
  */
 export default function HeroSearch({ action, label, button, examples, lang }: Props) {
   const [placeholder, setPlaceholder] = useState(examples[0] ?? '');
   const [value, setValue] = useState('');
+  const queryValue = useRef(value);
+  queryValue.current = value;
   const [active, setActive] = useState(false);
   const [open, setOpen] = useState(false);
   const [highlight, setHighlight] = useState(-1);
   const focused = useRef(false);
   const exampleIndex = useRef(0);
   const [semantic, setSemantic] = useSemanticPreference();
-  const { results, mode, model } = useHybridSearch(value, active, undefined, lang, semantic);
+  const { results, mode, model, error } = useHybridSearch(value, active, undefined, lang, semantic);
   const shown = (results ?? []).slice(0, 5);
   const expanded = open && Boolean(value.trim() && results);
 
@@ -37,7 +39,7 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     let example = 0, chars = 0, deleting = false, timer = 0;
     const tick = () => {
-      if (!(focused.current && value)) {
+      if (!focused.current && !queryValue.current && !document.hidden) {
         const text = examples[example];
         chars += deleting ? -1 : 1;
         setPlaceholder(text.slice(0, chars));
@@ -51,7 +53,7 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
     };
     timer = window.setTimeout(tick, 900);
     return () => window.clearTimeout(timer);
-  }, [examples, value]);
+  }, [examples]);
 
   return (
     <div
@@ -82,7 +84,7 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
           name="q"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onFocus={() => { focused.current = true; setActive(true); }}
+          onFocus={() => { focused.current = true; setActive(true); void loadIndex().catch(() => {}); }}
           onBlur={() => { focused.current = false; }}
           onKeyDown={(e) => {
             if (e.key === 'Escape') { if (expanded) setOpen(false); else setValue(''); }
@@ -118,7 +120,7 @@ export default function HeroSearch({ action, label, button, examples, lang }: Pr
             ); })}
             {shown.length === 0 && (
               <li role="presentation" className="px-4 py-4 text-sm text-[var(--muted)]">
-                {semantic ? (lang === 'zh' ? '没有结果' : 'No results') : (
+                {error ? (lang === 'zh' ? '搜索暂时无法加载，请稍后重试。' : 'Search could not load. Please try again.') : semantic ? (lang === 'zh' ? '没有结果' : 'No results') : (
                   <>
                     {lang === 'zh' ? '没有关键词匹配的结果。试试按语义搜索？' : 'No keyword matches. Search by meaning instead?'}
                     <button type="button" className="link-pill ml-2" onMouseDown={(e) => e.preventDefault()} onClick={() => setSemantic(true)}>{lang === 'zh' ? '开启语义搜索' : 'Turn on semantic search'}</button>

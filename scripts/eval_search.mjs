@@ -23,7 +23,9 @@ const encoder = new Encoder(
   await ort.InferenceSession.create(readFileSync(`public${MODEL_FILE}`)),
   new WordPiece(readFileSync(`public${VOCAB_FILE}`, 'utf8')),
 );
-const { docs } = JSON.parse(readFileSync('dist/search-index.json', 'utf8'));
+const { docs, vectors: vectorFile } = JSON.parse(readFileSync('dist/search-index.json', 'utf8'));
+const vectors = JSON.parse(readFileSync(`dist${vectorFile}`, 'utf8'));
+docs.forEach((doc, i) => { doc.vector = vectors[i]; });
 const suite = JSON.parse(readFileSync('tests/search_queries.json', 'utf8'));
 const corpus = (type) => {
   const subset = docs.filter((d) => d.type === type && (type === 'project' || d.lang === 'en'));

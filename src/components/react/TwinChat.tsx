@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { WEB3FORMS_KEY } from './ContactForm';
+import { ASK_EVENT, TWIN_ENDPOINT } from '../../lib/twin';
 
 /**
  * "Talk with my digital twin": a chat dialog backed by the Cloudflare Worker in /worker
  * (Gemini, grounded in the site's llms-full.txt). Opened by any element with `data-open-twin`.
  * Hidden until TWIN_ENDPOINT is set.
  */
-export const TWIN_ENDPOINT = 'https://shuaiwang-twin.shuaiwang-io.workers.dev';
 /** Cloudflare Turnstile (invisible) site key: the worker only answers browsers that pass it. */
 const TURNSTILE_SITEKEY = '0x4AAAAAAFTlAg-4M1DHF17K';
 
@@ -70,13 +70,6 @@ async function newSession(host: HTMLElement): Promise<string> {
 interface Message { role: 'user' | 'assistant'; content: string }
 
 const STORAGE_KEY = 'twin-chat';
-const ASK_EVENT = 'twin:ask';
-
-/** Open the twin and send it a question (used by the home search and the ⌘K palette). */
-export function askTwin(question: string) {
-  window.dispatchEvent(new CustomEvent(ASK_EVENT, { detail: question }));
-}
-
 const COPY = {
   en: {
     title: "Dylan's digital twin",

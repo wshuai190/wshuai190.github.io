@@ -5,7 +5,7 @@ import { profile } from '../lib/data';
 import { breadcrumbs } from '../lib/seo';
 import CultivationRealm from '../components/CultivationRealm.astro';
 import ContactForm, { WEB3FORMS_KEY } from '../components/react/ContactForm';
-import { TWIN_ENDPOINT } from '../components/react/TwinChat';
+import { TWIN_ENDPOINT } from '../lib/twin';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;

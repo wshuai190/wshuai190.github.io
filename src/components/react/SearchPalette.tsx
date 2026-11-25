@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { t, type Lang } from '../../i18n/ui';
-import { passageLink, snippet } from '../../lib/search/hybrid.ts';
+import { loadIndex, passageLink, snippet } from '../../lib/search/hybrid.ts';
 import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
 import SearchBadge from './SearchBadge';
 import ScoreChips from './ScoreChips';
-import { askTwin, TWIN_ENDPOINT } from './TwinChat';
+import { askTwin, TWIN_ENDPOINT } from '../../lib/twin';
 
 const TYPE_LABEL: Record<string, Record<Lang, string>> = {
   paper: { en: 'Paper', zh: '论文' },
@@ -26,7 +26,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const returnFocus = useRef<HTMLElement | null>(null);
   const [semantic, setSemantic] = useSemanticPreference();
-  const { results, mode, model } = useHybridSearch(query, open, undefined, lang, semantic);
+  const { results, mode, model, error } = useHybridSearch(query, open, undefined, lang, semantic);
   const shown = (results ?? []).slice(0, 8);
   // Questions ("what is…", "…?", "…吗") go to the twin first; keywords stay search-first.
   const looksLikeQuestion = /^\s*(what|how|why|who|which|where|when|can|could|do|does|is|are|tell)\b|[?？]\s*$|[吗呢么]\s*$|什么|怎么|为什么|哪/i.test(query);
@@ -65,6 +65,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
 
   useEffect(() => {
     if (!open) return;
+    void loadIndex().catch(() => {});
     inputRef.current?.focus();
     document.body.style.overflow = 'hidden';
     // Escape closes from anywhere; Tab cycles within the dialog (focus trap).
@@ -138,7 +139,7 @@ export default function SearchPalette({ lang }: { lang: Lang }) {
           ); })}
           {query.trim() && results && shown.length === 0 && (
             <li className="px-4 py-6 text-center text-sm text-[var(--muted)]">
-              {semantic ? t(lang, 'search.empty') : (
+              {error ? (lang === 'zh' ? '搜索暂时无法加载，请稍后重试。' : 'Search could not load. Please try again.') : semantic ? t(lang, 'search.empty') : (
                 <>
                   {t(lang, 'search.trySemantic')}
                   <button type="button" className="link-pill mx-auto mt-3 flex" onClick={() => setSemantic(true)}>{t(lang, 'search.trySemanticButton')}</button>

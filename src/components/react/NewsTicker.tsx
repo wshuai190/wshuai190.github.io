@@ -25,10 +25,10 @@ const TOUCH_RESUME_MS = 4000;
 export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }: Props) {
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [pageVisible, setPageVisible] = useState(true);
   const boxRef = useRef<HTMLDivElement>(null);
   const holding = useRef(false); // hover, focus or a recent touch
-  const pausedRef = useRef(paused);
-  pausedRef.current = paused;
 
   useEffect(() => {
     const query = matchMedia('(prefers-reduced-motion: reduce)');
@@ -36,6 +36,17 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
     const onChange = () => setReduced(query.matches);
     query.addEventListener('change', onChange);
     return () => query.removeEventListener('change', onChange);
+  }, []);
+
+  useEffect(() => {
+    const box = boxRef.current;
+    if (!box) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+    observer.observe(box);
+    const visibility = () => setPageVisible(!document.hidden);
+    visibility();
+    document.addEventListener('visibilitychange', visibility);
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', visibility); };
   }, []);
 
   const scrollable = items.length > visible;
@@ -51,13 +62,20 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
     const wrap = () => {
       if (box.scrollTop >= half) box.scrollTop -= half;
     };
+    box.addEventListener('scroll', wrap, { passive: true });
+    return () => box.removeEventListener('scroll', wrap);
+  }, [loop, half]);
+
+  useEffect(() => {
+    const box = boxRef.current;
+    if (!box || !loop || paused || !inView || !pageVisible) return;
     let frame = 0;
     let last = performance.now();
     let position = box.scrollTop;
     const tick = (now: number) => {
       const dt = Math.min(now - last, 100) / 1000;
       last = now;
-      if (holding.current || pausedRef.current) {
+      if (holding.current) {
         position = box.scrollTop; // follow the visitor's own scrolling
       } else {
         // Track the position as a float: scrollTop may round to whole pixels and stall a slow drift.
@@ -68,12 +86,10 @@ export default function NewsTicker({ items, visible = 4, pauseLabel, playLabel }
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
-    box.addEventListener('scroll', wrap, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
-      box.removeEventListener('scroll', wrap);
     };
-  }, [loop, half]);
+  }, [loop, half, paused, inView, pageVisible]);
 
   // Touch: hold while the finger is down and for a few seconds after, so a swipe can be read.
   useEffect(() => {

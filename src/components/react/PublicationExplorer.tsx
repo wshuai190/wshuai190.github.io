@@ -3,17 +3,16 @@ import CopyButton from './CopyButton';
 import SearchBadge from './SearchBadge';
 import ScoreChips from './ScoreChips';
 import { useHybridSearch, useSemanticPreference } from './useHybridSearch';
+import { loadIndex } from '../../lib/search/hybrid';
 
 export interface ExplorerItem {
   url: string;
   title: string;
   authors: string[];
-  venue: string;
   venueLabel: string;
   year: number;
   topic: string;
   type?: string;
-  abstract: string;
   links: { label: string; href: string }[];
   bibtex: string;
   cited?: number;
@@ -49,6 +48,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
   const [topic, setTopic] = useState('all');
   const [year, setYear] = useState('all');
   const [leading, setLeading] = useState(false);
+  const [urlReady, setUrlReady] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -56,9 +56,11 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
     setTopic(params.get('topic') ?? 'all');
     setYear(params.get('year') ?? 'all');
     setLeading(params.get('lead') === '1');
+    setUrlReady(true);
   }, []);
 
   useEffect(() => {
+    if (!urlReady) return;
     const params = new URLSearchParams();
     if (query) params.set('q', query);
     if (topic !== 'all') params.set('topic', topic);
@@ -66,10 +68,10 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
     if (leading) params.set('lead', '1');
     const search = params.toString();
     window.history.replaceState(null, '', search ? `?${search}` : window.location.pathname);
-  }, [query, topic, year, leading]);
+  }, [query, topic, year, leading, urlReady]);
 
   const [semantic, setSemantic] = useSemanticPreference();
-  const { results: ranked, mode, model } = useHybridSearch(query, true, PAPERS, lang, semantic);
+  const { results: ranked, mode, model, error } = useHybridSearch(query, true, PAPERS, lang, semantic);
   // Relevance order for the current query (results already passed the BM25 / Starbucks cutoff).
   const relevance = useMemo(
     () => (ranked ? new Map(ranked.slice(0, 20).map((r, i) => [r.doc.url, { rank: i, result: r }])) : null),
@@ -103,7 +105,7 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
         <label className="flex flex-1 items-center gap-3 rounded-full border border-line bg-[var(--bg)] px-4 focus-within:ring-2 focus-within:ring-[var(--teal)]">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" className="text-[var(--muted)]" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <span className="sr-only">{labels.search}</span>
-          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder={labels.search} className="h-10 w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]" type="search" />
+          <input value={query} onChange={(e) => setQuery(e.target.value)} onFocus={() => { void loadIndex().catch(() => {}); }} placeholder={labels.search} className="h-10 w-full bg-transparent text-[15px] outline-none placeholder:text-[var(--muted)]" type="search" />
         </label>
         <div className="px-2 md:order-last"><SearchBadge mode={mode} model={model} lang={lang} on={semantic} onToggle={setSemantic} /></div>
         <select value={year} onChange={(e) => setYear(e.target.value)} className="h-10 rounded-full border border-line bg-[var(--bg)] px-4 text-sm" aria-label={labels.allYears}>
@@ -128,7 +130,9 @@ export default function PublicationExplorer({ items, labels, lang, authorLinks =
 
       {groups.length === 0 && (
         <div className="glass mt-8 p-10 text-center text-[var(--muted)]">
-          {searching && !semantic ? (
+          {error ? <p>{lang === 'zh' ? '搜索暂时无法加载，请稍后重试。' : 'Search could not load. Please try again.'}</p> : searching && ranked === null ? (
+            <p>{lang === 'zh' ? '正在搜索…' : 'Searching…'}</p>
+          ) : searching && !semantic ? (
             <>
               <p>{labels.trySemantic}</p>
               <button type="button" className="link-pill mx-auto mt-4 flex" onClick={() => setSemantic(true)}>{labels.trySemanticButton}</button>

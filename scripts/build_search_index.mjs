@@ -146,10 +146,19 @@ for (const passage of passages) {
   passage.vector = fresh[key];
 }
 writeFileSync(CACHE, '{\n' + Object.entries(fresh).map(([k, v]) => `"${k}":${JSON.stringify(v)}`).join(',\n') + '\n}\n');
+// Keyword search downloads only text. Vectors are fetched with the optional encoder.
+const vectors = JSON.stringify(passages.map((passage) => passage.vector));
+const vectorHash = createHash('sha1').update(vectors).digest('hex').slice(0, 12);
+const vectorFile = `search-vectors.${vectorHash}.json`;
+writeFileSync(join(DIST, vectorFile), vectors);
+const vocabHash = createHash('sha1').update(readFileSync(`public${VOCAB_FILE}`)).digest('hex').slice(0, 12);
 writeFileSync(join(DIST, 'search-index.json'), JSON.stringify({
   model: 'ielabgroup/Starbucks-msmarco (2 layers, 32 dims)',
+  modelRevision: modelHash,
+  vocabRevision: vocabHash,
+  vectors: `/${vectorFile}`,
   threshold: DENSE_THRESHOLD,
-  docs: passages,
+  docs: passages.map(({ vector, ...passage }) => passage),
 }));
 const pages = new Set(passages.map((p) => `${p.lang}:${p.url}`)).size;
 console.log(`[search] ${passages.length} passages from ${pages} pages: ${encoded} encoded, ${passages.length - encoded} from cache`);

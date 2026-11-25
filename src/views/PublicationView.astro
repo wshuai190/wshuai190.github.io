@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/CopyButton.astro';
-import { TWIN_ENDPOINT } from '../components/react/TwinChat';
+import { TWIN_ENDPOINT } from '../lib/twin';
 import { localePath, pageTypeLabel, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import Authors from '../components/Authors.astro';
 import { articleSchema, breadcrumbs } from '../lib/seo';

@@ -4,7 +4,7 @@ import LinkPills from '../components/LinkPills.astro';
 import PubItem from '../components/PubItem.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import CopyButton from '../components/CopyButton.astro';
-import { TWIN_ENDPOINT } from '../components/react/TwinChat';
+import { TWIN_ENDPOINT } from '../lib/twin';
 import { localePath, pick, t, TOPIC_LABELS, type Lang } from '../i18n/ui';
 import { breadcrumbs, projectSchema } from '../lib/seo';
 import { bibtexOf, getPublications, projects, pubSlug, starsOf, type Project } from '../lib/data';

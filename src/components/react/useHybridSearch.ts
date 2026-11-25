@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { encoderLoaded, loadEncoder, search, type SearchDoc, type SearchMode, type SearchResult } from '../../lib/search/hybrid.ts';
+import { encoderLoaded, loadEncoder, loadIndex, search, type SearchDoc, type SearchMode, type SearchResult } from '../../lib/search/hybrid.ts';
 
 export type ModelStatus = 'idle' | 'loading' | 'ready' | 'unavailable';
 
@@ -36,6 +36,7 @@ export function useHybridSearch(query: string, enabled: boolean, types?: SearchD
   const [results, setResults] = useState<SearchResult[] | null>(null);
   const [mode, setMode] = useState<SearchMode>('lexical');
   const [model, setModel] = useState<ModelStatus>(encoderLoaded() ? 'ready' : 'idle');
+  const [error, setError] = useState(false);
   const request = useRef(0);
   const typeKey = types?.join(',');
 
@@ -46,21 +47,46 @@ export function useHybridSearch(query: string, enabled: boolean, types?: SearchD
   }, [enabled, semantic, model]);
 
   useEffect(() => {
-    if (!enabled) return;
-    if (!query.trim()) {
+    const id = ++request.current;
+    setError(false);
+    if (!enabled || !query.trim()) {
       setResults(null);
+      setMode('lexical');
       return;
     }
-    const id = ++request.current;
+    // Start the shared download while the visitor types, rather than after the debounce.
+    void loadIndex().catch(() => {});
+    let denseTimer = 0;
     const timer = window.setTimeout(async () => {
-      const found = await search(query, { types, lang, semantic });
-      if (id !== request.current) return;
-      setResults(found.results);
-      setMode(found.mode);
-    }, 120);
-    return () => window.clearTimeout(timer);
+      try {
+        // Keyword results always arrive first, including while an inference is running.
+        const found = await search(query, { types, lang, semantic: false });
+        if (id !== request.current) return;
+        setResults(found.results);
+        setMode(found.mode);
+        if (semantic && encoderLoaded()) {
+          denseTimer = window.setTimeout(async () => {
+            try {
+              const hybrid = await search(query, { types, lang, semantic: true });
+              if (id !== request.current) return;
+              setResults(hybrid.results);
+              setMode(hybrid.mode);
+            } catch { /* Keep the keyword results when inference fails. */ }
+          }, 160);
+        }
+      } catch {
+        if (id !== request.current) return;
+        setResults([]);
+        setError(true);
+      }
+    }, 80);
+    return () => {
+      ++request.current; // Also invalidate pending work when cleared, closed or unmounted.
+      window.clearTimeout(timer);
+      window.clearTimeout(denseTimer);
+    };
     // `model` and `semantic` are dependencies so results re-rank when either changes.
   }, [query, enabled, model, semantic, typeKey, lang]);
 
-  return { results, mode, model };
+  return { results, mode, model, error };
 }

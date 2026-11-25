@@ -17,7 +17,7 @@ const interactionDirective = {
 export default defineConfig({
   site: 'https://shuaiwang.io',
   trailingSlash: 'ignore',
-  build: { format: 'preserve', inlineStylesheets: 'always' },
+  build: { format: 'preserve', inlineStylesheets: 'auto' },
   integrations: [
     react(),
     interactionDirective,
