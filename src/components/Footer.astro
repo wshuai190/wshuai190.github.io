@@ -36,11 +36,11 @@ const external = [
       {external.map(([label, href]) => <li><a class="hover:text-ink" href={href} rel="me noopener">{label} ↗</a></li>)}
     </ul>
   </div>
-  <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line py-6 text-xs text-muted">
+  <div class="flex flex-wrap items-end justify-between gap-4 border-t border-line py-6 text-xs text-muted">
     <span>© {new Date().getFullYear()} Shuai Wang · <span class="mono">{t(lang, 'stat.citations')} {scholar.citations.toLocaleString('en')} · {scholar.last_updated}</span></span>
     {mapUrl && (
       <iframe
-        class="no-print h-64 w-full max-w-[360px] rounded-xl border border-line"
+        class="no-print h-[600px] w-full max-w-[360px] rounded-xl border border-line"
         src={mapUrl}
         title={mapTitle}
         loading="lazy"
