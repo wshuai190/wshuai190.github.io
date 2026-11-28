@@ -30,6 +30,12 @@ named Shuai Wang). To stop a Scholar entry from being added, list it in
 
 Secrets: `SERPAPI_KEY` (required). Optional repository variable `OPENALEX_MAILTO`.
 
+## Visitor analytics
+
+The `analytics` section of `src/data/profile.yml` contains the public Umami website ID for
+`shuaiwang.io`. Set `umami_map_url` to the public share URL of a board containing only the
+**World Map** to show it in the footer. Neither setting requires an API key.
+
 ## Site search
 
 ⌘K search, the home search box and the Publications search use BM25 by default. A **semantic search**

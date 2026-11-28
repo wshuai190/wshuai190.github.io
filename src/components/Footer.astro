@@ -4,6 +4,9 @@ import { profile, scholar } from '../lib/data';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
+const shareUrl = profile.analytics?.umami_map_url;
+const mapUrl = shareUrl?.startsWith('https://cloud.umami.is/share/') ? shareUrl : undefined;
+const mapTitle = lang === 'zh' ? '各国访客分布' : 'Visitors by country';
 
 const internal = [
   ['nav.talks', '/talks/'],
@@ -35,28 +38,14 @@ const external = [
   </div>
   <div class="flex flex-wrap items-center justify-between gap-4 border-t border-line py-6 text-xs text-muted">
     <span>© {new Date().getFullYear()} Shuai Wang · <span class="mono">{t(lang, 'stat.citations')} {scholar.citations.toLocaleString('en')} · {scholar.last_updated}</span></span>
-    <div class="no-print min-h-[79px] min-w-[160px] opacity-70" id="visitor-map"></div>
-    <script is:inline>
-      // Visitor map (also the visit counter): load it only when the footer scrolls into view, so its
-      // third-party scripts and cookies never touch visitors who don't get that far.
-      (() => {
-        const host = document.getElementById('visitor-map');
-        if (!host) return;
-        const start = () => {
-          const script = document.createElement('script');
-          script.id = 'mapmyvisitors';
-          script.src = 'https://mapmyvisitors.com/map.js?cl=f4f0f0&w=160&t=n&d=a0w4y9gGYzmliuMuke0InKoBQ4tcUehmbZ2F1VOK2yw&co=385163&cmo=d82727&cmn=269626&ct=b53838';
-          script.onload = () => setTimeout(() => {
-            host.querySelectorAll('a').forEach((a) => a.setAttribute('aria-label', 'Visitor map'));
-          }, 500);
-          host.appendChild(script);
-        };
-        if (!('IntersectionObserver' in window)) return start();
-        const observer = new IntersectionObserver((entries) => {
-          if (entries.some((e) => e.isIntersecting)) { observer.disconnect(); start(); }
-        }, { rootMargin: '200px' });
-        observer.observe(host);
-      })();
-    </script>
+    {mapUrl && (
+      <iframe
+        class="no-print h-64 w-full max-w-[360px] rounded-xl border border-line"
+        src={mapUrl}
+        title={mapTitle}
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    )}
   </div>
 </footer>

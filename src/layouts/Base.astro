@@ -36,6 +36,7 @@ const zhHref = new URL(lang === 'zh' ? path : alternatePath(lang, path), Astro.s
 const ogImage = new URL(image ?? '/images/og.png', Astro.site).href;
 const graph = [...(isHome ? [profilePageSchema(lang), personSchema(), websiteSchema(lang)] : []), ...schema];
 const verification = profile.seo.verification ?? {};
+const umamiWebsiteId = import.meta.env.PROD ? profile.analytics?.umami_website_id : undefined;
 ---
 <!doctype html>
 <html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
@@ -79,6 +80,15 @@ const verification = profile.seo.verification ?? {};
     <meta name="twitter:creator" content="@dylan_wangs" />
     <slot name="head" />
     {graph.length > 0 && <script type="application/ld+json" set:html={jsonLd(...graph)} />}
+    {umamiWebsiteId && <script
+      is:inline
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id={umamiWebsiteId}
+      data-domains={Astro.site?.hostname}
+      data-exclude-search="true"
+      data-exclude-hash="true"
+    ></script>}
     <script is:inline>
       (() => {
         let theme = null;
